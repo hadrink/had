@@ -15,6 +15,22 @@
 		7AA2250519CDA9D1002003ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2250419CDA9D1002003ED /* Images.xcassets */; };
 		7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2250619CDA9D1002003ED /* LaunchScreen.xib */; };
 		7AA2251419CDA9D1002003ED /* hadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251319CDA9D1002003ED /* hadTests.swift */; };
+		7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */; };
+		7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251F19CDBED4002003ED /* xmlHttpRequest.swift */; };
+		7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */; };
+		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
+		7ABD50BA19E048BA007E3562 /* SignPainter-HouseScript.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABD50B919E0460A007E3562 /* SignPainter-HouseScript.otf */; };
+		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
+		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
+		7AD2FDD419E029D7008114A2 /* logo-had-launchimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */; };
+		7AD673A819D0951C0079E682 /* app-icon-hadx2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD673A619D0951C0079E682 /* app-icon-hadx2.png */; };
+		7AD673A919D0951C0079E682 /* app-icon-hadx3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD673A719D0951C0079E682 /* app-icon-hadx3.png */; };
+		7AD673AE19D09B610079E682 /* launch-image-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD673AD19D09B610079E682 /* launch-image-ipad.png */; };
+		7ADC4B2419E0224400CDD8B9 /* launch-image-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2019E0224400CDD8B9 /* launch-image-ipad.png */; };
+		7ADC4B2519E0224400CDD8B9 /* launch-image-iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2119E0224400CDD8B9 /* launch-image-iphone6.png */; };
+		7ADC4B2619E0224400CDD8B9 /* launch-image-iphone6plus-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2219E0224400CDD8B9 /* launch-image-iphone6plus-background.png */; };
+		7ADC4B2719E0224400CDD8B9 /* launch-image-iphone6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */; };
+		7ADC4B2919E027BD00CDD8B9 /* intro-image-iphone6plus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +56,22 @@
 		7AA2250D19CDA9D1002003ED /* hadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA2251219CDA9D1002003ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA2251319CDA9D1002003ED /* hadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadTests.swift; sourceTree = "<group>"; };
+		7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntroductionViewController.swift; path = ../../StatusApp/Status/IntroductionViewController.swift; sourceTree = "<group>"; };
+		7AA2251F19CDBED4002003ED /* xmlHttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = xmlHttpRequest.swift; path = ../../StatusApp/Status/xmlHttpRequest.swift; sourceTree = "<group>"; };
+		7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		7ABD50B919E0460A007E3562 /* SignPainter-HouseScript.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter-HouseScript.otf"; sourceTree = "<group>"; };
+		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = ../../StatusApp/Status/CreateAccountViewController.swift; sourceTree = "<group>"; };
+		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = ../../StatusApp/Status/UserManager.swift; sourceTree = "<group>"; };
+		7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-had-launchimage.png"; sourceTree = "<group>"; };
+		7AD673A619D0951C0079E682 /* app-icon-hadx2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-hadx2.png"; sourceTree = "<group>"; };
+		7AD673A719D0951C0079E682 /* app-icon-hadx3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-hadx3.png"; sourceTree = "<group>"; };
+		7AD673AD19D09B610079E682 /* launch-image-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-ipad.png"; sourceTree = "<group>"; };
+		7ADC4B2019E0224400CDD8B9 /* launch-image-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-ipad.png"; sourceTree = "<group>"; };
+		7ADC4B2119E0224400CDD8B9 /* launch-image-iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-iphone6.png"; sourceTree = "<group>"; };
+		7ADC4B2219E0224400CDD8B9 /* launch-image-iphone6plus-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-iphone6plus-background.png"; sourceTree = "<group>"; };
+		7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-iphone6plus.png"; sourceTree = "<group>"; };
+		7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-image-iphone6plus.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +92,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A5B7BED19D03DDA0023AAC5 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				7AD673AD19D09B610079E682 /* launch-image-ipad.png */,
+				7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */,
+				7ADC4B2019E0224400CDD8B9 /* launch-image-ipad.png */,
+				7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */,
+				7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */,
+				7ADC4B2119E0224400CDD8B9 /* launch-image-iphone6.png */,
+				7ADC4B2219E0224400CDD8B9 /* launch-image-iphone6plus-background.png */,
+				7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */,
+				7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */,
+				7ABD50B919E0460A007E3562 /* SignPainter-HouseScript.otf */,
+				7AD673A619D0951C0079E682 /* app-icon-hadx2.png */,
+				7AD673A719D0951C0079E682 /* app-icon-hadx3.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
@@ -84,10 +135,15 @@
 				7AA224F919CDA9D1002003ED /* AppDelegate.swift */,
 				7AA224FB19CDA9D1002003ED /* RootViewController.swift */,
 				7AA224FD19CDA9D1002003ED /* DataViewController.swift */,
+				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
 				7AA224FF19CDA9D1002003ED /* ModelController.swift */,
+				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
+				7AA2251F19CDBED4002003ED /* xmlHttpRequest.swift */,
+				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
 				7AA2250119CDA9D1002003ED /* Main.storyboard */,
 				7AA2250419CDA9D1002003ED /* Images.xcassets */,
 				7AA2250619CDA9D1002003ED /* LaunchScreen.xib */,
+				7A5B7BED19D03DDA0023AAC5 /* images */,
 				7AA224F719CDA9D1002003ED /* Supporting Files */,
 			);
 			path = had;
@@ -167,6 +223,7 @@
 				TargetAttributes = {
 					7AA224F319CDA9D1002003ED = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 356ZH6XUVH;
 					};
 					7AA2250C19CDA9D1002003ED = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -198,9 +255,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ABD50BA19E048BA007E3562 /* SignPainter-HouseScript.otf in Resources */,
+				7AD673A819D0951C0079E682 /* app-icon-hadx2.png in Resources */,
 				7AA2250319CDA9D1002003ED /* Main.storyboard in Resources */,
+				7ADC4B2919E027BD00CDD8B9 /* intro-image-iphone6plus.jpg in Resources */,
+				7ADC4B2519E0224400CDD8B9 /* launch-image-iphone6.png in Resources */,
+				7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */,
+				7ADC4B2719E0224400CDD8B9 /* launch-image-iphone6plus.png in Resources */,
+				7AD673A919D0951C0079E682 /* app-icon-hadx3.png in Resources */,
 				7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */,
+				7ADC4B2619E0224400CDD8B9 /* launch-image-iphone6plus-background.png in Resources */,
+				7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */,
 				7AA2250519CDA9D1002003ED /* Images.xcassets in Resources */,
+				7AD673AE19D09B610079E682 /* launch-image-ipad.png in Resources */,
+				7ADC4B2419E0224400CDD8B9 /* launch-image-ipad.png in Resources */,
+				7AD2FDD419E029D7008114A2 /* logo-had-launchimage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,9 +287,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */,
+				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
+				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AA2250019CDA9D1002003ED /* ModelController.swift in Sources */,
 				7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */,
+				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
 				7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +353,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -323,6 +397,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -346,6 +421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -356,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -415,6 +492,7 @@
 				7AA2251919CDA9D1002003ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7AA2251A19CDA9D1002003ED /* Build configuration list for PBXNativeTarget "hadTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +501,7 @@
 				7AA2251C19CDA9D1002003ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
