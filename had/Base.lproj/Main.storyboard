@@ -130,6 +130,9 @@
                                         <include reference="oT1-hM-m0v"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="26" y="223" width="323" height="50"/>
+                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mot de passe" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ao-QI-aly">
                                 <rect key="frame" x="16" y="191" width="343" height="30"/>
@@ -157,6 +160,9 @@
                                     <mask key="constraints">
                                         <include reference="Voo-C1-LYV"/>
                                     </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="26" y="281" width="323" height="50"/>
                                 </variation>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Créer un compte" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBj-Q8-XTE">
@@ -595,6 +601,8 @@
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <action selector="firstnameEditingBegin:" destination="7WT-eq-Zu1" eventType="editingDidBegin" id="Aqm-M6-BGX"/>
+                                            <action selector="firstnameEditingEnd:" destination="7WT-eq-Zu1" eventType="editingDidEnd" id="jNd-DB-lIH"/>
                                             <outlet property="delegate" destination="7WT-eq-Zu1" id="1lj-6P-clM"/>
                                         </connections>
                                     </textField>
@@ -623,6 +631,8 @@
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <action selector="emailEditingBegin:" destination="7WT-eq-Zu1" eventType="editingDidBegin" id="x6R-NX-llh"/>
+                                            <action selector="emailEditingEnd:" destination="7WT-eq-Zu1" eventType="editingDidEnd" id="HpP-fT-xTa"/>
                                             <outlet property="delegate" destination="7WT-eq-Zu1" id="wKQ-7i-Tuk"/>
                                         </connections>
                                     </textField>
@@ -651,7 +661,8 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="passwordEditingBegin:" destination="7WT-eq-Zu1" eventType="editingDidEnd" id="Xsp-JN-slp"/>
+                                            <action selector="passwordEditingBegin:" destination="7WT-eq-Zu1" eventType="editingDidBegin" id="jly-MV-Tew"/>
+                                            <action selector="passwordEditingEnd:" destination="7WT-eq-Zu1" eventType="editingDidEnd" id="5Ie-cr-oda"/>
                                             <outlet property="delegate" destination="7WT-eq-Zu1" id="9O6-Uh-A6k"/>
                                         </connections>
                                     </textField>
@@ -741,6 +752,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <action selector="confirmPasswordEditingBegin:" destination="7WT-eq-Zu1" eventType="editingDidBegin" id="9I9-Zd-Gpz"/>
                                             <action selector="confirmPasswordEditingEnd:" destination="7WT-eq-Zu1" eventType="editingDidEnd" id="YJV-ye-4J1"/>
                                             <outlet property="delegate" destination="7WT-eq-Zu1" id="An9-QW-R6u"/>
                                         </connections>
@@ -1152,7 +1164,7 @@
                         <outlet property="birthdate" destination="aUZ-TN-sXM" id="CUN-7f-fak"/>
                         <outlet property="birthdateButton" destination="Kj1-ZU-MzZ" id="Ntp-ha-z9z"/>
                         <outlet property="confirmationPwd" destination="mFH-g8-Kwl" id="XJy-5m-iJr"/>
-                        <outlet property="contentView" destination="JXc-lS-cAk" id="dWL-jO-MMK"/>
+                        <outlet property="contentView" destination="JXc-lS-cAk" id="rJe-6m-abm"/>
                         <outlet property="createAccountButton" destination="eZG-nA-mMn" id="MXS-5D-6rc"/>
                         <outlet property="datePickerToolbar" destination="hfM-RY-JLc" id="aty-xQ-rSJ"/>
                         <outlet property="datePickerView" destination="pNX-Sc-2va" id="h1A-su-cdA"/>
