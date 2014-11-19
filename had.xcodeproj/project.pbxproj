@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8272F71A1D2D04004603FE /* MyPosition.swift */; };
+		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
 		7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224FB19CDA9D1002003ED /* RootViewController.swift */; };
 		7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224FD19CDA9D1002003ED /* DataViewController.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A8272F71A1D2D04004603FE /* MyPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPosition.swift; sourceTree = "<group>"; };
+		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA224F819CDA9D1002003ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA224F919CDA9D1002003ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +119,7 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
 				7AA224F619CDA9D1002003ED /* had */,
 				7AA2251019CDA9D1002003ED /* hadTests */,
 				7AA224F519CDA9D1002003ED /* Products */,
@@ -138,6 +144,7 @@
 				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
 				7AA224FF19CDA9D1002003ED /* ModelController.swift */,
 				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
+				7A8272F71A1D2D04004603FE /* MyPosition.swift */,
 				7AA2251F19CDBED4002003ED /* xmlHttpRequest.swift */,
 				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
 				7AA2250119CDA9D1002003ED /* Main.storyboard */,
@@ -287,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */,
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */,
 				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
