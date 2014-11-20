@@ -14,6 +14,7 @@ class DataViewController: UIViewController {
     var dataObject: AnyObject?
 
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,11 +27,11 @@ class DataViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let obj: AnyObject = dataObject {
+       /* if let obj: AnyObject = dataObject {
             self.dataLabel!.text = obj.description
         } else {
             self.dataLabel!.text = ""
-        }
+        }*/
     }
 
 
