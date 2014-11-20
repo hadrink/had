@@ -194,12 +194,16 @@ class MyPosition : UIViewController, CLLocationManagerDelegate, UITableViewDeleg
     // Create loop for tableView and convert MKpoint to CGpoint
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        
+    
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
         var rowData: NSDictionary = self.jsonData[indexPath.row] as NSDictionary
         var idPlace: NSString = rowData["idPlace"] as NSString
-        var latitudePlace: NSString = rowData["LatitudePlace"] as NSString
-        var longitudePlace: NSString = rowData["LongitudePlace"] as NSString
+        var latitudePlace: NSString = rowData["Latitude"] as NSString
+        var longitudePlace: NSString = rowData["Longitude"] as NSString
+        
+        print(latitudePlace)
         /*if(rowData["NamePlace"] === "<null>"){
             namePlace = ""
         }
@@ -228,8 +232,8 @@ class MyPosition : UIViewController, CLLocationManagerDelegate, UITableViewDeleg
             
         println("Latitude annotation\(latitudeAnnotation)")
         
-        self.mapView.addAnnotation(myPlacesAnnotation)
-        self.mapView.selectAnnotation(myPlacesAnnotation, animated: true)
+       // self.mapView.addAnnotation(myPlacesAnnotation)
+       // self.mapView.selectAnnotation(myPlacesAnnotation, animated: true)
         
         //var annPoint:CGPoint = self.mapView.convertCoordinate(coordinatePlaces, toPointToView: testView)
         //println(annPoint)
@@ -239,7 +243,7 @@ class MyPosition : UIViewController, CLLocationManagerDelegate, UITableViewDeleg
         
         label.textAlignment = NSTextAlignment.Center
         label.text = "1"
-        testView.addSubview(label)
+       //ê® testView.addSubview(label)
         
         
         return cell
