@@ -8,23 +8,24 @@
 
 import UIKit
 import QuartzCore
+import CoreLocation
 
 enum SlideOutState {
         case BothCollapsed
         case LeftPanelExpanded
 }
     
-class ContainerViewController: UIViewController, CenterViewControllerDelegate, UIGestureRecognizerDelegate {
+class ContainerViewController: UIViewController, CenterViewControllerDelegate, UIGestureRecognizerDelegate,CLLocationManagerDelegate {
         var centerNavigationController: UINavigationController!
         var centerViewController: CenterViewController!
-        
+        let locationManager = CLLocationManager()
         var currentState: SlideOutState = .BothCollapsed {
             didSet {
                 let shouldShowShadow = currentState != .BothCollapsed
                 showShadowForCenterViewController(shouldShowShadow)
             }
         }
-        //leftCOntroller
+        //leftController
         var leftViewController: SidePanelViewController?
 
         
@@ -40,7 +41,8 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+
+            locationManager.requestAlwaysAuthorization()
             centerViewController = UIStoryboard.centerViewController()
             centerViewController.delegate = self
             
