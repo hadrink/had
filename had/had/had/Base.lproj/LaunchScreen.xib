@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 had. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="20" y="439" width="441" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                        <rect key="frame" x="20" y="757" width="702" height="21"/>
+                    </variation>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="had" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                    <rect key="frame" x="20" y="140" width="441" height="43"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                        <rect key="frame" x="20" y="246" width="702" height="43"/>
+                    </variation>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-image-ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z1E-lV-YVb">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1024" id="cQZ-ni-EiD"/>
+                        <constraint firstAttribute="width" constant="768" id="vgM-JZ-3Vg"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="cQZ-ni-EiD"/>
+                            <exclude reference="vgM-JZ-3Vg"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                        <rect key="frame" x="-7" y="-17" width="768" height="1024"/>
+                        <mask key="constraints">
+                            <include reference="cQZ-ni-EiD"/>
+                            <include reference="vgM-JZ-3Vg"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-image-iphone6plus-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="LJl-ph-eaV">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="414" id="JYx-id-JDn"/>
+                        <constraint firstAttribute="height" constant="736" id="pLj-n2-6LT"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="JYx-id-JDn"/>
+                            <exclude reference="pLj-n2-6LT"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="JYx-id-JDn"/>
+                            <include reference="pLj-n2-6LT"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-had-launchimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vb9-bP-K15">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="443" id="9Og-O1-Wlq"/>
+                        <constraint firstAttribute="width" constant="141" id="Ix9-RP-bny"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9Og-O1-Wlq"/>
+                            <exclude reference="Ix9-RP-bny"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="9Og-O1-Wlq"/>
+                            <include reference="Ix9-RP-bny"/>
+                        </mask>
+                    </variation>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
+                <constraint firstAttribute="centerX" secondItem="Vb9-bP-K15" secondAttribute="centerX" id="6i2-xG-NdM"/>
+                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
+                <constraint firstAttribute="centerY" secondItem="Vb9-bP-K15" secondAttribute="centerY" id="P7V-sA-p6n"/>
+                <constraint firstAttribute="centerX" secondItem="LJl-ph-eaV" secondAttribute="centerX" id="Ueh-8a-eD4"/>
+                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="centerY" secondItem="LJl-ph-eaV" secondAttribute="centerY" id="bFK-Fa-Ad5"/>
+                <constraint firstAttribute="centerY" secondItem="Z1E-lV-YVb" secondAttribute="centerY" id="ful-zS-UG3"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
+                <constraint firstAttribute="centerX" secondItem="Z1E-lV-YVb" secondAttribute="centerX" id="mAa-or-VPS"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="Z1E-lV-YVb"/>
+                    <exclude reference="LJl-ph-eaV"/>
+                    <exclude reference="Vb9-bP-K15"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="Ueh-8a-eD4"/>
+                    <exclude reference="bFK-Fa-Ad5"/>
+                    <exclude reference="6i2-xG-NdM"/>
+                    <exclude reference="P7V-sA-p6n"/>
+                    <exclude reference="ful-zS-UG3"/>
+                    <exclude reference="mAa-or-VPS"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="LJl-ph-eaV"/>
+                    <include reference="Vb9-bP-K15"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="Ueh-8a-eD4"/>
+                    <include reference="bFK-Fa-Ad5"/>
+                    <include reference="6i2-xG-NdM"/>
+                    <include reference="P7V-sA-p6n"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="subviews">
+                    <include reference="Z1E-lV-YVb"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="ful-zS-UG3"/>
+                    <include reference="mAa-or-VPS"/>
+                    <exclude reference="5cJ-9S-tgC"/>
+                    <exclude reference="Koa-jz-hwk"/>
+                    <exclude reference="fvb-Df-36g"/>
+                    <exclude reference="Kzo-t9-V3l"/>
+                    <exclude reference="MfP-vx-nX0"/>
+                    <exclude reference="ZEH-qu-HZ9"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="538.5" y="682"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="launch-image-ipad.png" width="1536" height="2048"/>
+        <image name="launch-image-iphone6plus-background.png" width="1242" height="2208"/>
+        <image name="logo-had-launchimage.png" width="282" height="887"/>
+    </resources>
+</document>
