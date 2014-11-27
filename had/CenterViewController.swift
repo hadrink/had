@@ -15,11 +15,17 @@ protocol CenterViewControllerDelegate {
     optional func collapseSidePanels()
 }
 
-class CenterViewController: UIViewController, SidePanelViewControllerDelegate, CLLocationManagerDelegate, UITableViewDelegate {
-    @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var creatorLabel: UILabel!
-    
+class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLocationManagerDelegate, UITableViewDelegate {
+
     @IBOutlet weak var tableData: UITableView!
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
+        tableData.reloadData()
+    }
     
     var delegate: CenterViewControllerDelegate?
     
@@ -39,8 +45,15 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
         print("Yo")
     }
 
-    // Send latitude, longtitude and get jSon information
+    func addChildCenterViewController(childController: UIViewController) {
+        if (self.view.superview == nil){
+            self.addChildViewController(self)
+            
+            self.view.addSubview(self.view)
+        }
+    }
     
+    // Send latitude, longtitude and get jSon information
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         print("Yo 2")
         
@@ -62,8 +75,6 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
                 
                 let location = locations.last as CLLocation
                 let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-                //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                //self.mapView.setRegion(region, animated: true)
                 
                 println(result[0])
                 println(result[1])
@@ -75,13 +86,6 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
                 
                 var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
                 
-                /*var null:NSString = jsonResult["places"].objectForKey("<null>") as NSString
-                
-                if null == null{
-                jsonResult["places"].setObject("Not Find", forKey: "<null>")
-                }
-                
-                jsonResult["places"].setObject("Not Find", forKey: "<null>")*/
                 
                 println(jsonResult)
                 
@@ -108,7 +112,6 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
     }
     
     // Get location information
-    
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
         
@@ -150,42 +153,38 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
         return result
     }
     
-    
-    
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location" + error.localizedDescription)
     }
     
     // Number of Rows depends of count
-    
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         
         return jsonData.count
     }
+    //setRowHeightCell
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        self.tableData.rowHeight = 80
+        return self.tableData.rowHeight
+    }
     
     // Create loop for tableView and convert MKpoint to CGpoint
-    
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
         var rowData: NSDictionary = self.jsonData[indexPath.row] as NSDictionary
         var idPlace: NSString = rowData["idPlace"] as NSString
+        var name: NSString = rowData["NamePlace"] as NSString
+        var type: NSString = rowData["Type"] as NSString
         var latitudePlace: NSString = rowData["Latitude"] as NSString
         var longitudePlace: NSString = rowData["Longitude"] as NSString
         
         print(latitudePlace)
-        /*if(rowData["NamePlace"] === "<null>"){
-        namePlace = ""
-        }
-        else{
-        namePlace = rowData["NamePlace"] as NSString
-        }*/
-        //var placeName: NSString = rowData["NamePlace"] as NSString
-        cell.detailTextLabel?.text = "\(latitudePlace),\(longitudePlace)"
-        cell.textLabel.text = idPlace
-        
+ 
+        cell.detailTextLabel?.text = "\(type),\(latitudePlace),\(longitudePlace)"
+        cell.textLabel.text = name
+        cell.backgroundColor = UIColor.clearColor()
         
         var latitudeConversion = (latitudePlace as NSString).floatValue
         var longitudeConversion = (longitudePlace as NSString).floatValue
@@ -193,29 +192,12 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
         var latitudeAnnotation:NSNumber = latitudeConversion
         var longitudeAnnotation:NSNumber = longitudeConversion
         
-        //let coordinatePlaces = CLLocationCoordinate2D(latitude: latitudeAnnotation, longitude: longitudeAnnotation)
-        
-       // var myPlacesAnnotation = MKPointAnnotation()
-        
-        //myPlacesAnnotation.coordinate = coordinatePlaces
-        
-       // myPlacesAnnotation.title = idPlace
-        //myPlacesAnnotation.subtitle = "\(latitudePlace),\(longitudePlace)"
-        
         println("Latitude annotation\(latitudeAnnotation)")
         
-        // self.mapView.addAnnotation(myPlacesAnnotation)
-        // self.mapView.selectAnnotation(myPlacesAnnotation, animated: true)
-        
-        //var annPoint:CGPoint = self.mapView.convertCoordinate(coordinatePlaces, toPointToView: testView)
-        //println(annPoint)
-        
         var label = UILabel(frame: CGRectMake(0, 0, 100, 100))
-        //label.center = annPoint
         
         label.textAlignment = NSTextAlignment.Center
         label.text = "1"
-        //ê® testView.addSubview(label)
         
         
         return cell
@@ -227,10 +209,7 @@ class CenterViewController: UIViewController, SidePanelViewControllerDelegate, C
         }
     }
 
-    
-    func informationSelected(info: Information) {
-        titleLabel.text = info.title
-        creatorLabel.text = info.creator
+    func menuItemSelected(item: MenuItem){
         
         if let d = delegate {
             d.collapseSidePanels!()
