@@ -18,7 +18,6 @@ protocol CenterViewControllerDelegate {
 class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLocationManagerDelegate, UITableViewDelegate {
 
     @IBOutlet weak var tableData: UITableView!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

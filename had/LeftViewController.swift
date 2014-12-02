@@ -67,11 +67,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderView: UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 50.0))
+        let sectionHeaderView: UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 30.0))
 
         sectionHeaderView.backgroundColor = UIColor.clearColor()
         
-        var headerLabel: UILabel = UILabel(frame: CGRectMake(20, 25, sectionHeaderView.frame.size.width, 25.0))
+        var headerLabel: UILabel = UILabel(frame: CGRectMake(20, 12.5, sectionHeaderView.frame.size.width, 25.0))
         headerLabel.backgroundColor = UIColor.clearColor()
         headerLabel.textColor = UIColor.whiteColor()
         
@@ -84,11 +84,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let sectionHeaderView: UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 50.0))
+        let sectionHeaderView: UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 30.0))
         
         sectionHeaderView.backgroundColor = UIColor.clearColor()
         
-        var headerLabel: UILabel = UILabel(frame: CGRectMake(20, 25, sectionHeaderView.frame.size.width, 25.0))
+        var headerLabel: UILabel = UILabel(frame: CGRectMake(20, 15, sectionHeaderView.frame.size.width, 25.0))
         headerLabel.backgroundColor = UIColor.clearColor()
         
         headerLabel.font = UIFont(name: "SignPainter", size: 20.0)

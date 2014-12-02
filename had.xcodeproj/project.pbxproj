@@ -21,6 +21,13 @@
 		7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */; };
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
 		7ABD50BA19E048BA007E3562 /* SignPainter-HouseScript.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABD50B919E0460A007E3562 /* SignPainter-HouseScript.otf */; };
+		7ABF0E201A2877110049720C /* bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E1F1A2877110049720C /* bottle.png */; };
+		7ABF0E251A2877940049720C /* bottle-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E211A2877940049720C /* bottle-active.png */; };
+		7ABF0E261A2877940049720C /* flux.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E221A2877940049720C /* flux.png */; };
+		7ABF0E271A2877940049720C /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E231A2877940049720C /* setting.png */; };
+		7ABF0E281A2877940049720C /* turn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E241A2877940049720C /* turn-off.png */; };
+		7ABF0E2B1A2877D70049720C /* bg-had.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E291A2877D70049720C /* bg-had.png */; };
+		7ABF0E2C1A2877D70049720C /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E2A1A2877D70049720C /* hamburger.png */; };
 		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
 		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
 		7AD2FDD419E029D7008114A2 /* logo-had-launchimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */; };
@@ -35,16 +42,9 @@
 		F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F01A1E508C0007FAA1 /* CenterViewController.swift */; };
 		F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F41A1E61F00007FAA1 /* MenuItem.swift */; };
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
-		F67CAA041A265456008B9DF8 /* bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = F67CAA001A265456008B9DF8 /* bottle.png */; };
-		F67CAA051A265456008B9DF8 /* flux.png in Resources */ = {isa = PBXBuildFile; fileRef = F67CAA011A265456008B9DF8 /* flux.png */; };
-		F67CAA061A265456008B9DF8 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F67CAA021A265456008B9DF8 /* setting.png */; };
-		F67CAA071A265456008B9DF8 /* turn-off.png in Resources */ = {isa = PBXBuildFile; fileRef = F67CAA031A265456008B9DF8 /* turn-off.png */; };
-		F6A5521C1A268997001C371E /* bottle-active.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A5521B1A268997001C371E /* bottle-active.png */; };
 		F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5521D1A279D6A001C371E /* PlaceItem.swift */; };
 		F6A552211A27A317001C371E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A552201A27A317001C371E /* Item.swift */; };
 		F6EEB7B41A23DC0200D72936 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */; };
-		F6EEB7B61A23EB2300D72936 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = F6EEB7B51A23EB2300D72936 /* hamburger.png */; };
-		F6FA33CE1A23C92000CDE0B8 /* bg-had.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FA33CD1A23C92000CDE0B8 /* bg-had.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +76,13 @@
 		7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7ABD50B919E0460A007E3562 /* SignPainter-HouseScript.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter-HouseScript.otf"; sourceTree = "<group>"; };
+		7ABF0E1F1A2877110049720C /* bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottle.png; sourceTree = "<group>"; };
+		7ABF0E211A2877940049720C /* bottle-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottle-active.png"; sourceTree = "<group>"; };
+		7ABF0E221A2877940049720C /* flux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flux.png; sourceTree = "<group>"; };
+		7ABF0E231A2877940049720C /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		7ABF0E241A2877940049720C /* turn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turn-off.png"; sourceTree = "<group>"; };
+		7ABF0E291A2877D70049720C /* bg-had.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-had.png"; sourceTree = "<group>"; };
+		7ABF0E2A1A2877D70049720C /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountViewController.swift; path = ../../StatusApp/Status/CreateAccountViewController.swift; sourceTree = "<group>"; };
 		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = ../../StatusApp/Status/UserManager.swift; sourceTree = "<group>"; };
 		7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-had-launchimage.png"; sourceTree = "<group>"; };
@@ -91,16 +98,9 @@
 		F61331F01A1E508C0007FAA1 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F61331F41A1E61F00007FAA1 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		F67CAA001A265456008B9DF8 /* bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottle.png; path = ../../../../Downloads/bottle.png; sourceTree = "<group>"; };
-		F67CAA011A265456008B9DF8 /* flux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flux.png; path = ../../../../Downloads/flux.png; sourceTree = "<group>"; };
-		F67CAA021A265456008B9DF8 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting.png; path = ../../../../Downloads/setting.png; sourceTree = "<group>"; };
-		F67CAA031A265456008B9DF8 /* turn-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "turn-off.png"; path = "../../../../Downloads/turn-off.png"; sourceTree = "<group>"; };
-		F6A5521B1A268997001C371E /* bottle-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottle-active.png"; path = "../../../../Downloads/bottle-active.png"; sourceTree = "<group>"; };
 		F6A5521D1A279D6A001C371E /* PlaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceItem.swift; sourceTree = "<group>"; };
 		F6A552201A27A317001C371E /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
-		F6EEB7B51A23EB2300D72936 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hamburger.png; path = ../../../../Downloads/hamburger.png; sourceTree = "<group>"; };
-		F6FA33CD1A23C92000CDE0B8 /* bg-had.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg-had.png"; path = "../../../../Downloads/bg-had.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,18 +125,18 @@
 		7A5B7BED19D03DDA0023AAC5 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				F6FA33CD1A23C92000CDE0B8 /* bg-had.png */,
-				F6EEB7B51A23EB2300D72936 /* hamburger.png */,
+				7ABF0E291A2877D70049720C /* bg-had.png */,
+				7ABF0E2A1A2877D70049720C /* hamburger.png */,
 				7AD673AD19D09B610079E682 /* launch-image-ipad.png */,
 				7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */,
 				7ADC4B2019E0224400CDD8B9 /* launch-image-ipad.png */,
 				7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */,
 				7AD2FDD319E029D7008114A2 /* logo-had-launchimage.png */,
-				F67CAA001A265456008B9DF8 /* bottle.png */,
-				F6A5521B1A268997001C371E /* bottle-active.png */,
-				F67CAA011A265456008B9DF8 /* flux.png */,
-				F67CAA021A265456008B9DF8 /* setting.png */,
-				F67CAA031A265456008B9DF8 /* turn-off.png */,
+				7ABF0E1F1A2877110049720C /* bottle.png */,
+				7ABF0E211A2877940049720C /* bottle-active.png */,
+				7ABF0E221A2877940049720C /* flux.png */,
+				7ABF0E231A2877940049720C /* setting.png */,
+				7ABF0E241A2877940049720C /* turn-off.png */,
 				7ADC4B2119E0224400CDD8B9 /* launch-image-iphone6.png */,
 				7ADC4B2219E0224400CDD8B9 /* launch-image-iphone6plus-background.png */,
 				7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */,
@@ -309,25 +309,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ABD50BA19E048BA007E3562 /* SignPainter-HouseScript.otf in Resources */,
-				F67CAA041A265456008B9DF8 /* bottle.png in Resources */,
-				F67CAA051A265456008B9DF8 /* flux.png in Resources */,
 				7AD673A819D0951C0079E682 /* app-icon-hadx2.png in Resources */,
+				7ABF0E2C1A2877D70049720C /* hamburger.png in Resources */,
 				7ADC4B2919E027BD00CDD8B9 /* intro-image-iphone6plus.jpg in Resources */,
 				7ADC4B2519E0224400CDD8B9 /* launch-image-iphone6.png in Resources */,
 				7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */,
 				F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */,
-				F67CAA071A265456008B9DF8 /* turn-off.png in Resources */,
+				7ABF0E281A2877940049720C /* turn-off.png in Resources */,
 				7ADC4B2719E0224400CDD8B9 /* launch-image-iphone6plus.png in Resources */,
-				F6EEB7B61A23EB2300D72936 /* hamburger.png in Resources */,
 				7AD673A919D0951C0079E682 /* app-icon-hadx3.png in Resources */,
+				7ABF0E261A2877940049720C /* flux.png in Resources */,
 				7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */,
+				7ABF0E2B1A2877D70049720C /* bg-had.png in Resources */,
 				7ADC4B2619E0224400CDD8B9 /* launch-image-iphone6plus-background.png in Resources */,
+				7ABF0E251A2877940049720C /* bottle-active.png in Resources */,
 				7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */,
-				F67CAA061A265456008B9DF8 /* setting.png in Resources */,
+				7ABF0E201A2877110049720C /* bottle.png in Resources */,
 				7AA2250519CDA9D1002003ED /* Images.xcassets in Resources */,
-				F6FA33CE1A23C92000CDE0B8 /* bg-had.png in Resources */,
+				7ABF0E271A2877940049720C /* setting.png in Resources */,
 				7AD673AE19D09B610079E682 /* launch-image-ipad.png in Resources */,
-				F6A5521C1A268997001C371E /* bottle-active.png in Resources */,
 				7AD2FDD419E029D7008114A2 /* logo-had-launchimage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

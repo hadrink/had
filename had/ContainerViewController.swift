@@ -31,7 +31,7 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
     var currentState: SlideOutState = .BothCollapsed {
         didSet {
             let shouldShowShadow = currentState != .BothCollapsed
-            showShadowForCenterViewController(shouldShowShadow)
+            //showShadowForCenterViewController(shouldShowShadow)
         }
     }
     
@@ -54,16 +54,27 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
         centerViewController.delegate = self
         
         UIGraphicsBeginImageContext(self.view.frame.size)
-        UIImage(named: "bg-had.png")?.drawInRect(self.view.bounds)
+        //UIImage(named: "bg-had.png")?.drawInRect(self.view.bounds)
         image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         centerViewController?.view.backgroundColor = UIColor(patternImage: image)
         
+        var image2:UIImage = UIImage(named: "bottle-active.png")!
+        
         // wrap the centerViewController in a navigation controller, so we can push views to it
         // and display bar button items in the navigation bar$
         centerNavigationController = UINavigationController(rootViewController: centerViewController)
-        centerNavigationController.navigationBar.barStyle = UIBarStyle.BlackTranslucent
-        centerNavigationController.navigationBar.titleTextAttributes = NSDictionary(objectsAndKeys: UIFont(name: "Lato-Regular", size: 17)!,NSFontAttributeName)
+        centerNavigationController.navigationBar.translucent = true
+        centerNavigationController.navigationBar.alpha = 0.4
+        centerNavigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        centerNavigationController.navigationBar.backgroundColor = HadColor.Color.backgroundColor
+        
+        centerNavigationController.navigationBar.barTintColor = HadColor.Color.backgroundColor
+        centerNavigationController.navigationBar.tintColor = HadColor.Color.backgroundColor
+        
+    
+        centerNavigationController.navigationBar.titleTextAttributes = NSDictionary(objectsAndKeys: UIFont(name: "Lato-Regular", size: 17)!,NSFontAttributeName, UIColor.whiteColor(), NSForegroundColorAttributeName)
+        
         
         view.addSubview(centerNavigationController.view)
         addChildViewController(centerNavigationController)
@@ -74,6 +85,11 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
     }
     
     // MARK: CenterViewController delegate methods
+    
+    override func prefersStatusBarHidden() -> Bool {
+        
+        return true;
+    }
     
     func toggleLeftPanel() {
         let notAlreadyExpanded = (currentState != .LeftPanelExpanded)
@@ -135,13 +151,13 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
             }, completion: completion)
     }
     
-    func showShadowForCenterViewController(shouldShowShadow: Bool) {
+    /*func showShadowForCenterViewController(shouldShowShadow: Bool) {
         if (shouldShowShadow) {
             centerNavigationController.view.layer.shadowOpacity = 0.8
         } else {
             centerNavigationController.view.layer.shadowOpacity = 0.0
         }
-    }
+    }*/
     
     // MARK: Gesture recognizer
     
@@ -160,7 +176,7 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
                     addLeftPanelViewController()
                 }
                 
-                showShadowForCenterViewController(true)
+                //showShadowForCenterViewController(true)
             }
         case .Changed:
             // If the user is already panning, translate the center view controller's
