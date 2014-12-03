@@ -45,6 +45,7 @@
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
 		F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5521D1A279D6A001C371E /* PlaceItem.swift */; };
 		F6A552211A27A317001C371E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A552201A27A317001C371E /* Item.swift */; };
+		F6E2B65C1A2FA64000B085DC /* stats-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F6E2B65B1A2FA64000B085DC /* stats-icon.png */; };
 		F6EEB7B41A23DC0200D72936 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F6A5521D1A279D6A001C371E /* PlaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceItem.swift; sourceTree = "<group>"; };
 		F6A552201A27A317001C371E /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		F6E2B65B1A2FA64000B085DC /* stats-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stats-icon.png"; path = "../../../../Downloads/stats-icon.png"; sourceTree = "<group>"; };
 		F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		7A5B7BED19D03DDA0023AAC5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F6E2B65B1A2FA64000B085DC /* stats-icon.png */,
 				7A1ACD0A1A2E5DEE0033A2C5 /* flux.png */,
 				7A1ACD051A2E5CBC0033A2C5 /* setting.png */,
 				7A1ACD061A2E5CBC0033A2C5 /* turn-off.png */,
@@ -173,24 +176,17 @@
 		7AA224F619CDA9D1002003ED /* had */ = {
 			isa = PBXGroup;
 			children = (
+				F6E2B65A1A2F9F8C00B085DC /* Controller */,
 				F6A5521F1A27A2E5001C371E /* ItemCell */,
 				7AA224F919CDA9D1002003ED /* AppDelegate.swift */,
-				7AA224FB19CDA9D1002003ED /* RootViewController.swift */,
-				7AA224FD19CDA9D1002003ED /* DataViewController.swift */,
-				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
-				7AA224FF19CDA9D1002003ED /* ModelController.swift */,
 				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
 				7A8272F71A1D2D04004603FE /* MyPosition.swift */,
 				7AA2251F19CDBED4002003ED /* xmlHttpRequest.swift */,
-				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
 				7AA2250419CDA9D1002003ED /* Images.xcassets */,
 				7AA2250619CDA9D1002003ED /* LaunchScreen.xib */,
 				7A5B7BED19D03DDA0023AAC5 /* images */,
 				7AA224F719CDA9D1002003ED /* Supporting Files */,
-				F61331EE1A1E4F840007FAA1 /* ContainerViewController.swift */,
-				F61331F01A1E508C0007FAA1 /* CenterViewController.swift */,
 				F61331F61A1E6FF40007FAA1 /* Main.storyboard */,
-				F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */,
 			);
 			path = had;
 			sourceTree = "<group>";
@@ -228,6 +224,21 @@
 				F6A552201A27A317001C371E /* Item.swift */,
 			);
 			name = ItemCell;
+			sourceTree = "<group>";
+		};
+		F6E2B65A1A2F9F8C00B085DC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7AA224FB19CDA9D1002003ED /* RootViewController.swift */,
+				7AA224FD19CDA9D1002003ED /* DataViewController.swift */,
+				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
+				7AA224FF19CDA9D1002003ED /* ModelController.swift */,
+				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
+				F61331EE1A1E4F840007FAA1 /* ContainerViewController.swift */,
+				F61331F01A1E508C0007FAA1 /* CenterViewController.swift */,
+				F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +335,7 @@
 				7A1ACD081A2E5CBC0033A2C5 /* setting.png in Resources */,
 				7AD673A919D0951C0079E682 /* app-icon-hadx3.png in Resources */,
 				7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */,
+				F6E2B65C1A2FA64000B085DC /* stats-icon.png in Resources */,
 				7A1ACD091A2E5CBC0033A2C5 /* turn-off.png in Resources */,
 				7ABF0E2B1A2877D70049720C /* bg-had.png in Resources */,
 				7ADC4B2619E0224400CDD8B9 /* launch-image-iphone6plus-background.png in Resources */,

@@ -21,6 +21,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
 
     var delegate: CenterViewControllerDelegate?
     var placeItems: Array<PlaceItem>!
+    var selectedIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,12 +163,23 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as PlaceCell
         cell.configureForPlaceItem(placeItems[indexPath.row])
+        cell.backgroundColor = UIColor.clearColor()
+        
+        if(selectedIndex == indexPath.row){
+            //expand
+        }else{
+            //close expand
+        }
         return cell
     }
     //setRowHeightCell
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        self.tableData.rowHeight = 80
-        return self.tableData.rowHeight
+//        self.tableData.rowHeight = 80
+        if(selectedIndex == indexPath.row){
+            return 200
+        }else{
+            return 80
+        }
     }
     
     // Create loop for tableView and convert MKpoint to CGpoint
@@ -211,8 +223,17 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     }*/
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let selectedPlaceItem = placeItems[indexPath.row]
-        //delegate?.placeItemSelected(selectedPlaceItem)
+        if(selectedIndex == indexPath.row){
+            selectedIndex = -1
+            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            return
+        }
+        if(selectedIndex != -1){
+            var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath), withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+        selectedIndex = indexPath.row
+        tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     @IBAction func Menu(sender: AnyObject) {
