@@ -59,7 +59,7 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
         UIGraphicsEndImageContext()
         centerViewController?.view.backgroundColor = UIColor(patternImage: image)
         
-        var image2:UIImage = UIImage(named: "bottle-active.png")!
+        var image2:UIImage = UIImage(named: "hamburger.png")!
         
         // wrap the centerViewController in a navigation controller, so we can push views to it
         // and display bar button items in the navigation bar$
@@ -131,10 +131,11 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
     }
     
     func animateLeftPanel(#shouldExpand: Bool) {
+        var widthMenu:CGRect = CGRectMake(0, 0, 80, 0)
         if (shouldExpand) {
             currentState = .LeftPanelExpanded
             
-            animateCenterPanelXPosition(targetPosition: CGRectGetWidth(centerNavigationController.view.frame) / 4.6)
+            animateCenterPanelXPosition(targetPosition: CGRectGetWidth(widthMenu))
         } else {
             animateCenterPanelXPosition(targetPosition: 0) { finished in
                 self.currentState = .BothCollapsed
