@@ -37,8 +37,6 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
     
     var leftViewController: LeftViewController?
     
-//    let centerPanelExpandedOffset: CGFloat = 250
-    
     override init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,6 +50,7 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
         
         centerViewController = UIStoryboard.centerViewController()
         centerViewController.delegate = self
+        centerViewController.placeItems = PlaceItem.allPlaceItems()
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         //UIImage(named: "bg-had.png")?.drawInRect(self.view.bounds)
@@ -87,7 +86,6 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
     // MARK: CenterViewController delegate methods
     
     override func prefersStatusBarHidden() -> Bool {
-        
         return true;
     }
     

@@ -15,18 +15,22 @@ protocol CenterViewControllerDelegate {
     optional func collapseSidePanels()
 }
 
-class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLocationManagerDelegate, UITableViewDelegate {
+class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableData: UITableView!
+
+    var delegate: CenterViewControllerDelegate?
+    var placeItems: Array<PlaceItem>!
+    var selectedIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
+    
+        //placeItems = PlaceItem.allPlaceItems()
         tableData.reloadData()
     }
-    
-    var delegate: CenterViewControllerDelegate?
     
     let locationManager = CLLocationManager()
     var data: NSMutableData = NSMutableData()
@@ -112,17 +116,13 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     
     // Get location information
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
-        
-        
-        
+    
         //stop updating location to save battery life
         locationManager.stopUpdatingLocation()
-        
         
         let latitudeDescription = placemark.location.description
         let scannerLatitude = NSScanner(string:latitudeDescription)
         var scannedLatitude: NSString?
-        
         
         scannerLatitude.scanString("<", intoString:nil)
         
@@ -156,19 +156,34 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         println("Error while updating location" + error.localizedDescription)
     }
     
-    // Number of Rows depends of count
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return placeItems.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as PlaceCell
+        cell.configureForPlaceItem(placeItems[indexPath.row])
+        cell.backgroundColor = UIColor.clearColor()
         
-        return jsonData.count
+        if(selectedIndex == indexPath.row){
+            //expand
+        }else{
+            //close expand
+        }
+        return cell
     }
     //setRowHeightCell
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        self.tableData.rowHeight = 80
-        return self.tableData.rowHeight
+//        self.tableData.rowHeight = 80
+        if(selectedIndex == indexPath.row){
+            return 200
+        }else{
+            return 80
+        }
     }
     
     // Create loop for tableView and convert MKpoint to CGpoint
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+  /*  func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
@@ -197,9 +212,28 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         
         label.textAlignment = NSTextAlignment.Center
         label.text = "1"
+
         
-        
+        if(menuItems[indexPath.row].status == "active"){
+            cell.backgroundColor = UIColor.whiteColor()
+        }else{
+            cell.backgroundColor = UIColor.clearColor()
+        }
         return cell
+    }*/
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        if(selectedIndex == indexPath.row){
+            selectedIndex = -1
+            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            return
+        }
+        if(selectedIndex != -1){
+            var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath), withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+        selectedIndex = indexPath.row
+        tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     @IBAction func Menu(sender: AnyObject) {

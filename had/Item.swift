@@ -18,3 +18,18 @@ class MenuCell: UITableViewCell {
     }
 }
 
+class PlaceCell: UITableViewCell {
+    @IBOutlet weak var placeName: UILabel!
+    @IBOutlet weak var city: UILabel!
+    @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var stats: UIImageView!
+    @IBOutlet weak var details: UILabel!
+    
+    func configureForPlaceItem(place: PlaceItem) {
+        placeName.text = place.placeName
+        city.text = place.city
+        distance.text = place.distance
+        stats.image = place.stats
+        details.text = place.pourcentage
+    }
+}
