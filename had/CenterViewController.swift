@@ -182,7 +182,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         print(latitudePlace)
  
         cell.detailTextLabel?.text = "\(type),\(latitudePlace),\(longitudePlace)"
-        cell.textLabel.text = name
+        //cell.textLabel.text = name
         cell.backgroundColor = UIColor.clearColor()
         
         var latitudeConversion = (latitudePlace as NSString).floatValue
