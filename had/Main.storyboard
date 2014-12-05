@@ -1130,14 +1130,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="bg-had.png" translatesAutoresizingMaskIntoConstraints="NO" id="OwX-8R-QfM">
-                                <rect key="frame" x="0.0" y="0.0" width="420" height="568"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg-had@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="OwX-8R-QfM">
+                                <rect key="frame" x="0.0" y="17" width="533" height="736"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="568" id="R9j-AG-15A"/>
-                                    <constraint firstAttribute="width" constant="420" id="dvJ-R6-Vj1"/>
+                                    <constraint firstAttribute="height" constant="736" id="R9j-AG-15A"/>
+                                    <constraint firstAttribute="width" constant="533" id="dvJ-R6-Vj1"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="181" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PgU-L4-VPj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="181" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PgU-L4-VPj">
                                 <rect key="frame" x="0.0" y="74" width="360" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1213,10 +1213,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OwX-8R-QfM" firstAttribute="leading" secondItem="xbh-yN-7Lq" secondAttribute="leadingMargin" constant="-16" id="NqM-aS-cFx"/>
+                            <constraint firstItem="OwX-8R-QfM" firstAttribute="leading" secondItem="xbh-yN-7Lq" secondAttribute="leadingMargin" constant="-96" id="NqM-aS-cFx"/>
                             <constraint firstAttribute="centerX" secondItem="PgU-L4-VPj" secondAttribute="centerX" priority="250" id="dSn-s7-2JI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PgU-L4-VPj" secondAttribute="trailing" constant="-15" id="e7w-n5-oPN"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="PgU-L4-VPj" secondAttribute="bottom" id="fQ5-oz-UkT"/>
                             <constraint firstItem="PgU-L4-VPj" firstAttribute="top" secondItem="xhp-8E-gft" secondAttribute="bottom" id="ltg-3g-gDN"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="OwX-8R-QfM" secondAttribute="bottom" id="pNb-Vr-tZd"/>
                             <constraint firstItem="PgU-L4-VPj" firstAttribute="leading" secondItem="xbh-yN-7Lq" secondAttribute="leadingMargin" constant="-30" id="zUm-wW-4yu"/>
                         </constraints>
                     </view>
@@ -1250,11 +1252,15 @@
                         <viewControllerLayoutGuide type="bottom" id="7zn-fQ-Ao4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3S8-Fm-gnd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-had.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tlu-h1-iVM">
-                                <rect key="frame" x="0.0" y="0.0" width="420" height="568"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg-had@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tlu-h1-iVM">
+                                <rect key="frame" x="0.0" y="0.0" width="533" height="736"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="533" id="X8W-RW-8Yd"/>
+                                    <constraint firstAttribute="height" constant="736" id="xuQ-5h-Xxg"/>
+                                </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="45" sectionFooterHeight="46" translatesAutoresizingMaskIntoConstraints="NO" id="ny0-jb-0cs">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="731"/>
@@ -1290,8 +1296,13 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tlu-h1-iVM" firstAttribute="leading" secondItem="3S8-Fm-gnd" secondAttribute="leadingMargin" constant="-16" id="8BD-Ei-ITX"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Tlu-h1-iVM" secondAttribute="bottom" id="SOd-59-Z83"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="ny0-jb-0cs" id="erQ-wM-cwH"/>
                     </connections>
@@ -1302,7 +1313,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg-had.png" width="840" height="1136"/>
+        <image name="bg-had@3x.png" width="1600" height="2208"/>
         <image name="hamburger2.png" width="20" height="14"/>
         <image name="intro-image-iphone6plus.jpg" width="1242" height="2208"/>
         <image name="launch-image-iphone6plus-background.png" width="1242" height="2208"/>
