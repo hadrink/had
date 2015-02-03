@@ -13,6 +13,7 @@
 		7A1ACD0B1A2E5DEE0033A2C5 /* flux.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A1ACD0A1A2E5DEE0033A2C5 /* flux.png */; };
 		7A1ACD111A2E67B00033A2C5 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A1ACD101A2E67B00033A2C5 /* hamburger.png */; };
 		7A1ACD151A2E68870033A2C5 /* hamburger2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A1ACD141A2E68870033A2C5 /* hamburger2.png */; };
+		7A7C2A581A5B39CB000DFC3B /* stats-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */; };
 		7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8272F71A1D2D04004603FE /* MyPosition.swift */; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
@@ -41,6 +42,10 @@
 		7ADC4B2719E0224400CDD8B9 /* launch-image-iphone6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */; };
 		7ADC4B2919E027BD00CDD8B9 /* intro-image-iphone6plus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */; };
 		7ADC7A6E1A3096470087B83C /* stats-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ADC7A6D1A3096470087B83C /* stats-icon.png */; };
+		7AF362FC1A535C250058A583 /* had-title@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF362FB1A535C250058A583 /* had-title@3x.png */; };
+		7AF659671A49F134002C6745 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659661A49F134002C6745 /* SWRevealViewController.m */; };
+		7AF659691A49F235002C6745 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
+		7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6596A1A49F74E002C6745 /* MainViewController.swift */; };
 		F61331EF1A1E4F840007FAA1 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331EE1A1E4F840007FAA1 /* ContainerViewController.swift */; };
 		F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F01A1E508C0007FAA1 /* CenterViewController.swift */; };
 		F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F41A1E61F00007FAA1 /* MenuItem.swift */; };
@@ -67,6 +72,7 @@
 		7A1ACD0A1A2E5DEE0033A2C5 /* flux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flux.png; sourceTree = "<group>"; };
 		7A1ACD101A2E67B00033A2C5 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		7A1ACD141A2E68870033A2C5 /* hamburger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger2.png; sourceTree = "<group>"; };
+		7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stats-icon@3x.png"; sourceTree = "<group>"; };
 		7A8272F71A1D2D04004603FE /* MyPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPosition.swift; sourceTree = "<group>"; };
 		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +106,12 @@
 		7ADC4B2319E0224400CDD8B9 /* launch-image-iphone6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-image-iphone6plus.png"; sourceTree = "<group>"; };
 		7ADC4B2819E027BD00CDD8B9 /* intro-image-iphone6plus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-image-iphone6plus.jpg"; sourceTree = "<group>"; };
 		7ADC7A6D1A3096470087B83C /* stats-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stats-icon.png"; sourceTree = "<group>"; };
+		7AF362FB1A535C250058A583 /* had-title@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "had-title@3x.png"; sourceTree = "<group>"; };
+		7AF659641A49F133002C6745 /* had-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "had-Bridging-Header.h"; sourceTree = "<group>"; };
+		7AF659651A49F134002C6745 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		7AF659661A49F134002C6745 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		7AF659681A49F235002C6745 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		7AF6596A1A49F74E002C6745 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F61331EE1A1E4F840007FAA1 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		F61331F01A1E508C0007FAA1 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F61331F41A1E61F00007FAA1 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
@@ -131,7 +143,9 @@
 		7A5B7BED19D03DDA0023AAC5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				7AF362FB1A535C250058A583 /* had-title@3x.png */,
 				7ADC7A6D1A3096470087B83C /* stats-icon.png */,
+				7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */,
 				7A1ACD0A1A2E5DEE0033A2C5 /* flux.png */,
 				7A1ACD051A2E5CBC0033A2C5 /* setting.png */,
 				7A1ACD061A2E5CBC0033A2C5 /* turn-off.png */,
@@ -179,6 +193,7 @@
 		7AA224F619CDA9D1002003ED /* had */ = {
 			isa = PBXGroup;
 			children = (
+				7AF659631A49F111002C6745 /* library */,
 				F6E2B65A1A2F9F8C00B085DC /* Controller */,
 				F6A5521F1A27A2E5001C371E /* ItemCell */,
 				7AA224F919CDA9D1002003ED /* AppDelegate.swift */,
@@ -219,6 +234,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7AF659631A49F111002C6745 /* library */ = {
+			isa = PBXGroup;
+			children = (
+				7AF659651A49F134002C6745 /* SWRevealViewController.h */,
+				7AF659661A49F134002C6745 /* SWRevealViewController.m */,
+				7AF659641A49F133002C6745 /* had-Bridging-Header.h */,
+			);
+			name = library;
+			sourceTree = "<group>";
+		};
 		F6A5521F1A27A2E5001C371E /* ItemCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +265,8 @@
 				F61331EE1A1E4F840007FAA1 /* ContainerViewController.swift */,
 				F61331F01A1E508C0007FAA1 /* CenterViewController.swift */,
 				F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */,
+				7AF659681A49F235002C6745 /* SidebarViewController.swift */,
+				7AF6596A1A49F74E002C6745 /* MainViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -325,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A7C2A581A5B39CB000DFC3B /* stats-icon@3x.png in Resources */,
 				7ABD50BA19E048BA007E3562 /* SignPainter-HouseScript.otf in Resources */,
 				7A1ACD111A2E67B00033A2C5 /* hamburger.png in Resources */,
 				7AD673A819D0951C0079E682 /* app-icon-hadx2.png in Resources */,
@@ -342,6 +370,7 @@
 				7ABA1ED31A3235DC00DF59CB /* bg-had@3x.png in Resources */,
 				7A1ACD091A2E5CBC0033A2C5 /* turn-off.png in Resources */,
 				7ABF0E2B1A2877D70049720C /* bg-had.png in Resources */,
+				7AF362FC1A535C250058A583 /* had-title@3x.png in Resources */,
 				7ADC4B2619E0224400CDD8B9 /* launch-image-iphone6plus-background.png in Resources */,
 				7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */,
 				7ABF0E201A2877110049720C /* bottle.png in Resources */,
@@ -374,9 +403,12 @@
 				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AA2250019CDA9D1002003ED /* ModelController.swift in Sources */,
+				7AF659691A49F235002C6745 /* SidebarViewController.swift in Sources */,
+				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */,
 				7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
+				7AF659671A49F134002C6745 /* SWRevealViewController.m in Sources */,
 				F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */,
 				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
 				F6EEB7B41A23DC0200D72936 /* LeftViewController.swift in Sources */,
@@ -499,10 +531,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "had/had-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -510,10 +545,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "had/had-Bridging-Header.h";
 			};
 			name = Release;
 		};

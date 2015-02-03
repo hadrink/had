@@ -19,6 +19,7 @@ class HadColor {
     struct Color {
         static let backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         static let backgroundClearColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        static let hadBlue = UIColor(red: 91, green: 144, blue: 206, alpha: 1)
     }
     
 }
@@ -164,8 +165,11 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
         // we can determine whether the user is revealing the left or right
         // panel by looking at the velocity of the gesture
         let gestureIsDraggingFromLeftToRight = (recognizer.velocityInView(view).x > 0)
+        let gestureIsDraggingFromRightToLeft = (recognizer.velocityInView(view).x < 0)
+        
         
         switch(recognizer.state) {
+            
         case .Began:
             if (currentState == .BothCollapsed) {
                 // If the user starts panning, and neither panel is visible
@@ -175,22 +179,42 @@ class ContainerViewController: UIViewController, CenterViewControllerDelegate, U
                     addLeftPanelViewController()
                 }
                 
+                
                 //showShadowForCenterViewController(true)
             }
+            
         case .Changed:
             // If the user is already panning, translate the center view controller's
             // view by the amount that the user has panned
-            recognizer.view!.center.x = recognizer.view!.center.x + recognizer.translationInView(view).x
-            recognizer.setTranslation(CGPointZero, inView: view)
+            if (gestureIsDraggingFromRightToLeft && view.layer.position.x == recognizer.view!.center.x){
+                break
+            }
+                
+            else if(gestureIsDraggingFromRightToLeft){
+                
+                recognizer.view!.center.x = recognizer.view!.center.x + recognizer.translationInView(view).x/4
+                recognizer.setTranslation(CGPointZero, inView: view)
+            }
+            else {
+                recognizer.view!.center.x = recognizer.view!.center.x + recognizer.translationInView(view).x
+                recognizer.setTranslation(CGPointZero, inView: view)
+            }
+            
+            
         case .Ended:
             // When the pan ends, check whether the left or right view controller is visible
+            
             if (leftViewController != nil) {
                 // animate the side panel open or closed based on whether the view has moved more or less than halfway
                 let hasMovedGreaterThanHalfway = recognizer.view!.center.x > view.bounds.size.width
                 animateLeftPanel(shouldExpand: hasMovedGreaterThanHalfway)
-            } 
+                
+            }
+            
         default:
             break
+            
+            
         }
     }
 }

@@ -28,7 +28,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         
         tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
     
-        //placeItems = PlaceItem.allPlaceItems()
+        placeItems = PlaceItem.allPlaceItems()
         tableData.reloadData()
     }
     

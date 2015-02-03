@@ -24,7 +24,6 @@ class MyPosition {
     
     
     
-    
 
     /*func methodPost () -> NSString{
         let url = NSURL(string:"http://www.hadrink.com/had/php/server.php")
