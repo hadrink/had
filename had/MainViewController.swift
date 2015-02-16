@@ -21,6 +21,14 @@ import CoreLocation
 class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
      override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize the refresh control.
+        var refreshControl = UIRefreshControl()
+        refreshControl.backgroundColor = UIColor.whiteColor()
+        refreshControl.tintColor = UIColor.blackColor()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableData.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         
             /********** RevealView Configuration **********/
@@ -43,12 +51,13 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             imageView.frame = CGRectMake(0, 0, 38.66, 44)
             self.navbar.titleView = imageView
         
-            PlaceItem.allPlaceItems()
+            //PlaceItem.allPlaceItems()
         
         
             /********** Init variables **********/
         
-            placeItems = PlaceItem.allPlaceItems()
+            //placeItems = PlaceItem.allPlaceItems()
+            placeItems = []
     }
     
     /********** Outlets **********/
@@ -65,6 +74,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     /********** Global const & var **********/
     
+    var messageLabel:UILabel!
     var placeItems: Array<PlaceItem>!
     let locationManager = CLLocationManager()
     var data: NSMutableData = NSMutableData()
@@ -205,5 +215,54 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
     }
 
+    func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+        if placeItems.count != 0
+        {
+            self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            return 1;
+        }
+        else
+        {
+            // Display a message when the table is empty
+            messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            messageLabel.text = "No data is currently available. Please pull down to refresh."
+            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = NSTextAlignment.Center
+            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+            messageLabel.sizeToFit()
+            
+            self.tableData.backgroundView = messageLabel
+            self.tableData.separatorStyle = UITableViewCellSeparatorStyle.None
+            
+        }
+        
+        return 1
+    }
+    
+    
+    /********** Refresh places **********/
+    func refresh(refreshControl: UIRefreshControl)
+    {
+        println("refreshing")
+        placeItems = PlaceItem.allPlaceItems()
+        if (placeItems.count != 0)
+        {
+            messageLabel.alpha = 0
+        }
+        
+        self.tableData.reloadData()
+        
+        // End the refreshing
+        var formatter:NSDateFormatter = NSDateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
+        var title:NSString = NSString(format:"Last update: %@", formatter.stringFromDate(NSDate() ))
+        var attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
+        
+        var attributedTitle:NSAttributedString = NSAttributedString(string: title, attributes: attrsDictionary)
+        refreshControl.attributedTitle = attributedTitle;
+        
+        refreshControl.endRefreshing()
+    }
     
 }
