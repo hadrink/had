@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -29,6 +30,69 @@
                         <rect key="frame" x="20" y="246" width="702" height="43"/>
                     </variation>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-intro@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="95T-YS-Jdw">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="736" id="6zv-h6-URh"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="414" id="W8n-Ns-hBC"/>
+                        <constraint firstAttribute="width" constant="414" id="evx-Zj-QiL"/>
+                        <constraint firstAttribute="height" constant="736" id="olj-YU-ayq"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="6zv-h6-URh"/>
+                            <exclude reference="W8n-Ns-hBC"/>
+                            <exclude reference="evx-Zj-QiL"/>
+                            <exclude reference="olj-YU-ayq"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="evx-Zj-QiL"/>
+                            <include reference="olj-YU-ayq"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <exclude reference="6zv-h6-URh"/>
+                            <exclude reference="W8n-Ns-hBC"/>
+                        </mask>
+                    </variation>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle-intro@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="cjd-U9-L3C">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="250" constant="140" id="0fc-ud-lmF"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="cjd-U9-L3C" secondAttribute="height" multiplier="45:142" id="8zw-HF-Ti1"/>
+                        <constraint firstAttribute="width" secondItem="cjd-U9-L3C" secondAttribute="height" multiplier="45:142" id="PfA-Q7-EzU"/>
+                        <constraint firstAttribute="width" secondItem="cjd-U9-L3C" secondAttribute="height" multiplier="116:365" id="f7n-30-EoE"/>
+                        <constraint firstAttribute="width" secondItem="cjd-U9-L3C" secondAttribute="height" multiplier="70:221" id="oxo-mZ-uJQ"/>
+                        <constraint firstAttribute="height" priority="250" constant="442" id="pE7-iv-HWn"/>
+                        <constraint firstAttribute="width" secondItem="cjd-U9-L3C" secondAttribute="height" id="zFx-VU-a5h"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="0fc-ud-lmF"/>
+                            <exclude reference="8zw-HF-Ti1"/>
+                            <exclude reference="PfA-Q7-EzU"/>
+                            <exclude reference="f7n-30-EoE"/>
+                            <exclude reference="oxo-mZ-uJQ"/>
+                            <exclude reference="pE7-iv-HWn"/>
+                            <exclude reference="zFx-VU-a5h"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <exclude reference="0fc-ud-lmF"/>
+                            <exclude reference="8zw-HF-Ti1"/>
+                            <exclude reference="PfA-Q7-EzU"/>
+                            <include reference="f7n-30-EoE"/>
+                            <exclude reference="oxo-mZ-uJQ"/>
+                            <exclude reference="pE7-iv-HWn"/>
+                            <exclude reference="zFx-VU-a5h"/>
+                        </mask>
+                    </variation>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-image-ipad.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z1E-lV-YVb">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
@@ -49,87 +113,58 @@
                         </mask>
                     </variation>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-image-iphone6plus-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="LJl-ph-eaV">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="414" id="JYx-id-JDn"/>
-                        <constraint firstAttribute="height" constant="736" id="pLj-n2-6LT"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="JYx-id-JDn"/>
-                            <exclude reference="pLj-n2-6LT"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="JYx-id-JDn"/>
-                            <include reference="pLj-n2-6LT"/>
-                        </mask>
-                    </variation>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-had-launchimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vb9-bP-K15">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="443" id="9Og-O1-Wlq"/>
-                        <constraint firstAttribute="width" constant="141" id="Ix9-RP-bny"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="9Og-O1-Wlq"/>
-                            <exclude reference="Ix9-RP-bny"/>
-                        </mask>
-                    </variation>
-                    <variation key="heightClass=regular-widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="9Og-O1-Wlq"/>
-                            <include reference="Ix9-RP-bny"/>
-                        </mask>
-                    </variation>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
-                <constraint firstAttribute="centerX" secondItem="Vb9-bP-K15" secondAttribute="centerX" id="6i2-xG-NdM"/>
+                <constraint firstItem="cjd-U9-L3C" firstAttribute="width" secondItem="cjd-U9-L3C" secondAttribute="height" multiplier="45:142" id="6aJ-Xh-1xi"/>
+                <constraint firstAttribute="bottom" secondItem="95T-YS-Jdw" secondAttribute="bottom" id="Dbf-GR-eql"/>
+                <constraint firstItem="cjd-U9-L3C" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="Ftw-eh-YXK"/>
                 <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerY" secondItem="Vb9-bP-K15" secondAttribute="centerY" id="P7V-sA-p6n"/>
-                <constraint firstAttribute="centerX" secondItem="LJl-ph-eaV" secondAttribute="centerX" id="Ueh-8a-eD4"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="centerY" secondItem="LJl-ph-eaV" secondAttribute="centerY" id="bFK-Fa-Ad5"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="cjd-U9-L3C" secondAttribute="bottom" constant="100" id="dsm-sA-htb"/>
+                <constraint firstAttribute="centerX" secondItem="cjd-U9-L3C" secondAttribute="centerX" id="fW1-VZ-IuF"/>
                 <constraint firstAttribute="centerY" secondItem="Z1E-lV-YVb" secondAttribute="centerY" id="ful-zS-UG3"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
                 <constraint firstAttribute="centerX" secondItem="Z1E-lV-YVb" secondAttribute="centerX" id="mAa-or-VPS"/>
+                <constraint firstAttribute="centerX" secondItem="95T-YS-Jdw" secondAttribute="centerX" id="ow1-jQ-CbI"/>
+                <constraint firstAttribute="centerY" secondItem="95T-YS-Jdw" secondAttribute="centerY" id="vSt-Pw-FfY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
+                    <exclude reference="95T-YS-Jdw"/>
+                    <exclude reference="cjd-U9-L3C"/>
                     <exclude reference="Z1E-lV-YVb"/>
-                    <exclude reference="LJl-ph-eaV"/>
-                    <exclude reference="Vb9-bP-K15"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="Ueh-8a-eD4"/>
-                    <exclude reference="bFK-Fa-Ad5"/>
-                    <exclude reference="6i2-xG-NdM"/>
-                    <exclude reference="P7V-sA-p6n"/>
+                    <exclude reference="dsm-sA-htb"/>
+                    <exclude reference="Dbf-GR-eql"/>
+                    <exclude reference="ow1-jQ-CbI"/>
+                    <exclude reference="vSt-Pw-FfY"/>
                     <exclude reference="ful-zS-UG3"/>
                     <exclude reference="mAa-or-VPS"/>
+                    <exclude reference="6aJ-Xh-1xi"/>
+                    <exclude reference="Ftw-eh-YXK"/>
+                    <exclude reference="fW1-VZ-IuF"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="LJl-ph-eaV"/>
-                    <include reference="Vb9-bP-K15"/>
+                    <include reference="95T-YS-Jdw"/>
+                    <include reference="cjd-U9-L3C"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="Ueh-8a-eD4"/>
-                    <include reference="bFK-Fa-Ad5"/>
-                    <include reference="6i2-xG-NdM"/>
-                    <include reference="P7V-sA-p6n"/>
+                    <include reference="dsm-sA-htb"/>
+                    <exclude reference="Dbf-GR-eql"/>
+                    <include reference="ow1-jQ-CbI"/>
+                    <include reference="vSt-Pw-FfY"/>
+                    <exclude reference="6aJ-Xh-1xi"/>
+                    <include reference="Ftw-eh-YXK"/>
+                    <include reference="fW1-VZ-IuF"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
@@ -137,22 +172,22 @@
                     <include reference="Z1E-lV-YVb"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="Kzo-t9-V3l"/>
+                    <exclude reference="MfP-vx-nX0"/>
+                    <exclude reference="ZEH-qu-HZ9"/>
                     <include reference="ful-zS-UG3"/>
                     <include reference="mAa-or-VPS"/>
                     <exclude reference="5cJ-9S-tgC"/>
                     <exclude reference="Koa-jz-hwk"/>
                     <exclude reference="fvb-Df-36g"/>
-                    <exclude reference="Kzo-t9-V3l"/>
-                    <exclude reference="MfP-vx-nX0"/>
-                    <exclude reference="ZEH-qu-HZ9"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="538.5" y="682"/>
         </view>
     </objects>
     <resources>
+        <image name="bg-intro@3x.png" width="1242" height="2208"/>
+        <image name="bottle-intro@3x.png" width="320" height="1009"/>
         <image name="launch-image-ipad.png" width="1536" height="2048"/>
-        <image name="launch-image-iphone6plus-background.png" width="1242" height="2208"/>
-        <image name="logo-had-launchimage.png" width="282" height="887"/>
     </resources>
 </document>

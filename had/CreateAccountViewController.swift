@@ -1,6 +1,6 @@
 import UIKit
 
-class CreateAccountViewController: UIViewController, UITextFieldDelegate{
+class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFieldDelegate{
     
     
     override func viewDidLoad() {
@@ -10,7 +10,23 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         self.navigationController?.navigationBar.tintColor = UIColor .orangeColor()
         configView()
         
-       
+        
+        //navigationBar.barTintColor = UIColor(red: 66/255, green: 86/255, blue: 114/255, alpha: 1)
+        
+        func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+            return UIColor(
+                red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+                green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+                blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+                alpha: CGFloat(1.0)
+            )
+        }
+        
+        navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "Lato-Bolditalic", size: 18)!, NSForegroundColorAttributeName: UIColorFromRGB(0xffffff)]
+        
+        navigationBar.barTintColor = UIColorFromRGB(0x546a85)
+        navigationBar.translucent = false
+              
         
     }
     
@@ -63,8 +79,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet var birthdateButton: UIButton!
     @IBOutlet var datePickerView: UIView!
     @IBOutlet var datePickerToolbar: UIToolbar!
-    @IBOutlet var labelTest: UILabel!
-    @IBOutlet var contentView: UIView!
     @IBOutlet var toolbarButton: UIBarButtonItem!
     @IBOutlet var createAccountButton: UIButton!
     @IBOutlet var navigationBar: UINavigationBar!
@@ -72,7 +86,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
-        animationDown()
+        //animationDown()
         
     }
     
@@ -81,26 +95,26 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         if (textField === lastname) {
             firstname.becomeFirstResponder()
-        }else if (textField === firstname) {
-            firstname.resignFirstResponder()
+            return false
         }
         
         if (textField === firstname) {
             mail.becomeFirstResponder()
-        }else if (textField === mail) {
-            mail.resignFirstResponder()
+            return false
         }
-        
         if (textField === mail) {
             pwd.becomeFirstResponder()
-        }else if (textField === pwd) {
-            pwd.resignFirstResponder()
+            return false
         }
         
         if (textField === pwd) {
             confirmationPwd.becomeFirstResponder()
-        }else if (textField === confirmationPwd) {
-            confirmationPwd.resignFirstResponder()
+            return false
+        }
+        
+        if (textField === confirmationPwd) {
+            birthdateButton.becomeFirstResponder()
+            return true
         }
         
         
@@ -289,41 +303,15 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         return(myConstraintsRemoved)
     }
     
-    func animationUp () {
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
-            
-            /*var contentTopFrame = self.contentView.frame
-            contentTopFrame.origin.y -= contentTopFrame.size.height
-            
-            self.contentView.frame = contentTopFrame*/
-            
-            self.oneConstraint = NSLayoutConstraint(item: self.contentView, attribute: .Top, relatedBy: .Equal, toItem: self.navigationBar, attribute: .Bottom, multiplier: 1, constant: -70)
-            
-            self.addConstraints(self.oneConstraint)
-            
-            /*self.view.addConstraint(NSLayoutConstraint(
-            item:self.contentView, attribute:.Top,
-            relatedBy:.Equal, toItem:self.navigationBar,
-            attribute:.Bottom, multiplier:1, constant:-70))*/
-            
-            self.contentView.frame.origin.y = 0
-            
-            }, completion: { finished in
-                println("Textfield is Up")
-        })
-    }
     
     @IBAction func emailEditingBegin(sender: AnyObject) {
         mail.text = ""
         mail.textColor = darkColor
         
         
-       animationUp()
-        
-        
     }
     
-    func animationDown(){
+    /*func animationDown(){
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
             
             /*var contentTopFrame = self.contentView.frame
@@ -344,7 +332,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
                 println("Textfield is Down")
         })
 
-    }
+    }*/
     
     @IBAction func passwordEditingEnd(sender: AnyObject) {
         var lenght = countElements(pwd.text!)
@@ -370,7 +358,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         
         confirmationPwd.secureTextEntry = true
         confirmationPwd.text = ""
-        confirmationPwd.textColor = darkColor
     }
     
     
@@ -379,7 +366,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
             confirmationPwd.secureTextEntry = false
             confirmationPwd.text = "Tu t'es gouré Coco"
             confirmationPwd.textColor = redColor
-           animationDown()
+           //animationDown()
         }
         
     }
@@ -467,7 +454,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     func configView()
     {
         
+        // Color
         
+        let blackColorOpacity = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor
+        let greyColorTrans:UIColor = UIColor(red: 0.949, green: 0.945, blue: 0.939, alpha: 0.4)
+
         
         // Padding left
         
@@ -488,23 +479,51 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         pwd.leftView = paddingTextFieldPwd
         pwd.leftViewMode = UITextFieldViewMode.Always
         
-        // border radius texfield and view
-        
-        lastname.layer.cornerRadius = 4
-        firstname.layer.cornerRadius = 4
-        mail.layer.cornerRadius = 4
-        confirmationPwd.layer.cornerRadius = 4
-        pwd.layer.cornerRadius = 4
-        birthdateButton.layer.cornerRadius = 4
-        contentView.layer.cornerRadius = 5
-        createAccountButton.layer.cornerRadius = 4
         
         // Shadows
         
-        createAccountButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        createAccountButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).CGColor
-        createAccountButton.layer.shadowOpacity = 1
-        createAccountButton.layer.shadowRadius = 1
+        // Create Account Button
+        
+        createAccountButton.layer.borderColor = greyColor.CGColor
+        createAccountButton.tintColor = greyColor
+        createAccountButton.layer.borderWidth = 1.0
+        
+        // Lastname
+        
+        lastname.placeholder = "Prénom"
+        lastname.layer.backgroundColor = blackColorOpacity
+
+        
+        // Firstname
+        
+        firstname.placeholder = "Prénom"
+        firstname.layer.backgroundColor = blackColorOpacity
+
+        
+        // E-mail
+        
+        mail.placeholder = "E-mail"
+        mail.layer.backgroundColor = blackColorOpacity
+        
+        
+        // Password
+        
+        pwd.placeholder = "Mot de passe"
+        pwd.layer.backgroundColor = blackColorOpacity
+        
+        // Confirmation Password
+        
+        confirmationPwd.placeholder = "Confirmation"
+        confirmationPwd.layer.backgroundColor = blackColorOpacity
+        
+        // Birthdate 
+        
+        birthdateButton.layer.backgroundColor = blackColorOpacity
+        birthdateButton.tintColor = greyColorTrans
+        
+        // Gender
+        
+        gender.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor
         
         
       /*  //lastname.backgroundColor = greyColorForm

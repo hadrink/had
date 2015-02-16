@@ -30,7 +30,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.layer.backgroundColor = HadColor.Color.backgroundColor.CGColor
+        //tableView.layer.backgroundColor = HadColor.Color.backgroundColor.CGColor
         tableView.reloadData()
     }
     

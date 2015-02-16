@@ -1,6 +1,6 @@
 import UIKit
 
-class IntroductionViewController: UIViewController, UITextFieldDelegate{
+class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate{
     }
     
     
+    
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
         
@@ -73,8 +74,15 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate{
             }
         }*/
         
-        return true
+        if (textField === textFieldMail) {
+            textFieldPsw.becomeFirstResponder()
+        }
         
+        if(textField === textFieldPsw){
+            return true
+        }
+        
+        return false
         
     }
     
@@ -92,32 +100,46 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate{
     
     func configView()
     {
+        
+        
+        
         //textFieldMail.textColor = whiteColor
         textFieldMail.placeholder = "E-mail / Nom d'utilisateur"
-        textFieldMail.font = UIFont(name: "Lato-Regular", size: 18)
-        textFieldMail.layer.cornerRadius = 4
+        textFieldMail.font = UIFont(name: "Lato-Light", size: 12)
+        textFieldMail.layer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor
+        
+        var paddingTextFieldMail:UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        
+        textFieldMail.leftView = paddingTextFieldMail
+        textFieldMail.leftViewMode = UITextFieldViewMode.Always
+
+
         
         //textFieldPsw.textColor = whiteColor
         textFieldPsw.placeholder = "Mot de passe"
-        textFieldPsw.font = UIFont(name: "Lato-Regular", size: 18)
-        textFieldPsw.layer.cornerRadius = 4
+        textFieldPsw.font = UIFont(name: "Lato-Light", size: 12)
+        textFieldPsw.layer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor
+        
+        var paddingTextFieldPsw:UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        
+        textFieldPsw.leftView = paddingTextFieldPsw
+        textFieldPsw.leftViewMode = UITextFieldViewMode.Always
         
         
-        textFacebook.titleLabel?.font = UIFont(name: "Lato-Regular", size: 18)
+        textFacebook.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
                 
-        textEmail.titleLabel?.font = UIFont(name: "Lato-Regular", size: 18)
+        textEmail.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
         
         
-        textFacebook.layer.cornerRadius = 4
         textFacebook.layer.borderColor = greyColor.CGColor
         textFacebook.tintColor = greyColor
-        textFacebook.layer.borderWidth = 2.0
+        textFacebook.layer.borderWidth = 1.0
         textFacebook.layer.backgroundColor = blueColor.CGColor
         
-        textEmail.layer.cornerRadius = 4
         textEmail.layer.borderColor = greyColor.CGColor
         textEmail.tintColor = greyColor
-        textEmail.layer.borderWidth = 2.0
+        textEmail.layer.borderWidth = 1.0
+
     
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         

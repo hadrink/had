@@ -26,7 +26,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
+        //tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
     
         placeItems = PlaceItem.allPlaceItems()
         tableData.reloadData()
