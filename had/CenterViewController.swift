@@ -74,7 +74,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
                 var longitude = result[1]
                 var dataString = "ACTION=SEARCH&LATITUDE=\(latitude)&LONGITUDE=\(longitude)"
                 var xhr = xmlHttpRequest()
-                var caramel = xhr.methodPost(dataString)
+                //var caramel = xhr.methodPost(dataString)
                 
                 let location = locations.last as CLLocation
                 let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -82,17 +82,17 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
                 println(result[0])
                 println(result[1])
                 
-                let data = caramel.dataUsingEncoding(NSUTF8StringEncoding)
+                //let data = caramel.dataUsingEncoding(NSUTF8StringEncoding)
                 
                 var err: NSError
                 
                 
-                var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+                //var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
                 
                 
-                println(jsonResult)
+                //println(jsonResult)
                 
-                if jsonResult.count>0 && jsonResult["places"]!.count>0 {
+               /* if jsonResult.count>0 && jsonResult["places"]!.count>0 {
                     var results: NSArray = jsonResult["places"] as NSArray
                     println(results.mutableArrayValueForKey("Adress"))
                     
@@ -103,7 +103,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
                     self.jsonData = results
                     self.tableData.reloadData()
                 }
-                
+                */
                 
             }
                 
