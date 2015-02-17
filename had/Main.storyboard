@@ -556,7 +556,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="UBa-sc-NNf">
             <objects>
-                <viewController id="umO-Ob-sMk" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="umO-Ob-sMk" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZdG-Zk-4U9"/>
                         <viewControllerLayoutGuide type="bottom" id="kE2-3P-ld2"/>

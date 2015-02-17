@@ -386,16 +386,33 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
     
+    func checkUserData() -> Bool {
+        var bool = false
+        
+        if ( !firstname.text.isEmpty && !lastname.text.isEmpty && !mail.text.isEmpty && !pwd.text.isEmpty && !confirmationPwd.text.isEmpty){
+            bool = true
+        }
+        
+        
+        return bool
+    }
+    
     var methodePost = xmlHttpRequest()
     
     @IBAction func sendUserData(sender: UIButton) {
         
-        var finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
-        
-        var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
-       
-        var url = "http://151.80.128.136:3000/user/"
-        methodePost.post(tabUser, url:url)
+        if (checkUserData()){
+            var finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
+            
+            var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
+            
+            var url = "http://151.80.128.136:3000/user/"
+            methodePost.post(tabUser, url:url)
+            
+            let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+            self.showViewController(vc as UIViewController, sender: vc)
+
+        }
         
     }
     
