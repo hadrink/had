@@ -389,9 +389,11 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     var methodePost = xmlHttpRequest()
     
     @IBAction func sendUserData(sender: UIButton) {
-        var tabUser:Dictionary<String,String> = ["Lastname": lastname.text]
         
+        var finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
         
+        var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
+       
         var url = "http://151.80.128.136:3000/user/"
         methodePost.post(tabUser, url:url)
         
