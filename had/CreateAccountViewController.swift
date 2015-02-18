@@ -122,105 +122,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     }
     
     
-    func keyboardWillShow() {
-        
-       /* UIView.animateWithDuration(0.4, animations: {
-            
-            var frame:CGRect = self.contentView.frame
-            var positionFrame = frame.origin.y
-            positionFrame = 200
-            
-        })*/
-        
-        
-       
-        
-        /*let dict:NSDictionary = sender.userInfo as NSDictionary!
-        let s:NSValue = dict.valueForKey(UIKeyboardFrameEndUserInfoKey) as NSValue;
-        let rect :CGRect = s.CGRectValue();
-        
-        var frame = self.contentView.frame;
-        
-        //Adjust 80 according to your need actually if is for padding and quickTypeView
-        var offset = (rect.height - ((self.view.frame.height - self.contentView.frame.origin.y)+self.contentView.frame.size.height))+80;
-        print(offset)
-        frame.origin.y = offset>0 ? frame.origin.y - offset : frame.origin.y ;
-        UIView.animateWithDuration(0.3, animations:{
-            self.contentView.frame = frame;
-            
-            }
-        )*/
-        
-                
-    }
-    
-    func keyboardDidShow(notifaction: NSNotification) {
-        
-        
-       /* println("Keyboard appeared")
-        contentView.layer.position.y = 200
-        println(contentView.layer.position.y)
-        println(view.frame.height)*/
-        //contentView.layer.position.y = 200
-        
-        /*var info:NSDictionary = notifaction.userInfo!
-        
-        var kbFrame:NSValue = info.valueForKey("UIKeyboardFrameEndUserInfoKey") as NSValue
-        
-        var keyboardFrame:CGRect = kbFrame.CGRectValue()
-        
-        contentView.layer.position.y = contentView.layer.position.y - keyboardFrame.height
-        
-        println(contentView.layer.position.y)
-        
-        println(keyboardFrame.height)*/
-        
-
-        
-
-    }
-    
-    
-    func keyboardDidHide(notifaction: NSNotification) {
-
-        
-        /*println("Keyboard hidden")
-        contentView.layer.position.y += 200*/
-    }
-    
-   
-    
-    @IBAction func createAccount(sender: UIButton) {
-        
-        /*let user = User(mail: "maurice@mail.com", pwd: "mdp", gend: "Homme", birth: NSDate.date())
-        let user2 = User(mail: "maurice@mail.com", pwd: "mdp", gend: "Homme", birth: NSDate.distantPast() as NSDate)*/
-        if(lastname.text.isEmpty && firstname.text.isEmpty && mail.text.isEmpty && pwd.text.isEmpty && confirmationPwd.text.isEmpty){
-            println("T'as rien rempli sac à merde !")
-            
-        }
-        else if(lastname.textColor == redColor || firstname.textColor == redColor || mail.textColor == redColor || pwd.textColor == redColor || confirmationPwd.textColor == redColor){
-            println("Regarde tu t'es gouré !")
-            
-        }
-        /*else{
-            var dataString = "ACTION=REGISTER&LASTNAME=\(lastname.text)&FIRSTNAME=\(firstname.text)&EMAIL=\(mail.text)&PASSWORD=\(pwd.text)&BIRTHDATE=\(birthdate.date)&SEX=\(gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!)"
-            var xhr = xmlHttpRequest()
-            var registered = xhr.methodPost(dataString)
-            println(registered)
-            if registered == "done" {
-                var user: User = User(mail: mail.text, pwd: pwd.text, gend: "Homme", birth: NSDate())
-                //var data:NSData = NSKeyedArchiver.archivedDataWithRootObject(user)
-                //var username:NSString  = mail.text
-                //var age:NSString  = user.getAge().description
-                //NSUserDefaults.standardUserDefaults().setObject(data, forKey:"Username")
-                //NSUserDefaults.standardUserDefaults().setObject(age, forKey:"Age")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ParameterRadarViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
-            }
-            
-        }*/
-    }
     
     @IBAction func lastnameEditingEnd(sender: AnyObject) {
         
@@ -243,7 +144,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
     
-   
     
     @IBAction func firstnameEditingBegin(sender: AnyObject){
         
@@ -311,28 +211,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
     
-    /*func animationDown(){
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
-            
-            /*var contentTopFrame = self.contentView.frame
-            contentTopFrame.origin.y -= contentTopFrame.size.height
-            
-            self.contentView.frame = contentTopFrame*/
-            
-            /* self.view.addConstraint(NSLayoutConstraint(
-            item:self.contentView, attribute:.Top,
-            relatedBy:.Equal, toItem:self.navigationBar,
-            attribute:.Bottom, multiplier:2, constant:20))
-            
-            self.contentView.frame.origin.y = 80*/
-            
-            self.removeConstraints(self.oneConstraint)
-            
-            }, completion: { finished in
-                println("Textfield is Down")
-        })
-
-    }*/
     
     @IBAction func passwordEditingEnd(sender: AnyObject) {
         var lenght = countElements(pwd.text!)
@@ -373,12 +251,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
 
     @IBAction func birthdateButtonTouch(sender: UIButton) {
         
-        /*func move() {
-        datePickerTest.layer.anchorPoint = CGPoint(x:1, y:1)
-            datePickerTest.layer.position = CGPoint(x:view.frame.width, y: view.frame.height)
-        
-        }*/
-        
         UIView.animateWithDuration(0.4, animations: {
             
             self.datePickerView.frame = CGRectMake(0.0, self.view.frame.size.height - self.datePickerView.frame.height, self.view.frame.width, 250.0)
@@ -411,27 +283,19 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as UIViewController, sender: vc)
+            
+            println("Create Account : Success");
 
+        }
+        
+        else {
+            println("Create Account : Failed");
         }
         
     }
     
     
     @IBAction func toolbarButtonDone(sender: UIBarButtonItem) {
-        
-        
-        /*UIView.animateWithDuration(0.4, animations: {
-            
-            var frame:CGRect = self.datePickerView.frame
-            self.view.frame.size.height + 300.0 + 84
-            self.datePickerView.frame = frame
-            
-        })
-        
-        var birthdate:String = datePickerTest.date.description
-        birthdateButton.setTitle(birthdate, forState: UIControlState.Normal)*/
-        
-        
         
 
         UIView.animateWithDuration(0.4, animations: {
@@ -451,35 +315,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
    
-    
-       /*func methodPost () -> NSString{
-        let url = NSURL(string:"http://www.hadrink.com/had/php/server.php")
-        let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
-        request.HTTPMethod = "POST"
-    
-        // set Content-Type in HTTP header
-        let boundaryConstant = "----------V2ymHFg03esomerandomstuffhbqgZCaKO6jy";
-        let contentType = "multipart/form-data; boundary=" + boundaryConstant
-        NSURLProtocol.setProperty(contentType, forKey: "Content-Type", inRequest: request)
-    
-        // set data
-        var dataString = "ACTION=REGISTER&LASTNAME=\(lastname.text)&FIRSTNAME=\(firstname.text)&EMAIL=\(mail.text)&PASSWORD=\(pwd.text)&BIRTHDATE=\(birthdate.date)&SEX=\(gender.titleForSegmentAtIndex(gender.selectedSegmentIndex))"
-        let requestBodyData = (dataString as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        request.HTTPBody = requestBodyData
-    
-        // set content length
-        NSURLProtocol.setProperty(requestBodyData.length, forKey: "Content-Length", inRequest: request)
-    
-        var response: NSURLResponse? = nil
-        var error: NSError? = nil
-        let reply = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&error)
-    
-        let results = NSString(data:reply, encoding:NSUTF8StringEncoding)
-        println("API Response: \(results)")
-        var sbstring: NSRange = NSRange(location: 10, length: 4)
-        return results.substringWithRange(sbstring)
-    }*/
     
     
     func configView()
@@ -556,52 +391,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
         gender.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor
         
-        
-      /*  //lastname.backgroundColor = greyColorForm
-        lastname.textColor = darkColor
-        //lastname.font = UIFont(name: "Lato-Regular", size: 14)
-        lastname.layer.cornerRadius = 4
-        lastname.layer.borderColor = greyColorForm.CGColor
-        lastname.layer.borderWidth = 2.0
-
-
-        
-        firstname.backgroundColor = greyColorForm
-        firstname.textColor = darkColor
-        //firstname.font = UIFont(name: "Lato-Regular", size: 14)
-        firstname.layer.cornerRadius = 4
-        firstname.layer.borderColor = greyColorForm.CGColor
-        firstname.layer.borderWidth = 2.0
-
-        
-        mail.backgroundColor = greyColorForm
-        mail.textColor = darkColor
-        //mail.font = UIFont(name: "Lato-Regular", size: 14)
-        mail.layer.cornerRadius = 4
-        mail.layer.borderColor = greyColorForm.CGColor
-        mail.layer.borderWidth = 2.0
-
-        
-        pwd.backgroundColor = greyColorForm
-        pwd.textColor = darkColor
-        //pwd.font = UIFont(name: "Lato-Regular", size: 14)
-        pwd.layer.cornerRadius = 4
-        pwd.layer.borderColor = greyColorForm.CGColor
-        pwd.layer.borderWidth = 2.0
-
-        
-        confirmationPwd.backgroundColor = greyColorForm
-        confirmationPwd.textColor = darkColor
-        //confirmationPwd.font = UIFont(name: "Lato-Regular", size: 14)
-        confirmationPwd.layer.cornerRadius = 4
-        confirmationPwd.layer.borderColor = greyColorForm.CGColor
-        confirmationPwd.layer.borderWidth = 2.0
-        
-        birthdate.backgroundColor = greyColorForm
-        
-        //textLabelBirthdate.textColor = darkColor
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: false)*/
         
     }
     
