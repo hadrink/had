@@ -48,45 +48,33 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     @IBAction func withYourEmail(sender: UIButton) {
     
     }
-    
-    
-    
+        
+    var methodePost = xmlHttpRequest()
+
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
-        
-        /*if textField == textFieldPsw {
-            
-            var dataString = "ACTION=LOGIN&EMAIL=\(textFieldMail.text)&PASSWORD=\(textFieldPsw.text)"
-            var xhr = xmlHttpRequest()
-            var caramel:NSString = xhr.methodPost(dataString)
-
-            
-            println(caramel)
-            
-            if caramel == "done" {
-                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ParameterRadarViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
-            }
-            
-            else {
-                textFieldMail.layer.borderColor = redColor.CGColor
-                textFieldMail.layer.borderWidth = 4.0
-            }
-        }*/
         
         if (textField === textFieldMail) {
             textFieldPsw.becomeFirstResponder()
         }
         
         if(textField === textFieldPsw){
+            
+            var mail = textFieldMail.text
+            
+            var mySearch:Dictionary<String,String> =  ["E-mail": mail, "Password":textFieldPsw.text]
+            
+            var url = "http://151.80.128.136:3000/email/user/"
+            var cheum = methodePost.post(mySearch, url: url)
+            
+            
+            
             return true
         }
         
         return false
         
     }
-    
-    
 
 
     func isUserConnected()
