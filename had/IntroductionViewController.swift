@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate{
     
@@ -13,8 +14,37 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
      override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //1
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //2
+        let fetchRequest = NSFetchRequest(entityName:"User")
+        
+        //3
+        var error: NSError?
+        
+        let fetchedResults =
+        managedContext.executeFetchRequest(fetchRequest,
+            error: &error) as [NSManagedObject]?
+        
+        if let results = fetchedResults {
+            user.userProfil = results
+        } else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        println(fetchedResults)
+        println(user.userProfil)
+        for element in user.userProfil{
+            println("Popup video is \(element)")
+        }
+        configView()
+    
         // Do any additional setup after loading the view, typically from a nib.
-       configView()
+       
         
     }
     
@@ -53,27 +83,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
-        
-        /*if textField == textFieldPsw {
-            
-            var dataString = "ACTION=LOGIN&EMAIL=\(textFieldMail.text)&PASSWORD=\(textFieldPsw.text)"
-            var xhr = xmlHttpRequest()
-            var caramel:NSString = xhr.methodPost(dataString)
-
-            
-            println(caramel)
-            
-            if caramel == "done" {
-                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ParameterRadarViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
-            }
-            
-            else {
-                textFieldMail.layer.borderColor = redColor.CGColor
-                textFieldMail.layer.borderWidth = 4.0
-            }
-        }*/
-        
         if (textField === textFieldMail) {
             textFieldPsw.becomeFirstResponder()
         }
@@ -100,9 +109,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func configView()
     {
-        
-        
-        
         //textFieldMail.textColor = whiteColor
         textFieldMail.placeholder = "E-mail / Nom d'utilisateur"
         textFieldMail.font = UIFont(name: "Lato-Light", size: 12)
@@ -144,40 +150,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
-    
-    /*func methodPost () -> NSString{
-        let url = NSURL(string:"http://www.hadrink.com/had/php/server.php")
-        let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
-        request.HTTPMethod = "POST"
-        
-        // set Content-Type in HTTP header
-        let boundaryConstant = "----------V2ymHFg03esomerandomstuffhbqgZCaKO6jy";
-        let contentType = "multipart/form-data; boundary=" + boundaryConstant
-        NSURLProtocol.setProperty(contentType, forKey: "Content-Type", inRequest: request)
-        
-        // set data
-        var dataString = "ACTION=LOGIN&EMAIL=\(textFieldMail.text)&PASSWORD=\(textFieldPsw.text)"
-        let requestBodyData = (dataString as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        request.HTTPBody = requestBodyData
-        
-        // set content length
-        NSURLProtocol.setProperty(requestBodyData.length, forKey: "Content-Length", inRequest: request)
-        
-        var response: NSURLResponse? = nil
-        var error: NSError? = nil
-        let reply = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&error)
-        
-        let results = NSString(data:reply, encoding:NSUTF8StringEncoding)
-        println("API Response: \(results)")
-        var sbstring: NSRange = NSRange(location: 10, length: 4)
-        println(results)
-                println(textFieldMail.text)
-                println(textFieldPsw.text)
-        return results.substringWithRange(sbstring)
-    }*/
-
-    
     
 }
 

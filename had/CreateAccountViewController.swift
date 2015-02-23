@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFieldDelegate{
     
@@ -36,12 +37,12 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         configView()
         
         // Notifications for keyboard
-        
+        /*
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name: UIKeyboardDidShowNotification, object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
-        
+        */
         
         
     }
@@ -279,8 +280,8 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
             var url = "http://151.80.128.136:3000/user/"
-            methodePost.post(tabUser, url:url)
-            
+            methodePost.post(tabUser, url:URLS.urlUser)
+            saveName(firstname.text)
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as UIViewController, sender: vc)
             
@@ -394,6 +395,32 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
     
-
+    func saveName(name: String) {
+        
+        //1
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //2
+        let entity =  NSEntityDescription.entityForName("User",
+            inManagedObjectContext:
+            managedContext)
+        
+        let profil = NSManagedObject(entity: entity!,
+            insertIntoManagedObjectContext:managedContext)
+        
+        //3
+        profil.setValue(name, forKey: "name")
+        
+        //4
+        var error: NSError?
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        //5
+        user.userProfil.append(profil)
+    }
 }
 
