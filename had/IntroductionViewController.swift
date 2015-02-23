@@ -88,14 +88,22 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         }
         
         if(textField === textFieldPsw){
+            
+            var mail = textFieldMail.text
+            
+            var mySearch:Dictionary<String,String> =  ["E-mail": mail, "Password":textFieldPsw.text]
+            
+            var url = "http://151.80.128.136:3000/email/user/"
+            var cheum = methodePost.post(mySearch, url: url)
+            
+            
+            
             return true
         }
         
         return false
         
     }
-    
-    
 
 
     func isUserConnected()

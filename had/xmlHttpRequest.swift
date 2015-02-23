@@ -51,7 +51,28 @@ class xmlHttpRequest{
         
         task.resume()
     }
-
+    
+    func get(url : String) {
+        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var session = NSURLSession.sharedSession()
+        request.HTTPMethod = "GET"
+        
+        var err: NSError?
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            println("Response: \(response)")
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("Body: \(strData)")
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
+            
+        })
+        
+        task.resume()
+    }
+    
     
     func delete(params : Dictionary<String, String>,url : String) {
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
