@@ -50,6 +50,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     }
         
     var methodePost = xmlHttpRequest()
+    var myJsonResult = ""
 
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
@@ -60,22 +61,37 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         
         if(textField === textFieldPsw){
             
-            var mail = textFieldMail.text
+            // Correct url and username/password
+            methodePost.post(["E-mail": textFieldMail.text, "Password":textFieldPsw.text], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                if(succeeded) {
+                    alert.title = "Success!"
+                    alert.message = msg
+                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                    self.showViewController(vc as UIViewController, sender: vc)
+                }
+                
+                else {
+                    alert.title = "Failed :("
+                    alert.message = msg
+                }
+                    
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                })
+            }
+                
+        return true
             
-            var mySearch:Dictionary<String,String> =  ["E-mail": mail, "Password":textFieldPsw.text]
-            
-            var url = "http://151.80.128.136:3000/email/user/"
-            var cheum = methodePost.post(mySearch, url: url)
-            
-            
-            
-            return true
         }
         
-        return false
+    return false
         
     }
-
+    
 
     func isUserConnected()
     {

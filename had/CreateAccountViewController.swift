@@ -279,7 +279,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
             var url = "http://151.80.128.136:3000/user/"
-            methodePost.post(tabUser, url:url)
+            //methodePost.post(tabUser, url:url)
             
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as UIViewController, sender: vc)
