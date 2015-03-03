@@ -173,18 +173,39 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             return emailTest!.evaluateWithObject(candidate)
         }
         
+        if  mail.text.isEmpty {
+            mail.text = "Ce champ est vide"
+            mail.textColor = redColor
+        }
+        
         if(!validateEmail(mail.text)){
             mail.text = "Cette adresse n'est pas valide"
             mail.textColor = redColor
         }
         else {
             mail.textColor = darkColor
+            
         }
+        /*var emailTest:Dictionary<String,String> = ["E-mail": mail.text]
+
+        methodePost.post(emailTest, url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            
+            var myEmailfield = self.mail.text
+            
+            if(succeeded) {
+                alert.title = "Cette adresse existe déjà"
+                alert.message = msg
+                myEmailfield = "Cette adresse existe déjà"
+            }
+            
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // Show the alert
+                alert.show()
+            })
+        }*/
         
-        if  mail.text.isEmpty {
-            mail.text = "Ce champ est vide"
-            mail.textColor = redColor
-        }
     }
     
     var oneConstraint:NSLayoutConstraint!
@@ -278,13 +299,30 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
-            var url = "http://151.80.128.136:3000/user/"
-            //methodePost.post(tabUser, url:url)
+            println("http://151.80.128.136:3000/user/\(mail.text)")
             
-            let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-            self.showViewController(vc as UIViewController, sender: vc)
-            
-            println("Create Account : Success");
+            methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String) -> () in
+                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                
+                if(succeeded) {
+                    alert.title = "Create Account Success!"
+                    alert.message = msg
+                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                    self.showViewController(vc as UIViewController, sender: vc)
+                }
+                    
+                else {
+                    alert.title = "Cet E-mail est déjà utilisé :("
+                    alert.message = msg
+                }
+                
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                })
+            }
+
 
         }
         
