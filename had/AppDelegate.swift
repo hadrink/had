@@ -19,16 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-       /* userProfil.getUserCoreData()
+      /*  userProfil.getUserCoreData()
         println("getuser")
         var mail=userProfil.mail
         println(userProfil.mail)
         println(mail.isEmpty)
         if(!mail.isEmpty)
         {
+
             var storyboard:UIStoryboard = UIStoryboard(name: "Main.storyboard", bundle: nil)
             var loginController:UINavigationController  = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as UINavigationController
-            self.window?.rootViewController = UIViewController(nibName: <#String?#>, bundle: <#NSBundle?#>)
+//            self.window?.rootViewController = UIViewController(nibName: <#String?#>, bundle: <#NSBundle?#>)
 //            self.window.rootViewController
             //presentViewController:loginController animated:animated completion:nil];
             /*let vc: AnyObject! = self.inputViewController?.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")

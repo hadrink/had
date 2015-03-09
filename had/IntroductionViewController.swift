@@ -12,27 +12,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
        
     }
     
-     override func viewWillAppear(animated: Bool) {
-        
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.userProfil.getUserCoreData()
-        println("getuser")
-        var mail=appDelegate.userProfil.mail
-        println(appDelegate.userProfil.mail)
-        println(mail.isEmpty)
-        if(!mail.isEmpty){
-            let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-            self.showViewController(vc as UIViewController, sender: vc)
-            println("redirect")
-        }
-        else{
-            //super.viewWillAppear(animated)
-            configView()
-        }
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,6 +44,8 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     }
     
     var methodePost = xmlHttpRequest()
+    var myJsonResult = ""
+
     
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
@@ -74,13 +55,30 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         
         if(textField === textFieldPsw){
             
-            var mail = textFieldMail.text
-            
-            var mySearch:Dictionary<String,String> =  ["E-mail": mail, "Password":textFieldPsw.text]
-            
-            var url = "http://151.80.128.136:3000/email/user/"
-            methodePost.post(mySearch, url: url)
-            
+            // Correct url and username/password
+            methodePost.post(["E-mail": textFieldMail.text, "Password":textFieldPsw.text], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                if(succeeded) {
+                    alert.title = "Success!"
+                    alert.message = msg
+                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                    self.showViewController(vc as UIViewController, sender: vc)
+                }
+                
+                else {
+                    alert.title = "Failed :("
+                    alert.message = msg
+                }
+                    
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                })
+            }
+                
+        return true
         }
         
     return false

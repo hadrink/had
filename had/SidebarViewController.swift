@@ -36,6 +36,15 @@ class SidebarViewController: UITableViewController {
         
     }
     
+    @IBAction func disconnect(sender: AnyObject) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.userProfil.getUserCoreData()
+        println("getuser")
+        appDelegate.userProfil.disconnect()
+        let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
+        self.showViewController(vc as UIViewController, sender: vc)
+        println("disconnect")
+    }
     override func  prefersStatusBarHidden() -> Bool {
         return true
     }

@@ -45,11 +45,11 @@ struct Location {
 }
 */
 class User{
-    var name: String
-    var lastname: String
-    var mail: String
+    var name: String?
+    var lastname: String?
+    var mail: String?
     var gender:Int=0
-    var birthDate: NSDate
+    var birthDate: NSDate?
     //var position = Location();
     init(){
         self.name = ""
@@ -66,14 +66,14 @@ class User{
         self.gender = gend
         self.birthDate = birth
     }
-
+/*
     
     func getAge(/*birth: NSDate*/) -> Float{
         var age = -birthDate.timeIntervalSinceNow
         age /= 31536000
         return ceil(Float(age))
     }
-    
+  */  
     func getUserCoreData(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -88,11 +88,13 @@ class User{
             println(result.valueForKey("mail"))
             println(result.valueForKey("gender"))
             println(result.valueForKey("birthdate"))
-            self.name=result.valueForKey("name") as String
-            self.lastname=result.valueForKey("lastname") as String
-            self.mail = result.valueForKey("mail") as String
+            
+            
+            self.name=result.valueForKey("name") as? String
+            self.lastname=result.valueForKey("lastname") as? String
+            self.mail = result.valueForKey("mail") as? String
             self.gender = result.valueForKey("gender") as Int
-            self.birthDate = result.valueForKey("birthdate") as NSDate
+            self.birthDate = result.valueForKey("birthdate") as? NSDate
         }
         if fetchedResults.count == 0 {
             println("Could not fetch ")
@@ -132,6 +134,15 @@ class User{
 //        user.userProfil.append(profil)
     }
     
+    func disconnect()
+    {
+        var bool:Bool=false
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext!
+        var fetchedResults = executeRequest(managedContext)
+        deleteUserCoreData(managedContext,fetchedResults: fetchedResults)
+    }
     private func executeRequest(managedContext:NSManagedObjectContext)-> NSArray
     {
         let fetchRequest = NSFetchRequest(entityName:"User")

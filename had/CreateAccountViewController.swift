@@ -207,6 +207,10 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             })
         }*/
         
+        if  mail.text.isEmpty {
+            mail.text = "Ce champ est vide"
+            mail.textColor = redColor
+        }
     }
     
     var oneConstraint:NSLayoutConstraint!
@@ -301,13 +305,35 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
             var url = "http://151.80.128.136:3000/user/"
-            methodePost.post(tabUser, url:URLS.urlUser)
+            //methodePost.post(tabUser, url:URLS.urlUser)
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
-            let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-            self.showViewController(vc as UIViewController, sender: vc)
             
+            println("http://151.80.128.136:3000/user/\(mail.text)")
+            
+            methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String) -> () in
+                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                
+                if(succeeded) {
+                    alert.title = "Create Account Success!"
+                    alert.message = msg
+                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                    self.showViewController(vc as UIViewController, sender: vc)
+                }
+                    
+                else {
+                    alert.title = "Cet E-mail est déjà utilisé :("
+                    alert.message = msg
+                }
+                
+                // Move to the UI thread
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // Show the alert
+                    alert.show()
+                })
+            }
             println("Create Account : Success");
+
 
         }
         
