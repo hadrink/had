@@ -54,6 +54,8 @@
 		7AF659691A49F235002C6745 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
 		7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6596A1A49F74E002C6745 /* MainViewController.swift */; };
 		EB444F901A9527D600E533B2 /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F8F1A9527D600E533B2 /* structs.swift */; };
+		EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */; };
+		EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB444F9D1A9E30A000E533B2 /* CoreData.framework */; };
 		F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F01A1E508C0007FAA1 /* CenterViewController.swift */; };
 		F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F41A1E61F00007FAA1 /* MenuItem.swift */; };
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
@@ -127,6 +129,8 @@
 		7AF659681A49F235002C6745 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		7AF6596A1A49F74E002C6745 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EB444F8F1A9527D600E533B2 /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
+		EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
+		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F61331F01A1E508C0007FAA1 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F61331F41A1E61F00007FAA1 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +199,7 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				EB444F9D1A9E30A000E533B2 /* CoreData.framework */,
 				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
 				7AA224F619CDA9D1002003ED /* had */,
 				7AA2251019CDA9D1002003ED /* hadTests */,
@@ -267,6 +273,7 @@
 		F6A5521F1A27A2E5001C371E /* ItemCell */ = {
 			isa = PBXGroup;
 			children = (
+				EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */,
 				EB444F8F1A9527D600E533B2 /* structs.swift */,
 				F61331F41A1E61F00007FAA1 /* MenuItem.swift */,
 				F6A5521D1A279D6A001C371E /* PlaceItem.swift */,
@@ -431,6 +438,7 @@
 				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AA2250019CDA9D1002003ED /* ModelController.swift in Sources */,
+				EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */,
 				7AF659691A49F235002C6745 /* SidebarViewController.swift in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */,
@@ -647,6 +655,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */,
+			);
+			currentVersion = EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */;
+			path = had.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7AA224EC19CDA9D0002003ED /* Project object */;
 }

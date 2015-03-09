@@ -281,7 +281,8 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             var url = "http://151.80.128.136:3000/user/"
             methodePost.post(tabUser, url:URLS.urlUser)
-            saveName(firstname.text)
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as UIViewController, sender: vc)
             
@@ -393,34 +394,6 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         gender.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor
         
         
-    }
-    
-    func saveName(name: String) {
-        
-        //1
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        
-        //2
-        let entity =  NSEntityDescription.entityForName("User",
-            inManagedObjectContext:
-            managedContext)
-        
-        let profil = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext:managedContext)
-        
-        //3
-        profil.setValue(name, forKey: "name")
-        
-        //4
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
-        }
-        //5
-        user.userProfil.append(profil)
     }
 }
 

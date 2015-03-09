@@ -14,17 +14,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    /*func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-        let containerViewController = ContainerViewController()
-        
-        window!.rootViewController = containerViewController
-        window!.makeKeyAndVisible()
-        
-        return true
-    }*/
+    var userProfil:User = User()
 
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+       /* userProfil.getUserCoreData()
+        println("getuser")
+        var mail=userProfil.mail
+        println(userProfil.mail)
+        println(mail.isEmpty)
+        if(!mail.isEmpty)
+        {
+            var storyboard:UIStoryboard = UIStoryboard(name: "Main.storyboard", bundle: nil)
+            var loginController:UINavigationController  = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as UINavigationController
+            self.window?.rootViewController = UIViewController(nibName: <#String?#>, bundle: <#NSBundle?#>)
+//            self.window.rootViewController
+            //presentViewController:loginController animated:animated completion:nil];
+            /*let vc: AnyObject! = self.inputViewController?.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+            self.inputViewController?.showViewController(vc as UIViewController, sender: vc)*/
+            println("redirect")
+        }*/
+        return true
+    }
     
     func applicationWillResignActive(application: UIApplication!) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -38,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(application: UIApplication!) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
     }
     
     func applicationDidBecomeActive(application: UIApplication!) {

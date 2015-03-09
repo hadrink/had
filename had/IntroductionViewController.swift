@@ -13,38 +13,23 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     }
     
      override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-        //1
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
         
-        let managedContext = appDelegate.managedObjectContext!
-        
-        //2
-        let fetchRequest = NSFetchRequest(entityName:"User")
-        
-        //3
-        var error: NSError?
-        
-        let fetchedResults =
-        managedContext.executeFetchRequest(fetchRequest,
-            error: &error) as [NSManagedObject]?
-        
-        if let results = fetchedResults {
-            user.userProfil = results
-        } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.userProfil.getUserCoreData()
+        println("getuser")
+        var mail=appDelegate.userProfil.mail
+        println(appDelegate.userProfil.mail)
+        println(mail.isEmpty)
+        if(!mail.isEmpty){
+            let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+            self.showViewController(vc as UIViewController, sender: vc)
+            println("redirect")
         }
-        println(fetchedResults)
-        println(user.userProfil)
-        for element in user.userProfil{
-            println("Popup video is \(element)")
+        else{
+            //super.viewWillAppear(animated)
+            configView()
         }
-        configView()
-    
-        // Do any additional setup after loading the view, typically from a nib.
-       
         
     }
     
@@ -79,7 +64,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     }
     
-    
+    var methodePost = xmlHttpRequest()
     
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
@@ -94,9 +79,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             var mySearch:Dictionary<String,String> =  ["E-mail": mail, "Password":textFieldPsw.text]
             
             var url = "http://151.80.128.136:3000/email/user/"
-            var cheum = methodePost.post(mySearch, url: url)
-            
-            
+            methodePost.post(mySearch, url: url)
             
             return true
         }

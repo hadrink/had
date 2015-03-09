@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import CoreData
+/*
 var UserMgr = UserManager()
 
 class UserManager: NSObject {
@@ -42,20 +43,26 @@ struct Location {
     var lat:Double = 0.0
     var lng:Double = 0.0
 }
-
+*/
 class User{
-    var name: String?
-    var lastname: String?
-    var mail: String = ""
-    var password: String = "password"
-    var gender = "Homme"
+    var name: String
+    var lastname: String
+    var mail: String
+    var gender:Int=0
     var birthDate: NSDate
     //var position = Location();
-    
-    init(mail:String, pwd:String,gend:String, birth:NSDate) {
+    init(){
+        self.name = ""
+        self.lastname = ""
+        self.mail = ""
+        self.gender=0
+        self.birthDate = NSDate()
+    }
+    init(name :String,lastname:String,mail:String,gend:Int, birth:NSDate) {
        
+        self.lastname = lastname
+        self.name = name
         self.mail = mail
-        self.password = pwd
         self.gender = gend
         self.birthDate = birth
     }
@@ -66,8 +73,87 @@ class User{
         age /= 31536000
         return ceil(Float(age))
     }
-    /*func setLocation(latitude: Double,longitude :Double){
-        self.position.lat = latitude
-        self.position.lng = longitude
-    }*/
+    
+    func getUserCoreData(){
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        var fetchedResults = executeRequest(managedContext)
+        var result: NSManagedObject
+        
+        println("result")
+        for result in fetchedResults
+        {
+            println(result.valueForKey("name"))
+            println(result.valueForKey("lastname"))
+            println(result.valueForKey("mail"))
+            println(result.valueForKey("gender"))
+            println(result.valueForKey("birthdate"))
+            self.name=result.valueForKey("name") as String
+            self.lastname=result.valueForKey("lastname") as String
+            self.mail = result.valueForKey("mail") as String
+            self.gender = result.valueForKey("gender") as Int
+            self.birthDate = result.valueForKey("birthdate") as NSDate
+        }
+        if fetchedResults.count == 0 {
+            println("Could not fetch ")
+        }
+        
+    }
+    func saveUserCoreData(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext!
+        var fetchedResults = executeRequest(managedContext)
+        deleteUserCoreData(managedContext,fetchedResults: fetchedResults)
+        let entity =  NSEntityDescription.entityForName("User",inManagedObjectContext:managedContext)
+        
+        let profil = NSManagedObject(entity: entity!,insertIntoManagedObjectContext:managedContext)
+        profil.setValue(name, forKey: "name")
+        profil.setValue(lastname, forKey: "lastname")
+        profil.setValue(mail, forKey: "mail")
+        profil.setValue(gender, forKey: "gender")
+        profil.setValue(birthDate, forKey: "birthdate")
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        self.name=name
+        self.lastname=lastname
+        self.mail = mail
+        self.gender = gender
+        self.birthDate = birthDate
+        
+        println(name)
+        println(lastname)
+        println(mail)
+        println(gender)
+       // println(birthdate.date.description)
+//        user.userProfil.append(profil)
+    }
+    
+    private func executeRequest(managedContext:NSManagedObjectContext)-> NSArray
+    {
+        let fetchRequest = NSFetchRequest(entityName:"User")
+        //let predicate = NSPredicate(format: "mail != %@", "")
+        //fetchRequest.predicate = predicate
+        var error: NSError?
+        let fetchedResults: NSArray = managedContext.executeFetchRequest(fetchRequest,error: &error)!
+        return fetchedResults
+    }
+    
+    private func deleteUserCoreData(managedContext:NSManagedObjectContext,fetchedResults:NSArray)
+    {
+        var saveError: NSError?
+        //Delete all users in core data
+         for result in fetchedResults
+        {
+            print(" avant : ")
+            println(result.valueForKey("name"))
+            managedContext.deleteObject(result as NSManagedObject)
+            managedContext.save(&saveError)
+            print(" apres : ")
+            println(result.valueForKey("name"))
+        }
+    }
 }
