@@ -81,13 +81,12 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             var url = "http://151.80.128.136:3000/email/user/"
             methodePost.post(mySearch, url: url)
             
-            return true
         }
         
-        return false
+    return false
         
     }
-
+    
 
     func isUserConnected()
     {

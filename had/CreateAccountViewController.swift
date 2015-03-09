@@ -174,18 +174,39 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             return emailTest!.evaluateWithObject(candidate)
         }
         
+        if  mail.text.isEmpty {
+            mail.text = "Ce champ est vide"
+            mail.textColor = redColor
+        }
+        
         if(!validateEmail(mail.text)){
             mail.text = "Cette adresse n'est pas valide"
             mail.textColor = redColor
         }
         else {
             mail.textColor = darkColor
+            
         }
+        /*var emailTest:Dictionary<String,String> = ["E-mail": mail.text]
+
+        methodePost.post(emailTest, url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            
+            var myEmailfield = self.mail.text
+            
+            if(succeeded) {
+                alert.title = "Cette adresse existe déjà"
+                alert.message = msg
+                myEmailfield = "Cette adresse existe déjà"
+            }
+            
+            // Move to the UI thread
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // Show the alert
+                alert.show()
+            })
+        }*/
         
-        if  mail.text.isEmpty {
-            mail.text = "Ce champ est vide"
-            mail.textColor = redColor
-        }
     }
     
     var oneConstraint:NSLayoutConstraint!
