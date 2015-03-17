@@ -24,25 +24,20 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var stats: UIImageView!
     @IBOutlet weak var details: UILabel!
-    @IBOutlet var subView: UIView!
-    @IBOutlet var statIcon: UIImageView!
+    @IBOutlet weak var nbUser: UILabel!
+    @IBOutlet weak var averageAge: UILabel!
+    @IBOutlet weak var getLocation: UIButton!
     
     
     func configureForPlaceItem(place: PlaceItem) {
-        placeName.text = place.placeName.uppercaseString
+        placeName.text = place.placeName
         city.text = place.city
         distance.text = place.distance
-        stats.image = place.stats
         details.text = place.pourcentage
-        subView.layer.opacity = 0
+        nbUser.text = place.nbUser
+        averageAge.text = place.averageAge
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        if (self.frame.height > 80){
-            subView.layer.opacity = 1
-        }
-        
-    
-        statIcon.image = UIImage(named: "stats-icon@3x")
         
     }
     

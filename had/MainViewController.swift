@@ -22,14 +22,14 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
      override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize the refresh control.
+       /* // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableData.addSubview(refreshControl)
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib. */
         
             /********** RevealView Configuration **********/
         
@@ -51,13 +51,15 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             imageView.frame = CGRectMake(0, 0, 38.66, 44)
             self.navbar.titleView = imageView
         
+
+        
             //PlaceItem.allPlaceItems()
         
         
             /********** Init variables **********/
         
-            //placeItems = PlaceItem.allPlaceItems()
-            placeItems = []
+            placeItems = PlaceItem.allPlaceItems()
+            //placeItems = []
     }
     
     /********** Outlets **********/
@@ -141,25 +143,15 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
         cell.configureForPlaceItem(placeItems[indexPath.row])
-        cell.backgroundColor = UIColor.clearColor()
+        //cell.backgroundColor = UIColor.clearColor()
         
-        if(selectedIndex == indexPath.row){
-            //expand
-        }else{
-            //close expand
+        if (indexPath.row%2 == 1){
+            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         }
+        
         return cell
     }
     
-    //setRowHeightCell
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //        self.tableData.rowHeight = 80
-        if(selectedIndex == indexPath.row){
-            return 200
-        }else{
-            return 80
-        }
-    }
     
     // Create loop for tableView and convert MKpoint to CGpoint
     /*  func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
