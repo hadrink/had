@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFieldDelegate{
     
@@ -36,12 +37,12 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         configView()
         
         // Notifications for keyboard
-        
-       /* NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow"), name: UIKeyboardWillShowNotification, object: nil)
+        /*
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name: UIKeyboardDidShowNotification, object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)*/
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name: UIKeyboardDidHideNotification, object: nil)
+        */
         
         
     }
@@ -51,6 +52,8 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         // Dispose of any resources that can be recreated.
         
     }
+    
+    let MyKeychainWrapper = KeychainWrapper()
     
     var greyColor:UIColor = UIColor(red: 0.949, green: 0.945, blue: 0.939, alpha: 1)
     
@@ -206,6 +209,10 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             })
         }*/
         
+        if  mail.text.isEmpty {
+            mail.text = "Ce champ est vide"
+            mail.textColor = redColor
+        }
     }
     
     var oneConstraint:NSLayoutConstraint!
@@ -299,6 +306,23 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
+            var url = "http://151.80.128.136:3000/user/"
+            
+            let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+            if hasLoginKey == false {
+                NSUserDefaults.standardUserDefaults().setValue(mail.text, forKey: "username")
+            }
+            
+            // 5.
+            MyKeychainWrapper.mySetObject(pwd.text, forKey:kSecValueData)
+            MyKeychainWrapper.writeToKeychain()
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            //methodePost.post(tabUser, url:URLS.urlUser)
+            /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.userProfil.saveUser(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)*/
+            //appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
+            
             println("http://151.80.128.136:3000/user/\(mail.text)")
             
             methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String) -> () in
@@ -322,6 +346,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
                     alert.show()
                 })
             }
+            println("Create Account : Success");
 
 
         }
@@ -431,7 +456,5 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
         
     }
-    
-
 }
 

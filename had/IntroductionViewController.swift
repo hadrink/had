@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate{
     
@@ -9,13 +10,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         isUserConnected()
         textFieldPsw.delegate = self
        
-    }
-    
-     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        // Do any additional setup after loading the view, typically from a nib.
-       configView()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,6 +27,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     var whiteColor :UIColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
     
+    let MyKeychainWrapper = KeychainWrapper()
     
     @IBOutlet var createAccountLabel: UILabel!
     @IBOutlet var textFacebook: UIButton!
@@ -48,50 +43,74 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     @IBAction func withYourEmail(sender: UIButton) {
     
     }
-        
+    
     var methodePost = xmlHttpRequest()
     var myJsonResult = ""
 
+    
     func textFieldShouldReturn(textField : UITextField) -> Bool{
-        
         
         if (textField === textFieldMail) {
             textFieldPsw.becomeFirstResponder()
         }
         
-        if(textField === textFieldPsw){
+        if(textField === textFieldPsw)
+        {
+            if (textFieldPsw.text == "" || textFieldMail.text == "") {
+                var alert = UIAlertView()
+                alert.title = "You must enter both a username and password!"
+                alert.addButtonWithTitle("Oops!")
+                alert.show()
+                return false;
+            }
+
+            // 2.
+            textFieldMail.resignFirstResponder()
+            textFieldPsw.resignFirstResponder()
             
-            // Correct url and username/password
-            methodePost.post(["E-mail": textFieldMail.text, "Password":textFieldPsw.text], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+
+                // 6.
+            if checkLogin(textFieldMail.text, password: textFieldPsw.text) {
+                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                self.showViewController(vc as UIViewController, sender: vc)
+            }
+                
+            return true
+        }
+        
+        return false
+    }
+    
+    func checkLogin(username: String, password: String ) -> Bool
+    {
+        var res:Bool = false
+        if password == MyKeychainWrapper.myObjectForKey("v_Data") as NSString &&
+            username == NSUserDefaults.standardUserDefaults().valueForKey("username") as? NSString {
+                res = true
+        } else {
+            methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-                    
+                
                 if(succeeded) {
                     alert.title = "Success!"
                     alert.message = msg
-                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                    self.showViewController(vc as UIViewController, sender: vc)
+                    res = true
+                }
+                else {
+                    alert.title = "Login Problem"
+                    alert.message = "Wrong username or password."
+                    alert.addButtonWithTitle("Foiled Again!")
                 }
                 
-                else {
-                    alert.title = "Failed :("
-                    alert.message = msg
-                }
-                    
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert
                     alert.show()
                 })
             }
-                
-        return true
-            
         }
-        
-    return false
-        
+        return res
     }
-    
 
     func isUserConnected()
     {
@@ -104,9 +123,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func configView()
     {
-        
-        
-        
         //textFieldMail.textColor = whiteColor
         textFieldMail.placeholder = "E-mail / Nom d'utilisateur"
         textFieldMail.font = UIFont(name: "Lato-Light", size: 12)
@@ -148,40 +164,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
-    
-    /*func methodPost () -> NSString{
-        let url = NSURL(string:"http://www.hadrink.com/had/php/server.php")
-        let cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        var request = NSMutableURLRequest(URL: url, cachePolicy: cachePolicy, timeoutInterval: 2.0)
-        request.HTTPMethod = "POST"
-        
-        // set Content-Type in HTTP header
-        let boundaryConstant = "----------V2ymHFg03esomerandomstuffhbqgZCaKO6jy";
-        let contentType = "multipart/form-data; boundary=" + boundaryConstant
-        NSURLProtocol.setProperty(contentType, forKey: "Content-Type", inRequest: request)
-        
-        // set data
-        var dataString = "ACTION=LOGIN&EMAIL=\(textFieldMail.text)&PASSWORD=\(textFieldPsw.text)"
-        let requestBodyData = (dataString as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        request.HTTPBody = requestBodyData
-        
-        // set content length
-        NSURLProtocol.setProperty(requestBodyData.length, forKey: "Content-Length", inRequest: request)
-        
-        var response: NSURLResponse? = nil
-        var error: NSError? = nil
-        let reply = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&error)
-        
-        let results = NSString(data:reply, encoding:NSUTF8StringEncoding)
-        println("API Response: \(results)")
-        var sbstring: NSRange = NSRange(location: 10, length: 4)
-        println(results)
-                println(textFieldMail.text)
-                println(textFieldPsw.text)
-        return results.substringWithRange(sbstring)
-    }*/
-
-    
     
 }
 

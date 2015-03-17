@@ -43,10 +43,71 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="Wgz-X2-sCc">
+            <objects>
+                <viewController storyboardIdentifier="Login" id="Yk4-eP-Wbt" customClass="LoginViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lDs-3N-PqJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ONm-jO-ZZv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4D9-fa-9k8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-intro@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="jT4-T7-SmJ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="736" id="aGL-ke-cwe"/>
+                                    <constraint firstAttribute="width" constant="414" id="jMh-ds-RBg"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aGL-ke-cwe"/>
+                                        <exclude reference="jMh-ds-RBg"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="aGL-ke-cwe"/>
+                                        <include reference="jMh-ds-RBg"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="jT4-T7-SmJ" secondAttribute="centerY" id="Ssw-ER-Dcn"/>
+                            <constraint firstAttribute="centerX" secondItem="jT4-T7-SmJ" secondAttribute="centerX" id="smT-XT-a5S"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="jT4-T7-SmJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Ssw-ER-Dcn"/>
+                                <exclude reference="smT-XT-a5S"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="jT4-T7-SmJ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Ssw-ER-Dcn"/>
+                                <include reference="smT-XT-a5S"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y5R-iT-5Tu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2685" y="39.75"/>
+        </scene>
         <!--IntroductionViewController-->
         <scene sceneID="TCX-jS-HP6">
             <objects>
-                <viewController title="IntroductionViewController" id="Ivj-Zd-cle" customClass="IntroductionViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Introduction" title="IntroductionViewController" id="Ivj-Zd-cle" customClass="IntroductionViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ubI-7X-RFf"/>
                         <viewControllerLayoutGuide type="bottom" id="cwk-l7-rOc"/>
@@ -530,39 +591,6 @@
             </objects>
             <point key="canvasLocation" x="-2005.5" y="15.75"/>
         </scene>
-        <!--Center View Controller-->
-        <scene sceneID="gn9-Hh-hbI">
-            <objects>
-                <viewController id="h7p-oh-9T5" customClass="CenterViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VNj-oC-VXy"/>
-                        <viewControllerLayoutGuide type="bottom" id="9D3-ql-N4z"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PSN-WW-LGe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk4-eM-UxZ">
-                                <rect key="frame" x="184" y="391" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendInMongo:" destination="h7p-oh-9T5" eventType="touchUpInside" id="fWp-CX-Th8"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <outlet property="buttonOutlet" destination="zk4-eM-UxZ" id="7wA-AM-zR7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e3E-5Q-tTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2006" y="837"/>
-        </scene>
         <!--Reveal View Controller-->
         <scene sceneID="UBa-sc-NNf">
             <objects>
@@ -636,9 +664,15 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tDo-NE-Act" id="I8u-vf-lMT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="turn-off.png" translatesAutoresizingMaskIntoConstraints="NO" id="aQE-P7-aOb">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JLf-Lg-xxU">
                                             <rect key="frame" x="2" y="0.0" width="80" height="80"/>
-                                        </imageView>
+                                            <state key="normal" image="turn-off.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="disconnect:" destination="84k-gI-3Vy" eventType="touchUpInside" id="64G-A6-VTG"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.32941176470588235" green="0.41568627450980394" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
