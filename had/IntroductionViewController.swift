@@ -27,6 +27,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     var whiteColor :UIColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
     
+    let MyKeychainWrapper = KeychainWrapper()
     
     @IBOutlet var createAccountLabel: UILabel!
     @IBOutlet var textFacebook: UIButton!
@@ -53,38 +54,63 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             textFieldPsw.becomeFirstResponder()
         }
         
-        if(textField === textFieldPsw){
+        if(textField === textFieldPsw)
+        {
+            if (textFieldPsw.text == "" || textFieldMail.text == "") {
+                var alert = UIAlertView()
+                alert.title = "You must enter both a username and password!"
+                alert.addButtonWithTitle("Oops!")
+                alert.show()
+                return false;
+            }
+
+            // 2.
+            textFieldMail.resignFirstResponder()
+            textFieldPsw.resignFirstResponder()
             
-            // Correct url and username/password
-            methodePost.post(["E-mail": textFieldMail.text, "Password":textFieldPsw.text], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+
+                // 6.
+            if checkLogin(textFieldMail.text, password: textFieldPsw.text) {
+                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                self.showViewController(vc as UIViewController, sender: vc)
+            }
+                
+            return true
+        }
+        
+        return false
+    }
+    
+    func checkLogin(username: String, password: String ) -> Bool
+    {
+        var res:Bool = false
+        if password == MyKeychainWrapper.myObjectForKey("v_Data") as NSString &&
+            username == NSUserDefaults.standardUserDefaults().valueForKey("username") as? NSString {
+                res = true
+        } else {
+            methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-                    
+                
                 if(succeeded) {
                     alert.title = "Success!"
                     alert.message = msg
-                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                    self.showViewController(vc as UIViewController, sender: vc)
+                    res = true
+                }
+                else {
+                    alert.title = "Login Problem"
+                    alert.message = "Wrong username or password."
+                    alert.addButtonWithTitle("Foiled Again!")
                 }
                 
-                else {
-                    alert.title = "Failed :("
-                    alert.message = msg
-                }
-                    
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert
                     alert.show()
                 })
             }
-                
-        return true
         }
-        
-    return false
-        
+        return res
     }
-    
 
     func isUserConnected()
     {

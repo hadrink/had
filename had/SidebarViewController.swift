@@ -37,10 +37,13 @@ class SidebarViewController: UITableViewController {
     }
     
     @IBAction func disconnect(sender: AnyObject) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
+        NSUserDefaults.standardUserDefaults().synchronize()
+/*        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.userProfil.getUserCoreData()
         println("getuser")
-        appDelegate.userProfil.disconnect()
+        appDelegate.userProfil.disconnect()*/
         let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
         self.showViewController(vc as UIViewController, sender: vc)
         println("disconnect")

@@ -53,6 +53,8 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
     }
     
+    let MyKeychainWrapper = KeychainWrapper()
+    
     var greyColor:UIColor = UIColor(red: 0.949, green: 0.945, blue: 0.939, alpha: 1)
     
     var greyTransColor:UIColor = UIColor(red: 0.949, green: 0.945, blue: 0.939, alpha: 0.3)
@@ -305,9 +307,21 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
             
             var url = "http://151.80.128.136:3000/user/"
+            
+            let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+            if hasLoginKey == false {
+                NSUserDefaults.standardUserDefaults().setValue(mail.text, forKey: "username")
+            }
+            
+            // 5.
+            MyKeychainWrapper.mySetObject(pwd.text, forKey:kSecValueData)
+            MyKeychainWrapper.writeToKeychain()
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
+            NSUserDefaults.standardUserDefaults().synchronize()
             //methodePost.post(tabUser, url:URLS.urlUser)
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
+            /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.userProfil.saveUser(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)*/
+            //appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
             
             println("http://151.80.128.136:3000/user/\(mail.text)")
             

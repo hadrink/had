@@ -73,7 +73,85 @@ class User{
         age /= 31536000
         return ceil(Float(age))
     }
-  */  
+  */
+    func loadUser()
+    {
+        let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
+        var userData = NSArray(contentsOfFile: userDataPath!)
+        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as NSDictionary
+        //var pListData: NSDictionary = NSPropertyListSerialization.dictionaryWithValuesForKeys(NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
+        println(userDataDictionary.valueForKey("Firstname"))
+        println(userDataDictionary.valueForKey("Lastname"))
+        println(userDataDictionary.valueForKey("Mail"))
+        println(userDataDictionary.valueForKey("Gender"))
+        println(userDataDictionary.valueForKey("Birthdate"))
+        
+        self.name=userDataDictionary.valueForKey("Firstname") as? String
+        self.lastname=userDataDictionary.valueForKey("Lastname") as? String
+        self.mail = userDataDictionary.valueForKey("Mail") as? String
+        self.gender = userDataDictionary.valueForKey("Gender") as Int
+        self.birthDate = userDataDictionary.valueForKey("Birthdate") as? NSDate
+    }
+    func saveUser(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate)
+    {
+        let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
+        var userData = NSArray(contentsOfFile: userDataPath!)
+        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as NSDictionary
+        var error: NSError?
+        
+        var paths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+
+        var documentsDirectory = paths.objectAtIndex(0) as NSString //2
+        var path = documentsDirectory.stringByAppendingPathComponent("user.plist") //3
+        
+        var fileManager:NSFileManager = NSFileManager.defaultManager()
+        
+        if (!fileManager.fileExistsAtPath(path)) //4
+        {
+            var bundle:NSString = NSBundle.mainBundle().pathForResource("user", ofType: "plist")!
+            
+            fileManager.copyItemAtPath(bundle, toPath: path, error:&error) //6
+        }
+        
+        
+        // set the variables to the values in the text fields
+        self.name = name
+        self.lastname = lastname
+        self.mail = mail
+        self.gender = gender
+        self.birthDate = birthDate
+        
+        // create dictionary with values in UITextFields
+        var plistDict:NSDictionary = NSDictionary(objects: NSArray(objects: name,lastname,mail,gender,birthDate), forKeys: NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
+
+        println(NSPropertyListSerialization.propertyList(plistDict, isValidForFormat: NSPropertyListFormat.XMLFormat_v1_0))
+        // create NSData from dictionary
+        var plistData:NSData = NSPropertyListSerialization.dataWithPropertyList(plistDict,format:NSPropertyListFormat.XMLFormat_v1_0,options:0 ,error:&error)!
+     
+        println(plistData.length)
+        println(userDataPath)
+        // check is plistData exists
+        if(plistData.length != 0)
+        {
+            // write plistData to our Data.plistfile
+            let ok = plistData.writeToFile(path, atomically:true)
+            println("write ok : ")
+            println(ok)
+            /*let userDataPath2 = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
+            var userData2 = NSArray(contentsOfFile: userDataPath2!)
+            let userDataDictionary2 : NSDictionary = userData2?.objectAtIndex(0) as NSDictionary*/
+            println(userDataDictionary.valueForKey("Firstname"))
+            println(userDataDictionary.valueForKey("Lastname"))
+            println(userDataDictionary.valueForKey("Mail"))
+            println(userDataDictionary.valueForKey("Gender"))
+            println(userDataDictionary.valueForKey("Birthdate"))
+        }
+        else
+        {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        
+    }
     func getUserCoreData(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!

@@ -57,6 +57,9 @@
 		EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB444F9D1A9E30A000E533B2 /* CoreData.framework */; };
 		EB444FA01AAE3ADF00E533B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */; };
 		EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
+		EB4813461AAF83AB004B5D53 /* user.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB4813451AAF83AB004B5D53 /* user.plist */; };
+		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
+		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
 		F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F01A1E508C0007FAA1 /* CenterViewController.swift */; };
 		F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F41A1E61F00007FAA1 /* MenuItem.swift */; };
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
@@ -133,6 +136,10 @@
 		EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
 		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EB4813451AAF83AB004B5D53 /* user.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = user.plist; sourceTree = "<group>"; };
+		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
+		EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
 		F61331F01A1E508C0007FAA1 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F61331F41A1E61F00007FAA1 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -146,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
 			);
@@ -201,6 +209,7 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				EBFD30201AB77BB600727E3F /* Security.framework */,
 				EB444F9D1A9E30A000E533B2 /* CoreData.framework */,
 				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
 				7AA224F619CDA9D1002003ED /* had */,
@@ -233,6 +242,7 @@
 				7A5B7BED19D03DDA0023AAC5 /* images */,
 				7AA224F719CDA9D1002003ED /* Supporting Files */,
 				F61331F61A1E6FF40007FAA1 /* Main.storyboard */,
+				EB4813451AAF83AB004B5D53 /* user.plist */,
 			);
 			path = had;
 			sourceTree = "<group>";
@@ -265,6 +275,8 @@
 		7AF659631A49F111002C6745 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */,
+				EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */,
 				7AF659651A49F134002C6745 /* SWRevealViewController.h */,
 				7AF659661A49F134002C6745 /* SWRevealViewController.m */,
 				7AF659641A49F133002C6745 /* had-Bridging-Header.h */,
@@ -390,6 +402,7 @@
 				7AD673A819D0951C0079E682 /* app-icon-hadx2.png in Resources */,
 				7A10456F1A8F779C008DAF8C /* signpainter-housescript-webfont.ttf in Resources */,
 				7A1ACD0B1A2E5DEE0033A2C5 /* flux.png in Resources */,
+				EB4813461AAF83AB004B5D53 /* user.plist in Resources */,
 				7AE40E111A8BE4A30025D9BD /* bg-intro@3x.jpg in Resources */,
 				7ADC4B2919E027BD00CDD8B9 /* intro-image-iphone6plus.jpg in Resources */,
 				7ADC4B2519E0224400CDD8B9 /* launch-image-iphone6.png in Resources */,
@@ -439,6 +452,7 @@
 				7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */,
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */,
+				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
 				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AA2250019CDA9D1002003ED /* ModelController.swift in Sources */,
