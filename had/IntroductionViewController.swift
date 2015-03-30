@@ -70,10 +70,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             
 
                 // 6.
-            if checkLogin(textFieldMail.text, password: textFieldPsw.text) {
-                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
-            }
+            checkLogin(textFieldMail.text, password: textFieldPsw.text)
                 
             return true
         }
@@ -94,7 +91,8 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                 if(succeeded) {
                     alert.title = "Success!"
                     alert.message = msg
-                    res = true
+                    let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                    self.showViewController(vc as UIViewController, sender: vc)
                 }
                 else {
                     alert.title = "Login Problem"
