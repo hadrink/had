@@ -40,6 +40,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             hamburger.target = revealView
             hamburger.action = "revealToggle:"
         
+        
             /********** Custom View Design **********/
         
             self.navigationController?.navigationBar.barTintColor = UIColor(red: 74/255, green: 123/255, blue: 195/255, alpha: 1)
@@ -51,7 +52,10 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             imageView.frame = CGRectMake(0, 0, 38.66, 44)
             self.navbar.titleView = imageView
         
-
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        
         
             //PlaceItem.allPlaceItems()
         
@@ -60,6 +64,13 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
             placeItems = PlaceItem.allPlaceItems()
             //placeItems = []
+        
+        
+        /********** Get BarList ************/
+        
+        
+
+        
     }
     
     /********** Outlets **********/
@@ -83,7 +94,50 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     var jsonData: NSArray = NSArray()
     var longitude:NSString = ""
     var latitude:NSString = ""
+    
     var selectedIndex = -1
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                println("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                let pm = placemarks[0] as CLPlacemark
+                var latLng = self.getLocationInfo(pm)
+                
+                var methodePost = xmlHttpRequest()
+                
+                methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latLng[0])/\(latLng[1])/10") { (succeeded: Bool, msg: String) -> () in
+                    var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                    if(succeeded) {
+                        alert.title = "Success!"
+                        alert.message = msg
+                    }
+                    else {
+                        alert.title = "Login Problem"
+                        alert.message = "Wrong username or password."
+                        alert.addButtonWithTitle("Foiled Again!")
+                    }
+                    
+                    // Move to the UI thread
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        // Show the alert
+                        alert.show()
+                    })
+                }
+                
+                
+                
+            } else {
+                println("Problem with the data received from geocoder")
+            }
+        })
+    }
     
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
@@ -98,7 +152,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
         if scannerLatitude.scanUpToString(",", intoString:&scannedLatitude) {
             latitude = scannedLatitude as String
-            println("result: \(latitude)")
+            println("latitude: \(latitude)")
         }
         
         let longitudeDescription = placemark.location.description
@@ -112,7 +166,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             
             if scannerLongitude.scanUpToString(">", intoString:&scannedLongitude) {
                 longitude = scannedLongitude as String
-                println("result: \(longitude)")
+                println("longitude: \(longitude)")
             }
             
         }
