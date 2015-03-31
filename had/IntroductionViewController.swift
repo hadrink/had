@@ -80,10 +80,9 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func checkLogin(username: String, password: String ) -> Bool
     {
-        var res:Bool = false
         if password == MyKeychainWrapper.myObjectForKey("v_Data") as NSString &&
             username == NSUserDefaults.standardUserDefaults().valueForKey("username") as? NSString {
-                res = true
+                return true
         } else {
             methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
@@ -91,6 +90,17 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                 if(succeeded) {
                     alert.title = "Success!"
                     alert.message = msg
+                    let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+                    if hasLoginKey == false {
+                        NSUserDefaults.standardUserDefaults().setValue(username, forKey: "username")
+                    }
+                    
+                    self.MyKeychainWrapper.mySetObject(password, forKey:kSecValueData)
+                    self.MyKeychainWrapper.writeToKeychain()
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as NSString
+
                     let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                     self.showViewController(vc as UIViewController, sender: vc)
                 }
@@ -106,8 +116,8 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                     alert.show()
                 })
             }
+            return true
         }
-        return res
     }
 
     func isUserConnected()

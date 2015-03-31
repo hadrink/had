@@ -40,6 +40,8 @@ class SidebarViewController: UITableViewController {
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
         NSUserDefaults.standardUserDefaults().synchronize()
+        println(NSUserDefaults.standardUserDefaults().valueForKey("hasLoginKey"))
+        
 /*        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.userProfil.getUserCoreData()
         println("getuser")

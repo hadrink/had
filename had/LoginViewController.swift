@@ -10,9 +10,10 @@ import UIKit
 import CoreData
 
 class LoginViewController: UIViewController{
-    override func viewDidAppear(animated: Bool) {
-        
+    override func viewDidAppear(animated: Bool){
+
         let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+        println(NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey"))
         var vc: AnyObject!
         if hasLoginKey == true {
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")

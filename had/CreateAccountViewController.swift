@@ -312,6 +312,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             if hasLoginKey == false {
                 NSUserDefaults.standardUserDefaults().setValue(mail.text, forKey: "username")
             }
+            println(hasLoginKey)
             
             // 5.
             MyKeychainWrapper.mySetObject(pwd.text, forKey:kSecValueData)
