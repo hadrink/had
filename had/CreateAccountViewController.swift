@@ -319,12 +319,14 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             MyKeychainWrapper.writeToKeychain()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
             NSUserDefaults.standardUserDefaults().synchronize()
+            var pass = self.MyKeychainWrapper.myObjectForKey("v_Data") as NSString
+            println(pass)
             //methodePost.post(tabUser, url:URLS.urlUser)
             /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             appDelegate.userProfil.saveUser(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)*/
             //appDelegate.userProfil.saveUserCoreData(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)
             
-            println("http://151.80.128.136:3000/user/\(mail.text)")
+            //println("http://151.80.128.136:3000/user/\(mail.text)")
             
             methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")

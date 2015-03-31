@@ -108,13 +108,14 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
                 var latLng = self.getLocationInfo(pm)
-                
+                println(latLng[0])
+                println(latLng[1])
                 var methodePost = xmlHttpRequest()
                 
                 methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latLng[0])/\(latLng[1])/10") { (succeeded: Bool, msg: String) -> () in
                     var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
-                    if(succeeded) {
+                    /*if(succeeded) {
                         alert.title = "Success!"
                         alert.message = msg
                     }
@@ -122,13 +123,13 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                         alert.title = "Login Problem"
                         alert.message = "Wrong username or password."
                         alert.addButtonWithTitle("Foiled Again!")
-                    }
+                    }*/
                     
                     // Move to the UI thread
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    /*dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         // Show the alert
-                        alert.show()
-                    })
+                        //alert.show()
+                    })*/
                 }
                 
                 
@@ -136,6 +137,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             } else {
                 println("Problem with the data received from geocoder")
             }
+            
         })
     }
     
@@ -173,6 +175,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
         
         var result = [latitude, longitude]
+        locationManager.pausesLocationUpdatesAutomatically = true
         return result
     }
     
