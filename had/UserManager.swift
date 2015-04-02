@@ -152,7 +152,7 @@ class User{
         }
         
     }
-    func getUserCoreData(){
+    /*func getUserCoreData(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
@@ -220,7 +220,7 @@ class User{
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
         deleteUserCoreData(managedContext,fetchedResults: fetchedResults)
-    }
+    }*/
     private func executeRequest(managedContext:NSManagedObjectContext)-> NSArray
     {
         let fetchRequest = NSFetchRequest(entityName:"User")

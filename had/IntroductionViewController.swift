@@ -1,10 +1,15 @@
 import UIKit
 import CoreData
 
-class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate{
+class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, FBLoginViewDelegate{
+    
+    @IBOutlet var fbLoginView: FBLoginView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fbLoginView.delegate = self
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         // Do any additional setup after loading the view, typically from a nib.
         configView()
         isUserConnected()
@@ -30,20 +35,13 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     let MyKeychainWrapper = KeychainWrapper()
     
     @IBOutlet var createAccountLabel: UILabel!
-    @IBOutlet var textFacebook: UIButton!
+
+
     @IBOutlet var textEmail: UIButton!
     @IBOutlet weak var textFieldMail: UITextField!
     @IBOutlet weak var textFieldPsw: UITextField!
     @IBOutlet weak var loginLabel: UILabel!
-    @IBAction func withYourFacebook(sender: UIButton) {
-    
-    }
-    
-    
-    @IBAction func withYourEmail(sender: UIButton) {
-    
-    }
-    
+
     var methodePost = xmlHttpRequest()
     var myJsonResult = ""
 
@@ -158,16 +156,16 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         textFieldPsw.leftViewMode = UITextFieldViewMode.Always
         
         
-        textFacebook.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
+        //textFacebook.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
                 
         textEmail.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
         
         
-        textFacebook.layer.borderColor = greyColor.CGColor
+       /* textFacebook.layer.borderColor = greyColor.CGColor
         textFacebook.tintColor = greyColor
         textFacebook.layer.borderWidth = 1.0
         textFacebook.layer.backgroundColor = blueColor.CGColor
-        
+        */
         textEmail.layer.borderColor = greyColor.CGColor
         textEmail.tintColor = greyColor
         textEmail.layer.borderWidth = 1.0
@@ -176,6 +174,26 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
+ 
     
+    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        println("User Logged In")
+    }
+    
+    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        println("User: \(user)")
+        println("User ID: \(user.objectID)")
+        println("User Name: \(user.name)")
+        var userEmail = user.objectForKey("email") as String
+        println("User Email: \(userEmail)")
+    }
+    
+    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
+        println("User Logged Out")
+    }
+    
+    func loginView(loginView : FBLoginView!, handleError:NSError) {
+        println("Error: \(handleError.localizedDescription)")
+    }
 }
 

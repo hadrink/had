@@ -17,26 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userProfil:User = User()
 
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
-      /*  userProfil.getUserCoreData()
-        println("getuser")
-        var mail=userProfil.mail
-        println(userProfil.mail)
-        println(mail.isEmpty)
-        if(!mail.isEmpty)
-        {
-
-            var storyboard:UIStoryboard = UIStoryboard(name: "Main.storyboard", bundle: nil)
-            var loginController:UINavigationController  = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as UINavigationController
-//            self.window?.rootViewController = UIViewController(nibName: <#String?#>, bundle: <#NSBundle?#>)
-//            self.window.rootViewController
-            //presentViewController:loginController animated:animated completion:nil];
-            /*let vc: AnyObject! = self.inputViewController?.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-            self.inputViewController?.showViewController(vc as UIViewController, sender: vc)*/
-            println("redirect")
-        }*/
+        FBLoginView.self
+        FBProfilePictureView.self
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+        return wasHandled
     }
     
     func applicationWillResignActive(application: UIApplication!) {
@@ -56,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(application: UIApplication!) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //return FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(application: UIApplication!) {
@@ -64,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Core Data stack
-    
+ /*
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.razeware.HitList" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
@@ -125,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+    */
     
 }
 
