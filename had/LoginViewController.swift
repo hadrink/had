@@ -23,7 +23,7 @@ class LoginViewController: UIViewController{
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
             println("redirect intro")
         }
-        self.showViewController(vc as UIViewController, sender: vc)
+        self.showViewController(vc as! UIViewController, sender: vc)
         /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         //appDelegate.userProfil.getUserCoreData()
         appDelegate.userProfil.loadUser()

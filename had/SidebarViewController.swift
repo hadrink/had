@@ -28,8 +28,8 @@ class SidebarViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cellIdentifier:NSString = self.menuItems.objectAtIndex(indexPath.row) as NSString
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        var cellIdentifier:NSString = self.menuItems.objectAtIndex(indexPath.row) as! NSString
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! UITableViewCell
         
         
         return cell
@@ -47,7 +47,7 @@ class SidebarViewController: UITableViewController {
         println("getuser")
         appDelegate.userProfil.disconnect()*/
         let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
-        self.showViewController(vc as UIViewController, sender: vc)
+        self.showViewController(vc as! UIViewController, sender: vc)
         println("disconnect")
     }
     override func  prefersStatusBarHidden() -> Bool {

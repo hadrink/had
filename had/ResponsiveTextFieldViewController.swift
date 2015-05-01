@@ -30,7 +30,7 @@ class ResponsiveTextFieldViewController : UIViewController
         {
             if (subview.isKindOfClass(UITextField))
             {
-                var textField = subview as UITextField
+                var textField = subview as! UITextField
                 textField.addTarget(self, action: "textFieldDidReturn:", forControlEvents: UIControlEvents.EditingDidEndOnExit)
                 
                 textField.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -50,7 +50,7 @@ class ResponsiveTextFieldViewController : UIViewController
         self.keyboardIsShowing = true
         
         if let info = notification.userInfo {
-           self.keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+           self.keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
            self.arrangeViewOffsetFromKeyboard()
         }
         
@@ -100,7 +100,7 @@ class ResponsiveTextFieldViewController : UIViewController
         }
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+    override func touchesBegan(Set<NSObject>, withEvent event: UIEvent)
     {
         if (self.activeTextField != nil)
         {

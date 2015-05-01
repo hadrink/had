@@ -45,7 +45,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableView.CellIdentifiers.MenuCell, forIndexPath: indexPath) as MenuCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableView.CellIdentifiers.MenuCell, forIndexPath: indexPath) as! MenuCell
         cell.configureForMenuItem(menuItems[indexPath.row])
         if(menuItems[indexPath.row].status == "active"){
             cell.backgroundColor = UIColor.whiteColor()

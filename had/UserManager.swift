@@ -78,7 +78,7 @@ class User{
     {
         let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
         var userData = NSArray(contentsOfFile: userDataPath!)
-        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as NSDictionary
+        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as! NSDictionary
         //var pListData: NSDictionary = NSPropertyListSerialization.dictionaryWithValuesForKeys(NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
         println(userDataDictionary.valueForKey("Firstname"))
         println(userDataDictionary.valueForKey("Lastname"))
@@ -89,19 +89,19 @@ class User{
         self.name=userDataDictionary.valueForKey("Firstname") as? String
         self.lastname=userDataDictionary.valueForKey("Lastname") as? String
         self.mail = userDataDictionary.valueForKey("Mail") as? String
-        self.gender = userDataDictionary.valueForKey("Gender") as Int
+        self.gender = userDataDictionary.valueForKey("Gender") as! Int
         self.birthDate = userDataDictionary.valueForKey("Birthdate") as? NSDate
     }
     func saveUser(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate)
     {
         let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
         var userData = NSArray(contentsOfFile: userDataPath!)
-        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as NSDictionary
+        let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as! NSDictionary
         var error: NSError?
         
         var paths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
 
-        var documentsDirectory = paths.objectAtIndex(0) as NSString //2
+        var documentsDirectory = paths.objectAtIndex(0) as! NSString //2
         var path = documentsDirectory.stringByAppendingPathComponent("user.plist") //3
         
         var fileManager:NSFileManager = NSFileManager.defaultManager()
@@ -110,7 +110,7 @@ class User{
         {
             var bundle:NSString = NSBundle.mainBundle().pathForResource("user", ofType: "plist")!
             
-            fileManager.copyItemAtPath(bundle, toPath: path, error:&error) //6
+            fileManager.copyItemAtPath(bundle as String, toPath: path, error:&error) //6
         }
         
         
@@ -122,7 +122,7 @@ class User{
         self.birthDate = birthDate
         
         // create dictionary with values in UITextFields
-        var plistDict:NSDictionary = NSDictionary(objects: NSArray(objects: name,lastname,mail,gender,birthDate), forKeys: NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
+        var plistDict:NSDictionary = NSDictionary(objects: NSArray(objects: name,lastname,mail,gender,birthDate) as [AnyObject], forKeys: NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate") as [AnyObject])
 
         println(NSPropertyListSerialization.propertyList(plistDict, isValidForFormat: NSPropertyListFormat.XMLFormat_v1_0))
         // create NSData from dictionary
@@ -153,7 +153,7 @@ class User{
         
     }
     func getUserCoreData(){
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
         var result: NSManagedObject
@@ -171,7 +171,7 @@ class User{
             self.name=result.valueForKey("name") as? String
             self.lastname=result.valueForKey("lastname") as? String
             self.mail = result.valueForKey("mail") as? String
-            self.gender = result.valueForKey("gender") as Int
+            self.gender = result.valueForKey("gender") as! Int
             self.birthDate = result.valueForKey("birthdate") as? NSDate
         }
         if fetchedResults.count == 0 {
@@ -180,7 +180,7 @@ class User{
         
     }
     func saveUserCoreData(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
@@ -215,7 +215,7 @@ class User{
     func disconnect()
     {
         var bool:Bool=false
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
@@ -239,7 +239,7 @@ class User{
         {
             print(" avant : ")
             println(result.valueForKey("name"))
-            managedContext.deleteObject(result as NSManagedObject)
+            managedContext.deleteObject(result as! NSManagedObject)
             managedContext.save(&saveError)
             print(" apres : ")
             println(result.valueForKey("name"))

@@ -80,12 +80,12 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func checkLogin(username: String, password: String ) -> Bool
     {
-        if password == MyKeychainWrapper.myObjectForKey("v_Data") as NSString &&
+        if password == MyKeychainWrapper.myObjectForKey("v_Data") as! NSString &&
             username == NSUserDefaults.standardUserDefaults().valueForKey("username") as? NSString {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
+                self.showViewController(vc as! UIViewController, sender: vc)
                 return true
         } else {
             methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
@@ -103,10 +103,10 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                     self.MyKeychainWrapper.writeToKeychain()
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
                     NSUserDefaults.standardUserDefaults().synchronize()
-                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as NSString
+                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
                     
                     let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                    self.showViewController(vc as UIViewController, sender: vc)
+                    self.showViewController(vc as! UIViewController, sender: vc)
                 }
                 else {
                     alert.title = "Login Problem"
@@ -129,7 +129,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         var user: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Username")
         if(user != nil){
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ParameterRadarViewController")
-            self.showViewController(vc as UIViewController, sender: vc)
+            self.showViewController(vc as! UIViewController, sender: vc)
         }
     }
     

@@ -106,7 +106,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             }
             
             if placemarks.count > 0 {
-                let pm = placemarks[0] as CLPlacemark
+                let pm = placemarks[0] as! CLPlacemark
                 var latLng = self.getLocationInfo(pm)
                 println(latLng[0])
                 println(latLng[1])
@@ -153,7 +153,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         scannerLatitude.scanString("<", intoString:nil)
         
         if scannerLatitude.scanUpToString(",", intoString:&scannedLatitude) {
-            latitude = scannedLatitude as String
+            latitude = scannedLatitude as! String
             println("latitude: \(latitude)")
         }
         
@@ -167,7 +167,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             scannerLongitude.scanString(",", intoString:nil)
             
             if scannerLongitude.scanUpToString(">", intoString:&scannedLongitude) {
-                longitude = scannedLongitude as String
+                longitude = scannedLongitude as! String
                 println("longitude: \(longitude)")
             }
             
@@ -197,7 +197,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as PlaceCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
         cell.configureForPlaceItem(placeItems[indexPath.row])
         //cell.backgroundColor = UIColor.clearColor()
@@ -250,21 +250,21 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     return cell
     }*/
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(selectedIndex == indexPath.row){
             selectedIndex = -1
-            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
             return
         }
         if(selectedIndex != -1){
             var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
         }
         selectedIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView?) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if placeItems.count != 0
         {
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -308,7 +308,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         var title:NSString = NSString(format:"Last update: %@", formatter.stringFromDate(NSDate() ))
         var attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
         
-        var attributedTitle:NSAttributedString = NSAttributedString(string: title, attributes: attrsDictionary)
+        var attributedTitle:NSAttributedString = NSAttributedString(string: title as String, attributes: attrsDictionary as [NSObject : AnyObject])
         refreshControl.attributedTitle = attributedTitle;
         
         refreshControl.endRefreshing()
