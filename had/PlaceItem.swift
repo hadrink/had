@@ -31,10 +31,10 @@ class PlaceItem {
     }
 
     class func allPlaceItems() -> Array<PlaceItem> {
-        return [ PlaceItem(placeName: "Bougnat",city:"Troyes",distance: "2km",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"Plus de 150 Hadder ont fréquenté ce lieu dans les 30 derniers jours"),
-            PlaceItem(placeName: "Café",city: "Barberey",distance: "1.5",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"Plus de 150 Hadder ont fréquenté ce lieu dans les 30 derniers jours"),
-            PlaceItem(placeName: "Bar name",city: "La Chapelle",distance: "1km",stats: UIImage(named: "stats-icon.png")!,averageAge:"22 - 23",pourcentage:"75%", nbUser:"Plus de 150 Hadder ont fréquenté ce lieu dans les 30 derniers jours"),
-            PlaceItem(placeName: "Bar name", city: "Sainte Savine",distance: "0;5km",stats: UIImage(named: "stats-icon.png")!,averageAge:"12 - 13",pourcentage:"75%", nbUser:"Plus de 150 Hadder ont fréquenté ce lieu dans les 30 derniers jours")
+        return [ PlaceItem(placeName: "Bougnat des Pouilles",city:"Troyes",distance: "2km",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
+            PlaceItem(placeName: "Café",city: "Barberey",distance: "1.5",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
+            PlaceItem(placeName: "Bar name",city: "La Chapelle",distance: "1km",stats: UIImage(named: "stats-icon.png")!,averageAge:"22 - 23",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
+            PlaceItem(placeName: "Bar name", city: "Sainte Savine",distance: "0;5km",stats: UIImage(named: "stats-icon.png")!,averageAge:"12 - 13",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours")
         ]
     }
 }

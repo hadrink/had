@@ -43,7 +43,16 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
             /********** Custom View Design **********/
         
-            self.navigationController?.navigationBar.barTintColor = UIColor(red: 74/255, green: 123/255, blue: 195/255, alpha: 1)
+            func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+                return UIColor(
+                    red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+                    green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+                    blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+                    alpha: CGFloat(1.0)
+                )
+            }
+        
+            self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5B90CE)
             self.navigationController?.navigationBar.translucent = false
         
         
@@ -202,9 +211,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         cell.configureForPlaceItem(placeItems[indexPath.row])
         //cell.backgroundColor = UIColor.clearColor()
         
-        if (indexPath.row%2 == 1){
+        /*if (indexPath.row%2 == 1){
             cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        }
+        }*/
         
         return cell
     }
