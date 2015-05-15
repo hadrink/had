@@ -7,35 +7,98 @@
 //
 
 import UIKit
+import CoreLocation
 
-@objc
-class PlaceItem {
+class PlaceItem : CLLocationManager{
     
-    let placeName: NSString
-    let city: NSString
-    let distance: NSString
-    let averageAge: NSString
-    let pourcentage: NSString
-    let nbUser: NSString
-    let stats: UIImage
-
+    let locationManager = CLLocationManager()
     
-    init(placeName: String, city: String, distance: String,stats: UIImage, averageAge: String, pourcentage: String, nbUser: String) {
-        self.placeName = placeName
-        self.city = city
-        self.distance = distance
-        self.averageAge = averageAge
-        self.pourcentage = pourcentage
-        self.stats = stats
-        self.nbUser = nbUser
-    }
+    // Global variables for cells
 
-    class func allPlaceItems() -> Array<PlaceItem> {
-        return [ PlaceItem(placeName: "Bougnat des Pouilles",city:"Troyes",distance: "2km",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
-            PlaceItem(placeName: "Café",city: "Barberey",distance: "1.5",stats: UIImage(named: "stats-icon.png")!,averageAge:"23 - 24",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
-            PlaceItem(placeName: "Bar name",city: "La Chapelle",distance: "1km",stats: UIImage(named: "stats-icon.png")!,averageAge:"22 - 23",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours"),
-            PlaceItem(placeName: "Bar name", city: "Sainte Savine",distance: "0;5km",stats: UIImage(named: "stats-icon.png")!,averageAge:"12 - 13",pourcentage:"75%", nbUser:"150 Hadder ces 30 derniers jours")
-        ]
+    var placeName: String?
+    var city : String?
+    var counter: String!
+    var averageAge: Int!
+    var pourcentFemale:Float!
+    var distance : Double!
+    var placeLatitudeDegrees : CLLocationDegrees?
+    var placeLongitudeDegrees : CLLocationDegrees?
+    
+    // Init variables
+    
+    required init (json : NSDictionary, userLocation : NSDictionary) {
+        
+        // Init for place name and counter
+        
+        placeName = json["name"] as? String
+        counter = String(stringInterpolationSegment: json["counter"] as! Int!)
+        
+        // Init for location info
+        
+        var userLatitude = userLocation["latitude"] as? NSString
+        var userLongitude = userLocation["longitude"] as? NSString
+        var userLatitudeDegrees:CLLocationDegrees = userLatitude!.doubleValue
+        var userLongitudeDegrees:CLLocationDegrees = userLongitude!.doubleValue
+        var usersVisitedInfo: NSDictionary = NSDictionary()
+        
+        if let placeLocation = json["loc"] as? [String:AnyObject]
+        {
+            var placeCoordinate = placeLocation["coordinates"]! as? NSArray
+            var placeLongitude = placeCoordinate!.firstObject as! NSObject
+            var placeLatitude = placeCoordinate!.lastObject as! NSObject
+            placeLatitudeDegrees = placeLatitude as? Double
+            placeLongitudeDegrees = placeLongitude as? Double
+            var placeCoordinatesDegrees = CLLocation(latitude: placeLatitudeDegrees!, longitude: placeLongitudeDegrees!)
+            var userCoordinatesDegrees = CLLocation(latitude: userLatitudeDegrees, longitude: userLongitudeDegrees)
+            var distanceInMeters = placeCoordinatesDegrees.distanceFromLocation(userCoordinatesDegrees)
+            
+            func roundToPlaces(value:Double, places:Int) -> Double {
+                let divisor = pow(10.0, Double(places))
+                return round(value * divisor) / divisor
+            }
+            
+            distance = roundToPlaces(distanceInMeters / 1000, 1)
+            
+        }
+        
+        // Init for address data
+        
+        if let addressValues = json["address"] as? [String:AnyObject] {
+            city = addressValues["city"]! as? String
+        }
+        
+        // Init for users data
+        
+        if let usersvisited = json["usersvisited"] as? [NSDictionary] {
+            
+            var cumul:Int = 0
+            var count:Int = 0
+            var sexArray : [String] = []
+            
+            for uservisited in usersvisited {
+                var age:String = uservisited.objectForKey("age") as! String
+                var sex:String = uservisited.objectForKey("sex") as! String
+                var ageInt = age.toInt()
+                
+                sexArray.append(sex)
+                
+                count = usersvisited.count
+                cumul += ageInt!
+                
+            }
+            
+            var sexCount = sexArray.count
+            var sexFemaleCount = sexArray.filter {
+                $0 == "F"
+            }.count
+            
+            pourcentFemale = (Float(sexFemaleCount) / Float(sexCount))*100
+            averageAge = cumul / count
+            
+        }
+        
+        
     }
+    
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class xmlHttpRequest{
     
-    func post(params : Dictionary<String, String>, url : String, postCompleted : (succeeded: Bool, msg: String) -> ()) {
+    func post(params : Dictionary<String, String>, url : String, postCompleted : (succeeded: Bool, msg: String, obj : NSDictionary) -> ()) {
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
@@ -34,7 +34,7 @@ class xmlHttpRequest{
                 println(err!.localizedDescription)
                 let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("Error could not parse JSON: '\(jsonStr)'")
-                postCompleted(succeeded: false, msg: "Error")
+                postCompleted(succeeded: false, msg: "Error", obj : json!)
             }
             else {
                 // The JSONObjectWithData constructor didn't return an error. But, we should still
@@ -43,14 +43,18 @@ class xmlHttpRequest{
                     // Okay, the parsedJSON is here, let's get the value for 'success' out of it
                     if let success = parseJSON["success"] as? Bool {
                         println("Succes: \(success)")
-                        postCompleted(succeeded: success, msg: "Logged in.")
+                        postCompleted(succeeded: success, msg: "Logged in.", obj : json!)
+                    }
+                    
+                    else {
+                        postCompleted(succeeded: true, msg: "ParsedJson", obj: json!)
                     }
                 }
                 else {
                     // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
                     let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
                     println("Error could not parse JSON: \(jsonStr)")
-                    postCompleted(succeeded: false, msg: "Error")
+                    postCompleted(succeeded: false, msg: "Error", obj : json!)
                 }
             }
         })

@@ -28,7 +28,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         
         //tableData.layer.backgroundColor = HadColor.Color.backgroundClearColor.CGColor
     
-        placeItems = PlaceItem.allPlaceItems()
+        //placeItems = PlaceItem.allPlaceItems()
         tableData.reloadData()
     }
     
@@ -162,7 +162,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as! PlaceCell
-        cell.configureForPlaceItem(placeItems[indexPath.row])
+        //cell.configureForPlaceItem(placeItems[indexPath.row])
         cell.backgroundColor = UIColor.clearColor()
         
         if(selectedIndex == indexPath.row){
@@ -222,7 +222,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         return cell
     }*/
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(selectedIndex == indexPath.row){
             selectedIndex = -1
             tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)

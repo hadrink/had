@@ -28,16 +28,19 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var averageAge: UILabel!
     @IBOutlet weak var getLocation: UIButton!
     
+    @IBOutlet var routeButton: UIButton!
     
     func configureForPlaceItem(place: PlaceItem) {
-        placeName.text = place.placeName as String
-        city.text = place.city as String
+        //placeName.text = place.placeName as String?
+        //println("Place Name Text : \(placeName.text)")
+        /*city.text = place.city as String
         distance.text = place.distance as String
         details.text = place.pourcentage as String
         nbUser.text = place.nbUser as String
-        averageAge.text = place.averageAge as String
-        self.selectionStyle = UITableViewCellSelectionStyle.None
-        
+        averageAge.text = place.averageAge as String*/
+        //self.selectionStyle = UITableViewCellSelectionStyle.None
+        routeButton.layer.zPosition = 100
+        routeButton.layer.setNeedsDisplay()
         
     }
     

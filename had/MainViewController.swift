@@ -16,9 +16,12 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 
-class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
+class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+   
+    
      override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,22 +67,76 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+            var latitude = locationManager.location.coordinate.latitude
+            var longitude = locationManager.location.coordinate.longitude
+            var methodePost = xmlHttpRequest()
+
         
+        methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latitude)/\(longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            
+            /*if(succeeded) {
+            alert.title = "Success!"
+            alert.message = msg
+            // println("mon object : \(obj)")
+            
+            }
+            else {
+            alert.title = "Login Problem"
+            alert.message = "Wrong username or password."
+            alert.addButtonWithTitle("Foiled Again!")
+            }*/
+            
+            // Move to the UI thread
+            /*dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            // Show the alert
+            //alert.show()
+            })*/
+            
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: latitude), "longitude" : String(stringInterpolationSegment: longitude)]
+            
+            if let reposArray = obj["listbar"] as? [NSDictionary]  {
+                println("ReposArray \(reposArray)")
+                println("Youhou")
+                
+                for item in reposArray {
+                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                    println("Item \(item)")
+                }
+                
+                println("place item \(self.placeItems)")
+
+                
+            }
+            
+            
+            
+            println("Mon object \(obj)")
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.tableData.reloadData()
+                
+            })
+            
+            
+        }
+        
+       
         
             //PlaceItem.allPlaceItems()
         
         
+        
             /********** Init variables **********/
         
-            placeItems = PlaceItem.allPlaceItems()
+            //placeItems = PlaceItem.allPlaceItems()
             //placeItems = []
         
         
         /********** Get BarList ************/
         
-        
-
-        
+    
     }
     
     /********** Outlets **********/
@@ -87,6 +144,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     @IBOutlet weak var hamburger: UIBarButtonItem!
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
+    @IBOutlet weak var myMap: MKMapView!
+    
     /********** Override function **********/
     
     override func  prefersStatusBarHidden() -> Bool {
@@ -94,10 +153,11 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }
     
     
+    
+    
     /********** Global const & var **********/
     
     var messageLabel:UILabel!
-    var placeItems: Array<PlaceItem>!
     let locationManager = CLLocationManager()
     var data: NSMutableData = NSMutableData()
     var jsonData: NSArray = NSArray()
@@ -105,6 +165,15 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     var latitude:NSString = ""
     
     var selectedIndex = -1
+    
+   
+    
+    func openMapForPlace() {
+        
+        
+        
+    }
+
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
@@ -119,28 +188,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 var latLng = self.getLocationInfo(pm)
                 println(latLng[0])
                 println(latLng[1])
-                var methodePost = xmlHttpRequest()
                 
-                methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latLng[0])/\(latLng[1])/10") { (succeeded: Bool, msg: String) -> () in
-                    var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-                    
-                    /*if(succeeded) {
-                        alert.title = "Success!"
-                        alert.message = msg
-                    }
-                    else {
-                        alert.title = "Login Problem"
-                        alert.message = "Wrong username or password."
-                        alert.addButtonWithTitle("Foiled Again!")
-                    }*/
-                    
-                    // Move to the UI thread
-                    /*dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        // Show the alert
-                        //alert.show()
-                    })*/
-                }
                 
+
                 
                 
             } else {
@@ -200,16 +250,55 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }
     
     
+    var placeItems = [PlaceItem]()
+
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         println(placeItems)
+        
+        //println(placeItems)
+        //println("Count : \(placeItems.count)")
+        //println("place item \(placeItems)")
         return placeItems.count
     }
     
+   
+    
+    func routeButtonClicked(sender:UIButton) {
+        
+        let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
+        let regionDistance:CLLocationDistance = 10000
+ 
+        var latitute:CLLocationDegrees =  placeItems[indexPath.row].placeLatitudeDegrees!
+        var longitute:CLLocationDegrees =  placeItems[indexPath.row].placeLongitudeDegrees!
+        var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+       
+        var options = [
+            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+        ]
+        
+        var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        var mapItem = MKMapItem(placemark: placemark)
+       
+        mapItem.name = placeItems[indexPath.row].placeName
+        mapItem.openInMapsWithLaunchOptions(options)
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as! PlaceCell
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
-        cell.configureForPlaceItem(placeItems[indexPath.row])
-        //cell.backgroundColor = UIColor.clearColor()
+        cell.placeName.text = placeItems[indexPath.row].placeName as String?
+        cell.city.text = placeItems[indexPath.row].city as String?
+        cell.nbUser.text = placeItems[indexPath.row].counter as String! + " hadder"
+        cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge) + "ans"
+        cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale) + "%"
+        cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
+        cell.routeButton.tag = indexPath.row
+        cell.routeButton.addTarget(self, action: "routeButtonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
         
         /*if (indexPath.row%2 == 1){
             cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
@@ -260,6 +349,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }*/
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
         if(selectedIndex == indexPath.row){
             selectedIndex = -1
             tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -303,7 +393,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     func refresh(refreshControl: UIRefreshControl)
     {
         println("refreshing")
-        placeItems = PlaceItem.allPlaceItems()
+        //placeItems = PlaceItem.allPlaceItems()
         if (placeItems.count != 0)
         {
             messageLabel.alpha = 0
