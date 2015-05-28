@@ -68,7 +68,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
             }
             
             if placemarks.count > 0 {
-                let pm = placemarks[0] as CLPlacemark
+                let pm = placemarks[0] as! CLPlacemark
                 var result = self.getLocationInfo(pm)
                 var latitude = result[0]
                 var longitude = result[1]
@@ -76,7 +76,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
                 var xhr = xmlHttpRequest()
                 //var caramel = xhr.methodPost(dataString)
                 
-                let location = locations.last as CLLocation
+                let location = locations.last as! CLLocation
                 let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                 
                 println(result[0])
@@ -127,7 +127,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
         scannerLatitude.scanString("<", intoString:nil)
         
         if scannerLatitude.scanUpToString(",", intoString:&scannedLatitude) {
-            latitude = scannedLatitude as String
+            latitude = scannedLatitude as! String
             println("result: \(latitude)")
         }
         
@@ -141,7 +141,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
             scannerLongitude.scanString(",", intoString:nil)
             
             if scannerLongitude.scanUpToString(">", intoString:&scannedLongitude) {
-                longitude = scannedLongitude as String
+                longitude = scannedLongitude as! String
                 println("result: \(longitude)")
             }
             
@@ -161,7 +161,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as PlaceCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as! PlaceCell
         cell.configureForPlaceItem(placeItems[indexPath.row])
         cell.backgroundColor = UIColor.clearColor()
         
@@ -225,15 +225,15 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
         if(selectedIndex == indexPath.row){
             selectedIndex = -1
-            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath ) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
             return
         }
         if(selectedIndex != -1){
             var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath), withRowAnimation: UITableViewRowAnimation.Fade)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
         }
         selectedIndex = indexPath.row
-        tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath), withRowAnimation: UITableViewRowAnimation.Fade)
+        tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
     @IBAction func Menu(sender: AnyObject) {

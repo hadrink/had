@@ -30,12 +30,12 @@ class PlaceCell: UITableViewCell {
     
     
     func configureForPlaceItem(place: PlaceItem) {
-        placeName.text = place.placeName
-        city.text = place.city
-        distance.text = place.distance
-        details.text = place.pourcentage
-        nbUser.text = place.nbUser
-        averageAge.text = place.averageAge
+        placeName.text = place.placeName as String
+        city.text = place.city as String
+        distance.text = place.distance as String
+        details.text = place.pourcentage as String
+        nbUser.text = place.nbUser as String
+        averageAge.text = place.averageAge as String
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
         

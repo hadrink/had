@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import Foundation
 
 class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFieldDelegate{
     
@@ -87,13 +88,10 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     @IBOutlet var navigationBar: UINavigationBar!
     
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
-        //animationDown()
-        
     }
-    
-   
+
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         if (textField === lastname) {
@@ -173,7 +171,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
             var emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
             
-            return emailTest!.evaluateWithObject(candidate)
+            return emailTest.evaluateWithObject(candidate)
         }
         
         if  mail.text.isEmpty {
@@ -241,7 +239,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     
     
     @IBAction func passwordEditingEnd(sender: AnyObject) {
-        var lenght = countElements(pwd.text!)
+        var lenght = count(pwd.text!)
         if (lenght < 8 || lenght > 12){
             pwd.secureTextEntry = false
             pwd.text = "Mot de passe entre 8 et 12 ;)"
@@ -305,7 +303,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             var finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
             
             var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
-            
+
             var url = "http://151.80.128.136:3000/user/"
             
             let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
@@ -319,7 +317,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             MyKeychainWrapper.writeToKeychain()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
             NSUserDefaults.standardUserDefaults().synchronize()
-            var pass = self.MyKeychainWrapper.myObjectForKey("v_Data") as NSString
+            var pass = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
             println(pass)
             //methodePost.post(tabUser, url:URLS.urlUser)
             /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -335,7 +333,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
                     alert.title = "Create Account Success!"
                     alert.message = msg
                     let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                    self.showViewController(vc as UIViewController, sender: vc)
+                    self.showViewController(vc as! UIViewController, sender: vc)
                 }
                     
                 else {

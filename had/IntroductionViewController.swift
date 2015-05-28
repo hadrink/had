@@ -1,20 +1,32 @@
 import UIKit
 import CoreData
 
-class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, FBLoginViewDelegate{
-    
-    @IBOutlet var fbLoginView: FBLoginView!
+class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate,FBSDKLoginButtonDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "observeProfileChange", name:FBSDKProfileDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "observeTokenChange", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+        
         // Do any additional setup after loading the view, typically from a nib.
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
+            observeTokenChange()
+            //returnUserData();
+            println("token yes")
+            // User is already logged in, do work such as go to next view controller.
+        }
+        else
+        {
+            println("token no")
+            let loginView : FBSDKLoginButton = FBSDKLoginButton()
+            self.view.addSubview(loginView)
+            loginView.center = self.view.center
+            loginView.readPermissions = ["public_profile", "email", "user_friends"]
+            loginView.delegate = self
+        }
         configView()
-        isUserConnected()
-        textFieldPsw.delegate = self
-       
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,12 +90,12 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func checkLogin(username: String, password: String ) -> Bool
     {
-        if password == MyKeychainWrapper.myObjectForKey("v_Data") as NSString &&
+        if password == MyKeychainWrapper.myObjectForKey("v_Data") as? NSString &&
             username == NSUserDefaults.standardUserDefaults().valueForKey("username") as? NSString {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                self.showViewController(vc as UIViewController, sender: vc)
+                self.showViewController(vc as! UIViewController, sender: vc)
                 return true
         } else {
             methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
@@ -101,10 +113,10 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                     self.MyKeychainWrapper.writeToKeychain()
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
                     NSUserDefaults.standardUserDefaults().synchronize()
-                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as NSString
+                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
                     
                     let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                    self.showViewController(vc as UIViewController, sender: vc)
+                    self.showViewController(vc as! UIViewController, sender: vc)
                 }
                 else {
                     alert.title = "Login Problem"
@@ -122,17 +134,18 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         }
     }
 
-    func isUserConnected()
+    /*func isUserConnected()
     {
         var user: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Username")
         if(user != nil){
             let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("ParameterRadarViewController")
-            self.showViewController(vc as UIViewController, sender: vc)
+            self.showViewController(vc as! UIViewController, sender: vc)
         }
-    }
+    }*/
     
     func configView()
     {
+        textFieldPsw.delegate = self
         //textFieldMail.textColor = whiteColor
         textFieldMail.placeholder = "E-mail / Nom d'utilisateur"
         textFieldMail.font = UIFont(name: "Lato-Light", size: 12)
@@ -170,30 +183,72 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         textEmail.tintColor = greyColor
         textEmail.layer.borderWidth = 1.0
 
-    
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
- 
     
-    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         println("User Logged In")
+        
+        if ((error) != nil)
+        {
+            println(" Process error")
+        }
+        else if result.isCancelled {
+            println(" Handle cancellations")
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                var vc: AnyObject!
+                vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                self.showViewController(vc as! UIViewController, sender: vc)
+                println(" Do work")
+            }
+        }
     }
     
-    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        println("User: \(user)")
-        println("User ID: \(user.objectID)")
-        println("User Name: \(user.name)")
-        var userEmail = user.objectForKey("email") as String
-        println("User Email: \(userEmail)")
-    }
-    
-    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         println("User Logged Out")
     }
     
-    func loginView(loginView : FBLoginView!, handleError:NSError) {
-        println("Error: \(handleError.localizedDescription)")
+    func returnUserData()
+    {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                println("Error: \(error)")
+            }
+            else
+            {
+                println("fetched user: \(result)")
+                let userName : NSString = result.valueForKey("name") as! NSString
+                println("User Name is: \(userName)")
+                let userEmail : NSString = result.valueForKey("email") as! NSString
+                println("User Email is: \(userEmail)")
+            }
+        })
+    }
+    
+    func observeProfileChange(){
+        if ((FBSDKProfile.currentProfile()) != nil) {
+            println("diff de nil")
+            var vc: AnyObject!
+            vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+            self.showViewController(vc as! UIViewController, sender: vc)
+        }
+    }
+    
+    func observeTokenChange(){
+        if ((FBSDKAccessToken.currentAccessToken()) != nil) {
+            println("profile change")
+            observeProfileChange()
+        }
     }
 }
 

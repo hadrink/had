@@ -7,6 +7,5 @@
 //Keychain
 #import "KeychainWrapper.h"
 //Facebook
-#import <FacebookSDK/FacebookSDK.h>
-//#import <FBSDKCoreKit/FBSDKCoreKit.h>
-//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>

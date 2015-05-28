@@ -64,7 +64,10 @@
 		EB444FA01AAE3ADF00E533B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */; };
 		EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
 		EB4813461AAF83AB004B5D53 /* user.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB4813451AAF83AB004B5D53 /* user.plist */; };
-		EB63B0A81ACDEBEF0031BE6F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB63B0A71ACDEBEE0031BE6F /* FacebookSDK.framework */; };
+		EB63B0AA1AD465DF0031BE6F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB63B0A91AD465DF0031BE6F /* Settings.swift */; };
+		EBABF9391B1775200096D705 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBABF9381B1775200096D705 /* FBSDKCoreKit.framework */; };
+		EBABF93C1B1777C70096D705 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBABF93A1B1777C70096D705 /* Bolts.framework */; };
+		EBABF93D1B1777C70096D705 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBABF93B1B1777C70096D705 /* FBSDKLoginKit.framework */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
 		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
 		F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F01A1E508C0007FAA1 /* CenterViewController.swift */; };
@@ -150,7 +153,10 @@
 		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB4813451AAF83AB004B5D53 /* user.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = user.plist; sourceTree = "<group>"; };
-		EB63B0A71ACDEBEE0031BE6F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = had/FacebookSDK.framework; sourceTree = "<group>"; };
+		EB63B0A91AD465DF0031BE6F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		EBABF9381B1775200096D705 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		EBABF93A1B1777C70096D705 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		EBABF93B1B1777C70096D705 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -167,8 +173,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB63B0A81ACDEBEF0031BE6F /* FacebookSDK.framework in Frameworks */,
+				EBABF93C1B1777C70096D705 /* Bolts.framework in Frameworks */,
 				EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */,
+				EBABF93D1B1777C70096D705 /* FBSDKLoginKit.framework in Frameworks */,
+				EBABF9391B1775200096D705 /* FBSDKCoreKit.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
 			);
@@ -230,10 +238,7 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
-				EB63B0A71ACDEBEE0031BE6F /* FacebookSDK.framework */,
-				EBFD30201AB77BB600727E3F /* Security.framework */,
-				EB444F9D1A9E30A000E533B2 /* CoreData.framework */,
-				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
+				EBABF9371B1772090096D705 /* Framework */,
 				7AA224F619CDA9D1002003ED /* had */,
 				7AA2251019CDA9D1002003ED /* hadTests */,
 				7AA224F519CDA9D1002003ED /* Products */,
@@ -265,6 +270,7 @@
 				7AA224F719CDA9D1002003ED /* Supporting Files */,
 				F61331F61A1E6FF40007FAA1 /* Main.storyboard */,
 				EB4813451AAF83AB004B5D53 /* user.plist */,
+				EB63B0A91AD465DF0031BE6F /* Settings.swift */,
 			);
 			path = had;
 			sourceTree = "<group>";
@@ -304,6 +310,19 @@
 				7AF659641A49F133002C6745 /* had-Bridging-Header.h */,
 			);
 			name = library;
+			sourceTree = "<group>";
+		};
+		EBABF9371B1772090096D705 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				EBABF93A1B1777C70096D705 /* Bolts.framework */,
+				EBABF93B1B1777C70096D705 /* FBSDKLoginKit.framework */,
+				EBABF9381B1775200096D705 /* FBSDKCoreKit.framework */,
+				EBFD30201AB77BB600727E3F /* Security.framework */,
+				EB444F9D1A9E30A000E533B2 /* CoreData.framework */,
+				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 		F6A5521F1A27A2E5001C371E /* ItemCell */ = {
@@ -481,6 +500,7 @@
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */,
 				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
+				EB63B0AA1AD465DF0031BE6F /* Settings.swift in Sources */,
 				7AA2252019CDBED4002003ED /* xmlHttpRequest.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AA2250019CDA9D1002003ED /* ModelController.swift in Sources */,
@@ -619,6 +639,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/had",
 					"$(PROJECT_DIR)",
+					/Users/clitodu10/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -638,6 +659,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/had",
 					"$(PROJECT_DIR)",
+					/Users/clitodu10/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
