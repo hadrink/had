@@ -98,7 +98,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                 self.showViewController(vc as! UIViewController, sender: vc)
                 return true
         } else {
-            methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String) -> () in
+            methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {

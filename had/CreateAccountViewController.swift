@@ -88,12 +88,22 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     @IBOutlet var navigationBar: UINavigationBar!
     
     
+<<<<<<< HEAD
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
+=======
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+
+            self.view.endEditing(true)
+        }
+        super.touchesBegan(touches, withEvent: event)
+>>>>>>> tableview_design
     }
 
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if (textField === lastname) {
             firstname.becomeFirstResponder()
             return false
@@ -326,7 +336,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             //println("http://151.80.128.136:3000/user/\(mail.text)")
             
-            methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String) -> () in
+            methodePost.post(tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {

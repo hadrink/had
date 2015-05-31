@@ -100,7 +100,11 @@ class ResponsiveTextFieldViewController : UIViewController
         }
     }
     
+<<<<<<< HEAD
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+=======
+    override func touchesBegan(Set<NSObject>, withEvent event: UIEvent)
+>>>>>>> tableview_design
     {
         if (self.activeTextField != nil)
         {

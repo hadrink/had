@@ -152,8 +152,13 @@ class User{
         }
         
     }
+<<<<<<< HEAD
     /*func getUserCoreData(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+=======
+    func getUserCoreData(){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+>>>>>>> tableview_design
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
         var result: NSManagedObject
@@ -171,7 +176,7 @@ class User{
             self.name=result.valueForKey("name") as? String
             self.lastname=result.valueForKey("lastname") as? String
             self.mail = result.valueForKey("mail") as? String
-            self.gender = result.valueForKey("gender") as Int
+            self.gender = result.valueForKey("gender") as! Int
             self.birthDate = result.valueForKey("birthdate") as? NSDate
         }
         if fetchedResults.count == 0 {
@@ -180,7 +185,7 @@ class User{
         
     }
     func saveUserCoreData(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
@@ -215,7 +220,7 @@ class User{
     func disconnect()
     {
         var bool:Bool=false
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)

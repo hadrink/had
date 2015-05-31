@@ -41,22 +41,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "had/MainViewController.swift"
-            timestampString = "447796011.125358"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "had/Item.swift"
             timestampString = "441580103.792426"
             startingColumnNumber = "9223372036854775807"
@@ -90,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "441586817.022969"
+            timestampString = "453066023.076167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "had/MainViewController.swift"
-            timestampString = "447715263.684881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "getLocationInfo(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,7 +94,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "454"
-            endingLineNumber = "454">
+            endingLineNumber = "454"
+            landmarkName = "configView()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "447715263.684881"
+            timestampString = "453066114.856325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "MainViewController"
             landmarkType = "3">
             <Locations>
@@ -150,6 +120,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "had.MainViewController.selectedIndex.setter : Swift.Int"
                   moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/MainViewController.swift"
                   timestampString = "447714338.146581"
                   startingColumnNumber = "9223372036854775807"
@@ -164,6 +135,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "had.MainViewController.selectedIndex.materializeForSet : Swift.Int"
                   moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/MainViewController.swift"
                   timestampString = "447714338.146714"
                   startingColumnNumber = "9223372036854775807"
@@ -178,6 +150,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "had.MainViewController.init (had.MainViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; had.MainViewController"
                   moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/MainViewController.swift"
                   timestampString = "447714338.146845"
                   startingColumnNumber = "9223372036854775807"
@@ -192,6 +165,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "had.MainViewController.init (had.MainViewController.Type)() -&gt; had.MainViewController"
                   moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/MainViewController.swift"
                   timestampString = "447714338.146975"
                   startingColumnNumber = "9223372036854775807"
@@ -206,6 +180,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "had.MainViewController.init (had.MainViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; had.MainViewController"
                   moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/MainViewController.swift"
                   timestampString = "447714338.147103"
                   startingColumnNumber = "9223372036854775807"
@@ -215,6 +190,54 @@
                   offsetFromSymbolStart = "414">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/CreateAccountViewController.swift"
+            timestampString = "452199762.857349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "textFieldShouldReturn(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/CreateAccountViewController.swift"
+            timestampString = "452199764.095233"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "textFieldShouldReturn(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/CreateAccountViewController.swift"
+            timestampString = "452199821.076839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "touchesBegan(_:withEvent:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

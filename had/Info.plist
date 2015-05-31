@@ -39,6 +39,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RobotoSlab-Bold.ttf</string>
+		<string>RobotoSlab-Light.ttf</string>
+		<string>RobotoSlab-Regular.ttf</string>
+		<string>RobotoSlab-Thin.ttf</string>
 		<string>Lato-Bolditalic.ttf</string>
 		<string>Lato-Light.ttf</string>
 		<string>Lato-Regular.ttf</string>
