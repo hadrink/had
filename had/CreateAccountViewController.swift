@@ -88,19 +88,9 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     @IBOutlet var navigationBar: UINavigationBar!
     
     
-<<<<<<< HEAD
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
-=======
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-
-            self.view.endEditing(true)
-        }
-        super.touchesBegan(touches, withEvent: event)
->>>>>>> tableview_design
-    }
+}
 
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

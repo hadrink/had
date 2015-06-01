@@ -288,12 +288,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-<<<<<<< HEAD
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlaceCell", forIndexPath: indexPath) as! PlaceCell
-=======
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
->>>>>>> tableview_design
         cell.layoutMargins = UIEdgeInsetsZero
         cell.placeName.text = placeItems[indexPath.row].placeName as String?
         cell.city.text = placeItems[indexPath.row].city as String?

@@ -152,13 +152,8 @@ class User{
         }
         
     }
-<<<<<<< HEAD
     /*func getUserCoreData(){
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-=======
-    func getUserCoreData(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
->>>>>>> tableview_design
         let managedContext = appDelegate.managedObjectContext!
         var fetchedResults = executeRequest(managedContext)
         var result: NSManagedObject

@@ -31,16 +31,6 @@ class PlaceCell: UITableViewCell {
     @IBOutlet var routeButton: UIButton!
     
     func configureForPlaceItem(place: PlaceItem) {
-<<<<<<< HEAD
-        placeName.text = place.placeName as String
-        city.text = place.city as String
-        distance.text = place.distance as String
-        details.text = place.pourcentage as String
-        nbUser.text = place.nbUser as String
-        averageAge.text = place.averageAge as String
-        self.selectionStyle = UITableViewCellSelectionStyle.None
-        
-=======
         //placeName.text = place.placeName as String?
         //println("Place Name Text : \(placeName.text)")
         /*city.text = place.city as String
@@ -51,7 +41,6 @@ class PlaceCell: UITableViewCell {
         //self.selectionStyle = UITableViewCellSelectionStyle.None
         routeButton.layer.zPosition = 100
         routeButton.layer.setNeedsDisplay()
->>>>>>> tableview_design
         
     }
     
