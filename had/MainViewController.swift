@@ -25,14 +25,14 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
      override func viewDidLoad() {
         super.viewDidLoad()
         
-       /* // Initialize the refresh control.
+        // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableData.addSubview(refreshControl)
-        // Do any additional setup after loading the view, typically from a nib. */
+        // Do any additional setup after loading the view, typically from a nib.
         
             /********** RevealView Configuration **********/
         
@@ -67,8 +67,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-            var latitude = locationManager.location.coordinate.latitude
-            var longitude = locationManager.location.coordinate.longitude
+        var latitude: CLLocationDegrees = locationManager.location.coordinate.latitude
+        var longitude: CLLocationDegrees = locationManager.location.coordinate.longitude
             var methodePost = xmlHttpRequest()
 
         
@@ -93,7 +93,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             //alert.show()
             })*/
             
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: latitude), "longitude" : String(stringInterpolationSegment: longitude)]
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: latitude), "longitude" : String(stringInterpolationSegment: self.longitude)]
             
             if let reposArray = obj["listbar"] as? [NSDictionary]  {
                 println("ReposArray \(reposArray)")

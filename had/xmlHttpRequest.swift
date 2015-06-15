@@ -34,7 +34,9 @@ class xmlHttpRequest{
                 println(err!.localizedDescription)
                 let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("Error could not parse JSON: '\(jsonStr)'")
-                postCompleted(succeeded: false, msg: "Error", obj : json!)
+                if(json != nil){
+                    postCompleted(succeeded: false, msg: "Error", obj : json!)
+                }
             }
             else {
                 // The JSONObjectWithData constructor didn't return an error. But, we should still
