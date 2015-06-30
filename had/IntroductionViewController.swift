@@ -16,6 +16,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             //returnUserData();
             println("token yes")
             // User is already logged in, do work such as go to next view controller.
+            returnUserData()
         }
         else
         {
@@ -238,6 +239,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     func observeProfileChange(){
         if ((FBSDKProfile.currentProfile()) != nil) {
             println("diff de nil")
+            returnUserData()
             var vc: AnyObject!
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as! UIViewController, sender: vc)

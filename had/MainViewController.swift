@@ -21,12 +21,16 @@ import MapKit
 
 class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
    
+    let locationManager = CLLocationManager()
+//    var timer: NSTimer!
+    var refreshControl: UIRefreshControl!
+    //var isAnimating = false
     
      override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the refresh control.
-        var refreshControl = UIRefreshControl()
+        refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -63,10 +67,12 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             let imageView = UIImageView(image:logo)
             imageView.frame = CGRectMake(0, 0, 38.66, 44)
             self.navbar.titleView = imageView
-        
+
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
+        
         var latitude: CLLocationDegrees = locationManager.location.coordinate.latitude
         var longitude: CLLocationDegrees = locationManager.location.coordinate.longitude
             var methodePost = xmlHttpRequest()
@@ -105,12 +111,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 }
                 
                 println("place item \(self.placeItems)")
-
-                
             }
-            
-            
-            
             println("Mon object \(obj)")
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -118,25 +119,14 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 self.tableData.reloadData()
                 
             })
-            
-            
         }
         
-       
-        
             //PlaceItem.allPlaceItems()
-        
-        
         
             /********** Init variables **********/
         
             //placeItems = PlaceItem.allPlaceItems()
             //placeItems = []
-        
-        
-        /********** Get BarList ************/
-        
-    
     }
     
     /********** Outlets **********/
@@ -149,16 +139,13 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     /********** Override function **********/
     
     override func  prefersStatusBarHidden() -> Bool {
-        return true
+        return false
     }
-    
-    
-    
     
     /********** Global const & var **********/
     
     var messageLabel:UILabel!
-    let locationManager = CLLocationManager()
+
     var data: NSMutableData = NSMutableData()
     var jsonData: NSArray = NSArray()
     var longitude:NSString = ""
@@ -166,14 +153,17 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     var selectedIndex = -1
     
-   
-    
     func openMapForPlace() {
-        
-        
-        
     }
 
+    /*func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if refreshControl.refreshing {
+            if !isAnimating {
+                doSomething()
+                refresh()
+            }
+        }
+    }*/
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
@@ -188,11 +178,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 var latLng = self.getLocationInfo(pm)
                 println(latLng[0])
                 println(latLng[1])
-                
-                
-
-                
-                
             } else {
                 println("Problem with the data received from geocoder")
             }
@@ -260,8 +245,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         //println("place item \(placeItems)")
         return placeItems.count
     }
-    
-   
     
     func routeButtonClicked(sender:UIButton) {
         
@@ -392,14 +375,41 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     /********** Refresh places **********/
     func refresh(refreshControl: UIRefreshControl)
     {
+        //isAnimating = true
         println("refreshing")
         //placeItems = PlaceItem.allPlaceItems()
         if (placeItems.count != 0)
         {
             messageLabel.alpha = 0
         }
+        var methodePost = xmlHttpRequest()
         
-        self.tableData.reloadData()
+        methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latitude)/\(longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.latitude), "longitude" : String(stringInterpolationSegment: self.longitude)]
+            
+            if let reposArray = obj["listbar"] as? [NSDictionary]  {
+                println("ReposArray \(reposArray)")
+                println("RefreshhhYouhou")
+                
+                for item in reposArray {
+                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                    println("Item \(item)")
+                }
+                
+                println("place item \(self.placeItems)")
+            }
+            println("Mon object \(obj)")
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.tableData.reloadData()
+
+            })
+        }
+        //self.isAnimating = false
+        placeItems.removeAll(keepCapacity: true)
         
         // End the refreshing
         var formatter:NSDateFormatter = NSDateFormatter()
@@ -412,5 +422,18 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
         refreshControl.endRefreshing()
     }
+    
+   /* func doSomething() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: "endOfWork", userInfo: nil, repeats: true)
+        println(timer)
+    }
+    
+    
+    func endOfWork() {
+        refreshControl.endRefreshing()
+        
+        timer.invalidate()
+        timer = nil
+    }*/
     
 }
