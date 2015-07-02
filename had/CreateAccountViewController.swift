@@ -295,7 +295,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         return bool
     }
     
-    var methodePost = xmlHttpRequest()
+    var methodePost = QueryServices()
     
     @IBAction func sendUserData(sender: UIButton) {
         

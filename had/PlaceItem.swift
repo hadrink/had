@@ -11,7 +11,7 @@ import CoreLocation
 
 class PlaceItem : CLLocationManager{
     
-    let locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     
     // Global variables for cells
 
@@ -41,7 +41,7 @@ class PlaceItem : CLLocationManager{
         var userLongitudeDegrees:CLLocationDegrees = userLongitude!.doubleValue
         var usersVisitedInfo: NSDictionary = NSDictionary()
         
-        if let placeLocation = json["loc"] as? [String:AnyObject]
+        if var placeLocation = json["loc"] as? [String:AnyObject]
         {
             var placeCoordinate = placeLocation["coordinates"]! as? NSArray
             var placeLongitude = placeCoordinate!.firstObject as! NSObject
@@ -53,7 +53,7 @@ class PlaceItem : CLLocationManager{
             var distanceInMeters = placeCoordinatesDegrees.distanceFromLocation(userCoordinatesDegrees)
             
             func roundToPlaces(value:Double, places:Int) -> Double {
-                let divisor = pow(10.0, Double(places))
+                var divisor = pow(10.0, Double(places))
                 return round(value * divisor) / divisor
             }
             
@@ -63,13 +63,13 @@ class PlaceItem : CLLocationManager{
         
         // Init for address data
         
-        if let addressValues = json["address"] as? [String:AnyObject] {
+        if var addressValues = json["address"] as? [String:AnyObject] {
             city = addressValues["city"]! as? String
         }
         
         // Init for users data
         
-        if let usersvisited = json["usersvisited"] as? [NSDictionary] {
+        if var usersvisited = json["usersvisited"] as? [NSDictionary] {
             
             var cumul:Int = 0
             var count:Int = 0

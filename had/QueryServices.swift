@@ -1,5 +1,5 @@
 //
-//  xmlHttpRequest.swift
+//  QueryServices
 //  Status
 //
 //  Created by Rplay on 21/08/2014.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class xmlHttpRequest{
+class QueryServices{
     
     func post(params : Dictionary<String, String>, url : String, postCompleted : (succeeded: Bool, msg: String, obj : NSDictionary) -> ()) {
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
@@ -21,9 +21,9 @@ class xmlHttpRequest{
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            println("Response: \(response)")
+            //println("Response: \(response)")
             var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
+            //println("Body: \(strData)")
             var err: NSError?
             var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
             
@@ -152,4 +152,6 @@ class xmlHttpRequest{
         task.resume()
     }
 
+
+    
 }

@@ -55,7 +55,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     @IBOutlet weak var textFieldPsw: UITextField!
     @IBOutlet weak var loginLabel: UILabel!
 
-    var methodePost = xmlHttpRequest()
+    var methodePost = QueryServices()
     var myJsonResult = ""
 
     

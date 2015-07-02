@@ -19,18 +19,29 @@ import CoreLocation
 import MapKit
 
 
+
 class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
    
     let locationManager = CLLocationManager()
+    let locServices = LocationServices()
+    let QServices = QueryServices()
 //    var timer: NSTimer!
-    var refreshControl: UIRefreshControl!
+    //var refreshControl: UIRefreshControl!
     //var isAnimating = false
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
     
      override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the refresh control.
-        refreshControl = UIRefreshControl()
+        var refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -50,14 +61,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
             /********** Custom View Design **********/
         
-            func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-                return UIColor(
-                    red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-                    green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-                    blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-                    alpha: CGFloat(1.0)
-                )
-            }
+        
         
             self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5B90CE)
             self.navigationController?.navigationBar.translucent = false
@@ -73,44 +77,24 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         
-        var latitude: CLLocationDegrees = locationManager.location.coordinate.latitude
-        var longitude: CLLocationDegrees = locationManager.location.coordinate.longitude
-            var methodePost = xmlHttpRequest()
-
+            locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
+            locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
         
-        methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latitude)/\(longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
+        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
-            /*if(succeeded) {
-            alert.title = "Success!"
-            alert.message = msg
-            // println("mon object : \(obj)")
-            
-            }
-            else {
-            alert.title = "Login Problem"
-            alert.message = "Wrong username or password."
-            alert.addButtonWithTitle("Foiled Again!")
-            }*/
-            
-            // Move to the UI thread
-            /*dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            // Show the alert
-            //alert.show()
-            })*/
-            
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: latitude), "longitude" : String(stringInterpolationSegment: self.longitude)]
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
             
             if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                println("ReposArray \(reposArray)")
-                println("Youhou")
-                
+                //println("ReposArray \(reposArray)")
+                println("RefreshhhYouhou")
                 for item in reposArray {
                     self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    println("Item \(item)")
+                    //println("Item \(item)")
                 }
-                
-                println("place item \(self.placeItems)")
+                println(self.placeItems.count)
+                //println("place item \(self.placeItems)")
             }
             println("Mon object \(obj)")
             
@@ -120,9 +104,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 
             })
         }
-        
             //PlaceItem.allPlaceItems()
-        
+            println("nbplaces")
+            println(placeItems.count)
             /********** Init variables **********/
         
             //placeItems = PlaceItem.allPlaceItems()
@@ -239,10 +223,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        //println(placeItems)
-        //println("Count : \(placeItems.count)")
-        //println("place item \(placeItems)")
         return placeItems.count
     }
     
@@ -251,9 +231,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
         let regionDistance:CLLocationDistance = 10000
  
-        var latitute:CLLocationDegrees =  placeItems[indexPath.row].placeLatitudeDegrees!
-        var longitute:CLLocationDegrees =  placeItems[indexPath.row].placeLongitudeDegrees!
-        var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        var latitude =  placeItems[indexPath.row].placeLatitudeDegrees!
+        var longitude =  placeItems[indexPath.row].placeLongitudeDegrees!
+        var coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
        
@@ -274,6 +254,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
+        println(indexPath.row)
+        println(placeItems.count)
         cell.placeName.text = placeItems[indexPath.row].placeName as String?
         cell.city.text = placeItems[indexPath.row].city as String?
         cell.nbUser.text = placeItems[indexPath.row].counter as String! + " hadder"
@@ -282,11 +264,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
         cell.routeButton.tag = indexPath.row
         cell.routeButton.addTarget(self, action: "routeButtonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        /*if (indexPath.row%2 == 1){
-            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        }*/
-        
+    
         return cell
     }
     
@@ -346,6 +324,44 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
     }
 
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+        // Aller
+        var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Aller" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            // 2
+            self.locServices.mapsHandler(indexPath, placeItems: self.placeItems)
+
+        })
+        /*var button: UIButton = UIButton()
+        button.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
+        button.setImage(UIImage(named: "location-icon@10x"), forState: UIControlState.Normal)
+        var mut: NSMutableArray = NSMutableArray()
+        mut.addObject(button)*/
+        /*UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = color;
+        [button setImage:icon forState:UIControlStateNormal];
+        [self addObject:button];
+        var color30 = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
+        color30.*/
+        //
+        //GoToAction.backgroundColor = UIColor(patternImage: UIImage(named:"location-icon@10x")!)
+        //GoToAction.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
+        // 3
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            //do share action
+        })
+        shareAction.backgroundColor = UIColorFromRGB(0x5B90CE)
+        var FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            //do favoris action
+        })
+        FavorisAction.backgroundColor = UIColorFromRGB(0x4B75B2)
+        // 5
+        return [GoToAction,shareAction,FavorisAction]
+    }
+    
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if placeItems.count != 0
         {
@@ -367,10 +383,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.None
             
         }
-        
         return 1
     }
-    
     
     /********** Refresh places **********/
     func refresh(refreshControl: UIRefreshControl)
@@ -382,34 +396,31 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         {
             messageLabel.alpha = 0
         }
-        var methodePost = xmlHttpRequest()
         
-        methodePost.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(latitude)/\(longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+//        locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: true)
+        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.latitude), "longitude" : String(stringInterpolationSegment: self.longitude)]
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
             
             if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                println("ReposArray \(reposArray)")
+                //println("ReposArray \(reposArray)")
                 println("RefreshhhYouhou")
-                
+                self.placeItems.removeAll()
                 for item in reposArray {
                     self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    println("Item \(item)")
+                    //println("Item \(item)")
                 }
-                
-                println("place item \(self.placeItems)")
+                println(self.placeItems.count)
+                //println("place item \(self.placeItems)")
             }
             println("Mon object \(obj)")
             
             dispatch_async(dispatch_get_main_queue(), {
-                
                 self.tableData.reloadData()
-
             })
         }
         //self.isAnimating = false
-        placeItems.removeAll(keepCapacity: true)
         
         // End the refreshing
         var formatter:NSDateFormatter = NSDateFormatter()
@@ -428,12 +439,10 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         println(timer)
     }
     
-    
     func endOfWork() {
         refreshControl.endRefreshing()
         
         timer.invalidate()
         timer = nil
     }*/
-    
 }

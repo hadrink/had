@@ -73,7 +73,7 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate, CLLoca
                 var latitude = result[0]
                 var longitude = result[1]
                 var dataString = "ACTION=SEARCH&LATITUDE=\(latitude)&LONGITUDE=\(longitude)"
-                var xhr = xmlHttpRequest()
+                var xhr = QueryServices()
                 //var caramel = xhr.methodPost(dataString)
                 
                 let location = locations.last as! CLLocation
