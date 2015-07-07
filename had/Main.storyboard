@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yk4-eP-Wbt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yk4-eP-Wbt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -682,11 +682,17 @@
                                                     <rect key="frame" x="36" y="56" width="83" height="21"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="44" width="44" height="14"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOD-lR-biQ">
                                                     <rect key="frame" x="36" y="56" width="83" height="21"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="58" width="20" height="14"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="city" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQA-K6-DJE">
                                                     <rect key="frame" x="35" y="35" width="84" height="21"/>
@@ -708,11 +714,17 @@
                                                     <rect key="frame" x="294" y="52" width="51" height="21"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="54" y="58" width="68" height="14"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phrase Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84B-So-8zr">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="76" width="95" height="14"/>
+                                                    </variation>
                                                 </label>
                                                 <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r24-oN-NFw">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -922,7 +934,8 @@
                                                             <exclude reference="eMa-Lp-6Jw"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="41" y="60" width="11" height="11"/>
                                                         <mask key="constraints">
                                                             <include reference="2ZZ-iJ-1jI"/>
                                                             <include reference="eMa-Lp-6Jw"/>
@@ -1197,6 +1210,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search-icon.png" width="20" style="done" id="XrY-on-y1x">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="DEm-Uh-aZT" kind="show" id="n9Z-af-F1h"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -1209,6 +1225,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="swB-LT-J2j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-520.5" y="2224.5"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="vby-Yf-laQ">
+            <objects>
+                <viewController id="DEm-Uh-aZT" customClass="SearchViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fH1-00-VtN"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Go-78-LNq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IdU-KH-u6h">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-6N-RzA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="a5M-CG-lqe">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="DEm-Uh-aZT" id="o4s-UW-W7u"/>
+                                    </connections>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="p9I-2m-Swu">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p9I-2m-Swu" id="lAB-RV-iJi">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DEm-Uh-aZT" id="gkH-UK-Bqm"/>
+                                    <outlet property="delegate" destination="DEm-Uh-aZT" id="DoT-bH-vqV"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="LSq-6N-RzA" secondAttribute="trailing" id="8It-da-K4Y"/>
+                            <constraint firstItem="LSq-6N-RzA" firstAttribute="leading" secondItem="IdU-KH-u6h" secondAttribute="leadingMargin" id="Aza-BC-RPC">
+                                <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                            </constraint>
+                            <constraint firstItem="LSq-6N-RzA" firstAttribute="leading" secondItem="IdU-KH-u6h" secondAttribute="leading" id="G48-RT-Suj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LSq-6N-RzA" secondAttribute="trailing" id="SaY-is-Nj2">
+                                <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                            </constraint>
+                            <constraint firstItem="LSq-6N-RzA" firstAttribute="top" secondItem="fH1-00-VtN" secondAttribute="bottom" id="oWy-xb-rWu">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8" symbolic="YES"/>
+                            </constraint>
+                            <constraint firstItem="9Go-78-LNq" firstAttribute="top" secondItem="LSq-6N-RzA" secondAttribute="bottom" id="smY-IT-AFK">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8" symbolic="YES"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="LSq-6N-RzA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8It-da-K4Y"/>
+                                <exclude reference="G48-RT-Suj"/>
+                                <exclude reference="oWy-xb-rWu"/>
+                                <exclude reference="smY-IT-AFK"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="LSq-6N-RzA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="8It-da-K4Y"/>
+                                <exclude reference="Aza-BC-RPC"/>
+                                <include reference="G48-RT-Suj"/>
+                                <exclude reference="SaY-is-Nj2"/>
+                                <include reference="oWy-xb-rWu"/>
+                                <include reference="smY-IT-AFK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="a5M-CG-lqe" id="X9z-Lu-B1x"/>
+                        <outlet property="searchDisplayController" destination="MOd-LU-afT" id="fgw-Kd-Zzb"/>
+                        <outlet property="tableView" destination="LSq-6N-RzA" id="us3-5q-XRG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBo-80-v9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="MOd-LU-afT">
+                    <connections>
+                        <outlet property="delegate" destination="DEm-Uh-aZT" id="cDB-S0-dqx"/>
+                        <outlet property="searchBar" destination="a5M-CG-lqe" id="CLw-N1-7hb"/>
+                        <outlet property="searchContentsController" destination="DEm-Uh-aZT" id="i1K-zi-Mvk"/>
+                        <outlet property="searchResultsDataSource" destination="DEm-Uh-aZT" id="j4i-ou-5mB"/>
+                        <outlet property="searchResultsDelegate" destination="DEm-Uh-aZT" id="uOR-3z-vOM"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="294" y="2715.75"/>
         </scene>
         <!--Map View-->
         <scene sceneID="Ncq-Ci-GN5">
@@ -1248,7 +1362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAd-5a-4BW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273" y="2225.25"/>
+            <point key="canvasLocation" x="294" y="2015.25"/>
         </scene>
         <!--CreateAccountViewController-->
         <scene sceneID="u9I-dv-32E">

@@ -20,11 +20,12 @@ import MapKit
 
 
 
-class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate/*, UISearchBarDelegate*/ {
    
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
     let QServices = QueryServices()
+    //@IBOutlet weak var searchBar: UISearchBar!
 //    var timer: NSTimer!
     //var refreshControl: UIRefreshControl!
     //var isAnimating = false
@@ -57,8 +58,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             self.view.addGestureRecognizer(revealView.panGestureRecognizer())
             hamburger.target = revealView
             hamburger.action = "revealToggle:"
-        
-        
+        /************* Search Bar ***********/
+        //searchBar.delegate = self
             /********** Custom View Design **********/
         
         
@@ -93,10 +94,10 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                     self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
                     //println("Item \(item)")
                 }
-                println(self.placeItems.count)
+                //println(self.placeItems.count)
                 //println("place item \(self.placeItems)")
             }
-            println("Mon object \(obj)")
+            //println("Mon object \(obj)")
             
             dispatch_async(dispatch_get_main_queue(), {
                 
@@ -106,7 +107,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         }
             //PlaceItem.allPlaceItems()
             println("nbplaces")
-            println(placeItems.count)
+            //println(placeItems.count)
             /********** Init variables **********/
         
             //placeItems = PlaceItem.allPlaceItems()
@@ -160,8 +161,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             if placemarks.count > 0 {
                 let pm = placemarks[0] as! CLPlacemark
                 var latLng = self.getLocationInfo(pm)
-                println(latLng[0])
-                println(latLng[1])
+                //println(latLng[0])
+                //println(latLng[1])
             } else {
                 println("Problem with the data received from geocoder")
             }
@@ -182,7 +183,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
         if scannerLatitude.scanUpToString(",", intoString:&scannedLatitude) {
             latitude = scannedLatitude as! String
-            println("latitude: \(latitude)")
+            //println("latitude: \(latitude)")
         }
         
         let longitudeDescription = placemark.location.description
@@ -196,7 +197,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             
             if scannerLongitude.scanUpToString(">", intoString:&scannedLongitude) {
                 longitude = scannedLongitude as! String
-                println("longitude: \(longitude)")
+                //println("longitude: \(longitude)")
             }
             
         }
@@ -254,8 +255,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
-        println(indexPath.row)
-        println(placeItems.count)
+        //println(indexPath.row)
+        //println(placeItems.count)
         cell.placeName.text = placeItems[indexPath.row].placeName as String?
         cell.city.text = placeItems[indexPath.row].city as String?
         cell.nbUser.text = placeItems[indexPath.row].counter as String! + " hadder"
@@ -411,12 +412,13 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                     self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
                     //println("Item \(item)")
                 }
+                println("nb place")
                 println(self.placeItems.count)
                 //println("place item \(self.placeItems)")
             }
-            println("Mon object \(obj)")
+            //println("Mon object \(obj)")
             
-            dispatch_async(dispatch_get_main_queue(), {
+            dispatch_sync(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
             })
         }

@@ -24,9 +24,11 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
             loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
+            loginView.readPermissions = ["public_profile", "email","user_birthday", "user_friends","user_likes",
+                /*"publish_actions",*/"user_relationships","user_status","user_tagged_places"]
             loginView.delegate = self
         }
+        
         configView()
     }
     
@@ -203,6 +205,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
+                returnUserData()
                 var vc: AnyObject!
                 vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                 self.showViewController(vc as! UIViewController, sender: vc)
