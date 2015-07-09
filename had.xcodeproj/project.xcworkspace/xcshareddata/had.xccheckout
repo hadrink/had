@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B78DD1E1-8743-407D-BA6E-47FCD8B62104</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>had</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>71AE4F80FE222FF336C3EEA324616C81F053309A</key>
 		<string>https://github.com/hadrink/had.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>had.xcodeproj/project.xcworkspace</string>
+	<string>had.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>71AE4F80FE222FF336C3EEA324616C81F053309A</key>

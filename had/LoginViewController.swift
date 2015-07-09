@@ -22,7 +22,8 @@ class LoginViewController: UIViewController{
         {
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             println("redirect sw")
-            returnUserData()
+            let QServices = QueryServices()
+            QServices.returnUserData()
         }
         else
         {
@@ -49,35 +50,6 @@ class LoginViewController: UIViewController{
         
     }
     
-    func returnUserData()
-    {
-        
-//        FBSDKGraphRequestConnection
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
 
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                println("fetched user: \(result)")
-                let userName : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(userName)")
-                let userEmail : NSString = result.valueForKey("email") as! NSString
-                println("User Email is: \(userEmail)")
-                let gender : NSString = result.valueForKey("gender") as! NSString
-                println("User gender is: \(gender)")
-                let local : NSString = result.valueForKey("locale") as! NSString
-                println("User local is: \(local)")
-                let link : NSString = result.valueForKey("link") as! NSString
-                println("User link is: \(link)")
-
-            }
-        })
-    }
 }
 

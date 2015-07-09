@@ -54,7 +54,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
             let revealView = self.revealViewController()
             revealView.frontViewShadowOpacity = 0.0
-            revealView.rearViewRevealWidth = 80
+            //revealView.rearViewRevealWidth = 80
             self.view.addGestureRecognizer(revealView.panGestureRecognizer())
             hamburger.target = revealView
             hamburger.action = "revealToggle:"
@@ -123,9 +123,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     /********** Override function **********/
     
-    override func  prefersStatusBarHidden() -> Bool {
+/*    override func  prefersStatusBarHidden() -> Bool {
         return false
-    }
+    }*/
     
     /********** Global const & var **********/
     
@@ -330,7 +330,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         // Aller
-        var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Aller" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             // 2
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems)
 
@@ -435,16 +435,4 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
         refreshControl.endRefreshing()
     }
-    
-   /* func doSomething() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: "endOfWork", userInfo: nil, repeats: true)
-        println(timer)
-    }
-    
-    func endOfWork() {
-        refreshControl.endRefreshing()
-        
-        timer.invalidate()
-        timer = nil
-    }*/
 }

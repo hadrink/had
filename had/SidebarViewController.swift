@@ -35,7 +35,7 @@ class SidebarViewController: UITableViewController {
         return cell
         
     }
-    
+
     @IBAction func disconnect(sender: AnyObject) {
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
@@ -51,8 +51,9 @@ class SidebarViewController: UITableViewController {
         self.showViewController(vc as! UIViewController, sender: vc)
         println("disconnect")
     }
-    override func  prefersStatusBarHidden() -> Bool {
-        return true
+   
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
     }
     
     @IBOutlet var menu: UITableView!

@@ -31,7 +31,6 @@
 		7A65B69E1AF5027F00A124EC /* RobotoSlab-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */; };
 		7A6B5F2F1A8CBBAF00851BA5 /* bottle-intro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */; };
 		7A7C2A581A5B39CB000DFC3B /* stats-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */; };
-		7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8272F71A1D2D04004603FE /* MyPosition.swift */; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
 		7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224FB19CDA9D1002003ED /* RootViewController.swift */; };
@@ -68,10 +67,11 @@
 		7AE40E111A8BE4A30025D9BD /* bg-intro@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE40E101A8BE4A30025D9BD /* bg-intro@3x.jpg */; };
 		7AE40E131A8BEF860025D9BD /* bg-intro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AE40E121A8BEF860025D9BD /* bg-intro@3x.png */; };
 		7AF362FC1A535C250058A583 /* had-title@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF362FB1A535C250058A583 /* had-title@3x.png */; };
-		7AF659671A49F134002C6745 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659661A49F134002C6745 /* SWRevealViewController.m */; };
 		7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6596A1A49F74E002C6745 /* MainViewController.swift */; };
 		EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE151B45CABE00F46E99 /* locationServices.swift */; };
 		EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */; };
+		EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */; };
+		EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */; };
 		EB444F901A9527D600E533B2 /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F8F1A9527D600E533B2 /* structs.swift */; };
 		EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */; };
 		EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB444F9D1A9E30A000E533B2 /* CoreData.framework */; };
@@ -126,7 +126,6 @@
 		7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Thin.ttf"; sourceTree = "<group>"; };
 		7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottle-intro@3x.png"; sourceTree = "<group>"; };
 		7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stats-icon@3x.png"; sourceTree = "<group>"; };
-		7A8272F71A1D2D04004603FE /* MyPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPosition.swift; sourceTree = "<group>"; };
 		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA224F819CDA9D1002003ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,12 +168,13 @@
 		7AE40E121A8BEF860025D9BD /* bg-intro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-intro@3x.png"; sourceTree = "<group>"; };
 		7AF362FB1A535C250058A583 /* had-title@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "had-title@3x.png"; sourceTree = "<group>"; };
 		7AF659641A49F133002C6745 /* had-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "had-Bridging-Header.h"; sourceTree = "<group>"; };
-		7AF659651A49F134002C6745 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		7AF659661A49F134002C6745 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		7AF659681A49F235002C6745 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		7AF6596A1A49F74E002C6745 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		EB1BBE151B45CABE00F46E99 /* locationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationServices.swift; sourceTree = "<group>"; };
 		EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EB1BBE211B4DC4B400F46E99 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		EB444F8F1A9527D600E533B2 /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
 		EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
 		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -300,7 +300,6 @@
 				F6A5521F1A27A2E5001C371E /* ItemCell */,
 				7AA224F919CDA9D1002003ED /* AppDelegate.swift */,
 				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
-				7A8272F71A1D2D04004603FE /* MyPosition.swift */,
 				7AA2250419CDA9D1002003ED /* Images.xcassets */,
 				7AA2250619CDA9D1002003ED /* LaunchScreen.xib */,
 				7A5B7BED19D03DDA0023AAC5 /* images */,
@@ -340,10 +339,10 @@
 		7AF659631A49F111002C6745 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				EB1BBE211B4DC4B400F46E99 /* SWRevealViewController.h */,
+				EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */,
 				EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */,
 				EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */,
-				7AF659651A49F134002C6745 /* SWRevealViewController.h */,
-				7AF659661A49F134002C6745 /* SWRevealViewController.m */,
 				7AF659641A49F133002C6745 /* had-Bridging-Header.h */,
 			);
 			name = library;
@@ -398,6 +397,7 @@
 				7AF6596A1A49F74E002C6745 /* MainViewController.swift */,
 				EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */,
 				EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */,
+				EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -554,7 +554,7 @@
 				7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */,
 				F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */,
 				EB444F901A9527D600E533B2 /* structs.swift in Sources */,
-				7A8272F81A1D2D04004603FE /* MyPosition.swift in Sources */,
+				EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */,
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */,
 				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
@@ -570,9 +570,9 @@
 				EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */,
 				7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
-				7AF659671A49F134002C6745 /* SWRevealViewController.m in Sources */,
 				F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */,
 				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
+				EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */,
 				F6EEB7B41A23DC0200D72936 /* LeftViewController.swift in Sources */,
 				7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */,
 			);

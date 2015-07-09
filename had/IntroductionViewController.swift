@@ -3,6 +3,7 @@ import CoreData
 
 class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate,FBSDKLoginButtonDelegate{
     
+    let QServices = QueryServices()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,7 +17,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             //returnUserData();
             println("token yes")
             // User is already logged in, do work such as go to next view controller.
-            returnUserData()
+            //QServices.returnUserData()
         }
         else
         {
@@ -205,7 +206,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                returnUserData()
                 var vc: AnyObject!
                 vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                 self.showViewController(vc as! UIViewController, sender: vc)
@@ -218,31 +218,9 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         println("User Logged Out")
     }
     
-    func returnUserData()
-    {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                println("fetched user: \(result)")
-                let userName : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(userName)")
-                let userEmail : NSString = result.valueForKey("email") as! NSString
-                println("User Email is: \(userEmail)")
-            }
-        })
-    }
-    
     func observeProfileChange(){
         if ((FBSDKProfile.currentProfile()) != nil) {
             println("diff de nil")
-            returnUserData()
             var vc: AnyObject!
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as! UIViewController, sender: vc)
