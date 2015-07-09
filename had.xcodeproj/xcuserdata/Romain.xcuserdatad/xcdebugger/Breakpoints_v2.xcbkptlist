@@ -106,11 +106,16 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "453066114.856325"
+            timestampString = "458127262.420957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "162"
             endingLineNumber = "162"
+=======
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+>>>>>>> tableview-design-2.0
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "5">
             <Locations>

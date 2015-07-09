@@ -63,8 +63,8 @@ class PlaceItem : CLLocationManager{
         
         // Init for address data
         
-        if var addressValues = json["address"] as? [String:AnyObject] {
-            city = addressValues["city"]! as? String
+        if var addressValues = json["adress"] as? [String:AnyObject] {
+            city = addressValues["addr:city"]! as? String
         }
         
         // Init for users data
