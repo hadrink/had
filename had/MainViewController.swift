@@ -171,6 +171,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         })
     }
     
+    
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
         //stop updating location to save battery life
@@ -253,13 +254,12 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
 
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
         //println(indexPath.row)
         //println(placeItems.count)
-        
-        
         
         cell.placeName.text = placeItems[indexPath.row].placeName as String?
         cell.city.text = placeItems[indexPath.row].city as String?
