@@ -38,6 +38,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         )
     }
     
+    
+    
+    
      override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,9 +65,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         //searchBar.delegate = self
             /********** Custom View Design **********/
         
-        
-        
-            self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5B90CE)
+            self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
             self.navigationController?.navigationBar.translucent = false
         
         
@@ -97,7 +98,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 //println(self.placeItems.count)
                 //println("place item \(self.placeItems)")
             }
-            //println("Mon object \(obj)")
+            println("Mon object \(obj)")
             
             dispatch_async(dispatch_get_main_queue(), {
                 
@@ -257,16 +258,21 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         cell.layoutMargins = UIEdgeInsetsZero
         //println(indexPath.row)
         //println(placeItems.count)
+        
+        
+        
         cell.placeName.text = placeItems[indexPath.row].placeName as String?
         cell.city.text = placeItems[indexPath.row].city as String?
-        cell.nbUser.text = placeItems[indexPath.row].counter as String! + " hadder"
-        cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge) + "ans"
-        cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale) + "%"
+        cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
+        cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
+        cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
         cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
-        cell.routeButton.tag = indexPath.row
-        cell.routeButton.addTarget(self, action: "routeButtonClicked:", forControlEvents: UIControlEvents.TouchUpInside)
     
         return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     
@@ -373,7 +379,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         {
             // Display a message when the table is empty
             messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            messageLabel.text = "No data is currently available. Please pull down to refresh."
+            //messageLabel.text = "No data is currently available. Please pull down to refresh."
             messageLabel.textColor = UIColor.blackColor()
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = NSTextAlignment.Center
