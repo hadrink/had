@@ -39,10 +39,24 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }
     
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        var weakSelf = self
+    
+
+    }
+    
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {
+        return false;
+    }
+    
     
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
@@ -57,7 +71,9 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         
             let revealView = self.revealViewController()
             revealView.frontViewShadowOpacity = 0.0
-            //revealView.rearViewRevealWidth = 80
+            //revealView.rearViewRevealWidth = 200
+            //revealView.rearViewRevealWidth = view.frame.width
+            revealView.rearViewRevealOverdraw = 0
             self.view.addGestureRecognizer(revealView.panGestureRecognizer())
             hamburger.target = revealView
             hamburger.action = "revealToggle:"
@@ -150,6 +166,8 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
             }
         }
     }*/
+    
+    
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in

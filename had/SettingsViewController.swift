@@ -7,9 +7,16 @@
 //
 
 import Foundation
+import UIKit
+
+class CellSetting:UITableViewCell{
+    
+    @IBOutlet weak var titleSetting: UILabel!
+    
+}
 
 
-class SettingsViewController: UIViewController{
+class SettingsViewController: UITableViewController{
     
     let QServices = QueryServices()
     
@@ -24,10 +31,42 @@ class SettingsViewController: UIViewController{
     @IBOutlet var SeekingAge: UILabel!
     
     @IBOutlet var profilePicture: UIImageView!
+    @IBOutlet var backgroundPicture: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UserData()
+        
+        
+        /*self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
+        self.navigationController?.navigationBar.translucent = false
+        self.navBar.title = "Youhou"*/
+
     }
+    
+    /*override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.styleNavBar()
+    }
+    
+    func styleNavBar(){
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        var newNavBar:UINavigationBar = UINavigationBar(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 64.0))
+        newNavBar.tintColor = UIColor.whiteColor()
+        
+        var newItem:UINavigationItem = UINavigationItem()
+        
+        newItem.title = "Youhou"
+
+        newNavBar.setItems([newItem], animated: true)
+        
+        self.view.addSubview(newNavBar)
+        
+    }*/
+    
+    
+
     
     func UserData()
     {
@@ -43,16 +82,21 @@ class SettingsViewController: UIViewController{
                 println("fetched user: \(result)")
                 println(result.valueForKey("age_range") as? String)
                 self.Name.text = result.valueForKey("name") as? String
-                self.Age.text = result.valueForKey("birthday") as? String
+               /* self.Age.text = result.valueForKey("birthday") as? String
                 self.Mail.text = result.valueForKey("email") as? String
                 self.Gender.text = result.valueForKey("gender") as? String
                 self.Loc.text = result.valueForKey("locale") as? String
                 //Link.text = userData.valueForKey("link") as? String
                 self.Languages.text = result.valueForKey("languages") as? String
-                self.SeekingAge.text = result.valueForKey("relationship_status") as? String
+                self.SeekingAge.text = result.valueForKey("relationship_status") as? String*/
                 
             }
         })
+        
+        
+        
+        
+        
         
         let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
         pictureRequest.startWithCompletionHandler({
@@ -66,6 +110,22 @@ class SettingsViewController: UIViewController{
                 self.profilePicture.image = UIImage(data: nsdata!)
                 self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
                 self.profilePicture.clipsToBounds = true;
+                
+                self.backgroundPicture.image = UIImage(data: nsdata!)
+                
+                func blurImage() {
+                    var lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    
+                    var blurView = UIVisualEffectView(effect: lightBlur)
+                    blurView.frame = self.backgroundPicture.bounds
+                    self.backgroundPicture.addSubview(blurView)
+                }
+                
+                blurImage()
+                
+                
+               
+                
                 //self.profilePicture.image = UIImage(data: NSData(contentsOfURL: NSURL(fileURLWithPath: url as String)!)!)
                 println(url)
             } else {

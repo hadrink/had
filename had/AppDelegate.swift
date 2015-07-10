@@ -17,13 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-<<<<<<< HEAD
-                // Override point for customization after application launch.
-=======
+
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         // Override point for customization after application launch.
->>>>>>> tableview-design-2.0
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
     }
