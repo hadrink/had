@@ -16,9 +16,12 @@ class CellSetting:UITableViewCell{
 }
 
 
+
 class SettingsViewController: UITableViewController{
     
     let QServices = QueryServices()
+    let rangeSlider = RangeSlider(frame: CGRectZero)
+
     
     @IBOutlet var Name: UILabel!
     @IBOutlet var Mail: UILabel!
@@ -30,43 +33,67 @@ class SettingsViewController: UITableViewController{
     @IBOutlet var Musics: UILabel!
     @IBOutlet var SeekingAge: UILabel!
     
+    @IBOutlet weak var ageLabel: UILabel!
+    
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var backgroundPicture: UIImageView!
     
+    @IBOutlet weak var contentViewTest: UIView!
+    
+    @IBOutlet var contentViewTest2: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UserData()
-        
-        
-        /*self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
-        self.navigationController?.navigationBar.translucent = false
-        self.navBar.title = "Youhou"*/
+        contentViewTest2.addSubview(rangeSlider)
+        contentViewTest2.addSubview(ageLabel)
 
+        rangeSlider.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        println("Bob\(rangeSlider.accessibilityElementCount())")
+        
+        
+        let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
+            .TopMargin, relatedBy: .Equal, toItem: ageLabel,
+            attribute: .TopMargin, multiplier: 1.0, constant: 20)
+        
     }
     
-    /*override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        self.styleNavBar()
+    
+     override func viewDidLayoutSubviews() {
+        let marginTop: CGFloat = 10.0
+        let marginBottom: CGFloat = 5
+        let width = view.bounds.width - 2.0 * 16
+        rangeSlider.frame = CGRect(x: 16, y: 27,
+            width: width, height: 30.0)
     }
     
-    func styleNavBar(){
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        var newNavBar:UINavigationBar = UINavigationBar(frame: CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 64.0))
-        newNavBar.tintColor = UIColor.whiteColor()
-        
-        var newItem:UINavigationItem = UINavigationItem()
-        
-        newItem.title = "Youhou"
-
-        newNavBar.setItems([newItem], animated: true)
-        
-        self.view.addSubview(newNavBar)
-        
-    }*/
+    
+    func rangeSliderValueChanged(rangeSlider: RangeSlider) {
+        println("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+    }
     
     
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+        var section = indexPath.section
+        
+        if (section == 2 || section == 3){
+            
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            
+        }
+        
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
+        
+        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
+            
+    }
     
     func UserData()
     {
@@ -92,11 +119,6 @@ class SettingsViewController: UITableViewController{
                 
             }
         })
-        
-        
-        
-        
-        
         
         let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
         pictureRequest.startWithCompletionHandler({
