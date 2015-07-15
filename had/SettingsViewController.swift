@@ -21,7 +21,22 @@ class SettingsViewController: UITableViewController{
     
     let QServices = QueryServices()
     let rangeSlider = RangeSlider(frame: CGRectZero)
+    
+    // Outlets setting
 
+    @IBOutlet weak var ageMin: UILabel!
+    @IBOutlet weak var ageMax: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var distanceSlider: UISlider!
+    @IBOutlet weak var barSwitch: UISwitch!
+    @IBOutlet weak var nightclubSwitch: UISwitch!
+    @IBOutlet weak var femaleCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var maleCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var nomatterCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var oneweekCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var twoweeksCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var monthCheckmarkCell: UITableViewCell!
+    @IBOutlet weak var deleteAccountButton: UIButton!
     
     @IBOutlet var Name: UILabel!
     @IBOutlet var Mail: UILabel!
@@ -86,7 +101,6 @@ class SettingsViewController: UITableViewController{
         }
         
     }
-    
     
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){

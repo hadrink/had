@@ -1466,10 +1466,23 @@
                     <connections>
                         <outlet property="Name" destination="Wqe-o5-J3e" id="hI6-g0-OQa"/>
                         <outlet property="ageLabel" destination="3Y6-ia-BbX" id="jI4-ns-jHk"/>
+                        <outlet property="ageMax" destination="2E4-MB-es2" id="e9a-4Z-7Zm"/>
+                        <outlet property="ageMin" destination="gyq-sy-Rsu" id="H0h-5J-eXz"/>
                         <outlet property="backgroundPicture" destination="TZW-0A-gE9" id="tMg-ik-ynU"/>
+                        <outlet property="barSwitch" destination="MBM-9f-9Wv" id="HPA-vT-2ee"/>
                         <outlet property="contentViewTest" destination="oC8-Jg-PkK" id="QvR-TQ-bdG"/>
                         <outlet property="contentViewTest2" destination="fZj-sr-YaX" id="6qq-FP-6pc"/>
+                        <outlet property="deleteAccountButton" destination="V2a-s1-E6K" id="kth-mO-SCO"/>
+                        <outlet property="distanceLabel" destination="qvY-53-Tmk" id="3UO-P3-czA"/>
+                        <outlet property="distanceSlider" destination="ZbT-g5-PJX" id="or3-x5-pxf"/>
+                        <outlet property="femaleCheckmarkCell" destination="rrM-jW-phe" id="PmE-f8-eoy"/>
+                        <outlet property="maleCheckmarkCell" destination="kQS-E1-lyH" id="8c1-pR-Nng"/>
+                        <outlet property="monthCheckmarkCell" destination="dGf-um-tuv" id="Ata-kr-XwO"/>
+                        <outlet property="nightclubSwitch" destination="lcP-0e-eQK" id="FLo-pw-xRK"/>
+                        <outlet property="nomatterCheckmarkCell" destination="i5x-WM-7VC" id="xhb-hc-8sS"/>
+                        <outlet property="oneweekCheckmarkCell" destination="rWK-GT-vZT" id="v4z-oU-gxX"/>
                         <outlet property="profilePicture" destination="RpR-S5-pzw" id="QA9-WH-54F"/>
+                        <outlet property="twoweeksCheckmarkCell" destination="VI6-Xq-ToN" id="Gx8-cQ-r0q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWi-pl-fyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
