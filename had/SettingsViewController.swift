@@ -75,6 +75,9 @@ class SettingsViewController: UITableViewController{
         contentViewTest2.addSubview(rangeSlider)
         contentViewTest2.addSubview(ageLabel)
 
+        nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        
         rangeSlider.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         println("Bob\(rangeSlider.accessibilityElementCount())")
@@ -126,21 +129,13 @@ class SettingsViewController: UITableViewController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
-        var section = indexPath.section
-        
-        if (section == 2 || section == 3){
-            
-            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            
+        let section = indexPath.section
+        let numberOfRows = tableView.numberOfRowsInSection(section)
+        for row in 0..<numberOfRows {
+            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
+                cell.accessoryType = row == indexPath.row ? .Checkmark : .None
+            }
         }
-        
-    }
-    
-    
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
-        
-        tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = UITableViewCellAccessoryType.None
-            
     }
     
     func UserData()
