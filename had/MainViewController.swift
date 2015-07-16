@@ -20,7 +20,7 @@ import MapKit
 
 
 
-class MainViewController:UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate/*, UISearchBarDelegate*/ {
+class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDelegate */{
    
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
@@ -38,7 +38,10 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         )
     }
     
-    
+    var searchArray:[PlaceItem] = [PlaceItem](){
+        didSet  {self.tableData.reloadData()}
+    }
+    var placesSearchController = UISearchController()
     
     
      override func viewDidLoad() {
@@ -52,6 +55,34 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableData.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Configure countrySearchController
+        self.placesSearchController = ({
+            // Two setups provided below:
+            
+            // Setup One: This setup present the results in the current view.
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.dimsBackgroundDuringPresentation = false
+            //controller.searchBar.searchBarStyle = .Minimal
+            controller.searchBar.sizeToFit()
+            self.tableData.tableHeaderView = controller.searchBar
+            
+            /*
+            // Setup Two: Alternative - This presents the results in a sepearate tableView
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let alternateController:AlternateTableViewController = storyBoard.instantiateViewControllerWithIdentifier("aTV") as! AlternateTableViewController
+            let controller = UISearchController(searchResultsController: alternateController)
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchResultsUpdater = alternateController
+            controller.definesPresentationContext = false
+            controller.searchBar.sizeToFit()
+            self.countryTable.tableHeaderView = controller.searchBar
+            */
+            return controller
+        })()
         
             /********** RevealView Configuration **********/
         
@@ -149,28 +180,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
                 refresh()
             }
         }
-    }*/
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-            
-            if (error != nil) {
-                println("Reverse geocoder failed with error" + error.localizedDescription)
-                return
-            }
-            
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as! CLPlacemark
-                var latLng = self.getLocationInfo(pm)
-                //println(latLng[0])
-                //println(latLng[1])
-            } else {
-                println("Problem with the data received from geocoder")
-            }
-            
-        })
-    }
-    
+    }*/    
     
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
@@ -210,10 +220,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         return result
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("Error while updating location" + error.localizedDescription)
-    }
-    
     /********** TableView configuration **********/
     
     override func viewDidLayoutSubviews() {
@@ -221,13 +227,7 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         self.tableData.layoutMargins = UIEdgeInsetsZero
     }
     
-    
     var placeItems = [PlaceItem]()
-
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placeItems.count
-    }
     
     func routeButtonClicked(sender:UIButton) {
         
@@ -251,30 +251,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
         mapItem.name = placeItems[indexPath.row].placeName
         mapItem.openInMapsWithLaunchOptions(options)
     }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
-        cell.layoutMargins = UIEdgeInsetsZero
-        //println(indexPath.row)
-        //println(placeItems.count)
-        
-        cell.placeName.text = placeItems[indexPath.row].placeName as String?
-        cell.city.text = placeItems[indexPath.row].city as String?
-        cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
-        cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
-        cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
-        cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
-    
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.clearColor()
-    }
-    
     
     // Create loop for tableView and convert MKpoint to CGpoint
     /*  func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
@@ -315,21 +291,6 @@ class MainViewController:UIViewController, CLLocationManagerDelegate, UITableVie
     }
     return cell
     }*/
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-        if(selectedIndex == indexPath.row){
-            selectedIndex = -1
-            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
-            return
-        }
-        if(selectedIndex != -1){
-            var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
-        }
-        selectedIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
-    }
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }

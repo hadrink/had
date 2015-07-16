@@ -1437,9 +1437,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search-icon.png" width="20" style="done" id="XrY-on-y1x">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="DEm-Uh-aZT" kind="show" id="n9Z-af-F1h"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -1463,11 +1460,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9Go-78-LNq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IdU-KH-u6h">
-<<<<<<< HEAD
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-=======
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
->>>>>>> tableview-design-2.0
+                        <rect key="frame" x="0.0" y="44" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-6N-RzA">

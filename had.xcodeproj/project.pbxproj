@@ -86,6 +86,7 @@
 		EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
 		EB4813461AAF83AB004B5D53 /* user.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB4813451AAF83AB004B5D53 /* user.plist */; };
 		EB63B0AA1AD465DF0031BE6F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB63B0A91AD465DF0031BE6F /* Settings.swift */; };
+		EB797E721B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */; };
 		EB82B03B1B433D4200E37AD5 /* location-icon@10x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB82B03A1B433D4200E37AD5 /* location-icon@10x.png */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
 		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
@@ -194,6 +195,7 @@
 		EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB4813451AAF83AB004B5D53 /* user.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = user.plist; sourceTree = "<group>"; };
 		EB63B0A91AD465DF0031BE6F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtensions.swift; sourceTree = "<group>"; };
 		EB82B03A1B433D4200E37AD5 /* location-icon@10x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon@10x.png"; sourceTree = "<group>"; };
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */,
 				7AF659681A49F235002C6745 /* SidebarViewController.swift */,
 				7AF6596A1A49F74E002C6745 /* MainViewController.swift */,
+				EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */,
 				EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */,
 				EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */,
 				EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */,
@@ -575,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB444FA01AAE3ADF00E533B2 /* LoginViewController.swift in Sources */,
+				EB797E721B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift in Sources */,
 				7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */,
 				F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */,
 				EB444F901A9527D600E533B2 /* structs.swift in Sources */,
