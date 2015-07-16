@@ -180,7 +180,12 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
                 refresh()
             }
         }
-    }*/    
+    }*/
+    
+/*    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        self.tableData.reloadData()
+    }*/
     
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         

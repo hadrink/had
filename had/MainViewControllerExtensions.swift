@@ -16,10 +16,14 @@ extension MainViewController: UITableViewDataSource
     {
         if (self.placesSearchController.active)
         {
+            println("search")
+            println(self.searchArray.count)
             return self.searchArray.count
         }
         else
         {
+            println("noraml")
+            println(self.placeItems.count)
             return self.placeItems.count
         }
     }
@@ -28,8 +32,10 @@ extension MainViewController: UITableViewDataSource
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
+        println(self.placesSearchController.active)
         if (self.placesSearchController.active)
         {
+            println("active")
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
@@ -41,6 +47,7 @@ extension MainViewController: UITableViewDataSource
             
         else
         {
+            println("inactive")
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
@@ -78,10 +85,27 @@ extension MainViewController: UISearchResultsUpdating
 {
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
-        self.searchArray.removeAll(keepCapacity: false)
-        
-        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
-    //    let array = (self.placeItems as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        self.searchArray.removeAll()
+        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text){
+            (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            
+            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+            
+            if let reposArray = obj["searchlist"] as? [NSDictionary]  {
+                //println("ReposArray \(reposArray)")
+                
+                for item in reposArray {
+                    self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
+                    //println("Item \(item)")
+                }
+                
+            }
+            self.tableData.reloadData()
+            //println("Mon object \(obj)")
+        }
+
+        //let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
+        //let array = (self.placeItems as NSArray!).filteredArrayUsingPredicate(searchPredicate)
   //      println(array)
 //        self.searchArray = array as! [PlaceItem]
     }

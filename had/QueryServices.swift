@@ -68,7 +68,7 @@ class QueryServices{
 
         
     
-    func get(url : String) {
+    func get(url : String /*, postCompleted : (succeeded: Bool, msg: String, obj : NSDictionary) -> ()*/) {
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "GET"
