@@ -69,6 +69,7 @@ class SettingsViewController: UITableViewController{
         }
         
         distanceSlider.value = userDefaults.floatForKey("DistanceValue")
+        distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + "km"
         
         UserData()
         contentViewTest2.addSubview(rangeSlider)
@@ -112,6 +113,7 @@ class SettingsViewController: UITableViewController{
         }
         
         userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
+        distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + "km"
         
     }
     
