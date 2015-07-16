@@ -59,6 +59,17 @@ class SettingsViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (userDefaults.objectForKey("SwitchStateBar") != nil) {
+            barSwitch.on = userDefaults.boolForKey("SwitchStateBar")
+        }
+        
+        if (userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+            nightclubSwitch.on = userDefaults.boolForKey("SwitchStateNightclub")
+        }
+        
+        distanceSlider.value = userDefaults.floatForKey("DistanceValue")
+        
         UserData()
         contentViewTest2.addSubview(rangeSlider)
         contentViewTest2.addSubview(ageLabel)
@@ -74,13 +85,34 @@ class SettingsViewController: UITableViewController{
         
     }
     
-    
      override func viewDidLayoutSubviews() {
         let marginTop: CGFloat = 10.0
         let marginBottom: CGFloat = 5
         let width = view.bounds.width - 2.0 * 16
         rangeSlider.frame = CGRect(x: 16, y: 27,
             width: width, height: 30.0)
+    }
+    
+    // Save user config
+    
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
+    @IBAction func saveSwitchState(sender: AnyObject) {
+        
+        if barSwitch.on {
+            userDefaults.setBool(true, forKey: "SwitchStateBar")
+        } else {
+            userDefaults.setBool(false, forKey: "SwitchStateBar")
+        }
+        
+        if nightclubSwitch.on {
+            userDefaults.setBool(true, forKey: "SwitchStateNightclub")
+        } else {
+            userDefaults.setBool(false, forKey: "SwitchStateNightclub")
+        }
+        
+        userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
+        
     }
     
     
