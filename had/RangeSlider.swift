@@ -20,25 +20,25 @@ class RangeSlider: UIControl {
     
     var previousLocation = CGPoint()
     
-    var minimumValue: Double = 0.0 {
+    var minimumValue: Double = 16.0 {
         didSet {
             updateLayerFrames()
         }
     }
     
-    var maximumValue: Double = 1.0 {
+    var maximumValue: Double = 30.0 {
         didSet {
             updateLayerFrames()
         }
     }
     
-    var lowerValue: Double = 0.2 {
+    var lowerValue: Double = 18.0 {
         didSet {
             updateLayerFrames()
         }
     }
     
-    var upperValue: Double = 0.8 {
+    var upperValue: Double = 20.0 {
         didSet {
             updateLayerFrames()
         }
