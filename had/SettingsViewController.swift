@@ -60,6 +60,9 @@ class SettingsViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
+
+        
         if (userDefaults.objectForKey("SwitchStateBar") != nil) {
             barSwitch.on = userDefaults.boolForKey("SwitchStateBar")
         }
@@ -70,6 +73,15 @@ class SettingsViewController: UITableViewController{
         
         distanceSlider.value = userDefaults.floatForKey("DistanceValue")
         distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + "km"
+        
+        ageMin.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMinValue")))
+                
+        if ageMax.text == "0"{
+            ageMax.text == String(stringInterpolationSegment: Int(rangeSlider.upperValue))
+        }
+        else {
+            ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue")))
+        }
         
         UserData()
         contentViewTest2.addSubview(rangeSlider)
@@ -115,11 +127,20 @@ class SettingsViewController: UITableViewController{
         userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
         distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + "km"
         
+        
+                
     }
     
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
         println("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+        
+        userDefaults.setFloat(Float(rangeSlider.lowerValue), forKey: "AgeMinValue")
+        userDefaults.setFloat(Float(rangeSlider.upperValue), forKey: "AgeMaxValue")
+        
+        ageMin.text = String(stringInterpolationSegment: Int(rangeSlider.lowerValue))
+        ageMax.text = String(stringInterpolationSegment: Int(rangeSlider.upperValue))
+        
     }
     
     
