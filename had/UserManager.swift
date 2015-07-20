@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+
+// Comment Kevin
 /*
 var UserMgr = UserManager()
 
