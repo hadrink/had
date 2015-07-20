@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-// Comment Kevin
+// Comment Kevin test
 /*
 var UserMgr = UserManager()
 
