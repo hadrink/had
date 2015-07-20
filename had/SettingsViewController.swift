@@ -151,10 +151,14 @@ class SettingsViewController: UITableViewController{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         let section = indexPath.section
-        let numberOfRows = tableView.numberOfRowsInSection(section)
-        for row in 0..<numberOfRows {
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
-                cell.accessoryType = row == indexPath.row ? .Checkmark : .None
+        
+        if (section == 2 || section == 3) {
+        
+            let numberOfRows = tableView.numberOfRowsInSection(section)
+            for row in 0..<numberOfRows {
+                if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
+                    cell.accessoryType = row == indexPath.row ? .Checkmark : .None
+                }
             }
         }
     }
