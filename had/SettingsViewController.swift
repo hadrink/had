@@ -72,7 +72,7 @@ class SettingsViewController: UITableViewController{
         }
         
         distanceSlider.value = userDefaults.floatForKey("DistanceValue")
-        distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + "km"
+        distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + " km"
         
         ageMin.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMinValue")))
                 
@@ -80,7 +80,7 @@ class SettingsViewController: UITableViewController{
             ageMax.text == String(stringInterpolationSegment: Int(rangeSlider.upperValue))
         }
         else {
-            ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue")))
+            ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue"))) + " ans"
         }
         
         UserData()
@@ -128,7 +128,7 @@ class SettingsViewController: UITableViewController{
         }
         
         userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
-        distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + "km"
+        distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + " km"
         
         
                 
@@ -142,7 +142,7 @@ class SettingsViewController: UITableViewController{
         userDefaults.setFloat(Float(rangeSlider.upperValue), forKey: "AgeMaxValue")
         
         ageMin.text = String(stringInterpolationSegment: Int(rangeSlider.lowerValue))
-        ageMax.text = String(stringInterpolationSegment: Int(rangeSlider.upperValue))
+        ageMax.text = String(stringInterpolationSegment: Int(rangeSlider.upperValue)) + " ans"
         
     }
     

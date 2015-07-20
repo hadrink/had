@@ -153,10 +153,10 @@ class RangeSlider: UIControl {
         // 2. Update the values
         if lowerThumbLayer.highlighted {
             lowerValue += deltaValue
-            lowerValue = boundValue(lowerValue, toLowerValue: minimumValue, upperValue: upperValue)
+            lowerValue = boundValue(lowerValue, toLowerValue: minimumValue, upperValue: upperValue - 1)
         } else if upperThumbLayer.highlighted {
             upperValue += deltaValue
-            upperValue = boundValue(upperValue, toLowerValue: lowerValue, upperValue: maximumValue)
+            upperValue = boundValue(upperValue, toLowerValue: lowerValue + 1, upperValue: maximumValue)
         }
         
         sendActionsForControlEvents(.ValueChanged)
