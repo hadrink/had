@@ -15,13 +15,26 @@ class LocationServices {
     var latitude:CLLocationDegrees = 0.0
     var longitude:CLLocationDegrees = 0.0
     
-    func mapsHandler(indexPath:NSIndexPath, placeItems:[PlaceItem]){
+    func mapsHandler(indexPath:NSIndexPath, placeItems:[PlaceItem], searchArray : [PlaceItem],
+                    placesSearchController:UISearchController){
         //        let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
         let regionDistance:CLLocationDistance = 10000
         
-        var latitute:CLLocationDegrees =  placeItems[indexPath.row].placeLatitudeDegrees!
-        var longitute:CLLocationDegrees =  placeItems[indexPath.row].placeLongitudeDegrees!
-        var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+        var latitude = 0.0
+        var longitude = 0.0
+        println("itineraire")
+        println(placesSearchController.active)
+        if !placesSearchController.active
+        {
+            latitude = placeItems[indexPath.row].placeLatitudeDegrees!
+            longitude = placeItems[indexPath.row].placeLongitudeDegrees!
+        }
+        else
+        {
+            latitude = searchArray[indexPath.row].placeLatitudeDegrees!
+            longitude = searchArray[indexPath.row].placeLongitudeDegrees!
+        }
+        var coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
         
@@ -33,7 +46,15 @@ class LocationServices {
         var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         var mapItem = MKMapItem(placemark: placemark)
         
-        mapItem.name = placeItems[indexPath.row].placeName
+        if !placesSearchController.active
+        {
+            mapItem.name = placeItems[indexPath.row].placeName
+        }
+        else
+        {
+            mapItem.name = searchArray[indexPath.row].placeName
+        }
+
         mapItem.openInMapsWithLaunchOptions(options)
     }
     

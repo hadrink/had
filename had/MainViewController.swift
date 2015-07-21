@@ -239,8 +239,21 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
         let regionDistance:CLLocationDistance = 10000
  
-        var latitude =  placeItems[indexPath.row].placeLatitudeDegrees!
-        var longitude =  placeItems[indexPath.row].placeLongitudeDegrees!
+        var latitude = 0.0
+        var longitude = 0.0
+        println("itineraire")
+        println(self.placesSearchController.active)
+        if !self.placesSearchController.active
+        {
+            latitude = placeItems[indexPath.row].placeLatitudeDegrees!
+            longitude = placeItems[indexPath.row].placeLongitudeDegrees!
+        }
+        else
+        {
+            latitude = searchArray[indexPath.row].placeLatitudeDegrees!
+            longitude = searchArray[indexPath.row].placeLongitudeDegrees!
+        }
+
         var coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -252,8 +265,14 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
         var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         var mapItem = MKMapItem(placemark: placemark)
-       
-        mapItem.name = placeItems[indexPath.row].placeName
+        if !self.placesSearchController.active
+        {
+            mapItem.name = placeItems[indexPath.row].placeName
+        }
+        else
+        {
+            mapItem.name = searchArray[indexPath.row].placeName
+        }
         mapItem.openInMapsWithLaunchOptions(options)
     }
     
@@ -297,67 +316,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
     return cell
     }*/
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        // Aller
-        var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 2
-            self.locServices.mapsHandler(indexPath, placeItems: self.placeItems)
-
-        })
-        /*var button: UIButton = UIButton()
-        button.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        button.setImage(UIImage(named: "location-icon@10x"), forState: UIControlState.Normal)
-        var mut: NSMutableArray = NSMutableArray()
-        mut.addObject(button)*/
-        /*UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = color;
-        [button setImage:icon forState:UIControlStateNormal];
-        [self addObject:button];
-        var color30 = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        color30.*/
-        //
-        //GoToAction.backgroundColor = UIColor(patternImage: UIImage(named:"location-icon@10x")!)
-        //GoToAction.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        // 3
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            //do share action
-        })
-        shareAction.backgroundColor = UIColorFromRGB(0x5B90CE)
-        var FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            //do favoris action
-        })
-        FavorisAction.backgroundColor = UIColorFromRGB(0x4B75B2)
-        // 5
-        return [GoToAction,shareAction,FavorisAction]
-    }
-    
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if placeItems.count != 0
-        {
-            self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            return 1;
-        }
-        else
-        {
-            // Display a message when the table is empty
-            messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            //messageLabel.text = "No data is currently available. Please pull down to refresh."
-            messageLabel.textColor = UIColor.blackColor()
-            messageLabel.numberOfLines = 0
-            messageLabel.textAlignment = NSTextAlignment.Center
-            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
-            messageLabel.sizeToFit()
-            
-            self.tableData.backgroundView = messageLabel
-            self.tableData.separatorStyle = UITableViewCellSeparatorStyle.None
-            
-        }
-        return 1
-    }
     
     /********** Refresh places **********/
     func refresh(refreshControl: UIRefreshControl)
