@@ -38,6 +38,9 @@
 		7A6B5F2F1A8CBBAF00851BA5 /* bottle-intro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */; };
 		7A7C2A581A5B39CB000DFC3B /* stats-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
+		7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */; };
+		7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */; };
+		7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
 		7AA224FC19CDA9D1002003ED /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224FB19CDA9D1002003ED /* RootViewController.swift */; };
 		7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224FD19CDA9D1002003ED /* DataViewController.swift */; };
@@ -140,6 +143,9 @@
 		7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottle-intro@3x.png"; sourceTree = "<group>"; };
 		7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stats-icon@3x.png"; sourceTree = "<group>"; };
 		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
+		7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA224F819CDA9D1002003ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA224F919CDA9D1002003ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -411,8 +417,11 @@
 				7AA224FF19CDA9D1002003ED /* ModelController.swift */,
 				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
 				7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */,
+				7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */,
+				7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */,
 				F61331F01A1E508C0007FAA1 /* CenterViewController.swift */,
 				F6EEB7B31A23DC0200D72936 /* LeftViewController.swift */,
+				7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */,
 				7AF659681A49F235002C6745 /* SidebarViewController.swift */,
 				7AF6596A1A49F74E002C6745 /* MainViewController.swift */,
 				EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */,
@@ -593,9 +602,12 @@
 				EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */,
+				7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */,
 				EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */,
 				F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */,
 				EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */,
+				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
+				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
 				7AA224FE19CDA9D1002003ED /* DataViewController.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
 				F61331F11A1E508C0007FAA1 /* CenterViewController.swift in Sources */,

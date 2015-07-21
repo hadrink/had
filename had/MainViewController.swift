@@ -38,14 +38,32 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         )
     }
     
+<<<<<<< HEAD
     var searchArray:[PlaceItem] = [PlaceItem](){
         didSet  {self.tableData.reloadData()}
     }
     var placesSearchController = UISearchController()
+=======
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        var weakSelf = self
+    
+
+    }
+    
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {
+        return false;
+    }
+    
+>>>>>>> setting_view
     
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
@@ -88,7 +106,9 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
             let revealView = self.revealViewController()
             revealView.frontViewShadowOpacity = 0.0
-            //revealView.rearViewRevealWidth = 80
+            //revealView.rearViewRevealWidth = 200
+            //revealView.rearViewRevealWidth = view.frame.width
+            revealView.rearViewRevealOverdraw = 0
             self.view.addGestureRecognizer(revealView.panGestureRecognizer())
             hamburger.target = revealView
             hamburger.action = "revealToggle:"
@@ -182,10 +202,35 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         }
     }*/
     
+<<<<<<< HEAD
 /*    override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         self.tableData.reloadData()
     }*/
+=======
+    
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                println("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                let pm = placemarks[0] as! CLPlacemark
+                var latLng = self.getLocationInfo(pm)
+                //println(latLng[0])
+                //println(latLng[1])
+            } else {
+                println("Problem with the data received from geocoder")
+            }
+            
+        })
+    }
+    
+>>>>>>> setting_view
     
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
