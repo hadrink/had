@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-//-- Kevin
-
 /*
 var UserMgr = UserManager()
 

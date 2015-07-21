@@ -35,7 +35,7 @@ extension MainViewController: UITableViewDataSource
         println(self.placesSearchController.active)
         if (self.placesSearchController.active)
         {
-            println("active")
+            println("active reload")
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
@@ -83,8 +83,7 @@ extension MainViewController: UITableViewDelegate
 
 extension MainViewController: UISearchResultsUpdating
 {
-    func updateSearchResultsForSearchController(searchController: UISearchController)
-    {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.searchArray.removeAll()
         QServices.post(["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text){
             (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
@@ -97,10 +96,17 @@ extension MainViewController: UISearchResultsUpdating
                 for item in reposArray {
                     self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
                     //println("Item \(item)")
+                    println("has Item")
                 }
                 
             }
-            self.tableData.reloadData()
+            println("reload")
+            //self.tableData.reloadData()
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableData.reloadData()
+            })
+            
             //println("Mon object \(obj)")
         }
 
