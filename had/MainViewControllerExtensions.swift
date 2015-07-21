@@ -62,27 +62,10 @@ extension MainViewController: UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        // Aller
         var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 2
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.placesSearchController)
-            
         })
-        /*var button: UIButton = UIButton()
-        button.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        button.setImage(UIImage(named: "location-icon@10x"), forState: UIControlState.Normal)
-        var mut: NSMutableArray = NSMutableArray()
-        mut.addObject(button)*/
-        /*UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = color;
-        [button setImage:icon forState:UIControlStateNormal];
-        [self addObject:button];
-        var color30 = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        color30.*/
-        //
-        //GoToAction.backgroundColor = UIColor(patternImage: UIImage(named:"location-icon@10x")!)
-        //GoToAction.backgroundColor = UIColor(red: 30, green: 30, blue: 30, alpha: 30)
-        // 3
+        
         var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             //do share action
         })
@@ -91,7 +74,6 @@ extension MainViewController: UITableViewDataSource
             //do favoris action
         })
         FavorisAction.backgroundColor = UIColorFromRGB(0x4B75B2)
-        // 5
         return [GoToAction,shareAction,FavorisAction]
     }
     
@@ -164,19 +146,13 @@ extension MainViewController: UISearchResultsUpdating
                 
             }
             println("reload")
-            //self.tableData.reloadData()
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
             })
             
-            //println("Mon object \(obj)")
         }
 
-        //let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text)
-        //let array = (self.placeItems as NSArray!).filteredArrayUsingPredicate(searchPredicate)
-  //      println(array)
-//        self.searchArray = array as! [PlaceItem]
     }
 }
 

@@ -17,7 +17,6 @@ class LoginViewController: UIViewController{
         println(NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey"))
         var vc: AnyObject!
         println("willappear")
-//        self.performSegueWithIdentifier("loggedIn", sender: self)
         if (FBSDKAccessToken.currentAccessToken() != nil || hasLoginKey == true)
         {
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
@@ -31,23 +30,7 @@ class LoginViewController: UIViewController{
             println("redirect intro")
         }
         self.showViewController(vc as! UIViewController, sender: vc)
-        /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        //appDelegate.userProfil.getUserCoreData()
-        appDelegate.userProfil.loadUser()
-        println("getuser")
-        var mail=appDelegate.userProfil.mail
-        var vc: AnyObject!
-        if(((mail?.isEmpty) != nil) && ((mail?) != "")){
-            vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-            println("redirect sw")
-        }
-        else{
-            vc = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
-            println("redirect intro")
-        }
-        self.showViewController(vc as UIViewController, sender: vc)*/
 
-        
     }
     
 

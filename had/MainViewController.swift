@@ -25,10 +25,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
     let QServices = QueryServices()
-    //@IBOutlet weak var searchBar: UISearchBar!
-//    var timer: NSTimer!
-    //var refreshControl: UIRefreshControl!
-    //var isAnimating = false
+    
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -58,7 +55,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
         // Configure countrySearchController
         self.placesSearchController = ({
-            // Two setups provided below:
             
             // Setup One: This setup present the results in the current view.
             let controller = UISearchController(searchResultsController: nil)
@@ -69,18 +65,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
             controller.searchBar.sizeToFit()
             self.tableData.tableHeaderView = controller.searchBar
             
-            /*
-            // Setup Two: Alternative - This presents the results in a sepearate tableView
-            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let alternateController:AlternateTableViewController = storyBoard.instantiateViewControllerWithIdentifier("aTV") as! AlternateTableViewController
-            let controller = UISearchController(searchResultsController: alternateController)
-            controller.hidesNavigationBarDuringPresentation = false
-            controller.dimsBackgroundDuringPresentation = false
-            controller.searchResultsUpdater = alternateController
-            controller.definesPresentationContext = false
-            controller.searchBar.sizeToFit()
-            self.countryTable.tableHeaderView = controller.searchBar
-            */
             return controller
         })()
         
@@ -128,8 +112,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
                     self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
                     //println("Item \(item)")
                 }
-                //println(self.placeItems.count)
-                //println("place item \(self.placeItems)")
             }
             println("Mon object \(obj)")
             
@@ -139,13 +121,8 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
                 
             })
         }
-            //PlaceItem.allPlaceItems()
             println("nbplaces")
-            //println(placeItems.count)
-            /********** Init variables **********/
         
-            //placeItems = PlaceItem.allPlaceItems()
-            //placeItems = []
     }
     
     /********** Outlets **********/
@@ -154,12 +131,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!
-    
-    /********** Override function **********/
-    
-/*    override func  prefersStatusBarHidden() -> Bool {
-        return false
-    }*/
     
     /********** Global const & var **********/
     
@@ -174,17 +145,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
     
     func openMapForPlace() {
     }
-
-    /*func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if refreshControl.refreshing {
-            if !isAnimating {
-                doSomething()
-                refresh()
-            }
-        }
-    }*/
-    
-    
     
     func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
         
