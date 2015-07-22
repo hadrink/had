@@ -191,6 +191,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         
     }
     
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         println("User Logged In")
         
@@ -206,6 +207,8 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
+                var isCreate = UserDataFb.UserData()
+                
                 var vc: AnyObject!
                 vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                 self.showViewController(vc as! UIViewController, sender: vc)
