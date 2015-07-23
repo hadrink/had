@@ -14,7 +14,7 @@ extension MainViewController: UITableViewDataSource
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if (self.placesSearchController.active)
+        if (self.searchController.active)
         {
             println("search")
             println(self.searchArray.count)
@@ -32,8 +32,8 @@ extension MainViewController: UITableViewDataSource
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
-        println(self.placesSearchController.active)
-        if (self.placesSearchController.active)
+        println(self.searchController.active)
+        if (self.searchController.active)
         {
             println("active reload")
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
@@ -65,7 +65,7 @@ extension MainViewController: UITableViewDataSource
         // Aller
         var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             // 2
-            self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.placesSearchController)
+            self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
         /*var button: UIButton = UIButton()
@@ -168,6 +168,8 @@ extension MainViewController: UISearchResultsUpdating
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
+
+//                self.searchController.s(self.tableData.layer)
             })
             
             //println("Mon object \(obj)")
@@ -204,5 +206,12 @@ extension MainViewController: CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location" + error.localizedDescription)
+    }
+}
+
+extension MainViewController: UISearchBarDelegate
+{
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.setLogoNavBar()
     }
 }

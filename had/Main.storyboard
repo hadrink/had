@@ -2253,6 +2253,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search-icon.png" width="20" style="done" id="XrY-on-y1x">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="ActivateSearchMode:" destination="Wgm-MH-Dmi" id="i8B-KC-Tmv"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

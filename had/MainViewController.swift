@@ -18,13 +18,13 @@ import UIKit
 import CoreLocation
 import MapKit
 
-
-
-class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDelegate */{
+class MainViewController: UIViewController, MKMapViewDelegate {
    
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
     let QServices = QueryServices()
+    var refreshControl = UIRefreshControl()
+    var searchController = UISearchController()
     //@IBOutlet weak var searchBar: UISearchBar!
 //    var timer: NSTimer!
     //var refreshControl: UIRefreshControl!
@@ -38,17 +38,29 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         )
     }
     
+    @IBAction func ActivateSearchMode(sender: UIBarButtonItem) {
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.titleView = searchController.searchBar
+        searchController.active = true
+        refreshControl.hidden = true
+        // Include the search bar within the navigation bar.
+
+        definesPresentationContext = true
+        //providesPresentationContextTransitionStyle = false
+    }
+    
     var searchArray:[PlaceItem] = [PlaceItem](){
         didSet  {self.tableData.reloadData()}
     }
-    var placesSearchController = UISearchController()
     
      override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Initialize the refresh control.
-        var refreshControl = UIRefreshControl()
+
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -57,32 +69,11 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
-        self.placesSearchController = ({
-            // Two setups provided below:
-            
-            // Setup One: This setup present the results in the current view.
-            let controller = UISearchController(searchResultsController: nil)
-            controller.searchResultsUpdater = self
-            controller.hidesNavigationBarDuringPresentation = false
-            controller.dimsBackgroundDuringPresentation = false
-            //controller.searchBar.searchBarStyle = .Minimal
-            controller.searchBar.sizeToFit()
-            self.tableData.tableHeaderView = controller.searchBar
-            
-            /*
-            // Setup Two: Alternative - This presents the results in a sepearate tableView
-            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let alternateController:AlternateTableViewController = storyBoard.instantiateViewControllerWithIdentifier("aTV") as! AlternateTableViewController
-            let controller = UISearchController(searchResultsController: alternateController)
-            controller.hidesNavigationBarDuringPresentation = false
-            controller.dimsBackgroundDuringPresentation = false
-            controller.searchResultsUpdater = alternateController
-            controller.definesPresentationContext = false
-            controller.searchBar.sizeToFit()
-            self.countryTable.tableHeaderView = controller.searchBar
-            */
-            return controller
-        })()
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        setLogoNavBar()
         
             /********** RevealView Configuration **********/
         
@@ -100,12 +91,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
             self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
             self.navigationController?.navigationBar.translucent = false
-        
-        
-            let logo = UIImage(named: "had-title@3x")
-            let imageView = UIImageView(image:logo)
-            imageView.frame = CGRectMake(0, 0, 38.66, 44)
-            self.navbar.titleView = imageView
 
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -241,8 +226,8 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         var latitude = 0.0
         var longitude = 0.0
         println("itineraire")
-        println(self.placesSearchController.active)
-        if !self.placesSearchController.active
+        println(self.searchController.active)
+        if !self.searchController.active
         {
             latitude = placeItems[indexPath.row].placeLatitudeDegrees!
             longitude = placeItems[indexPath.row].placeLongitudeDegrees!
@@ -264,7 +249,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
         var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         var mapItem = MKMapItem(placemark: placemark)
-        if !self.placesSearchController.active
+        if !self.searchController.active
         {
             mapItem.name = placeItems[indexPath.row].placeName
         }
@@ -363,5 +348,13 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         refreshControl.attributedTitle = attributedTitle;
         
         refreshControl.endRefreshing()
+    }
+    
+    func setLogoNavBar(){
+        println("ici")
+        let logo = UIImage(named: "had-title@3x")
+        let imageView = UIImageView(image:logo)
+        imageView.frame = CGRectMake(0, 0, 38.66, 44)
+        self.navbar.titleView = imageView
     }
 }
