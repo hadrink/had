@@ -43,7 +43,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
      override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()

@@ -207,7 +207,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                var isCreate = UserDataFb.UserData()
+                var isCreate = UserDataFb().SendUserData()
                 
                 var vc: AnyObject!
                 vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
