@@ -43,7 +43,7 @@ class UserDataFb {
                 
                 
                 //-- user Object
-                var userArray:Dictionary<String,String> = ["Gender":userGenderFb, "E-mail":userEmailFb, "Lastname":userLastnameFb, "Firstname":userFirstnameFb, "Link":userLinkFb /*"Birthday":userBirthday*/]
+                var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
                 
                 //-- Post method
                 methodePost.post(userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
