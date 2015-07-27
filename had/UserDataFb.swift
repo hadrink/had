@@ -46,7 +46,7 @@ class UserDataFb {
                 var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
                 
                 //-- Post method
-                methodePost.post(userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
                     if(succeeded) {

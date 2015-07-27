@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate,FBSDKLoginButtonDelegate{
+class IntroductionViewController: ResponsiveTextFieldViewController, UITextFieldDelegate, UIPopoverPresentationControllerDelegate{
     
     let QServices = QueryServices()
     override func viewDidLoad() {
@@ -9,26 +9,6 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "observeProfileChange", name:FBSDKProfileDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "observeTokenChange", name:FBSDKAccessTokenDidChangeNotification, object: nil)
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        if (FBSDKAccessToken.currentAccessToken() != nil)
-        {
-            observeTokenChange()
-            //returnUserData();
-            println("token yes")
-            // User is already logged in, do work such as go to next view controller.
-            //QServices.returnUserData()
-        }
-        else
-        {
-            println("token no")
-            let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email","user_birthday", "user_friends","user_likes",
-                /*"publish_actions",*/"user_relationships","user_status","user_tagged_places"]
-            loginView.delegate = self
-        }
         
         configView()
     }
@@ -102,7 +82,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                 self.showViewController(vc as! UIViewController, sender: vc)
                 return true
         } else {
-            methodePost.post(["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            methodePost.post("POST", params: ["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {
@@ -149,7 +129,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func configView()
     {
-        textFieldPsw.delegate = self
+        /*textFieldPsw.delegate = self
         //textFieldMail.textColor = whiteColor
         textFieldMail.placeholder = "E-mail / Nom d'utilisateur"
         textFieldMail.font = UIFont(name: "Lato-Light", size: 12)
@@ -159,6 +139,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         
         textFieldMail.leftView = paddingTextFieldMail
         textFieldMail.leftViewMode = UITextFieldViewMode.Always
+
 
 
         
@@ -188,34 +169,35 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         textEmail.layer.borderWidth = 1.0
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    */
         
     }
     
-    
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        println("User Logged In")
-        
-        if ((error) != nil)
-        {
-            println(" Process error")
-        }
-        else if result.isCancelled {
-            println(" Handle cancellations")
-        }
-        else {
-            // If you ask for multiple permissions at once, you
-            // should check if specific permissions missing
-            if result.grantedPermissions.contains("email")
-            {
-                var isCreate = UserDataFb().SendUserData()
-                
-                var vc: AnyObject!
-                vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
-                self.showViewController(vc as! UIViewController, sender: vc)
-                println(" Do work")
+    @IBAction func btnFBLoginPressed(sender: AnyObject) {
+        var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager .logInWithReadPermissions(["email"], handler: { (result, error) -> Void in
+            if (error == nil){
+                var fbloginresult : FBSDKLoginManagerLoginResult = result
+                if result.isCancelled {
+                    println(" Handle cancellations")
+                }
+                else {
+                    // If you ask for multiple permissions at once, you
+                    // should check if specific permissions missing
+                    if result.grantedPermissions.contains("email")
+                    {
+                        var isCreate = UserDataFb().SendUserData()
+                        
+                        var vc: AnyObject!
+                        vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+                        self.showViewController(vc as! UIViewController, sender: vc)
+                        println(" Do work")
+                    }
+                }
             }
-        }
+        })
     }
+    
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         println("User Logged Out")

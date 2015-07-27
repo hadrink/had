@@ -130,7 +130,7 @@ extension MainViewController: UISearchResultsUpdating
 {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.searchArray.removeAll()
-        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text){
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text){
             (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
             var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
