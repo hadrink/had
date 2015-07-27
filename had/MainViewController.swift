@@ -38,11 +38,24 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         )
     }
     
-    @IBAction func ActivateSearchMode(sender: UIBarButtonItem) {
+    func ActivateSearchMode() {
+        searchController.searchBar.delegate = self
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+        searchController.searchBar.tintColor = UIColorFromRGB(0xF0F0EF)
         searchController.dimsBackgroundDuringPresentation = false
         navigationItem.titleView = searchController.searchBar
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        navigationItem.setRightBarButtonItems(nil, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
+        /*let frame = CGRect(x: 0, y: 0, width: navbar.s, height: 44)
+        let titleView = UIView(frame: frame)
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.frame = frame
+        titleView.addSubview(searchController.searchBar)
+        navigationItem.titleView = titleView
+        hamburger.enabled = false*/
+        //hamburger.image = nil
         searchController.active = true
         refreshControl.hidden = true
         // Include the search bar within the navigation bar.
@@ -135,7 +148,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     /********** Outlets **********/
     
-    @IBOutlet weak var hamburger: UIBarButtonItem!
+    var hamburger = UIBarButtonItem()
+    var favButton = UIBarButtonItem()
+    var searchButton = UIBarButtonItem()
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!
@@ -356,5 +371,18 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         let imageView = UIImageView(image:logo)
         imageView.frame = CGRectMake(0, 0, 38.66, 44)
         self.navbar.titleView = imageView
+        //navigationItem.setLeftBarButtonItem(hamburger, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
+  //      hamburger.enabled = true
+        hamburger.tintColor = UIColorFromRGB(0xF0F0EF)
+        hamburger.image = UIImage(named: "hamburger2")
+        favButton.image = UIImage(named: "heart-hover@3x")
+        favButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchButton.image = UIImage(named: "search-icon")
+        searchButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchButton.target = self
+        searchButton.action = "ActivateSearchMode"
+        navbar.setLeftBarButtonItem(hamburger, animated: true)
+        navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
     }
 }
