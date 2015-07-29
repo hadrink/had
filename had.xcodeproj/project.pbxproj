@@ -260,6 +260,7 @@
 				EBEA243C1B69709C004E338A /* FBSDKCoreKit.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
+				F3A1335F1B680BEB00664365 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
