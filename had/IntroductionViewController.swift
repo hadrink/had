@@ -37,6 +37,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     @IBOutlet weak var textFieldMail: UITextField!
     @IBOutlet weak var textFieldPsw: UITextField!
     @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var facebookBtn: UIButton!
 
     var methodePost = QueryServices()
     var myJsonResult = ""
@@ -159,17 +160,18 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         textEmail.titleLabel?.font = UIFont(name: "Lato-Regular", size: 12)
         
         
-       /* textFacebook.layer.borderColor = greyColor.CGColor
-        textFacebook.tintColor = greyColor
-        textFacebook.layer.borderWidth = 1.0
-        textFacebook.layer.backgroundColor = blueColor.CGColor
-        */
         textEmail.layer.borderColor = greyColor.CGColor
         textEmail.tintColor = greyColor
         textEmail.layer.borderWidth = 1.0
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     */
+        
+        facebookBtn.layer.borderColor = greyColor.CGColor
+        facebookBtn.tintColor = greyColor
+        facebookBtn.layer.borderWidth = 1.0
+        facebookBtn.layer.backgroundColor = blueColor.CGColor
+        facebookBtn.titleLabel?.font = UIFont(name: "Lato-Regular", size: 16)
         
     }
     

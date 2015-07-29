@@ -18,9 +18,6 @@
             <string>Lato-Bold</string>
             <string>Lato-Bold</string>
         </mutableArray>
-        <mutableArray key="Lato-BoldItalic.ttf">
-            <string>Lato-BoldItalic</string>
-        </mutableArray>
         <mutableArray key="Lato-Italic.ttf">
             <string>Lato-Italic</string>
         </mutableArray>
@@ -148,39 +145,6 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-vj-FNd">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="97" y="1155" width="220" height="1"/>
-                                </variation>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Créer un compte" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chr-0H-irF">
-                                <rect key="frame" x="105" y="310" width="165" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="H9K-HZ-vQQ"/>
-                                    <constraint firstAttribute="width" secondItem="chr-0H-irF" secondAttribute="height" multiplier="243:40" id="XMx-YZ-xre"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Lato-BoldItalic" family="Lato" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="1" height="1"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="H9K-HZ-vQQ"/>
-                                        <exclude reference="XMx-YZ-xre"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="109" y="342" width="157" height="21"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="114" y="434" width="243" height="40"/>
-                                    <mask key="constraints">
-                                        <include reference="H9K-HZ-vQQ"/>
-                                        <exclude reference="XMx-YZ-xre"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottle-intro@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="aJ9-v8-2iA">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
@@ -212,12 +176,29 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0P-6J-AS8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0P-6J-AS8" userLabel="Créer un compte avec Facebook">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Avec ton Facebook">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="NaO-N8-WFd"/>
+                                    <constraint firstAttribute="height" constant="40" id="dPW-ca-P9Z"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Se connecter avec Facebook" backgroundImage="background-btn-fb.png">
                                     <color key="titleColor" red="0.95309716463088989" green="0.95302087068557739" blue="0.94994944334030151" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NaO-N8-WFd"/>
+                                        <exclude reference="dPW-ca-P9Z"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="NaO-N8-WFd"/>
+                                        <include reference="dPW-ca-P9Z"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="btnFBLoginPressed:" destination="Ivj-Zd-cle" eventType="touchUpInside" id="NOb-LE-NcV"/>
                                 </connections>
@@ -225,17 +206,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cwk-l7-rOc" firstAttribute="top" secondItem="Y0P-6J-AS8" secondAttribute="bottom" constant="30" id="2EB-uS-lYY"/>
                             <constraint firstAttribute="centerX" secondItem="aJ9-v8-2iA" secondAttribute="centerX" id="4lh-9x-eyQ"/>
-                            <constraint firstAttribute="centerX" secondItem="B7w-vj-FNd" secondAttribute="centerX" id="A2x-po-mLc"/>
                             <constraint firstAttribute="centerX" secondItem="Y0P-6J-AS8" secondAttribute="centerX" id="Bax-my-xqH"/>
                             <constraint firstAttribute="centerY" secondItem="Ei9-y6-HpW" secondAttribute="centerY" id="Bes-XI-aBQ"/>
                             <constraint firstAttribute="centerX" secondItem="Ei9-y6-HpW" secondAttribute="centerX" id="F2V-H3-Utl"/>
                             <constraint firstItem="aJ9-v8-2iA" firstAttribute="top" secondItem="Gzs-1q-CqJ" secondAttribute="topMargin" constant="30" id="G0S-vG-Thv"/>
                             <constraint firstItem="Y0P-6J-AS8" firstAttribute="top" secondItem="ubI-7X-RFf" secondAttribute="bottom" constant="203" id="Gmg-xW-r4w"/>
                             <constraint firstAttribute="centerX" secondItem="aJ9-v8-2iA" secondAttribute="centerX" id="OPf-oe-qtI"/>
-                            <constraint firstAttribute="centerX" secondItem="chr-0H-irF" secondAttribute="centerX" id="gsL-k4-8qE"/>
-                            <constraint firstItem="chr-0H-irF" firstAttribute="top" secondItem="aJ9-v8-2iA" secondAttribute="bottom" constant="40" id="ifI-6l-ION"/>
-                            <constraint firstItem="Y0P-6J-AS8" firstAttribute="top" secondItem="chr-0H-irF" secondAttribute="bottom" constant="20" id="jCM-CO-dRI"/>
+                            <constraint firstItem="Y0P-6J-AS8" firstAttribute="top" secondItem="aJ9-v8-2iA" secondAttribute="bottom" constant="30" id="YsY-vb-r6J"/>
                             <constraint firstItem="aJ9-v8-2iA" firstAttribute="top" secondItem="ubI-7X-RFf" secondAttribute="bottom" constant="10" id="jdQ-bl-lai">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -245,15 +224,14 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Ei9-y6-HpW"/>
-                                <exclude reference="B7w-vj-FNd"/>
                                 <exclude reference="aJ9-v8-2iA"/>
                                 <exclude reference="Y0P-6J-AS8"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2EB-uS-lYY"/>
                                 <exclude reference="Bax-my-xqH"/>
                                 <exclude reference="Gmg-xW-r4w"/>
-                                <exclude reference="jCM-CO-dRI"/>
-                                <exclude reference="A2x-po-mLc"/>
+                                <exclude reference="YsY-vb-r6J"/>
                                 <exclude reference="Bes-XI-aBQ"/>
                                 <exclude reference="F2V-H3-Utl"/>
                                 <exclude reference="4lh-9x-eyQ"/>
@@ -262,8 +240,6 @@
                                 <exclude reference="jdQ-bl-lai"/>
                                 <exclude reference="mDq-g8-efm"/>
                                 <exclude reference="tLF-Ar-tQQ"/>
-                                <exclude reference="gsL-k4-8qE"/>
-                                <exclude reference="ifI-6l-ION"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -273,32 +249,32 @@
                             <mask key="constraints">
                                 <include reference="Bes-XI-aBQ"/>
                                 <include reference="F2V-H3-Utl"/>
-                                <include reference="gsL-k4-8qE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="B7w-vj-FNd"/>
                                 <include reference="aJ9-v8-2iA"/>
                                 <include reference="Y0P-6J-AS8"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2EB-uS-lYY"/>
                                 <include reference="Bax-my-xqH"/>
                                 <exclude reference="Gmg-xW-r4w"/>
-                                <include reference="jCM-CO-dRI"/>
-                                <include reference="A2x-po-mLc"/>
+                                <include reference="YsY-vb-r6J"/>
                                 <include reference="4lh-9x-eyQ"/>
                                 <exclude reference="G0S-vG-Thv"/>
                                 <exclude reference="OPf-oe-qtI"/>
                                 <include reference="jdQ-bl-lai"/>
                                 <exclude reference="mDq-g8-efm"/>
                                 <exclude reference="tLF-Ar-tQQ"/>
-                                <include reference="ifI-6l-ION"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="facebookBtn" destination="Y0P-6J-AS8" id="kvc-lO-Pek"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSq-wh-GsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2914,6 +2890,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background-btn-fb.png" width="750" height="120"/>
         <image name="background@3x.png" width="1242" height="2208"/>
         <image name="bar-icon@3x.png" width="93" height="101"/>
         <image name="bg-intro@3x.png" width="1242" height="2208"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        Parse.setApplicationId("OPLwhpxUAsrLtXpboVLCEmyttPrcR62yFWoUD4uR",
+            clientKey: "XbTtLmK0TFIvTWeLqil7Hcgs8NXz7hATjOpmKq5X")
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
 
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         // Override point for customization after application launch.
