@@ -134,6 +134,33 @@ class SettingsViewController: UITableViewController{
                 
     }
     
+    let queryServices = QueryServices()
+    let userDefault = NSUserDefaults.standardUserDefaults()
+    let FBLogOut = FBSDKLoginManager()
+    
+    @IBAction func deleteUserAccount(sender: AnyObject) {
+        
+        println("Userdefault\(userDefault.dictionaryRepresentation().keys)")
+        
+        var email:String = userDefault.stringForKey("email")!
+        
+        var emailDict:Dictionary<String,String> = ["email": email]
+        
+        queryServices.post("DELETE", params: emailDict, url: "http://151.80.128.136:3000/user/delete") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            
+            if(succeeded) {
+                println("Delete account : DONE")
+                self.userDefault.removeObjectForKey("email")
+                //println(self.userDefault.stringForKey("email"))
+                self.FBLogOut.logOut()
+                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
+                self.showViewController(vc as! UIViewController, sender: vc)
+            }
+            else {
+                println("Failed to delete your account. Please try again later.")
+            }
+        }
+    }
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
         println("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")

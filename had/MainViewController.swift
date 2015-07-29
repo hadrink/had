@@ -43,7 +43,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
      override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Initialize the refresh control.
         var refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.whiteColor()
@@ -100,7 +99,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
             locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
         
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
             var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
@@ -288,7 +287,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         }
         
 //        locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: true)
-        QServices.post(["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
             var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
