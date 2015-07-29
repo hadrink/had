@@ -23,16 +23,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
     let QServices = QueryServices()
-<<<<<<< HEAD
-    
-=======
+
     var refreshControl = UIRefreshControl()
     var searchController = UISearchController()
     //@IBOutlet weak var searchBar: UISearchBar!
 //    var timer: NSTimer!
     //var refreshControl: UIRefreshControl!
     //var isAnimating = false
->>>>>>> origin/searchNavigationController_chris
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -85,27 +82,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
-<<<<<<< HEAD
-        self.placesSearchController = ({
-            
-            // Setup One: This setup present the results in the current view.
-            let controller = UISearchController(searchResultsController: nil)
-            controller.searchResultsUpdater = self
-            controller.hidesNavigationBarDuringPresentation = false
-            controller.dimsBackgroundDuringPresentation = false
-            //controller.searchBar.searchBarStyle = .Minimal
-            controller.searchBar.sizeToFit()
-            self.tableData.tableHeaderView = controller.searchBar
-            
-            return controller
-        })()
-=======
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         
         setLogoNavBar()
->>>>>>> origin/searchNavigationController_chris
         
             /********** RevealView Configuration **********/
         
