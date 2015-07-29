@@ -26,6 +26,8 @@
 		7A1ACD111A2E67B00033A2C5 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A1ACD101A2E67B00033A2C5 /* hamburger.png */; };
 		7A1ACD151A2E68870033A2C5 /* hamburger2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A1ACD141A2E68870033A2C5 /* hamburger2.png */; };
 		7A3143211B69138A00122781 /* background-btn-fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3143201B69138A00122781 /* background-btn-fb.png */; };
+		7A3143231B69607500122781 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143221B69607500122781 /* Accounts.framework */; };
+		7A3143251B6960A000122781 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143241B6960A000122781 /* Social.framework */; };
 		7A31650D1B4E57DE00CFE4B1 /* heart-hover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A31650B1B4E57DE00CFE4B1 /* heart-hover@3x.png */; };
 		7A31650E1B4E57DE00CFE4B1 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A31650C1B4E57DE00CFE4B1 /* heart@3x.png */; };
 		7A32BE541AF51686001649E2 /* chop@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A32BE521AF51686001649E2 /* chop@3x.png */; };
@@ -138,6 +140,8 @@
 		7A1ACD101A2E67B00033A2C5 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		7A1ACD141A2E68870033A2C5 /* hamburger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger2.png; sourceTree = "<group>"; };
 		7A3143201B69138A00122781 /* background-btn-fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-btn-fb.png"; sourceTree = "<group>"; };
+		7A3143221B69607500122781 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		7A3143241B6960A000122781 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7A31650B1B4E57DE00CFE4B1 /* heart-hover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-hover@3x.png"; sourceTree = "<group>"; };
 		7A31650C1B4E57DE00CFE4B1 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
 		7A32BE521AF51686001649E2 /* chop@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chop@3x.png"; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3143251B6960A000122781 /* Social.framework in Frameworks */,
+				7A3143231B69607500122781 /* Accounts.framework in Frameworks */,
 				7A1017B31B67B04F00781E54 /* Bolts.framework in Frameworks */,
 				7A1017B01B67AFDC00781E54 /* libsqlite3.dylib in Frameworks */,
 				7A1017AE1B67AFCB00781E54 /* libz.dylib in Frameworks */,
@@ -337,6 +343,8 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				7A3143241B6960A000122781 /* Social.framework */,
+				7A3143221B69607500122781 /* Accounts.framework */,
 				7A1017AF1B67AFDC00781E54 /* libsqlite3.dylib */,
 				7A1017AD1B67AFCB00781E54 /* libz.dylib */,
 				7A1017AB1B67AFA100781E54 /* SystemConfiguration.framework */,

@@ -153,7 +153,7 @@ class SettingsViewController: UITableViewController{
                 self.userDefault.removeObjectForKey("email")
                 //println(self.userDefault.stringForKey("email"))
                 self.FBLogOut.logOut()
-                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
+                let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
                 self.showViewController(vc as! UIViewController, sender: vc)
             }
             else {

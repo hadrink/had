@@ -38,6 +38,8 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     @IBOutlet weak var textFieldPsw: UITextField!
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var facebookBtn: UIButton!
+    @IBOutlet weak var buttleHad: UIImageView!
+    @IBOutlet weak var backgroundIntro: UIImageView!
 
     var methodePost = QueryServices()
     var myJsonResult = ""

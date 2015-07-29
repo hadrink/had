@@ -273,6 +273,8 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="backgroundIntro" destination="Ei9-y6-HpW" id="Xnu-Ix-KFS"/>
+                        <outlet property="buttleHad" destination="aJ9-v8-2iA" id="qf4-Rc-h6F"/>
                         <outlet property="facebookBtn" destination="Y0P-6J-AS8" id="kvc-lO-Pek"/>
                     </connections>
                 </viewController>
