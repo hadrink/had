@@ -18,14 +18,21 @@ import UIKit
 import CoreLocation
 import MapKit
 
-
-
-class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDelegate */{
+class MainViewController: UIViewController, MKMapViewDelegate {
    
     let locationManager = CLLocationManager()
     let locServices = LocationServices()
     let QServices = QueryServices()
+<<<<<<< HEAD
     
+=======
+    var refreshControl = UIRefreshControl()
+    var searchController = UISearchController()
+    //@IBOutlet weak var searchBar: UISearchBar!
+//    var timer: NSTimer!
+    //var refreshControl: UIRefreshControl!
+    //var isAnimating = false
+>>>>>>> origin/searchNavigationController_chris
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -35,16 +42,41 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         )
     }
     
+    func ActivateSearchMode() {
+        searchController.searchBar.delegate = self
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+        searchController.searchBar.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.titleView = searchController.searchBar
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        navigationItem.setRightBarButtonItems(nil, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
+        /*let frame = CGRect(x: 0, y: 0, width: navbar.s, height: 44)
+        let titleView = UIView(frame: frame)
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.frame = frame
+        titleView.addSubview(searchController.searchBar)
+        navigationItem.titleView = titleView
+        hamburger.enabled = false*/
+        //hamburger.image = nil
+        searchController.active = true
+        refreshControl.hidden = true
+        // Include the search bar within the navigation bar.
+
+        definesPresentationContext = true
+        //providesPresentationContextTransitionStyle = false
+    }
+    
     var searchArray:[PlaceItem] = [PlaceItem](){
         didSet  {self.tableData.reloadData()}
     }
-    var placesSearchController = UISearchController()
     
      override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the refresh control.
-        var refreshControl = UIRefreshControl()
+
         refreshControl.backgroundColor = UIColor.whiteColor()
         refreshControl.tintColor = UIColor.blackColor()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -53,6 +85,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
+<<<<<<< HEAD
         self.placesSearchController = ({
             
             // Setup One: This setup present the results in the current view.
@@ -66,6 +99,13 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
             
             return controller
         })()
+=======
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        setLogoNavBar()
+>>>>>>> origin/searchNavigationController_chris
         
             /********** RevealView Configuration **********/
         
@@ -83,12 +123,6 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
             self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
             self.navigationController?.navigationBar.translucent = false
-        
-        
-            let logo = UIImage(named: "had-title@3x")
-            let imageView = UIImageView(image:logo)
-            imageView.frame = CGRectMake(0, 0, 38.66, 44)
-            self.navbar.titleView = imageView
 
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -126,7 +160,9 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
     
     /********** Outlets **********/
     
-    @IBOutlet weak var hamburger: UIBarButtonItem!
+    var hamburger = UIBarButtonItem()
+    var favButton = UIBarButtonItem()
+    var searchButton = UIBarButtonItem()
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!
@@ -200,8 +236,8 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         var latitude = 0.0
         var longitude = 0.0
         println("itineraire")
-        println(self.placesSearchController.active)
-        if !self.placesSearchController.active
+        println(self.searchController.active)
+        if !self.searchController.active
         {
             latitude = placeItems[indexPath.row].placeLatitudeDegrees!
             longitude = placeItems[indexPath.row].placeLongitudeDegrees!
@@ -223,7 +259,7 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         
         var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         var mapItem = MKMapItem(placemark: placemark)
-        if !self.placesSearchController.active
+        if !self.searchController.active
         {
             mapItem.name = placeItems[indexPath.row].placeName
         }
@@ -322,5 +358,26 @@ class MainViewController: UIViewController, MKMapViewDelegate/*, UISearchBarDele
         refreshControl.attributedTitle = attributedTitle;
         
         refreshControl.endRefreshing()
+    }
+    
+    func setLogoNavBar(){
+        println("ici")
+        let logo = UIImage(named: "had-title@3x")
+        let imageView = UIImageView(image:logo)
+        imageView.frame = CGRectMake(0, 0, 38.66, 44)
+        self.navbar.titleView = imageView
+        //navigationItem.setLeftBarButtonItem(hamburger, animated: true)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
+  //      hamburger.enabled = true
+        hamburger.tintColor = UIColorFromRGB(0xF0F0EF)
+        hamburger.image = UIImage(named: "hamburger2")
+        favButton.image = UIImage(named: "heart-hover@3x")
+        favButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchButton.image = UIImage(named: "search-icon")
+        searchButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchButton.target = self
+        searchButton.action = "ActivateSearchMode"
+        navbar.setLeftBarButtonItem(hamburger, animated: true)
+        navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
     }
 }

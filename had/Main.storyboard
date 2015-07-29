@@ -1996,18 +1996,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="dOd-Gu-oCv">
-                        <barButtonItem key="leftBarButtonItem" image="hamburger2.png" id="bEO-wZ-tp0">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="search-icon.png" width="20" style="done" id="XrY-on-y1x">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="dOd-Gu-oCv"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="hamburger" destination="bEO-wZ-tp0" id="0GP-1F-6hQ"/>
                         <outlet property="navbar" destination="dOd-Gu-oCv" id="YIT-gO-Szg"/>
                         <outlet property="tableData" destination="KXM-JB-Uyf" id="1ry-uI-BK4"/>
                     </connections>
@@ -2899,11 +2891,9 @@
         <image name="bottle-intro@3x.png" width="320" height="1009"/>
         <image name="bottle.png" width="120" height="120"/>
         <image name="flux.png" width="160" height="160"/>
-        <image name="hamburger2.png" width="20" height="14"/>
         <image name="heart@3x.png" width="63" height="60"/>
         <image name="left-arrow@3x.png" width="81" height="69"/>
         <image name="line-separator.png" width="220" height="1"/>
-        <image name="search-icon.png" width="19" height="19"/>
         <image name="setting.png" width="160" height="160"/>
         <image name="sexicon-male@3x.png" width="42" height="42"/>
         <image name="turn-off.png" width="160" height="160"/>
