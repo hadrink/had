@@ -102,6 +102,10 @@
 		EBEA243D1B69709C004E338A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEA243B1B69709C004E338A /* FBSDKLoginKit.framework */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
 		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
+		F3A1335F1B680BEB00664365 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A1335C1B680BEB00664365 /* Bolts.framework */; };
+		F3A133601B680BEB00664365 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A1335D1B680BEB00664365 /* FBSDKCoreKit.framework */; };
+		F3A133611B680BEB00664365 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A1335E1B680BEB00664365 /* FBSDKLoginKit.framework */; };
+		F3A133631B680E7400664365 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A133621B680E7400664365 /* Social.framework */; };
 		F3C67E071B601B6600191138 /* UserDataFb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C67E061B601B6600191138 /* UserDataFb.swift */; };
 		F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61331F41A1E61F00007FAA1 /* MenuItem.swift */; };
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
@@ -223,6 +227,10 @@
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
+		F3A1335C1B680BEB00664365 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../SDK-Facebook/Bolts.framework"; sourceTree = "<group>"; };
+		F3A1335D1B680BEB00664365 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../SDK-Facebook/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		F3A1335E1B680BEB00664365 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../SDK-Facebook/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		F3A133621B680E7400664365 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F3C67E061B601B6600191138 /* UserDataFb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataFb.swift; sourceTree = "<group>"; };
 		F61331F41A1E61F00007FAA1 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -787,6 +795,12 @@
 					"Multimédia/SDK-Facebook",
 					/Users/kevinrignault/Documents/Projets,
 					"Multimédia/SDK-Facebook",
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
 				);
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -808,6 +822,12 @@
 					"$(PROJECT_DIR)",
 					/Users/clitodu10/Documents/FacebookSDK,
 					/Users/Romain/Documents/FacebookSDK,
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
+					/Users/kevinrignault/Documents/Projets,
+					"Multimédia/SDK-Facebook",
 					/Users/kevinrignault/Documents/Projets,
 					"Multimédia/SDK-Facebook",
 					/Users/kevinrignault/Documents/Projets,

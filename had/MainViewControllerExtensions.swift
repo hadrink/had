@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import Social
 
 extension MainViewController: UITableViewDataSource
 {
@@ -22,7 +23,7 @@ extension MainViewController: UITableViewDataSource
         }
         else
         {
-            println("noraml")
+            println("normal")
             println(self.placeItems.count)
             return self.placeItems.count
         }
@@ -62,6 +63,7 @@ extension MainViewController: UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+        
         var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
 
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
@@ -69,12 +71,57 @@ extension MainViewController: UITableViewDataSource
         })
         
         var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            //do share action
+            
+            let shareToFacebookButton = NSLocalizedString("Facebook", comment: "Facebook")
+            let shareToTwitterButton = NSLocalizedString("Twitter", comment: "Twitter")
+            let cancelButton = NSLocalizedString("Annuler", comment: "Annuler")
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            //-- Create the actions
+            let shareToFacebookAction = UIAlertAction(title: shareToFacebookButton, style: .Destructive ) { action in
+                var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                var thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
+                shareToFacebook.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
+                self.presentViewController(shareToFacebook, animated: true, completion: nil)
+            }
+            
+            let shareToTwitterAction = UIAlertAction(title: shareToTwitterButton, style: .Destructive) { action in
+                var shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                var thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
+                shareToTwitter.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
+                self.presentViewController(shareToTwitter, animated: true, completion: nil)
+            }
+            
+            let cancelAction = UIAlertAction(title: cancelButton, style: .Cancel) { action in
+                alertController.dismissViewControllerAnimated(true, completion: {
+                    self.performSegueWithIdentifier("postview", sender: self)
+                })
+            }
+            
+            //-- Add the actions.
+            alertController.addAction(shareToFacebookAction)
+            alertController.addAction(shareToTwitterAction)
+            alertController.addAction(cancelAction)
+            
+            //-- Configure the alert controller's popover presentation controller if it has one.
+            /*if let popoverPresentationController = alertController.popoverPresentationController {
+                // This method expects a valid cell to display from.
+                let selectedCell = tableView.cellForRowAtIndexPath(selectedIndexPath)!
+                popoverPresentationController.sourceRect = selectedCell.frame
+                popoverPresentationController.sourceView = view
+                popoverPresentationController.permittedArrowDirections = .Up
+            }*/
+            
+           self.presentViewController(alertController, animated: true, completion: nil)
+
         })
+        
         shareAction.backgroundColor = UIColorFromRGB(0x5B90CE)
         var FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             //do favoris action
         })
+        
         FavorisAction.backgroundColor = UIColorFromRGB(0x4B75B2)
         return [GoToAction,shareAction,FavorisAction]
     }
