@@ -16,6 +16,7 @@ class UserDataFb {
         var response:Bool = true
         
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil)
@@ -24,6 +25,7 @@ class UserDataFb {
             }
             else
             {
+                println(result)
                 let userDefaults = NSUserDefaults.standardUserDefaults()
 
                 var userEmailFb:String = result.valueForKey("email") as! String
@@ -45,18 +47,30 @@ class UserDataFb {
                 //-- user Object
                 var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
                 
-                //-- Post method
-                methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                    var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
                     
-                    if(succeeded) {
-                        response = true
+                    if ((error) != nil)
+                    {
+                        println("Error: \(error)")
                     }
+                    else
+                    {
+                        println("Friends\(result)")
+                    
+                        //-- Post method
+                        methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                            if(succeeded) {
+                                response = true
+                            }
                         
-                    else {
-                        response = false
+                            else {
+                                response = false
+                            }
+                        }
                     }
-                }
+                })
             }
         })
         

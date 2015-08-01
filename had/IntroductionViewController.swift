@@ -179,7 +179,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     @IBAction func btnFBLoginPressed(sender: AnyObject) {
         var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager .logInWithReadPermissions(["email"], handler: { (result, error) -> Void in
+        fbLoginManager .logInWithReadPermissions(["email", "user_friends"], handler: { (result, error) -> Void in
             if (error == nil){
                 var fbloginresult : FBSDKLoginManagerLoginResult = result
                 if result.isCancelled {
