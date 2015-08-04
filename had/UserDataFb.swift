@@ -45,7 +45,6 @@ class UserDataFb {
                 
                 
                 //-- user Object
-                var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
                 
                 getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
                     
@@ -56,7 +55,11 @@ class UserDataFb {
                     else
                     {
                         println("Friends\(result)")
-                    
+                        var userFriendsFb = result.valueForKey("data") as! NSObject
+                        userDefaults.setValue(userFriendsFb as NSObject, forKey: "data")
+                        println(userFriendsFb)
+                        var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
+
                         //-- Post method
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
