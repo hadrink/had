@@ -19,13 +19,10 @@ class UserDataFb {
         let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
-            if ((error) != nil)
-            {
+            if ((error) != nil) {
                 println("Error: \(error)")
             }
-            else
-            {
-                println(result)
+            else {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
 
                 var userEmailFb:String = result.valueForKey("email") as! String
@@ -48,18 +45,26 @@ class UserDataFb {
                 
                 getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
                     
-                    if ((error) != nil)
-                    {
+                    if ((error) != nil) {
                         println("Error: \(error)")
                     }
-                    else
-                    {
+                    else {
                         println("Friends\(result)")
-                        var userFriendsFb = result.valueForKey("data") as! NSObject
-                        userDefaults.setValue(userFriendsFb as NSObject, forKey: "data")
-                        println(userFriendsFb)
-                        var userArray:Dictionary<String,String> = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb /*"Birthday":userBirthday*/]
+                        
+                        var allFriends = [String]()
+                        var friends = result["data"] as! NSArray
+                        for friend in friends {
+                            var thisFriend = friend["id"] as! String
+                            allFriends.append(thisFriend)
+                        }
+                        
+                        var allFriendsFb = ",".join(allFriends)
+                        println(allFriendsFb)
 
+                        var userArray:Dictionary = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb, "friends":allFriendsFb /*"Birthday":userBirthday*/]
+
+                        
+                        
                         //-- Post method
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
@@ -67,7 +72,6 @@ class UserDataFb {
                             if(succeeded) {
                                 response = true
                             }
-                        
                             else {
                                 response = false
                             }
