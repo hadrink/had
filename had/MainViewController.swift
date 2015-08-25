@@ -113,11 +113,14 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
             locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
         
+        
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3001/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
+
             var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+            
             
             if let reposArray = obj["listbar"] as? [NSDictionary]  {
                 //println("ReposArray \(reposArray)")
