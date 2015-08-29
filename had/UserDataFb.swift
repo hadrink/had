@@ -10,6 +10,53 @@ import Foundation
 
 class UserDataFb {
     
+    var friendsDictionary:Dictionary<String, String> = ["":""]
+    
+    func getFriends() {
+        
+        let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
+       
+        getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
+           
+             // 1
+            
+            if ((error) != nil) {
+                println("Error: \(error)")
+            }
+            else {
+                
+                println(result)
+                
+                var allFriends = [String]()
+                var friends = result["data"] as! NSArray
+                
+                println("friends\(friends)")
+                for friend in friends {
+                    var thisFriend = friend["id"] as! String
+                    allFriends.append(thisFriend)
+                    println("Thisfriends\(thisFriend)")
+
+                }
+                
+                var allFriendsFb = ",".join(allFriends)
+                println(allFriendsFb)
+                
+                
+                
+                self.friendsDictionary = ["friends":allFriendsFb /*"Birthday":userBirthday*/]
+                
+                let userSetting = SettingsViewController().userDefaults
+                
+                userSetting.setObject(allFriends, forKey: "friends")
+                
+                
+            }
+            
+            
+        })
+                
+    }
+    
     func SendUserData() -> Bool
     {
         var methodePost = QueryServices()
