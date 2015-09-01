@@ -60,7 +60,7 @@ class UserDataFb {
     func SendUserData() -> Bool
     {
         var methodePost = QueryServices()
-        var response:Bool = true
+        var response:Bool = false
         
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
@@ -116,12 +116,18 @@ class UserDataFb {
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
+                            println("Response 1 \(response)")
+
+                            
                             if(succeeded) {
                                 response = true
                             }
                             else {
                                 response = false
                             }
+                            
+                            println("Response 2 \(response)")
+                            
                         }
                     }
                 })

@@ -116,30 +116,29 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
             locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
         
-            println("Latitude \(locationManager.location.coordinate.latitude)")
+           // println("Latitude \(locationManager.location.coordinate.latitude)")
         
             let settingViewController = SettingsViewController()
         
             var userLatitude = String(stringInterpolationSegment: locationManager.location.coordinate.latitude)
             var userLongitude = String(stringInterpolationSegment: locationManager.location.coordinate.longitude)
+            println("Latitude \(userLatitude)")
+            println("Longitude \(userLongitude)")
             var ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
+            println("ageMin \(ageMin)")
             var ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
+            println("AgeMax \(ageMax)")
             var distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
+            println("Distance max \(distanceMax)")
         
-        
-        
-        
-        
-                let userDataFb = UserDataFb()
-                userDataFb.getFriends()
-                var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                println("MyFriends\(friends)" )
+            let userDataFb = UserDataFb()
+            userDataFb.getFriends()
+            var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
+            println("MyFriends\(friends)" )
             
         
-        
-        
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-        QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+       QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
             
 
