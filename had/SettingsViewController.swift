@@ -71,7 +71,7 @@ class SettingsViewController: UITableViewController{
             nightclubSwitch.on = userDefaults.boolForKey("SwitchStateNightclub")
         }
         
-        distanceSlider.value = userDefaults.floatForKey("DistanceValue")
+        
         distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + " km"
         
         ageMin.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMinValue")))

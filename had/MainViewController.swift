@@ -20,7 +20,15 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
    
-    let locationManager = CLLocationManager()
+    lazy var locationManager: CLLocationManager! = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        return manager
+        }()
+    
+    var isAnimating = false
     let locServices = LocationServices()
     let QServices = QueryServices()
 
@@ -108,9 +116,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
             self.navigationController?.navigationBar.translucent = false
 
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         
             locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
@@ -118,50 +123,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
            // println("Latitude \(locationManager.location.coordinate.latitude)")
         
-            let settingViewController = SettingsViewController()
-        
-            var userLatitude = String(stringInterpolationSegment: locationManager.location.coordinate.latitude)
-            var userLongitude = String(stringInterpolationSegment: locationManager.location.coordinate.longitude)
-            println("Latitude \(userLatitude)")
-            println("Longitude \(userLongitude)")
-            var ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
-            println("ageMin \(ageMin)")
-            var ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
-            println("AgeMax \(ageMax)")
-            var distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
-            println("Distance max \(distanceMax)")
-        
-            let userDataFb = UserDataFb()
-            userDataFb.getFriends()
-            var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-            println("MyFriends\(friends)" )
-            
-        
-            //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-       QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-            
-
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
-            
-            
-            if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                println("RefreshhhYouhou")
-                for item in reposArray {
-                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    //println("Item \(item)")
-                }
-            }
-            println("Mon object \(obj)")
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                
-                self.tableData.reloadData()
-                
-            })
-        }
-            println("nbplaces")
+                        println("nbplaces")
         
     }
     
@@ -330,30 +292,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
         
 //        locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: true)
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-            
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
-            
-            if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                println("RefreshhhYouhou")
-                self.placeItems.removeAll()
-                for item in reposArray {
-                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    //println("Item \(item)")
-                }
-                println("nb place")
-                println(self.placeItems.count)
-                //println("place item \(self.placeItems)")
-            }
-            //println("Mon object \(obj)")
-            
-            dispatch_sync(dispatch_get_main_queue(), {
-                self.tableData.reloadData()
-            })
-        }
-        //self.isAnimating = false
+        
+        self.isAnimating = true
+        
+        locationManager.startUpdatingLocation()
+        
+        
+
         
         // End the refreshing
         var formatter:NSDateFormatter = NSDateFormatter()

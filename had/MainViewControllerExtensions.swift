@@ -209,24 +209,67 @@ extension MainViewController: UISearchResultsUpdating
 
 extension MainViewController: CLLocationManagerDelegate
 {
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+        
+            manager.stopUpdatingLocation()
+        
+            //println(manager.location)
+        
+            let settingViewController = SettingsViewController()
             
-            if (error != nil) {
-                println("Reverse geocoder failed with error" + error.localizedDescription)
-                return
+            var userLatitude = String(stringInterpolationSegment: manager.location.coordinate.latitude)
+            var userLongitude = String(stringInterpolationSegment: manager.location.coordinate.longitude)
+            println("Latitude \(userLatitude)")
+            println("Longitude \(userLongitude)")
+            var ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
+            println("ageMin \(ageMin)")
+            var ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
+            println("AgeMax \(ageMax)")
+            var distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
+            println("Distance max \(distanceMax)")
+            
+            /*if (distanceMax == "0.0"){
+                distanceMax = "10"
+            }*/
+        
+            
+            let userDataFb = UserDataFb()
+            userDataFb.getFriends()
+            var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
+            println("MyFriends\(friends)" )
+            
+            
+            //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
+            self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                
+                
+                var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+                
+                
+                if let reposArray = obj["listbar"] as? [NSDictionary]  {
+                    //println("ReposArray \(reposArray)")
+                    println("RefreshhhYouhou")
+                    
+                    if(self.isAnimating == true) {
+                        self.placeItems.removeAll()
+                    }
+                    
+                    for item in reposArray {
+                        self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                        //println("Item \(item)")
+                    }
+                }
+                println("Mon object \(obj)")
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    self.tableData.reloadData()
+                    
+                })
             }
-            
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as! CLPlacemark
-                var latLng = self.getLocationInfo(pm)
-                //println(latLng[0])
-                //println(latLng[1])
-            } else {
-                println("Problem with the data received from geocoder")
-            }
-            
-        })
+
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
