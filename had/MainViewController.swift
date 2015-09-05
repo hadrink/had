@@ -65,6 +65,22 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         navigationItem.titleView = titleView
         hamburger.enabled = false*/
         //hamburger.image = nil
+        
+        
+        //-- Change color searchBar text and placeholder and set image search icon
+        
+        var textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
+        
+        textFieldInsideSearchBar?.textColor = UIColorFromRGB(0xF0F0EF)
+        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        
+        if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
+
+            let attributeDictSearch = [NSForegroundColorAttributeName: UIColorFromRGB(0xF0F0EF)]
+            textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
+            
+        }
+        
         searchController.active = true
         refreshControl.hidden = true
         // Include the search bar within the navigation bar.
@@ -81,6 +97,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         // Set Friends to user settings
+        
+        
+
 
         
         // Initialize the refresh control.
