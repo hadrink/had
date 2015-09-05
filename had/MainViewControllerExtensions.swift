@@ -62,6 +62,7 @@ extension MainViewController: UITableViewDataSource
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     }
     
+    
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         
         var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -168,11 +169,15 @@ extension MainViewController: UITableViewDelegate
         }
         selectedIndex = indexPath.row
         tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
     }
+    
 }
 
 extension MainViewController: UISearchResultsUpdating
