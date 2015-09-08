@@ -36,6 +36,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your custom message to describe why you need location always goes here!</string>
+	<key>bak</key>
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
@@ -47,6 +49,11 @@
 		<string>Lato-Light.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>Lato-Bold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

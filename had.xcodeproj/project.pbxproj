@@ -534,6 +534,11 @@
 					7AA224F319CDA9D1002003ED = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 356ZH6XUVH;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					7AA2250C19CDA9D1002003ED = {
 						CreatedOnToolsVersion = 6.0.1;

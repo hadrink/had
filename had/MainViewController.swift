@@ -38,8 +38,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         manager.requestAlwaysAuthorization()
         return manager
         }()
+<<<<<<< HEAD
     
     var isAnimating = false
+=======
+>>>>>>> master1
     let locServices = LocationServices()
     let QServices = QueryServices()
 
@@ -317,6 +320,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     /********** Refresh places **********/
     func refresh(refreshControl: UIRefreshControl)
     {
+        locationManager.startUpdatingLocation()
         //isAnimating = true
         println("refreshing")
         //placeItems = PlaceItem.allPlaceItems()

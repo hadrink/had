@@ -214,6 +214,7 @@ extension MainViewController: UISearchResultsUpdating
 
 extension MainViewController: CLLocationManagerDelegate
 {
+<<<<<<< HEAD
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
@@ -275,6 +276,20 @@ extension MainViewController: CLLocationManagerDelegate
                 })
             }
 
+=======
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+        
+        if UIApplication.sharedApplication().applicationState == .Active {
+            println("app is activated")
+        } else {
+            NSLog("App is backgrounded. New location is %@", newLocation)
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            var email: String! = userDefaults.stringForKey("email")
+            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(newLocation.coordinate.latitude)/\(newLocation.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                println("dans le post du backgroundeuuuux")
+            }
+        }
+>>>>>>> master1
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
