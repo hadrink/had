@@ -19,12 +19,31 @@ import CoreLocation
 import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
+    
+    
+        
+    var refreshControl = UIRefreshControl()
+    var refreshLoadingView : UIView!
+    var refreshColorView : UIView!
+    var town_background : UIImageView!
+    var bottle_spinner : UIImageView!
+    var isRefreshIconsOverlap = false
+    var isRefreshAnimating = false
+    
    
-    let locationManager = CLLocationManager()
+    lazy var locationManager: CLLocationManager! = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        return manager
+        }()
+    
+    var isAnimating = false
     let locServices = LocationServices()
     let QServices = QueryServices()
 
-    var refreshControl = UIRefreshControl()
+    //var refreshControl = UIRefreshControl()
     var searchController = UISearchController()
     //@IBOutlet weak var searchBar: UISearchBar!
 //    var timer: NSTimer!
@@ -57,6 +76,22 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         navigationItem.titleView = titleView
         hamburger.enabled = false*/
         //hamburger.image = nil
+        
+        
+        //-- Change color searchBar text and placeholder and set image search icon
+        
+        var textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
+        
+        textFieldInsideSearchBar?.textColor = UIColorFromRGB(0xF0F0EF)
+        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        
+        if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
+
+            let attributeDictSearch = [NSForegroundColorAttributeName: UIColorFromRGB(0xF0F0EF)]
+            textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
+            
+        }
+        
         searchController.active = true
         refreshControl.hidden = true
         // Include the search bar within the navigation bar.
@@ -72,12 +107,21 @@ class MainViewController: UIViewController, MKMapViewDelegate {
      override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize the refresh control.
+        // Set Friends to user settings
+        
+        self.setupRefreshControl()
 
-        refreshControl.backgroundColor = UIColor.whiteColor()
-        refreshControl.tintColor = UIColor.blackColor()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+
+
+        
+        // Initialize the refresh control.
+        
+        
+        
+        //refreshControl.backgroundColor = UIColor.purpleColor()
+        //refreshControl.tintColor = UIColor.blackColor()
+        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        //refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableData.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -105,39 +149,17 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
             self.navigationController?.navigationBar.translucent = false
 
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         
             locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
             locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
         
-            //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-            
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
-            
-            if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                println("RefreshhhYouhou")
-                for item in reposArray {
-                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    //println("Item \(item)")
-                }
-            }
-            println("Mon object \(obj)")
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                
-                self.tableData.reloadData()
-                
-            })
-        }
-            println("nbplaces")
+           // println("Latitude \(locationManager.location.coordinate.latitude)")
+        
+                        println("nbplaces")
         
     }
+    
     
     /********** Outlets **********/
     
@@ -304,30 +326,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
         
 //        locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: true)
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/places/\(self.locServices.latitude)/\(self.locServices.longitude)/10") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-            
-            var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
-            
-            if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                println("RefreshhhYouhou")
-                self.placeItems.removeAll()
-                for item in reposArray {
-                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    //println("Item \(item)")
-                }
-                println("nb place")
-                println(self.placeItems.count)
-                //println("place item \(self.placeItems)")
-            }
-            //println("Mon object \(obj)")
-            
-            dispatch_sync(dispatch_get_main_queue(), {
-                self.tableData.reloadData()
-            })
-        }
-        //self.isAnimating = false
+        
+        self.isAnimating = true
+        
+        locationManager.startUpdatingLocation()
+        
+        
+
         
         // End the refreshing
         var formatter:NSDateFormatter = NSDateFormatter()

@@ -10,10 +10,57 @@ import Foundation
 
 class UserDataFb {
     
+    var friendsDictionary:Dictionary<String, String> = ["":""]
+    
+    func getFriends() {
+        
+        let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
+       
+        getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
+           
+             // 1
+            
+            if ((error) != nil) {
+                println("Error: \(error)")
+            }
+            else {
+                
+                println(result)
+                
+                var allFriends = [String]()
+                var friends = result["data"] as! NSArray
+                
+                println("friends\(friends)")
+                for friend in friends {
+                    var thisFriend = friend["id"] as! String
+                    allFriends.append(thisFriend)
+                    println("Thisfriends\(thisFriend)")
+
+                }
+                
+                var allFriendsFb = ",".join(allFriends)
+                println(allFriendsFb)
+                
+                
+                
+                self.friendsDictionary = ["friends":allFriendsFb /*"Birthday":userBirthday*/]
+                
+                let userSetting = SettingsViewController().userDefaults
+                
+                userSetting.setObject(allFriends, forKey: "friends")
+                
+                
+            }
+            
+            
+        })
+                
+    }
+    
     func SendUserData() -> Bool
     {
         var methodePost = QueryServices()
-        var response:Bool = true
+        var response:Bool = false
         
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
@@ -69,12 +116,18 @@ class UserDataFb {
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
+                            println("Response 1 \(response)")
+
+                            
                             if(succeeded) {
                                 response = true
                             }
                             else {
                                 response = false
                             }
+                            
+                            println("Response 2 \(response)")
+                            
                         }
                     }
                 })
