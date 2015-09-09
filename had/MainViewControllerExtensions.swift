@@ -214,14 +214,14 @@ extension MainViewController: UISearchResultsUpdating
 
 extension MainViewController: CLLocationManagerDelegate
 {
-<<<<<<< HEAD
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
-            manager.stopUpdatingLocation()
-        
+    
             //println(manager.location)
-        
+        if UIApplication.sharedApplication().applicationState == .Active {
+            println("app is activated")
+            manager.stopUpdatingLocation()
+            
             let settingViewController = SettingsViewController()
             
             var userLatitude = String(stringInterpolationSegment: manager.location.coordinate.latitude)
@@ -244,7 +244,6 @@ extension MainViewController: CLLocationManagerDelegate
             userDataFb.getFriends()
             var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
             println("MyFriends\(friends)" )
-            
             
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
             self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
@@ -275,21 +274,15 @@ extension MainViewController: CLLocationManagerDelegate
                     
                 })
             }
-
-=======
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
         
-        if UIApplication.sharedApplication().applicationState == .Active {
-            println("app is activated")
         } else {
-            NSLog("App is backgrounded. New location is %@", newLocation)
+            NSLog("App is backgrounded. New location is %@", manager.location)
             let userDefaults = NSUserDefaults.standardUserDefaults()
             var email: String! = userDefaults.stringForKey("email")
-            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(newLocation.coordinate.latitude)/\(newLocation.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location.coordinate.latitude)/\(manager.location.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 println("dans le post du backgroundeuuuux")
             }
         }
->>>>>>> master1
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {

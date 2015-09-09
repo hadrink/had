@@ -38,11 +38,10 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         manager.requestAlwaysAuthorization()
         return manager
         }()
-<<<<<<< HEAD
+
     
     var isAnimating = false
-=======
->>>>>>> master1
+
     let locServices = LocationServices()
     let QServices = QueryServices()
 
