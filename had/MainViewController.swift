@@ -20,8 +20,7 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
     
-    
-        
+            
     var refreshControl = UIRefreshControl()
     var refreshLoadingView : UIView!
     var refreshColorView : UIView!
@@ -153,15 +152,19 @@ class MainViewController: UIViewController, MKMapViewDelegate {
 
             locationManager.startUpdatingLocation()
         
-            locServices.latitude = 48.7809894//locationManager.location.coordinate.latitude
-            locServices.longitude = 2.2066908//locationManager.location.coordinate.longitude
+            locServices.latitude = locationManager.location.coordinate.latitude
+            locServices.longitude = locationManager.location.coordinate.longitude
         
            // println("Latitude \(locationManager.location.coordinate.latitude)")
         
                         println("nbplaces")
         
+        //-- Observer for background state
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        
+        
     }
-    
     
     /********** Outlets **********/
     

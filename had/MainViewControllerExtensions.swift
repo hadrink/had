@@ -34,6 +34,7 @@ extension MainViewController: UITableViewDataSource
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
         println(self.searchController.active)
+        
         if (self.searchController.active)
         {
             println("active reload")
@@ -43,18 +44,45 @@ extension MainViewController: UITableViewDataSource
             cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
+            
+            var type = searchArray[indexPath.row].typeofPlace as String!
+            
+            if ( type == "cafe") {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+            
+            else {
+                cell.iconTableview.image = UIImage(named: "bottle-spin")
+            }
+            
             return cell
         }
             
         else
         {
+            var type = placeItems[indexPath.row].typeofPlace as String!
+            
             println("inactive")
+            
+            //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
             cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
+            
+            println("Type \(type)")
+            
+            if ( type == "cafe" || type == "bar") {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+                
+            else {
+                cell.iconTableview.image = UIImage(named: "bottle-spin")
+            }
+
+            
             return cell
         }
     }
@@ -215,12 +243,21 @@ extension MainViewController: UISearchResultsUpdating
 extension MainViewController: CLLocationManagerDelegate
 {
     
+    //-- Func Observer Method for start Updating Location
+    
+    func myObserverMethod (notification: NSNotification) {
+        locationManager.startUpdatingLocation()
+    }
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        println("Michel")
+        manager.stopUpdatingLocation()
+
     
             //println(manager.location)
         if UIApplication.sharedApplication().applicationState == .Active {
             println("app is activated")
-            manager.stopUpdatingLocation()
             
             let settingViewController = SettingsViewController()
             
@@ -257,9 +294,11 @@ extension MainViewController: CLLocationManagerDelegate
                     //println("ReposArray \(reposArray)")
                     println("RefreshhhYouhou")
                     
-                    if(self.isAnimating == true) {
-                        self.placeItems.removeAll()
-                    }
+                   /* if(self.isAnimating == true) {
+                    
+                    }*/
+                    
+                    self.placeItems.removeAll()
                     
                     for item in reposArray {
                         self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
@@ -452,6 +491,7 @@ extension MainViewController
             delay: Double(0.0),
             options: UIViewAnimationOptions.CurveLinear,
             animations: {
+                self.locationManager.startUpdatingLocation()
                 // Rotate the spinner by M_PI_2 = PI/2 = 90 degrees
                 self.bottle_spinner.transform = CGAffineTransformRotate(self.bottle_spinner.transform, CGFloat(M_PI_2))
                 
@@ -463,6 +503,7 @@ extension MainViewController
                 // If still refreshing, keep spinning, else reset
                 if (self.refreshControl.refreshing) {
                     self.animateRefreshView()
+                    self.locationManager.stopUpdatingLocation()
                 }else {
                     self.resetAnimation()
                 }

@@ -1480,9 +1480,6 @@
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="9"/>
                                                             <color key="textColor" red="0.36862745099999999" green="0.57254901960000004" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="61" y="10" width="33" height="11"/>
-                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1533,7 +1530,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="17" y="47" width="104" height="27"/>
+                                                        <rect key="frame" x="17" y="47" width="103" height="26.5"/>
                                                         <mask key="subviews">
                                                             <include reference="XZb-ky-v8W"/>
                                                             <include reference="fUQ-Y6-wBe"/>
@@ -1613,7 +1610,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="122" y="47" width="61" height="27"/>
+                                                        <rect key="frame" x="121" y="47" width="61" height="27"/>
                                                         <mask key="subviews">
                                                             <include reference="dOD-lR-biQ"/>
                                                             <include reference="QQH-ip-fH2"/>
@@ -1766,7 +1763,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="184" y="47" width="66" height="27"/>
+                                                        <rect key="frame" x="183" y="47" width="66" height="27"/>
                                                         <mask key="subviews">
                                                             <include reference="J2g-fv-Qc9"/>
                                                             <include reference="Aaa-Si-uel"/>
@@ -1926,6 +1923,7 @@
                                             <outlet property="city" destination="xQA-K6-DJE" id="64J-Hy-r1l"/>
                                             <outlet property="details" destination="Aaa-Si-uel" id="yu2-qp-Eeu"/>
                                             <outlet property="distance" destination="7gf-53-C2O" id="IbH-Pc-pjh"/>
+                                            <outlet property="iconTableview" destination="4cO-zJ-HIs" id="3WM-Da-BFg"/>
                                             <outlet property="nbUser" destination="XZb-ky-v8W" id="ZOZ-rk-tio"/>
                                             <outlet property="placeName" destination="3MB-Jd-tuw" id="SLS-pt-pK6"/>
                                         </connections>
