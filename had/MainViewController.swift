@@ -162,7 +162,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Observer for background state
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("WillAppTerminate:"), name: UIApplicationWillTerminateNotification, object: nil)
         
     }
     

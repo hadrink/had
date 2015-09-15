@@ -249,16 +249,26 @@ extension MainViewController: CLLocationManagerDelegate
         locationManager.startUpdatingLocation()
     }
     
+    func WillAppTerminate(notification: NSNotification){
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        var email: String! = userDefaults.stringForKey("email")
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(self.locationManager.location.coordinate.latitude)/\(self.locationManager.location.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            println("dans le post du backgroundeuuuux")
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFinishDeferredUpdatesWithError error: NSError!) {
+        println("deferredUpdates")
+    }
+
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         println("Michel")
-        manager.stopUpdatingLocation()
-
     
             //println(manager.location)
         if UIApplication.sharedApplication().applicationState == .Active {
             println("app is activated")
-            
+            manager.stopUpdatingLocation()
             let settingViewController = SettingsViewController()
             
             var userLatitude = String(stringInterpolationSegment: manager.location.coordinate.latitude)
@@ -316,11 +326,15 @@ extension MainViewController: CLLocationManagerDelegate
         
         } else {
             NSLog("App is backgrounded. New location is %@", manager.location)
+            
             let userDefaults = NSUserDefaults.standardUserDefaults()
             var email: String! = userDefaults.stringForKey("email")
             QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location.coordinate.latitude)/\(manager.location.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 println("dans le post du backgroundeuuuux")
             }
+            var distance:CLLocationDistance = 200
+            var time:NSTimeInterval  = 60
+            manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
         }
     }
     
