@@ -23,6 +23,7 @@ class PlaceItem : CLLocationManager{
     var distance : Double!
     var placeLatitudeDegrees : CLLocationDegrees?
     var placeLongitudeDegrees : CLLocationDegrees?
+    var typeofPlace : String?
     
     // Init variables
     
@@ -30,7 +31,13 @@ class PlaceItem : CLLocationManager{
         
         // Init for place name and counter
         
-        placeName = json["name"] as? String
+        if var placeProperties = json["properties"] as? [String:AnyObject] {
+            placeName = placeProperties["name"] as? String
+            typeofPlace = placeProperties["amenity"] as? String
+        }
+        
+        println(typeofPlace)
+        
         counter = String(stringInterpolationSegment: json["counter"] as! Int!)
         
         // Init for location info
@@ -48,8 +55,10 @@ class PlaceItem : CLLocationManager{
             var placeLatitude = placeCoordinate!.lastObject as! NSObject
             placeLatitudeDegrees = placeLatitude as? Double
             placeLongitudeDegrees = placeLongitude as? Double
+            
             var placeCoordinatesDegrees = CLLocation(latitude: placeLatitudeDegrees!, longitude: placeLongitudeDegrees!)
             var userCoordinatesDegrees = CLLocation(latitude: userLatitudeDegrees, longitude: userLongitudeDegrees)
+            
             var distanceInMeters = placeCoordinatesDegrees.distanceFromLocation(userCoordinatesDegrees)
             
             func roundToPlaces(value:Double, places:Int) -> Double {
@@ -63,8 +72,8 @@ class PlaceItem : CLLocationManager{
         
         // Init for address data
         
-        if var addressValues = json["adress"] as? [String:AnyObject] {
-            city = (addressValues["addr:city"] as? String)
+        if var addressValues = json["properties"] as? [String:AnyObject] {
+            city = (addressValues["city"] as? String)
         }
         
         // Init for users data
