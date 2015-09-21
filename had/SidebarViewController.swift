@@ -28,8 +28,8 @@ class SidebarViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cellIdentifier:NSString = self.menuItems.objectAtIndex(indexPath.row) as! NSString
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! UITableViewCell
+        let cellIdentifier:NSString = self.menuItems.objectAtIndex(indexPath.row) as! NSString
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) 
         
         
         return cell
@@ -40,7 +40,7 @@ class SidebarViewController: UITableViewController {
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
         NSUserDefaults.standardUserDefaults().synchronize()
-        println(NSUserDefaults.standardUserDefaults().valueForKey("hasLoginKey"))
+        print(NSUserDefaults.standardUserDefaults().valueForKey("hasLoginKey"))
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
 /*        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -49,7 +49,7 @@ class SidebarViewController: UITableViewController {
         appDelegate.userProfil.disconnect()*/
         let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
         self.showViewController(vc as! UIViewController, sender: vc)
-        println("disconnect")
+        print("disconnect")
     }
    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

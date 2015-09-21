@@ -19,6 +19,8 @@ class CellSetting:UITableViewCell{
 
 class SettingsViewController: UITableViewController{
     
+    //let userDataFb = UserDataFb.sharedInstance
+
     let QServices = QueryServices()
     let rangeSlider = RangeSlider(frame: CGRectZero)
     
@@ -61,6 +63,7 @@ class SettingsViewController: UITableViewController{
         super.viewDidLoad()
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
+       
 
         
         if (userDefaults.objectForKey("SwitchStateBar") != nil) {
@@ -83,21 +86,40 @@ class SettingsViewController: UITableViewController{
             ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue"))) + " ans"
         }
         
-        UserData()
+        //UserData()
         contentViewTest2.addSubview(rangeSlider)
         contentViewTest2.addSubview(ageLabel)
 
         nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         
-        rangeSlider.setTranslatesAutoresizingMaskIntoConstraints(false)
+        rangeSlider.translatesAutoresizingMaskIntoConstraints = false
         
-        println("Bob\(rangeSlider.accessibilityElementCount())")
+        print("Bob\(rangeSlider.accessibilityElementCount())")
         
         
         let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
             .TopMargin, relatedBy: .Equal, toItem: ageLabel,
             attribute: .TopMargin, multiplier: 1.0, constant: 20)
+        
+        
+        print("get image picture")
+       
+        
+
+        
+        print("profile picture setting")
+        print(UserDataFb().pictureCache.description)
+        self.profilePicture.image = UserDataFb().pictureCache["profile_picture"]
+        self.backgroundPicture.image = UserDataFb().pictureCache["profile_picture"]
+        
+        
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true;
+        
+        
+        blurImage()
+
         
     }
     
@@ -108,6 +130,15 @@ class SettingsViewController: UITableViewController{
         rangeSlider.frame = CGRect(x: 16, y: 27,
             width: width, height: 30.0)
     }
+    
+    func blurImage() {
+        let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        
+        let blurView = UIVisualEffectView(effect: lightBlur)
+        blurView.frame = backgroundPicture.bounds
+        backgroundPicture.addSubview(blurView)
+    }
+
     
     // Save user config
     
@@ -140,16 +171,16 @@ class SettingsViewController: UITableViewController{
     
     @IBAction func deleteUserAccount(sender: AnyObject) {
         
-        println("Userdefault\(userDefault.dictionaryRepresentation().keys)")
+        print("Userdefault\(userDefault.dictionaryRepresentation().keys)")
         
-        var email:String = userDefault.stringForKey("email")!
+        let email:String = userDefault.stringForKey("email")!
         
-        var emailDict:Dictionary<String,String> = ["email": email]
+        let emailDict:Dictionary<String,String> = ["email": email]
         
         queryServices.post("DELETE", params: emailDict, url: "http://151.80.128.136:3000/user/delete") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
             if(succeeded) {
-                println("Delete account : DONE")
+                print("Delete account : DONE")
                 self.userDefault.removeObjectForKey("email")
                 //println(self.userDefault.stringForKey("email"))
                 self.FBLogOut.logOut()
@@ -157,13 +188,13 @@ class SettingsViewController: UITableViewController{
                 self.showViewController(vc as! UIViewController, sender: vc)
             }
             else {
-                println("Failed to delete your account. Please try again later.")
+                print("Failed to delete your account. Please try again later.")
             }
         }
     }
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
-        println("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+        print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
         
         userDefaults.setFloat(Float(rangeSlider.lowerValue), forKey: "AgeMinValue")
         userDefaults.setFloat(Float(rangeSlider.upperValue), forKey: "AgeMaxValue")
@@ -190,19 +221,19 @@ class SettingsViewController: UITableViewController{
         }
     }
     
-    func UserData()
+    /*func UserData()
     {
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil)
             {
-                println("Error: \(error)")
+                print("Error: \(error)")
             }
             else
             {
-                println("fetched user: \(result)")
-                println(result.valueForKey("age_range") as? String)
+                print("fetched user: \(result)")
+                print(result.valueForKey("age_range") as? String)
                 self.Name.text = result.valueForKey("name") as? String
                /* self.Age.text = result.valueForKey("birthday") as? String
                 self.Mail.text = result.valueForKey("email") as? String
@@ -215,11 +246,11 @@ class SettingsViewController: UITableViewController{
             }
         })
         
-        let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
+        /*let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
         pictureRequest.startWithCompletionHandler({
             (connection, result, error: NSError!) -> Void in
             if error == nil {
-                println("\(result)")
+                print("\(result)")
                 var data: AnyObject  = result.objectForKey("data")!
                 var url :NSString = data.valueForKey("url") as! NSString
                 let imageURL = NSURL(string: url as String)
@@ -231,9 +262,9 @@ class SettingsViewController: UITableViewController{
                 self.backgroundPicture.image = UIImage(data: nsdata!)
                 
                 func blurImage() {
-                    var lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
                     
-                    var blurView = UIVisualEffectView(effect: lightBlur)
+                    let blurView = UIVisualEffectView(effect: lightBlur)
                     blurView.frame = self.backgroundPicture.bounds
                     self.backgroundPicture.addSubview(blurView)
                 }
@@ -244,10 +275,10 @@ class SettingsViewController: UITableViewController{
                
                 
                 //self.profilePicture.image = UIImage(data: NSData(contentsOfURL: NSURL(fileURLWithPath: url as String)!)!)
-                println(url)
+                print(url)
             } else {
-                println("\(error)")
+                print("\(error)")
             }
-        })
-    }
+        })*/
+    }*/
 }

@@ -22,8 +22,8 @@ class LocationServices {
         
         var latitude = 0.0
         var longitude = 0.0
-        println("itineraire")
-        println(placesSearchController.active)
+        print("itineraire")
+        print(placesSearchController.active)
         if !placesSearchController.active
         {
             latitude = placeItems[indexPath.row].placeLatitudeDegrees!
@@ -34,17 +34,17 @@ class LocationServices {
             latitude = searchArray[indexPath.row].placeLatitudeDegrees!
             longitude = searchArray[indexPath.row].placeLongitudeDegrees!
         }
-        var coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
         
-        var options = [
+        let options = [
             MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
             MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
         ]
         
-        var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        var mapItem = MKMapItem(placemark: placemark)
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
         
         if !placesSearchController.active
         {

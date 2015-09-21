@@ -14,7 +14,7 @@ class ResponsiveTextFieldViewController : UIViewController
 {
 
     var kPreferredTextFieldToKeyboardOffset: CGFloat = 20.0
-    var keyboardFrame: CGRect = CGRect.nullRect
+    var keyboardFrame: CGRect = CGRect.null
     var keyboardIsShowing: Bool = false
     weak var activeTextField: UITextField?
 
@@ -30,7 +30,7 @@ class ResponsiveTextFieldViewController : UIViewController
         {
             if (subview.isKindOfClass(UITextField))
             {
-                var textField = subview as! UITextField
+                let textField = subview as! UITextField
                 textField.addTarget(self, action: "textFieldDidReturn:", forControlEvents: UIControlEvents.EditingDidEndOnExit)
                 
                 textField.addTarget(self, action: "textFieldDidBeginEditing:", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -66,17 +66,17 @@ class ResponsiveTextFieldViewController : UIViewController
     
     func arrangeViewOffsetFromKeyboard()
     {
-        var theApp: UIApplication = UIApplication.sharedApplication()
-        var windowView: UIView? = theApp.delegate!.window!
+        let theApp: UIApplication = UIApplication.sharedApplication()
+        let windowView: UIView? = theApp.delegate!.window!
         
-        var textFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.activeTextField!.frame.origin.y + self.activeTextField!.frame.size.height)
+        let textFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.activeTextField!.frame.origin.y + self.activeTextField!.frame.size.height)
         
-        var convertedTextFieldLowerPoint: CGPoint = self.view.convertPoint(textFieldLowerPoint, toView: windowView)
+        let convertedTextFieldLowerPoint: CGPoint = self.view.convertPoint(textFieldLowerPoint, toView: windowView)
         
-        var targetTextFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.keyboardFrame.origin.y - kPreferredTextFieldToKeyboardOffset)
+        let targetTextFieldLowerPoint: CGPoint = CGPointMake(self.activeTextField!.frame.origin.x, self.keyboardFrame.origin.y - kPreferredTextFieldToKeyboardOffset)
         
-        var targetPointOffset: CGFloat = targetTextFieldLowerPoint.y - convertedTextFieldLowerPoint.y
-        var adjustedViewFrameCenter: CGPoint = CGPointMake(self.view.center.x, self.view.center.y + targetPointOffset)
+        let targetPointOffset: CGFloat = targetTextFieldLowerPoint.y - convertedTextFieldLowerPoint.y
+        let adjustedViewFrameCenter: CGPoint = CGPointMake(self.view.center.x, self.view.center.y + targetPointOffset)
         
         if self.keyboardFrame.origin.y < self.activeTextField!.frame.origin.y + self.activeTextField!.frame.height{
         
@@ -90,7 +90,7 @@ class ResponsiveTextFieldViewController : UIViewController
     
     func returnViewToInitialFrame()
     {
-        var initialViewRect: CGRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)
+        let initialViewRect: CGRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height)
         
         if (!CGRectEqualToRect(initialViewRect, self.view.frame))
         {
@@ -100,7 +100,7 @@ class ResponsiveTextFieldViewController : UIViewController
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
 
     {
         if (self.activeTextField != nil)

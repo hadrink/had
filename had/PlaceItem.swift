@@ -36,7 +36,7 @@ class PlaceItem : CLLocationManager{
             typeofPlace = placeProperties["amenity"] as? String
         }
         
-        println(typeofPlace)
+        print(typeofPlace)
         
         counter = String(stringInterpolationSegment: json["counter"] as! Int!)
         
@@ -62,11 +62,11 @@ class PlaceItem : CLLocationManager{
             var distanceInMeters = placeCoordinatesDegrees.distanceFromLocation(userCoordinatesDegrees)
             
             func roundToPlaces(value:Double, places:Int) -> Double {
-                var divisor = pow(10.0, Double(places))
+                let divisor = pow(10.0, Double(places))
                 return round(value * divisor) / divisor
             }
             
-            distance = roundToPlaces(distanceInMeters / 1000, 1)
+            distance = roundToPlaces(distanceInMeters / 1000, places: 1)
             
         }
         
@@ -87,7 +87,7 @@ class PlaceItem : CLLocationManager{
             for uservisited in usersvisited {
                 var age:String = uservisited.objectForKey("age") as! String
                 var sex:String = uservisited.objectForKey("sex") as! String
-                var ageInt = age.toInt()
+                var ageInt = Int(age)
                 
                 sexArray.append(sex)
                 

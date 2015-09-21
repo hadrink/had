@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc
+
 class Settings {
     
     //Properties
@@ -29,7 +29,7 @@ class Settings {
     
     func setShouldSkipLogin(shouldSkipLogin:Bool)
     {
-        var defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let defaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         defaults.setBool(shouldSkipLogin ,forKey:kShouldSkipLoginKey as String)
         defaults.synchronize()
     }

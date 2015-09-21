@@ -82,7 +82,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func valueChanged(segmentedControl: UISegmentedControl) {
-        println("Coming in : \(segmentedControl.selectedSegmentIndex)")
+        print("Coming in : \(segmentedControl.selectedSegmentIndex)")
         if(segmentedControl.selectedSegmentIndex == 0){
             self.data = self.data0
         } else if(segmentedControl.selectedSegmentIndex == 1){
@@ -111,13 +111,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as!  UITableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell?
         if(searchActive){
-            cell.textLabel?.text = filtered[indexPath.row]
+            cell?.textLabel?.text = filtered[indexPath.row]
         } else {
-            cell.textLabel?.text = data[indexPath.row];
+            cell?.textLabel?.text = data[indexPath.row];
         }
         
-        return cell;
+        return cell!;
     }
 }

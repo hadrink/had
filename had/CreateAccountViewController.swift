@@ -88,7 +88,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     @IBOutlet var navigationBar: UINavigationBar!
     
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
 }
 
@@ -126,11 +126,11 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     
     @IBAction func lastnameEditingEnd(sender: AnyObject) {
         
-        if  lastname.text.isEmpty {
+        if  (lastname.text?.isEmpty != nil) {
             lastname.text = "Ce champ est vide"
             lastname.textColor = redColor
         }
-        else if lastname.text.isEmpty == false {
+        else if lastname.text?.isEmpty == false {
             lastname.textColor = darkColor
         }
 
@@ -153,11 +153,11 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     }
     
     @IBAction func firstnameEditingEnd(sender: AnyObject) {
-        if  firstname.text.isEmpty {
+        if  (firstname.text?.isEmpty != nil) {
             firstname.text = "Ce champ est vide"
             firstname.textColor = redColor
         }
-        else if firstname.text.isEmpty == false {
+        else if firstname.text?.isEmpty == false {
             firstname.textColor = darkColor
         }
     
@@ -168,18 +168,18 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
         
         func validateEmail (candidate:NSString) -> Bool{
             
-            var emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-            var emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+            let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+            let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
             
             return emailTest.evaluateWithObject(candidate)
         }
         
-        if  mail.text.isEmpty {
+        if  (mail.text?.isEmpty != nil) {
             mail.text = "Ce champ est vide"
             mail.textColor = redColor
         }
         
-        if(!validateEmail(mail.text)){
+        if(!validateEmail(mail.text!)){
             mail.text = "Cette adresse n'est pas valide"
             mail.textColor = redColor
         }
@@ -207,7 +207,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             })
         }*/
         
-        if  mail.text.isEmpty {
+        if  (mail.text?.isEmpty != nil) {
             mail.text = "Ce champ est vide"
             mail.textColor = redColor
         }
@@ -218,13 +218,13 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     
     func addConstraints(contraints : NSLayoutConstraint){
         
-        var myConstraintsAdded: Void = self.view.addConstraint(contraints)
+        let myConstraintsAdded: Void = self.view.addConstraint(contraints)
         
         return(myConstraintsAdded)
     }
     
     func removeConstraints(constraints : NSLayoutConstraint){
-        var myConstraintsRemoved:Void = self.view.removeConstraint(constraints)
+        let myConstraintsRemoved:Void = self.view.removeConstraint(constraints)
         
         return(myConstraintsRemoved)
     }
@@ -239,7 +239,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     
     
     @IBAction func passwordEditingEnd(sender: AnyObject) {
-        var lenght = count(pwd.text!)
+        let lenght = (pwd.text!).characters.count
         if (lenght < 8 || lenght > 12){
             pwd.secureTextEntry = false
             pwd.text = "Mot de passe entre 8 et 12 ;)"
@@ -287,7 +287,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     func checkUserData() -> Bool {
         var bool = false
         
-        if ( !firstname.text.isEmpty && !lastname.text.isEmpty && !mail.text.isEmpty && !pwd.text.isEmpty && !confirmationPwd.text.isEmpty){
+        if ( !firstname.text!.isEmpty && !lastname.text!.isEmpty && !mail.text!.isEmpty && !pwd.text!.isEmpty && !confirmationPwd.text!.isEmpty){
             bool = true
         }
         
@@ -300,9 +300,9 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
     @IBAction func sendUserData(sender: UIButton) {
         
         if (checkUserData()){
-            var finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
+            let finalGender:String = gender.titleForSegmentAtIndex(gender.selectedSegmentIndex)!
             
-            var tabUser:Dictionary<String,String> = ["Lastname": lastname.text, "Firstname": firstname.text, "E-mail": mail.text, "Password" : pwd.text, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
+            let tabUser:Dictionary<String,String> = ["Lastname": lastname.text!, "Firstname": firstname.text!, "E-mail": mail.text!, "Password" : pwd.text!, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
 
             var url = "http://151.80.128.136:3000/user/"
             
@@ -310,15 +310,15 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             if hasLoginKey == false {
                 NSUserDefaults.standardUserDefaults().setValue(mail.text, forKey: "username")
             }
-            println(hasLoginKey)
+            print(hasLoginKey)
             
             // 5.
             MyKeychainWrapper.mySetObject(pwd.text, forKey:kSecValueData)
             MyKeychainWrapper.writeToKeychain()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
             NSUserDefaults.standardUserDefaults().synchronize()
-            var pass = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
-            println(pass)
+            let pass = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
+            print(pass)
             //methodePost.post(tabUser, url:URLS.urlUser)
             /*let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             appDelegate.userProfil.saveUser(firstname.text, lastname: lastname.text, mail: mail.text, gender: gender.selectedSegmentIndex, birthDate: birthdate.date)*/
@@ -327,7 +327,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             //println("http://151.80.128.136:3000/user/\(mail.text)")
             
             methodePost.post("POST", params:tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                let alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {
                     alert.title = "Create Account Success!"
@@ -347,13 +347,13 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
                     alert.show()
                 })
             }
-            println("Create Account : Success");
+            print("Create Account : Success");
 
 
         }
         
         else {
-            println("Create Account : Failed");
+            print("Create Account : Failed");
         }
         
     }

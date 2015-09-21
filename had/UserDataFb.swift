@@ -7,8 +7,66 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDataFb {
+    
+    var profilePicture:UIImage?
+    var backgroundPicture:UIImage?
+    
+    var pictureCache = [String : UIImage]()
+    let userSetting = SettingsViewController().userDefaults
+
+    func getPicture() {
+        
+        print("Func get profil picture")
+        
+        
+        let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
+        
+        print("picture request")
+        
+        pictureRequest.startWithCompletionHandler({
+            (connection, result, error: NSError!) -> Void in
+            if error == nil {
+                print("\(result)")
+                let data: AnyObject  = result.objectForKey("data")!
+                let url :NSString = data.valueForKey("url") as! NSString
+                let imageURL = NSURL(string: url as String)
+                let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+                
+                
+                    self.profilePicture = UIImage(data: nsdata!)
+                    self.backgroundPicture = UIImage(data: nsdata!)
+                    self.pictureCache["profile_picture"] = UIImage(data: nsdata!)
+                    print("Profile picture userData")
+                    print(self.pictureCache["profile_picture"]?.description)
+                    self.test()
+
+                
+                
+                
+                //settingViewController.profilePicture.image = UIImage(data: nsdata!)
+                //settingViewController.profilePicture.layer.cornerRadius = settingViewController.profilePicture.frame.size.width / 2
+                //settingViewController.profilePicture.clipsToBounds = true;
+                
+                //settingViewController.backgroundPicture.image = UIImage(data: nsdata!)
+                
+                //self.profilePicture.image = UIImage(data: NSData(contentsOfURL: NSURL(fileURLWithPath: url as String)!)!)
+                print(url)
+            } else {
+                print("\(error)")
+            }
+        })
+        
+    }
+    
+    
+    func test() {
+        print("testpicture")
+        print(pictureCache["profile_picture"]?.description)
+    }
+        
     
     var friendsDictionary:Dictionary<String, String> = ["":""]
     
@@ -21,25 +79,25 @@ class UserDataFb {
              // 1
             
             if ((error) != nil) {
-                println("Error: \(error)")
+                print("Error: \(error)")
             }
             else {
                 
-                println(result)
+                print(result)
                 
                 var allFriends = [String]()
-                var friends = result["data"] as! NSArray
+                let friends = result["data"] as! NSArray
                 
-                println("friends\(friends)")
+                print("friends\(friends)")
                 for friend in friends {
-                    var thisFriend = friend["id"] as! String
+                    let thisFriend = friend["id"] as! String
                     allFriends.append(thisFriend)
-                    println("Thisfriends\(thisFriend)")
+                    print("Thisfriends\(thisFriend)")
 
                 }
                 
-                var allFriendsFb = ",".join(allFriends)
-                println(allFriendsFb)
+                let allFriendsFb = allFriends.joinWithSeparator(",")
+                print(allFriendsFb)
                 
                 
                 
@@ -59,7 +117,7 @@ class UserDataFb {
     
     func SendUserData() -> Bool
     {
-        var methodePost = QueryServices()
+        let methodePost = QueryServices()
         var response:Bool = false
         
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
@@ -67,19 +125,19 @@ class UserDataFb {
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil) {
-                println("Error: \(error)")
+                print("Error: \(error)")
             }
             else {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
 
-                var userEmailFb:String = result.valueForKey("email") as! String
-                var userFirstnameFb:String = result.valueForKey("first_name") as! String
-                var userLastnameFb = result.valueForKey("last_name") as! String
-                var userGenderFb = result.valueForKey("gender") as! String
-                var userLinkFb = result.valueForKey("link") as! String
+                let userEmailFb:String = result.valueForKey("email") as! String
+                let userFirstnameFb:String = result.valueForKey("first_name") as! String
+                let userLastnameFb = result.valueForKey("last_name") as! String
+                let userGenderFb = result.valueForKey("gender") as! String
+                let userLinkFb = result.valueForKey("link") as! String
                 
                 //-- Set userData
-                println("fetched user: \(result)")
+                print("fetched user: \(result)")
                 userDefaults.setValue(userEmailFb as String, forKey: "email")
                 userDefaults.setValue(userFirstnameFb as String, forKey: "first_name")
                 userDefaults.setValue(userLastnameFb as String, forKey: "last_name")
@@ -93,22 +151,22 @@ class UserDataFb {
                 getFriends.startWithCompletionHandler({ (connection, result, error) -> Void in
                     
                     if ((error) != nil) {
-                        println("Error: \(error)")
+                        print("Error: \(error)")
                     }
                     else {
-                        println("Friends\(result)")
+                        print("Friends\(result)")
                         
                         var allFriends = [String]()
-                        var friends = result["data"] as! NSArray
+                        let friends = result["data"] as! NSArray
                         for friend in friends {
-                            var thisFriend = friend["id"] as! String
+                            let thisFriend = friend["id"] as! String
                             allFriends.append(thisFriend)
                         }
                         
-                        var allFriendsFb = ",".join(allFriends)
-                        println(allFriendsFb)
+                        let allFriendsFb = allFriends.joinWithSeparator(",")
+                        print(allFriendsFb)
 
-                        var userArray:Dictionary = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb, "friends":allFriendsFb /*"Birthday":userBirthday*/]
+                        let userArray:Dictionary = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb, "friends":allFriendsFb /*"Birthday":userBirthday*/]
 
                         
                         
@@ -116,7 +174,7 @@ class UserDataFb {
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
-                            println("Response 1 \(response)")
+                            print("Response 1 \(response)")
 
                             
                             if(succeeded) {
@@ -126,7 +184,7 @@ class UserDataFb {
                                 response = false
                             }
                             
-                            println("Response 2 \(response)")
+                            print("Response 2 \(response)")
                             
                         }
                     }
@@ -135,6 +193,7 @@ class UserDataFb {
         })
         
         return response
+        
     }
     
 }

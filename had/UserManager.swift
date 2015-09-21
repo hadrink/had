@@ -78,14 +78,14 @@ class User{
     func loadUser()
     {
         let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
-        var userData = NSArray(contentsOfFile: userDataPath!)
+        let userData = NSArray(contentsOfFile: userDataPath!)
         let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as! NSDictionary
         //var pListData: NSDictionary = NSPropertyListSerialization.dictionaryWithValuesForKeys(NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
-        println(userDataDictionary.valueForKey("Firstname"))
-        println(userDataDictionary.valueForKey("Lastname"))
-        println(userDataDictionary.valueForKey("Mail"))
-        println(userDataDictionary.valueForKey("Gender"))
-        println(userDataDictionary.valueForKey("Birthdate"))
+        print(userDataDictionary.valueForKey("Firstname"))
+        print(userDataDictionary.valueForKey("Lastname"))
+        print(userDataDictionary.valueForKey("Mail"))
+        print(userDataDictionary.valueForKey("Gender"))
+        print(userDataDictionary.valueForKey("Birthdate"))
         
         self.name=userDataDictionary.valueForKey("Firstname") as? String
         self.lastname=userDataDictionary.valueForKey("Lastname") as? String
@@ -111,7 +111,11 @@ class User{
         {
             var bundle:NSString = NSBundle.mainBundle().pathForResource("user", ofType: "plist")!
             
-            fileManager.copyItemAtPath(bundle as String, toPath: path, error:&error) //6
+            do {
+                try fileManager.copyItemAtPath(bundle as String, toPath: path)
+            } catch var error1 as NSError {
+                error = error1
+            } //6
         }
         
         
@@ -123,33 +127,33 @@ class User{
         self.birthDate = birthDate
         
         // create dictionary with values in UITextFields
-        var plistDict:NSDictionary = NSDictionary(objects: NSArray(objects: name,lastname,mail,gender,birthDate) as [AnyObject], forKeys: NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate") as [AnyObject])
+        let plistDict:NSDictionary = NSDictionary(objects: NSArray(objects: name,lastname,mail,gender,birthDate) as [AnyObject], forKeys: NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate") as! [NSArray])
 
-        println(NSPropertyListSerialization.propertyList(plistDict, isValidForFormat: NSPropertyListFormat.XMLFormat_v1_0))
+        print(NSPropertyListSerialization.propertyList(plistDict, isValidForFormat: NSPropertyListFormat.XMLFormat_v1_0))
         // create NSData from dictionary
-        var plistData:NSData = NSPropertyListSerialization.dataWithPropertyList(plistDict,format:NSPropertyListFormat.XMLFormat_v1_0,options:0 ,error:&error)!
+        let plistData:NSData = try! NSPropertyListSerialization.dataWithPropertyList(plistDict,format:NSPropertyListFormat.XMLFormat_v1_0,options:0 )
      
-        println(plistData.length)
-        println(userDataPath)
+        print(plistData.length)
+        print(userDataPath)
         // check is plistData exists
         if(plistData.length != 0)
         {
             // write plistData to our Data.plistfile
             let ok = plistData.writeToFile(path, atomically:true)
-            println("write ok : ")
-            println(ok)
+            print("write ok : ")
+            print(ok)
             /*let userDataPath2 = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
             var userData2 = NSArray(contentsOfFile: userDataPath2!)
             let userDataDictionary2 : NSDictionary = userData2?.objectAtIndex(0) as NSDictionary*/
-            println(userDataDictionary.valueForKey("Firstname"))
-            println(userDataDictionary.valueForKey("Lastname"))
-            println(userDataDictionary.valueForKey("Mail"))
-            println(userDataDictionary.valueForKey("Gender"))
-            println(userDataDictionary.valueForKey("Birthdate"))
+            print(userDataDictionary.valueForKey("Firstname"))
+            print(userDataDictionary.valueForKey("Lastname"))
+            print(userDataDictionary.valueForKey("Mail"))
+            print(userDataDictionary.valueForKey("Gender"))
+            print(userDataDictionary.valueForKey("Birthdate"))
         }
         else
         {
-            println("Could not save \(error), \(error?.userInfo)")
+            print("Could not save \(error), \(error?.userInfo)")
         }
         
     }
@@ -228,7 +232,7 @@ class User{
         //let predicate = NSPredicate(format: "mail != %@", "")
         //fetchRequest.predicate = predicate
         var error: NSError?
-        let fetchedResults: NSArray = managedContext.executeFetchRequest(fetchRequest,error: &error)!
+        let fetchedResults: NSArray = try! managedContext.executeFetchRequest(fetchRequest)
         return fetchedResults
     }
     
@@ -238,12 +242,16 @@ class User{
         //Delete all users in core data
          for result in fetchedResults
         {
-            print(" avant : ")
-            println(result.valueForKey("name"))
+            print(" avant : ", terminator: "")
+            print(result.valueForKey("name"))
             managedContext.deleteObject(result as! NSManagedObject)
-            managedContext.save(&saveError)
-            print(" apres : ")
-            println(result.valueForKey("name"))
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                saveError = error
+            }
+            print(" apres : ", terminator: "")
+            print(result.valueForKey("name"))
         }
     }
 }

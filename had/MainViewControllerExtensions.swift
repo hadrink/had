@@ -17,14 +17,14 @@ extension MainViewController: UITableViewDataSource
     {
         if (self.searchController.active)
         {
-            println("search")
-            println(self.searchArray.count)
+            print("search")
+            print(self.searchArray.count)
             return self.searchArray.count
         }
         else
         {
-            println("normal")
-            println(self.placeItems.count)
+            print("normal")
+            print(self.placeItems.count)
             return self.placeItems.count
         }
     }
@@ -33,11 +33,11 @@ extension MainViewController: UITableViewDataSource
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
-        println(self.searchController.active)
+        print(self.searchController.active)
         
         if (self.searchController.active)
         {
-            println("active reload")
+            print("active reload")
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
@@ -45,7 +45,7 @@ extension MainViewController: UITableViewDataSource
             cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
             
-            var type = searchArray[indexPath.row].typeofPlace as String!
+            let type = searchArray[indexPath.row].typeofPlace as String!
             
             if ( type == "cafe") {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
@@ -60,9 +60,9 @@ extension MainViewController: UITableViewDataSource
             
         else
         {
-            var type = placeItems[indexPath.row].typeofPlace as String!
+            let type = placeItems[indexPath.row].typeofPlace as String!
             
-            println("inactive")
+            print("inactive")
             
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
@@ -72,7 +72,7 @@ extension MainViewController: UITableViewDataSource
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             
-            println("Type \(type)")
+            print("Type \(type)")
             
             if ( type == "cafe" || type == "bar") {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
@@ -91,15 +91,15 @@ extension MainViewController: UITableViewDataSource
     }
     
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
         
-        var GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
 
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
         
-        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             let shareToFacebookButton = NSLocalizedString("Facebook", comment: "Facebook")
             let shareToTwitterButton = NSLocalizedString("Twitter", comment: "Twitter")
@@ -109,15 +109,15 @@ extension MainViewController: UITableViewDataSource
             
             //-- Create the actions
             let shareToFacebookAction = UIAlertAction(title: shareToFacebookButton, style: .Destructive ) { action in
-                var shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                var thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
+                let shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                let thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
                 shareToFacebook.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
                 self.presentViewController(shareToFacebook, animated: true, completion: nil)
             }
             
             let shareToTwitterAction = UIAlertAction(title: shareToTwitterButton, style: .Destructive) { action in
-                var shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-                var thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
+                let shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                let thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
                 shareToTwitter.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
                 self.presentViewController(shareToTwitter, animated: true, completion: nil)
             }
@@ -147,7 +147,7 @@ extension MainViewController: UITableViewDataSource
         })
         
         shareAction.backgroundColor = UIColorFromRGB(0x5B90CE)
-        var FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             //do favoris action
         })
         
@@ -188,15 +188,15 @@ extension MainViewController: UITableViewDelegate
         
         if(selectedIndex == indexPath.row){
             selectedIndex = -1
-            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             return
         }
         if(selectedIndex != -1){
-            var prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+            let prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
+            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
         selectedIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -212,7 +212,7 @@ extension MainViewController: UISearchResultsUpdating
 {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.searchArray.removeAll()
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text){
+        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text!){
             (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
             var locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
@@ -223,11 +223,11 @@ extension MainViewController: UISearchResultsUpdating
                 for item in reposArray {
                     self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
                     //println("Item \(item)")
-                    println("has Item")
+                    print("has Item")
                 }
                 
             }
-            println("reload")
+            print("reload")
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
@@ -249,28 +249,28 @@ extension MainViewController: CLLocationManagerDelegate
         locationManager.startUpdatingLocation()
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        println("Michel")
+        print("Michel")
         manager.stopUpdatingLocation()
 
     
             //println(manager.location)
         if UIApplication.sharedApplication().applicationState == .Active {
-            println("app is activated")
+            print("app is activated")
             
             let settingViewController = SettingsViewController()
             
-            var userLatitude = String(stringInterpolationSegment: manager.location.coordinate.latitude)
-            var userLongitude = String(stringInterpolationSegment: manager.location.coordinate.longitude)
-            println("Latitude \(userLatitude)")
-            println("Longitude \(userLongitude)")
+            var userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
+            var userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
+            print("Latitude \(userLatitude)")
+            print("Longitude \(userLongitude)")
             var ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
-            println("ageMin \(ageMin)")
+            print("ageMin \(ageMin)")
             var ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
-            println("AgeMax \(ageMax)")
+            print("AgeMax \(ageMax)")
             var distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
-            println("Distance max \(distanceMax)")
+            print("Distance max \(distanceMax)")
             
             /*if (distanceMax == "0.0"){
                 distanceMax = "10"
@@ -280,7 +280,7 @@ extension MainViewController: CLLocationManagerDelegate
             let userDataFb = UserDataFb()
             userDataFb.getFriends()
             var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-            println("MyFriends\(friends)" )
+            print("MyFriends\(friends)" )
             
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
             self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
@@ -292,20 +292,20 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if let reposArray = obj["listbar"] as? [NSDictionary]  {
                     //println("ReposArray \(reposArray)")
-                    println("RefreshhhYouhou")
+                    print("RefreshhhYouhou")
                     
                    /* if(self.isAnimating == true) {
                     
                     }*/
                     
-                    self.placeItems.removeAll()
+                    //self.placeItems.removeAll()
                     
                     for item in reposArray {
                         self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
                         //println("Item \(item)")
                     }
                 }
-                println("Mon object \(obj)")
+                print("Mon object \(obj)")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
@@ -315,17 +315,17 @@ extension MainViewController: CLLocationManagerDelegate
             }
         
         } else {
-            NSLog("App is backgrounded. New location is %@", manager.location)
+            NSLog("App is backgrounded. New location is %@", manager.location!)
             let userDefaults = NSUserDefaults.standardUserDefaults()
             var email: String! = userDefaults.stringForKey("email")
-            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location.coordinate.latitude)/\(manager.location.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                println("dans le post du backgroundeuuuux")
+            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location?.coordinate.latitude)/\(manager.location?.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                print("dans le post du backgroundeuuuux")
             }
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("Error while updating location" + error.localizedDescription)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location" + error.localizedDescription)
     }
 }
 
@@ -340,7 +340,7 @@ extension MainViewController
 {
     
     func setupRefreshControl() {
-        println()
+        print("")
         
         // Programmatically inserting a UIRefreshControl
         self.refreshControl = UIRefreshControl()
@@ -386,12 +386,12 @@ extension MainViewController
     }
     
     func refresh(){
-        println()
+        print("")
         
         // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
         // This is where you'll make requests to an API, reload data, or process information
-        var delayInSeconds = 3.0;
-        var popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
+        let delayInSeconds = 3.0;
+        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
         dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
             // When done requesting/reloading/processing invoke endRefreshing, to close the control
             self.refreshControl.endRefreshing()
@@ -405,30 +405,30 @@ extension MainViewController
         var refreshBounds = self.refreshControl.bounds;
         
         // Distance the table has been pulled >= 0
-        var pullDistance = max(0.0, -self.refreshControl.frame.origin.y);
+        let pullDistance = max(0.0, -self.refreshControl.frame.origin.y);
         
         // Half the width of the table
-        var midX = self.tableData.frame.size.width / 2.0;
+        let midX = self.tableData.frame.size.width / 2.0;
         
         // Calculate the width and height of our graphics
-        var compassHeight = self.town_background.bounds.size.height + 120;
-        var compassHeightHalf = compassHeight / 2.0;
+        let compassHeight = self.town_background.bounds.size.height + 120;
+        let compassHeightHalf = compassHeight / 2.0;
         
-        var compassWidth = self.town_background.bounds.size.width;
-        var compassWidthHalf = compassWidth / 2.0;
+        let compassWidth = self.town_background.bounds.size.width;
+        let compassWidthHalf = compassWidth / 2.0;
         
-        var spinnerHeight = self.bottle_spinner.bounds.size.height;
-        var spinnerHeightHalf = spinnerHeight / 2.0;
+        let spinnerHeight = self.bottle_spinner.bounds.size.height;
+        let spinnerHeightHalf = spinnerHeight / 2.0;
         
-        var spinnerWidth = self.bottle_spinner.bounds.size.width;
-        var spinnerWidthHalf = spinnerWidth / 2.0;
+        let spinnerWidth = self.bottle_spinner.bounds.size.width;
+        let spinnerWidthHalf = spinnerWidth / 2.0;
         
         // Calculate the pull ratio, between 0.0-1.0
-        var pullRatio = min( max(pullDistance, 0.0), 100.0) / 100.0;
+        let pullRatio = min( max(pullDistance, 0.0), 100.0) / 100.0;
         
         // Set the Y coord of the graphics, based on pull distance
-        var compassY = pullDistance / 2.0 - compassHeightHalf;
-        var spinnerY = pullDistance / 2.0 - spinnerHeightHalf;
+        let compassY = pullDistance / 2.0 - compassHeightHalf;
+        let spinnerY = pullDistance / 2.0 - spinnerHeightHalf;
         
         // Calculate the X coord of the graphics, adjust based on pull ratio
         var compassX = midX + compassWidthHalf - compassWidth;
@@ -468,11 +468,11 @@ extension MainViewController
             self.animateRefreshView()
         }
         
-        println("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: \(midX), refreshing: \(self.refreshControl.refreshing)")
+        print("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: \(midX), refreshing: \(self.refreshControl.refreshing)")
     }
     
     func animateRefreshView() {
-        println()
+        print("")
         
         // Background color to loop through for our color view
         
@@ -512,7 +512,7 @@ extension MainViewController
     }
     
     func resetAnimation() {
-        println()
+        print("")
         
         // Reset our flags and }background color
         self.isRefreshAnimating = false;

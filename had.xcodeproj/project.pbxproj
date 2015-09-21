@@ -11,11 +11,7 @@
 		7A1017A41B67AF6100781E54 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017A31B67AF6100781E54 /* CFNetwork.framework */; };
 		7A1017A61B67AF6E00781E54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */; };
 		7A1017A81B67AF7E00781E54 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017A71B67AF7E00781E54 /* QuartzCore.framework */; };
-		7A1017AA1B67AF9500781E54 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017A91B67AF9500781E54 /* StoreKit.framework */; };
 		7A1017AC1B67AFA100781E54 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017AB1B67AFA100781E54 /* SystemConfiguration.framework */; };
-		7A1017AE1B67AFCB00781E54 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017AD1B67AFCB00781E54 /* libz.dylib */; };
-		7A1017B01B67AFDC00781E54 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017AF1B67AFDC00781E54 /* libsqlite3.dylib */; };
-		7A1017B31B67B04F00781E54 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017B11B67B04F00781E54 /* Bolts.framework */; };
 		7A1017B41B67B04F00781E54 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1017B21B67B04F00781E54 /* Parse.framework */; };
 		7A10456F1A8F779C008DAF8C /* signpainter-housescript-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A10456E1A8F779C008DAF8C /* signpainter-housescript-webfont.ttf */; };
 		7A1045711A8F7EC4008DAF8C /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A1045701A8F7EC4008DAF8C /* Lato-BoldItalic.ttf */; };
@@ -62,6 +58,11 @@
 		7AA2251419CDA9D1002003ED /* hadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251319CDA9D1002003ED /* hadTests.swift */; };
 		7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */; };
 		7AA2252019CDBED4002003ED /* QueryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251F19CDBED4002003ED /* QueryServices.swift */; };
+		7AB065201BADA5DE001293C2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB0651F1BADA5DE001293C2 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		7AB065231BADA5F5001293C2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065211BADA5F5001293C2 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		7AB065241BADA5F5001293C2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065221BADA5F5001293C2 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */; };
+		7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9981BADAAC10025477A /* libsqlite3.tbd */; };
 		7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */; };
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
 		7ABF0E201A2877110049720C /* bottle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABF0E1F1A2877110049720C /* bottle.png */; };
@@ -100,8 +101,6 @@
 		EB63B0AA1AD465DF0031BE6F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB63B0A91AD465DF0031BE6F /* Settings.swift */; };
 		EB797E721B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */; };
 		EB82B03B1B433D4200E37AD5 /* location-icon@10x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB82B03A1B433D4200E37AD5 /* location-icon@10x.png */; };
-		EBEA243C1B69709C004E338A /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEA243A1B69709C004E338A /* FBSDKCoreKit.framework */; };
-		EBEA243D1B69709C004E338A /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBEA243B1B69709C004E338A /* FBSDKLoginKit.framework */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
 		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
 		F3A1335F1B680BEB00664365 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A1335C1B680BEB00664365 /* Bolts.framework */; };
@@ -127,11 +126,7 @@
 		7A1017A31B67AF6100781E54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7A1017A71B67AF7E00781E54 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		7A1017A91B67AF9500781E54 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7A1017AB1B67AFA100781E54 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		7A1017AD1B67AFCB00781E54 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		7A1017AF1B67AFDC00781E54 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		7A1017B11B67B04F00781E54 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		7A1017B21B67B04F00781E54 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		7A10456E1A8F779C008DAF8C /* signpainter-housescript-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "signpainter-housescript-webfont.ttf"; sourceTree = "<group>"; };
 		7A1045701A8F7EC4008DAF8C /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -182,6 +177,11 @@
 		7AA2251319CDA9D1002003ED /* hadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadTests.swift; sourceTree = "<group>"; };
 		7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		7AA2251F19CDBED4002003ED /* QueryServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryServices.swift; sourceTree = "<group>"; };
+		7AB0651F1BADA5DE001293C2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		7AB065211BADA5F5001293C2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		7AB065221BADA5F5001293C2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		7AB6C9981BADAAC10025477A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7ABF0E1F1A2877110049720C /* bottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottle.png; sourceTree = "<group>"; };
@@ -223,8 +223,6 @@
 		EB63B0A91AD465DF0031BE6F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtensions.swift; sourceTree = "<group>"; };
 		EB82B03A1B433D4200E37AD5 /* location-icon@10x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon@10x.png"; sourceTree = "<group>"; };
-		EBEA243A1B69709C004E338A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		EBEA243B1B69709C004E338A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
 		EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
@@ -241,22 +239,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBEA243D1B69709C004E338A /* FBSDKLoginKit.framework in Frameworks */,
+				7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */,
+				7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */,
 				7A3143251B6960A000122781 /* Social.framework in Frameworks */,
 				7A3143231B69607500122781 /* Accounts.framework in Frameworks */,
-				7A1017B31B67B04F00781E54 /* Bolts.framework in Frameworks */,
-				7A1017B01B67AFDC00781E54 /* libsqlite3.dylib in Frameworks */,
-				7A1017AE1B67AFCB00781E54 /* libz.dylib in Frameworks */,
 				7A1017AC1B67AFA100781E54 /* SystemConfiguration.framework in Frameworks */,
-				7A1017AA1B67AF9500781E54 /* StoreKit.framework in Frameworks */,
 				EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */,
+				7AB065231BADA5F5001293C2 /* FBSDKCoreKit.framework in Frameworks */,
 				7A1017B41B67B04F00781E54 /* Parse.framework in Frameworks */,
 				7A1017A81B67AF7E00781E54 /* QuartzCore.framework in Frameworks */,
 				7A1017A61B67AF6E00781E54 /* CoreGraphics.framework in Frameworks */,
 				7A1017A41B67AF6100781E54 /* CFNetwork.framework in Frameworks */,
 				7A1017A21B67AF5600781E54 /* AudioToolbox.framework in Frameworks */,
-				EBEA243C1B69709C004E338A /* FBSDKCoreKit.framework in Frameworks */,
+				7AB065241BADA5F5001293C2 /* FBSDKLoginKit.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
+				7AB065201BADA5DE001293C2 /* Bolts.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
 				F3A1335F1B680BEB00664365 /* Bolts.framework in Frameworks */,
 			);
@@ -349,12 +346,11 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */,
+				7AB6C9981BADAAC10025477A /* libsqlite3.tbd */,
 				7A3143241B6960A000122781 /* Social.framework */,
 				7A3143221B69607500122781 /* Accounts.framework */,
-				7A1017AF1B67AFDC00781E54 /* libsqlite3.dylib */,
-				7A1017AD1B67AFCB00781E54 /* libz.dylib */,
 				7A1017AB1B67AFA100781E54 /* SystemConfiguration.framework */,
-				7A1017A91B67AF9500781E54 /* StoreKit.framework */,
 				7A1017A71B67AF7E00781E54 /* QuartzCore.framework */,
 				7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */,
 				7A1017A31B67AF6100781E54 /* CFNetwork.framework */,
@@ -445,10 +441,10 @@
 		EBABF9371B1772090096D705 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				EBEA243A1B69709C004E338A /* FBSDKCoreKit.framework */,
-				EBEA243B1B69709C004E338A /* FBSDKLoginKit.framework */,
-				7A1017B11B67B04F00781E54 /* Bolts.framework */,
 				7A1017B21B67B04F00781E54 /* Parse.framework */,
+				7AB065211BADA5F5001293C2 /* FBSDKCoreKit.framework */,
+				7AB065221BADA5F5001293C2 /* FBSDKLoginKit.framework */,
+				7AB0651F1BADA5DE001293C2 /* Bolts.framework */,
 				EBFD30201AB77BB600727E3F /* Security.framework */,
 				EB444F9D1A9E30A000E533B2 /* CoreData.framework */,
 				7A8272F91A1D3279004603FE /* CoreLocation.framework */,
@@ -528,6 +524,8 @@
 		7AA224EC19CDA9D0002003ED /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = had;
 				TargetAttributes = {
@@ -537,6 +535,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
 							};
 						};
 					};
@@ -791,6 +792,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/had",
@@ -813,8 +816,10 @@
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "had/had-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TREAT_MISSING_BASELINES_AS_TEST_FAILURES = NO;
 			};
 			name = Debug;
 		};
@@ -824,6 +829,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/had",
@@ -846,7 +853,9 @@
 				INFOPLIST_FILE = had/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "had/had-Bridging-Header.h";
+				TREAT_MISSING_BASELINES_AS_TEST_FAILURES = NO;
 			};
 			name = Release;
 		};
@@ -854,10 +863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -865,7 +871,7 @@
 				INFOPLIST_FILE = hadTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/had.app/had";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
@@ -873,14 +879,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = hadTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/had.app/had";
+				TEST_HOST = "";
 			};
 			name = Release;
 		};

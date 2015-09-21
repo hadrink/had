@@ -54,7 +54,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
         if(textField === textFieldPsw)
         {
             if (textFieldPsw.text == "" || textFieldMail.text == "") {
-                var alert = UIAlertView()
+                let alert = UIAlertView()
                 alert.title = "You must enter both a username and password!"
                 alert.addButtonWithTitle("Oops!")
                 alert.show()
@@ -67,7 +67,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             
 
                 // 6.
-            checkLogin(textFieldMail.text, password: textFieldPsw.text)
+            checkLogin(textFieldMail.text!, password: textFieldPsw.text!)
                 
             return true
         }
@@ -86,7 +86,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                 return true
         } else {
             methodePost.post("POST", params: ["E-mail": username, "Password":password], url: "http://151.80.128.136:3000/email/user/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                let alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {
                     alert.title = "Success!"
@@ -178,12 +178,12 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     }
     
     @IBAction func btnFBLoginPressed(sender: AnyObject) {
-        var fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager .logInWithReadPermissions(["email", "user_friends"], handler: { (result, error) -> Void in
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logInWithReadPermissions(["email", "user_friends"], handler: { (result, error) -> Void in
             if (error == nil){
                 var fbloginresult : FBSDKLoginManagerLoginResult = result
                 if result.isCancelled {
-                    println(" Handle cancellations")
+                    print(" Handle cancellations")
                 }
                 else {
                     // If you ask for multiple permissions at once, you
@@ -195,7 +195,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                         var vc: AnyObject!
                         vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                         self.showViewController(vc as! UIViewController, sender: vc)
-                        println(" Do work")
+                        print(" Do work")
                     }
                 }
             }
@@ -204,12 +204,12 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        println("User Logged Out")
+        print("User Logged Out")
     }
     
     func observeProfileChange(){
         if ((FBSDKProfile.currentProfile()) != nil) {
-            println("diff de nil")
+            print("diff de nil")
             var vc: AnyObject!
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             self.showViewController(vc as! UIViewController, sender: vc)
@@ -218,7 +218,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     func observeTokenChange(){
         if ((FBSDKAccessToken.currentAccessToken()) != nil) {
-            println("profile change")
+            print("profile change")
             observeProfileChange()
         }
     }

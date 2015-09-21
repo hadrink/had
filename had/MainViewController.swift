@@ -81,7 +81,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         //-- Change color searchBar text and placeholder and set image search icon
         
-        var textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
+        let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
         
         textFieldInsideSearchBar?.textColor = UIColorFromRGB(0xF0F0EF)
         searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
@@ -152,14 +152,16 @@ class MainViewController: UIViewController, MKMapViewDelegate {
 
             locationManager.startUpdatingLocation()
         
-            locServices.latitude = locationManager.location.coordinate.latitude
-            locServices.longitude = locationManager.location.coordinate.longitude
+            locServices.latitude = locationManager.location!.coordinate.latitude
+            locServices.longitude = locationManager.location!.coordinate.longitude
         
            // println("Latitude \(locationManager.location.coordinate.latitude)")
         
-                        println("nbplaces")
+                        print("nbplaces")
         
         //-- Observer for background state
+        
+        UserDataFb().getPicture()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
@@ -194,7 +196,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //stop updating location to save battery life
         locationManager.stopUpdatingLocation()
         
-        let latitudeDescription = placemark.location.description
+        let latitudeDescription = placemark.location!.description
         let scannerLatitude = NSScanner(string:latitudeDescription)
         var scannedLatitude: NSString?
         
@@ -205,7 +207,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             //println("latitude: \(latitude)")
         }
         
-        let longitudeDescription = placemark.location.description
+        let longitudeDescription = placemark.location!.description
         let scannerLongitude = NSScanner(string:latitudeDescription)
         var scannedLongitude: NSString?
         
@@ -243,8 +245,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
  
         var latitude = 0.0
         var longitude = 0.0
-        println("itineraire")
-        println(self.searchController.active)
+        print("itineraire")
+        print(self.searchController.active)
         if !self.searchController.active
         {
             latitude = placeItems[indexPath.row].placeLatitudeDegrees!
@@ -256,17 +258,17 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             longitude = searchArray[indexPath.row].placeLongitudeDegrees!
         }
 
-        var coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
        
-        var options = [
+        let options = [
             MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
             MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
         ]
         
-        var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        var mapItem = MKMapItem(placemark: placemark)
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
         if !self.searchController.active
         {
             mapItem.name = placeItems[indexPath.row].placeName
@@ -324,7 +326,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     {
         locationManager.startUpdatingLocation()
         //isAnimating = true
-        println("refreshing")
+        print("refreshing")
         //placeItems = PlaceItem.allPlaceItems()
         if (placeItems.count != 0)
         {
@@ -341,19 +343,19 @@ class MainViewController: UIViewController, MKMapViewDelegate {
 
         
         // End the refreshing
-        var formatter:NSDateFormatter = NSDateFormatter()
+        let formatter:NSDateFormatter = NSDateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
-        var title:NSString = NSString(format:"Last update: %@", formatter.stringFromDate(NSDate() ))
-        var attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
+        let title:NSString = NSString(format:"Last update: %@", formatter.stringFromDate(NSDate() ))
+        let attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
         
-        var attributedTitle:NSAttributedString = NSAttributedString(string: title as String, attributes: attrsDictionary as [NSObject : AnyObject])
+        let attributedTitle:NSAttributedString = NSAttributedString(string: title as String, attributes: attrsDictionary as? [String : AnyObject])
         refreshControl.attributedTitle = attributedTitle;
         
         refreshControl.endRefreshing()
     }
     
     func setLogoNavBar(){
-        println("ici")
+        print("ici")
         let logo = UIImage(named: "had-title@3x")
         let imageView = UIImageView(image:logo)
         imageView.frame = CGRectMake(0, 0, 38.66, 44)
