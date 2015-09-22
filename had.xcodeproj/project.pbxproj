@@ -47,6 +47,9 @@
 		7A65B69D1AF5027F00A124EC /* RobotoSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */; };
 		7A65B69E1AF5027F00A124EC /* RobotoSlab-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */; };
 		7A6B5F2F1A8CBBAF00851BA5 /* bottle-intro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */; };
+		7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4951BB1463500299781 /* had.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		7A70C49B1BB146C300299781 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4991BB146C300299781 /* Store.swift */; settings = {ASSET_TAGS = (); }; };
 		7A7C2A581A5B39CB000DFC3B /* stats-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
 		7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */; };
@@ -93,7 +96,6 @@
 		EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */; };
 		EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */; };
 		EB444F901A9527D600E533B2 /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F8F1A9527D600E533B2 /* structs.swift */; };
-		EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */; };
 		EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB444F9D1A9E30A000E533B2 /* CoreData.framework */; };
 		EB444FA01AAE3ADF00E533B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */; };
 		EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF659681A49F235002C6745 /* SidebarViewController.swift */; };
@@ -162,6 +164,9 @@
 		7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Regular.ttf"; sourceTree = "<group>"; };
 		7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Thin.ttf"; sourceTree = "<group>"; };
 		7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottle-intro@3x.png"; sourceTree = "<group>"; };
+		7A70C4961BB1463500299781 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
+		7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Store+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7A70C4991BB146C300299781 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		7A7C2A571A5B39CB000DFC3B /* stats-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stats-icon@3x.png"; sourceTree = "<group>"; };
 		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
@@ -216,7 +221,6 @@
 		EB1BBE211B4DC4B400F46E99 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		EB444F8F1A9527D600E533B2 /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
-		EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
 		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB4813451AAF83AB004B5D53 /* user.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = user.plist; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 			children = (
 				7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */,
 				7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */,
+				7A70C4951BB1463500299781 /* had.xcdatamodeld */,
 				7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */,
 				EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */,
 			);
@@ -346,6 +351,8 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */,
+				7A70C4991BB146C300299781 /* Store.swift */,
 				7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */,
 				7AB6C9981BADAAC10025477A /* libsqlite3.tbd */,
 				7A3143241B6960A000122781 /* Social.framework */,
@@ -455,7 +462,6 @@
 		F6A5521F1A27A2E5001C371E /* ItemCell */ = {
 			isa = PBXGroup;
 			children = (
-				EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */,
 				EB444F8F1A9527D600E533B2 /* structs.swift */,
 				F61331F41A1E61F00007FAA1 /* MenuItem.swift */,
 				F6A5521D1A279D6A001C371E /* PlaceItem.swift */,
@@ -654,20 +660,22 @@
 				EB444F901A9527D600E533B2 /* structs.swift in Sources */,
 				EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */,
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
+				7A70C49B1BB146C300299781 /* Store.swift in Sources */,
 				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
 				EB63B0AA1AD465DF0031BE6F /* Settings.swift in Sources */,
 				F3C67E071B601B6600191138 /* UserDataFb.swift in Sources */,
 				7AA2252019CDBED4002003ED /* QueryServices.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
-				EB444F9C1A9BD45600E533B2 /* had.xcdatamodeld in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */,
 				7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */,
+				7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */,
 				EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */,
 				F61331F51A1E61F00007FAA1 /* MenuItem.swift in Sources */,
 				EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */,
 				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
 				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
+				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
 				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
 				EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */,
@@ -920,12 +928,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		EB444F9A1A9BD45600E533B2 /* had.xcdatamodeld */ = {
+		7A70C4951BB1463500299781 /* had.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */,
+				7A70C4961BB1463500299781 /* had.xcdatamodel */,
 			);
-			currentVersion = EB444F9B1A9BD45600E533B2 /* had.xcdatamodel */;
+			currentVersion = 7A70C4961BB1463500299781 /* had.xcdatamodel */;
 			path = had.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

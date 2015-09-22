@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class CellSetting:UITableViewCell{
     
@@ -59,9 +60,20 @@ class SettingsViewController: UITableViewController{
     
     @IBOutlet var contentViewTest2: UIView!
     
+    //var moContext: NSManagedObjectContext!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        let storeDesctiption = NSEntityDescription.entityForName("Store", inManagedObjectContext: moContext!)
+        print(" Yoyo\(storeDesctiption)")
+        let store = Store(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
+        
+        print("Test sImage2\(store.sImage?.description)")
+
+    
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
        
 
@@ -111,8 +123,11 @@ class SettingsViewController: UITableViewController{
         print("profile picture setting")
         print(UserDataFb().pictureCache.description)
         self.profilePicture.image = UserDataFb().pictureCache["profile_picture"]
-        self.backgroundPicture.image = UserDataFb().pictureCache["profile_picture"]
         
+        print("Test array\(NSArray(object: store))")
+
+        self.backgroundPicture.image = UIImage(data: store.sImage!)
+    
         
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true;

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class UserDataFb {
     
@@ -16,11 +17,12 @@ class UserDataFb {
     
     var pictureCache = [String : UIImage]()
     let userSetting = SettingsViewController().userDefaults
+    let cache:NSCache = NSCache()
+
 
     func getPicture() {
         
         print("Func get profil picture")
-        
         
         let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
         
@@ -35,15 +37,42 @@ class UserDataFb {
                 let imageURL = NSURL(string: url as String)
                 let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 
-                
+
                     self.profilePicture = UIImage(data: nsdata!)
                     self.backgroundPicture = UIImage(data: nsdata!)
                     self.pictureCache["profile_picture"] = UIImage(data: nsdata!)
                     print("Profile picture userData")
                     print(self.pictureCache["profile_picture"]?.description)
-                    self.test()
-
                 
+                    self.cache.setObject(UIImage(data: nsdata!)!, forKey: "profile_picture")
+                    print(self.cache.objectForKey("profile_picture")?.description)
+                
+                
+                    let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+                
+                    do {
+                
+                    let entityName : String = "Store"
+                    let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
+                    print(" Yoyo\(storeDesctiption)")
+                    let store = Store(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
+                
+                    let img = UIImage(data: nsdata!)
+                    let imgData = UIImageJPEGRepresentation(img!, 1)
+                    store.sImage = imgData
+                
+                
+                    try moContext?.save()
+                        
+                    print("Test sImage\(store.sImage?.description)")
+                
+                    }
+                
+                    catch let err as NSError {
+                        
+                        print(err)
+                
+                    }
                 
                 
                 //settingViewController.profilePicture.image = UIImage(data: nsdata!)
@@ -57,14 +86,17 @@ class UserDataFb {
             } else {
                 print("\(error)")
             }
+            
         })
-        
+        self.test()
     }
     
     
     func test() {
         print("testpicture")
         print(pictureCache["profile_picture"]?.description)
+        print(cache.objectForKey("profile_picture")?.description)
+        print(cache.description)
     }
         
     
