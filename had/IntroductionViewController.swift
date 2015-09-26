@@ -179,9 +179,9 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     @IBAction func btnFBLoginPressed(sender: AnyObject) {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logInWithReadPermissions(["email", "user_friends"], handler: { (result, error) -> Void in
+        fbLoginManager.logInWithReadPermissions(["public_profile","email","user_friends"], handler: { (result, error) -> Void in
             if (error == nil){
-                var fbloginresult : FBSDKLoginManagerLoginResult = result
+                
                 if result.isCancelled {
                     print(" Handle cancellations")
                 }
@@ -190,7 +190,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                     // should check if specific permissions missing
                     if result.grantedPermissions.contains("email")
                     {
-                        var isCreate = UserDataFb().SendUserData()
+                        UserDataFb().SendUserData()
                         
                         var vc: AnyObject!
                         vc=self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")

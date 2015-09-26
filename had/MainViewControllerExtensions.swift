@@ -251,6 +251,8 @@ extension MainViewController: CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        locServices.latitude = locationManager.location!.coordinate.latitude
+        locServices.longitude = locationManager.location!.coordinate.longitude
         print("Michel")
         manager.stopUpdatingLocation()
 
@@ -283,7 +285,7 @@ extension MainViewController: CLLocationManagerDelegate
             print("MyFriends\(friends)" )
             
             //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-            self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: "http://151.80.128.136:3000/list/had/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 

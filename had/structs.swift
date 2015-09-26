@@ -7,11 +7,10 @@
 //
 import CoreData
 
-struct URLS {
+struct Urls {
     
-    static var urlUser="http://151.80.128.136:3000/user/"
-    static var urlPlace="http://151.80.128.136:3000/place/"
-    static var url="vide"
+    static let urlListPlace = "http://151.80.128.136:3000/list/had/"
+    
 }
 struct user {
     static var userProfil = [NSManagedObject]()

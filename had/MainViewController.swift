@@ -36,7 +36,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         return manager
-        }()
+    }()
 
     
     var isAnimating = false
@@ -44,12 +44,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     let locServices = LocationServices()
     let QServices = QueryServices()
 
-    //var refreshControl = UIRefreshControl()
     var searchController = UISearchController()
-    //@IBOutlet weak var searchBar: UISearchBar!
-//    var timer: NSTimer!
-    //var refreshControl: UIRefreshControl!
-    //var isAnimating = false
+   
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -152,8 +148,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
 
             locationManager.startUpdatingLocation()
         
-            locServices.latitude = locationManager.location!.coordinate.latitude
-            locServices.longitude = locationManager.location!.coordinate.longitude
+            
         
            // println("Latitude \(locationManager.location.coordinate.latitude)")
         

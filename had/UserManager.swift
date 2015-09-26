@@ -9,42 +9,6 @@
 import UIKit
 import CoreData
 
-/*
-var UserMgr = UserManager()
-
-class UserManager: NSObject {
-    var users = [User]()
-    
-    func addUser(user: User){
-        users.append(user)
-    }
-    
-    func getAverageAge() -> Float{
-        var average : Float = 0.0
-        for user in users{
-            average += user.getAge(/*user.birthDate*/)
-        }
-        average /= Float(users.count)
-        return average
-    }
-    
-    func getPercentageGender() -> Float{
-        var percentage : Float = 0.0
-        for user in users{
-            if user.gender == "Homme"{
-                percentage++
-            }
-        }
-        percentage /= Float(users.count*100)
-        return percentage
-    }
-}
-
-struct Location {
-    var lat:Double = 0.0
-    var lng:Double = 0.0
-}
-*/
 class User{
     var name: String?
     var lastname: String?
@@ -67,20 +31,13 @@ class User{
         self.gender = gend
         self.birthDate = birth
     }
-/*
-    
-    func getAge(/*birth: NSDate*/) -> Float{
-        var age = -birthDate.timeIntervalSinceNow
-        age /= 31536000
-        return ceil(Float(age))
-    }
-  */
+
     func loadUser()
     {
         let userDataPath = NSBundle.mainBundle().pathForResource("user", ofType: "plist")
         let userData = NSArray(contentsOfFile: userDataPath!)
         let userDataDictionary : NSDictionary = userData?.objectAtIndex(0) as! NSDictionary
-        //var pListData: NSDictionary = NSPropertyListSerialization.dictionaryWithValuesForKeys(NSArray(objects: "Firstname", "Lastname", "Mail", "Gender", "Birthdate"))
+       
         print(userDataDictionary.valueForKey("Firstname"))
         print(userDataDictionary.valueForKey("Lastname"))
         print(userDataDictionary.valueForKey("Mail"))
@@ -157,75 +114,7 @@ class User{
         }
         
     }
-    /*func getUserCoreData(){
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        var fetchedResults = executeRequest(managedContext)
-        var result: NSManagedObject
-        
-        println("result")
-        for result in fetchedResults
-        {
-            println(result.valueForKey("name"))
-            println(result.valueForKey("lastname"))
-            println(result.valueForKey("mail"))
-            println(result.valueForKey("gender"))
-            println(result.valueForKey("birthdate"))
-            
-            
-            self.name=result.valueForKey("name") as? String
-            self.lastname=result.valueForKey("lastname") as? String
-            self.mail = result.valueForKey("mail") as? String
-            self.gender = result.valueForKey("gender") as! Int
-            self.birthDate = result.valueForKey("birthdate") as? NSDate
-        }
-        if fetchedResults.count == 0 {
-            println("Could not fetch ")
-        }
-        
-    }
-    func saveUserCoreData(name: String,lastname:String,mail: String,gender:Int,birthDate: NSDate) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        var fetchedResults = executeRequest(managedContext)
-        deleteUserCoreData(managedContext,fetchedResults: fetchedResults)
-        let entity =  NSEntityDescription.entityForName("User",inManagedObjectContext:managedContext)
-        
-        let profil = NSManagedObject(entity: entity!,insertIntoManagedObjectContext:managedContext)
-        profil.setValue(name, forKey: "name")
-        profil.setValue(lastname, forKey: "lastname")
-        profil.setValue(mail, forKey: "mail")
-        profil.setValue(gender, forKey: "gender")
-        profil.setValue(birthDate, forKey: "birthdate")
-        
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
-        }
-        self.name=name
-        self.lastname=lastname
-        self.mail = mail
-        self.gender = gender
-        self.birthDate = birthDate
-        
-        println(name)
-        println(lastname)
-        println(mail)
-        println(gender)
-       // println(birthdate.date.description)
-//        user.userProfil.append(profil)
-    }
-    
-    func disconnect()
-    {
-        var bool:Bool=false
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext!
-        var fetchedResults = executeRequest(managedContext)
-        deleteUserCoreData(managedContext,fetchedResults: fetchedResults)
-    }*/
+
     private func executeRequest(managedContext:NSManagedObjectContext)-> NSArray
     {
         let fetchRequest = NSFetchRequest(entityName:"User")

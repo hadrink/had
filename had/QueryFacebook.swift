@@ -154,7 +154,7 @@ class UserDataFb {
         let methodePost = QueryServices()
         var response:Bool = false
         
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/v2.2/me", parameters: nil)
         let getFriends : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: nil)
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
@@ -163,6 +163,8 @@ class UserDataFb {
             }
             else {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
+                
+                print("result FB \(result)")
 
                 let userEmailFb:String = result.valueForKey("email") as! String
                 let userFirstnameFb:String = result.valueForKey("first_name") as! String
