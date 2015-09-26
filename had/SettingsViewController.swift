@@ -60,19 +60,65 @@ class SettingsViewController: UITableViewController{
     
     @IBOutlet var contentViewTest2: UIView!
     
+    var firstTime: Bool?
+    
     //var moContext: NSManagedObjectContext!
     
+    let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    
+    var stores = [Store]()
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        if firstTime == true {
+        
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
+        self.profilePicture.clipsToBounds = true;
+
+        
+        func blurImage() {
+            let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            
+            let blurView = UIVisualEffectView(effect: lightBlur)
+            blurView.frame = backgroundPicture.bounds
+            backgroundPicture.addSubview(blurView)
+        }
+        
+        blurImage()
+        
+        
+        let request = NSFetchRequest(entityName: "Store")
+        
+        do {
+            
+            stores = try moContext?.executeFetchRequest(request) as! [Store]
+            
+        }
+            
+        catch let err as NSError {
+            
+            print(err)
+            
+        }
+        
+        let store = stores[0].sImage
+        
+        print("Test store \(store)")
+        
+        self.profilePicture.image = UIImage(data: store!)
+        self.backgroundPicture.image = UIImage(data: store!)
+            
+        firstTime = false
+            
+        }
+            
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let storeDesctiption = NSEntityDescription.entityForName("Store", inManagedObjectContext: moContext!)
-        print(" Yoyo\(storeDesctiption)")
-        let store = Store(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
-        
-        print("Test sImage2\(store.sImage?.description)")
-
+        firstTime = true
     
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
        
@@ -118,22 +164,9 @@ class SettingsViewController: UITableViewController{
         print("get image picture")
        
         
-
         
         print("profile picture setting")
         print(UserDataFb().pictureCache.description)
-        self.profilePicture.image = UserDataFb().pictureCache["profile_picture"]
-        
-        print("Test array\(NSArray(object: store))")
-
-        self.backgroundPicture.image = UIImage(data: store.sImage!)
-    
-        
-        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
-        profilePicture.clipsToBounds = true;
-        
-        
-        blurImage()
 
         
     }
@@ -146,13 +179,7 @@ class SettingsViewController: UITableViewController{
             width: width, height: 30.0)
     }
     
-    func blurImage() {
-        let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        
-        let blurView = UIVisualEffectView(effect: lightBlur)
-        blurView.frame = backgroundPicture.bounds
-        backgroundPicture.addSubview(blurView)
-    }
+    
 
     
     // Save user config

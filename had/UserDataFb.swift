@@ -59,12 +59,14 @@ class UserDataFb {
                 
                     let img = UIImage(data: nsdata!)
                     let imgData = UIImageJPEGRepresentation(img!, 1)
-                    store.sImage = imgData
+                    store.setValue(imgData, forKey: "sImage")
                 
                 
                     try moContext?.save()
                         
-                    print("Test sImage\(store.sImage?.description)")
+                    //print("Test sImage\(store.sImage?.description)")
+                    print("test sImage")
+                    print(store.valueForKey("sImage"))
                 
                     }
                 
