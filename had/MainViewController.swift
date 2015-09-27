@@ -107,9 +107,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         // Set Friends to user settings
         
         self.setupRefreshControl()
-
-
-
         
         // Initialize the refresh control.
         
@@ -132,7 +129,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             /********** RevealView Configuration **********/
         
             let revealView = self.revealViewController()
-            revealView.frontViewShadowOpacity = 0.0
+            revealView.frontViewShadowOpacity = 1.0
             //revealView.rearViewRevealWidth = 200
             //revealView.rearViewRevealWidth = view.frame.width
             revealView.rearViewRevealOverdraw = 0
@@ -359,7 +356,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //navigationItem.setRightBarButtonItem(nil, animated: true)
   //      hamburger.enabled = true
         hamburger.tintColor = UIColorFromRGB(0xF0F0EF)
-        hamburger.image = UIImage(named: "hamburger2")
+        hamburger.image = UIImage(named: "setting@3x")
         favButton.image = UIImage(named: "heart-hover@3x")
         favButton.tintColor = UIColorFromRGB(0xF0F0EF)
         searchButton.image = UIImage(named: "search-icon")
