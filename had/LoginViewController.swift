@@ -21,8 +21,7 @@ class LoginViewController: UIViewController{
         {
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             print("redirect sw")
-            let QServices = QueryServices()
-            QServices.returnUserData()
+
         }
         else
         {
