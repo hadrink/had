@@ -24,7 +24,7 @@ class UserDataFb {
         
         print("Func get profil picture")
         
-        let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
+        let pictureRequest = FBSDKGraphRequest(graphPath: "/v2.2/me/picture?type=large&redirect=false", parameters: nil)
         
         print("picture request")
         

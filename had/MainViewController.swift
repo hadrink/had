@@ -20,7 +20,17 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
     
-            
+     //-- Global const and var
+    
+    var hamburger = UIBarButtonItem()
+    var favButton = UIBarButtonItem()
+    var searchButton = UIBarButtonItem()
+    var messageLabel:UILabel!
+    var data: NSMutableData = NSMutableData()
+    var jsonData: NSArray = NSArray()
+    var longitude:NSString = ""
+    var latitude:NSString = ""
+    var selectedIndex = -1
     var refreshControl = UIRefreshControl()
     var refreshLoadingView : UIView!
     var refreshColorView : UIView!
@@ -28,81 +38,35 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     var bottle_spinner : UIImageView!
     var isRefreshIconsOverlap = false
     var isRefreshAnimating = false
+    var isAnimating = false
+    var searchController = UISearchController()
+    var searchArray:[PlaceItem] = [PlaceItem](){
+        didSet  {self.tableData.reloadData()}
+    }
     
-   
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         manager.requestAlwaysAuthorization()
         return manager
-    }()
-
+        }()
     
-    var isAnimating = false
-
     let locServices = LocationServices()
     let QServices = QueryServices()
 
-    var searchController = UISearchController()
-   
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
     
-    func ActivateSearchMode() {
-        searchController.searchBar.delegate = self
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
-        searchController.searchBar.tintColor = UIColorFromRGB(0xF0F0EF)
-        searchController.dimsBackgroundDuringPresentation = false
-        navigationItem.titleView = searchController.searchBar
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
-        navigationItem.setRightBarButtonItems(nil, animated: true)
-        //navigationItem.setRightBarButtonItem(nil, animated: true)
-        /*let frame = CGRect(x: 0, y: 0, width: navbar.s, height: 44)
-        let titleView = UIView(frame: frame)
-        searchController.searchBar.backgroundImage = UIImage()
-        searchController.searchBar.frame = frame
-        titleView.addSubview(searchController.searchBar)
-        navigationItem.titleView = titleView
-        hamburger.enabled = false*/
-        //hamburger.image = nil
-        
-        
-        //-- Change color searchBar text and placeholder and set image search icon
-        
-        let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
-        
-        textFieldInsideSearchBar?.textColor = UIColorFromRGB(0xF0F0EF)
-        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
-        
-        if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
-
-            let attributeDictSearch = [NSForegroundColorAttributeName: UIColorFromRGB(0xF0F0EF)]
-            textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
-            
-        }
-        
-        searchController.active = true
-        refreshControl.hidden = true
-        // Include the search bar within the navigation bar.
-
-        definesPresentationContext = true
-        //providesPresentationContextTransitionStyle = false
-    }
+    //-- Outlets
     
-    var searchArray:[PlaceItem] = [PlaceItem](){
-        didSet  {self.tableData.reloadData()}
-    }
+    @IBOutlet var tableData: UITableView!
+    @IBOutlet var navbar: UINavigationItem!
+    @IBOutlet weak var myMap: MKMapView!
+    
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let revealView = self.revealViewController()
         
         // Set Friends to user settings
         
@@ -110,12 +74,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         // Initialize the refresh control.
         
-        
-        
-        //refreshControl.backgroundColor = UIColor.purpleColor()
-        //refreshControl.tintColor = UIColor.blackColor()
-        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        //refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableData.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -126,107 +84,63 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         setLogoNavBar()
         
-            /********** RevealView Configuration **********/
+        //-- Reveal view configuration
         
-            let revealView = self.revealViewController()
-            revealView.frontViewShadowOpacity = 1.0
-            //revealView.rearViewRevealWidth = 200
-            //revealView.rearViewRevealWidth = view.frame.width
-            revealView.rearViewRevealOverdraw = 0
-            self.view.addGestureRecognizer(revealView.panGestureRecognizer())
-            hamburger.target = revealView
-            hamburger.action = "revealToggle:"
-        /************* Search Bar ***********/
-        //searchBar.delegate = self
-            /********** Custom View Design **********/
-        
-            self.navigationController?.navigationBar.barTintColor = UIColorFromRGB(0x5a74ae)
-            self.navigationController?.navigationBar.translucent = false
-
-            locationManager.startUpdatingLocation()
-        
-            
-        
-           // println("Latitude \(locationManager.location.coordinate.latitude)")
-        
-                        print("nbplaces")
+        revealView.frontViewShadowOpacity = 1.0
+        revealView.rearViewRevealOverdraw = 0
+        self.view.addGestureRecognizer(revealView.panGestureRecognizer())
+        hamburger.target = revealView
+        hamburger.action = "revealToggle:"
+        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
+        self.navigationController?.navigationBar.translucent = false
+        locationManager.startUpdatingLocation()
         
         //-- Observer for background state
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+
+        //- Get Picture Facebook
+        
         UserDataFb().getPicture()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        
-        
     }
-    
-    /********** Outlets **********/
-    
-    var hamburger = UIBarButtonItem()
-    var favButton = UIBarButtonItem()
-    var searchButton = UIBarButtonItem()
-    @IBOutlet var tableData: UITableView!
-    @IBOutlet var navbar: UINavigationItem!
-    @IBOutlet weak var myMap: MKMapView!
-    
-    /********** Global const & var **********/
-    
-    var messageLabel:UILabel!
-
-    var data: NSMutableData = NSMutableData()
-    var jsonData: NSArray = NSArray()
-    var longitude:NSString = ""
-    var latitude:NSString = ""
-    
-    var selectedIndex = -1
-    
-    func openMapForPlace() {
-    }
-    
-    func getLocationInfo(placemark: CLPlacemark) -> Array<NSString> {
-        
-        //stop updating location to save battery life
-        locationManager.stopUpdatingLocation()
-        
-        let latitudeDescription = placemark.location!.description
-        let scannerLatitude = NSScanner(string:latitudeDescription)
-        var scannedLatitude: NSString?
-        
-        scannerLatitude.scanString("<", intoString:nil)
-        
-        if scannerLatitude.scanUpToString(",", intoString:&scannedLatitude) {
-            latitude = scannedLatitude as! String
-            //println("latitude: \(latitude)")
-        }
-        
-        let longitudeDescription = placemark.location!.description
-        let scannerLongitude = NSScanner(string:latitudeDescription)
-        var scannedLongitude: NSString?
-        
-        
-        if scannerLongitude.scanUpToString(",", intoString:nil) {
-            
-            scannerLongitude.scanString(",", intoString:nil)
-            
-            if scannerLongitude.scanUpToString(">", intoString:&scannedLongitude) {
-                longitude = scannedLongitude as! String
-                //println("longitude: \(longitude)")
-            }
-            
-        }
-        
-        
-        var result = [latitude, longitude]
-        locationManager.pausesLocationUpdatesAutomatically = true
-        return result
-    }
-    
-    /********** TableView configuration **********/
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableData.layoutMargins = UIEdgeInsetsZero
     }
+    
+    func ActivateSearchMode() {
+        
+        let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
+        
+        searchController.searchBar.delegate = self
+        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+        searchController.searchBar.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.titleView = searchController.searchBar
+        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        navigationItem.setRightBarButtonItems(nil, animated: true)
+        
+        //-- Change color searchBar text and placeholder and set image search icon
+        
+        textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
+        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        
+        if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
+            let attributeDictSearch = [NSForegroundColorAttributeName: Design().UIColorFromRGB(0xF0F0EF)]
+            textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
+        }
+        
+        searchController.active = true
+        refreshControl.hidden = true
+        
+        definesPresentationContext = true
+
+    }
+    
+    //-- Table view configuration
     
     var placeItems = [PlaceItem]()
     
@@ -272,97 +186,46 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         mapItem.openInMapsWithLaunchOptions(options)
     }
     
-    // Create loop for tableView and convert MKpoint to CGpoint
-    /*  func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
     
-    let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+    //-- Refresh places
     
-    var rowData: NSDictionary = self.jsonData[indexPath.row] as NSDictionary
-    var idPlace: NSString = rowData["idPlace"] as NSString
-    var name: NSString = rowData["NamePlace"] as NSString
-    var type: NSString = rowData["Type"] as NSString
-    var latitudePlace: NSString = rowData["Latitude"] as NSString
-    var longitudePlace: NSString = rowData["Longitude"] as NSString
-    
-    print(latitudePlace)
-    
-    cell.detailTextLabel?.text = "\(type),\(latitudePlace),\(longitudePlace)"
-    //cell.textLabel.text = name
-    cell.backgroundColor = UIColor.clearColor()
-    
-    var latitudeConversion = (latitudePlace as NSString).floatValue
-    var longitudeConversion = (longitudePlace as NSString).floatValue
-    
-    var latitudeAnnotation:NSNumber = latitudeConversion
-    var longitudeAnnotation:NSNumber = longitudeConversion
-    
-    println("Latitude annotation\(latitudeAnnotation)")
-    
-    var label = UILabel(frame: CGRectMake(0, 0, 100, 100))
-    
-    label.textAlignment = NSTextAlignment.Center
-    label.text = "1"
-    
-    
-    if(menuItems[indexPath.row].status == "active"){
-    cell.backgroundColor = UIColor.whiteColor()
-    }else{
-    cell.backgroundColor = UIColor.clearColor()
-    }
-    return cell
-    }*/
-
-    
-    /********** Refresh places **********/
-    func refresh(refreshControl: UIRefreshControl)
-    {
-        locationManager.startUpdatingLocation()
-        //isAnimating = true
+    func refresh(refreshControl: UIRefreshControl) {
+        
+        /*let formatter:NSDateFormatter = NSDateFormatter()
+        let attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
+        formatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")*/
+        
         print("refreshing")
-        //placeItems = PlaceItem.allPlaceItems()
-        if (placeItems.count != 0)
-        {
+        
+        if (placeItems.count != 0) {
             messageLabel.alpha = 0
         }
         
-//        locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: true)
-        
         self.isAnimating = true
-        
         locationManager.startUpdatingLocation()
         
-        
-
-        
         // End the refreshing
-        let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
-        let title:NSString = NSString(format:"Last update: %@", formatter.stringFromDate(NSDate() ))
-        let attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
-        
-        let attributedTitle:NSAttributedString = NSAttributedString(string: title as String, attributes: attrsDictionary as? [String : AnyObject])
-        refreshControl.attributedTitle = attributedTitle;
         
         refreshControl.endRefreshing()
     }
     
     func setLogoNavBar(){
-        print("ici")
         let logo = UIImage(named: "had-title@3x")
         let imageView = UIImageView(image:logo)
         imageView.frame = CGRectMake(0, 0, 38.66, 44)
         self.navbar.titleView = imageView
-        //navigationItem.setLeftBarButtonItem(hamburger, animated: true)
-        //navigationItem.setRightBarButtonItem(nil, animated: true)
-  //      hamburger.enabled = true
-        hamburger.tintColor = UIColorFromRGB(0xF0F0EF)
+        
+        hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         hamburger.image = UIImage(named: "setting@3x")
+        
         favButton.image = UIImage(named: "heart-hover@3x")
-        favButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        
         searchButton.image = UIImage(named: "search-icon")
-        searchButton.tintColor = UIColorFromRGB(0xF0F0EF)
+        searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.target = self
         searchButton.action = "ActivateSearchMode"
+        
         navbar.setLeftBarButtonItem(hamburger, animated: true)
         navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
     }
