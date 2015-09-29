@@ -227,7 +227,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         searchButton.action = "ActivateSearchMode"
         
         navbar.setLeftBarButtonItem(hamburger, animated: true)
-        //navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
         navbar.setRightBarButtonItem(searchButton, animated: true)
     }
 }

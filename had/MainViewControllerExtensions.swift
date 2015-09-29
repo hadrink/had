@@ -201,7 +201,7 @@ extension MainViewController: UISearchResultsUpdating
         QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text!){
             (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
-           /* let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+            /* let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
             
             if let reposArray = obj["searchlist"] as? [NSDictionary]  {
             //println("ReposArray \(reposArray)")
