@@ -78,16 +78,16 @@ class PlaceItem : CLLocationManager{
         
         // Init for users data
         
-        if var usersvisited = json["usersvisited"] as? [NSDictionary] {
+        if let usersvisited = json["usersvisited"] as? [NSDictionary] {
             
             var cumul:Int = 0
             var count:Int = 0
             var sexArray : [String] = []
             
             for uservisited in usersvisited {
-                var age:String = uservisited.objectForKey("age") as! String
-                var sex:String = uservisited.objectForKey("sex") as! String
-                var ageInt = Int(age)
+                let age:String = uservisited.objectForKey("age") as! String
+                let sex:String = uservisited.objectForKey("sex") as! String
+                let ageInt = Int(age)
                 
                 sexArray.append(sex)
                 
@@ -96,8 +96,8 @@ class PlaceItem : CLLocationManager{
                 
             }
             
-            var sexCount = sexArray.count
-            var sexFemaleCount = sexArray.filter {
+            let sexCount = sexArray.count
+            let sexFemaleCount = sexArray.filter {
                 $0 == "F"
             }.count
             

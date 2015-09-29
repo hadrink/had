@@ -250,14 +250,11 @@ extension MainViewController: CLLocationManagerDelegate
         if((locationManager.location) != nil){
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
-            print("Michel")
             
-            
-            //println(manager.location)
             if UIApplication.sharedApplication().applicationState == .Active {
                 print("app is activated")
                 
-                manager.stopUpdatingLocation()
+                locationManager.stopUpdatingLocation()
                 
                 let settingViewController = SettingsViewController()
                 
@@ -272,11 +269,6 @@ extension MainViewController: CLLocationManagerDelegate
                 let distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
                 print("Distance max \(distanceMax)")
                 
-                /*if (distanceMax == "0.0"){
-                distanceMax = "10"
-                }*/
-                
-                
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
@@ -289,13 +281,11 @@ extension MainViewController: CLLocationManagerDelegate
                     
                     let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
                     
-                    
                     if let reposArray = obj["listbar"] as? [NSDictionary]  {
                         self.placeItems.removeAll()
                         
                         for item in reposArray {
                             self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                            //println("Item \(item)")
                         }
                     }
                     print("Mon object \(obj)")
@@ -312,7 +302,6 @@ extension MainViewController: CLLocationManagerDelegate
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 let email: String! = userDefaults.stringForKey("email")
                 QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location?.coordinate.latitude)/\(manager.location?.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                    print("dans le post du backgroundeuuuux")
                 }
                 
                 let distance:CLLocationDistance = 200
@@ -320,6 +309,7 @@ extension MainViewController: CLLocationManagerDelegate
                 manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
                 
             }
+            locationManager = nil
         }
     }
     
@@ -423,7 +413,7 @@ extension MainViewController
         let spinnerWidthHalf = spinnerWidth / 2.0;
         
         // Calculate the pull ratio, between 0.0-1.0
-        let pullRatio = min( max(pullDistance, 0.0), 100.0) / 100.0;
+        //_ = min( max(pullDistance, 0.0), 100.0) / 100.0;
         
         // Set the Y coord of the graphics, based on pull distance
         let compassY = pullDistance / 2.0 - compassHeightHalf;
@@ -467,7 +457,7 @@ extension MainViewController
             self.animateRefreshView()
         }
         
-        print("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: \(midX), refreshing: \(self.refreshControl.refreshing)")
+        //print("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: \(midX), refreshing: \(self.refreshControl.refreshing)")
     }
     
     func animateRefreshView() {

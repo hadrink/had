@@ -304,7 +304,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             let tabUser:Dictionary<String,String> = ["Lastname": lastname.text!, "Firstname": firstname.text!, "E-mail": mail.text!, "Password" : pwd.text!, "Birthdate" : birthdate.date.description, "Gender" : finalGender ]
 
-            var url = "http://151.80.128.136:3000/user/"
+            //var url = "http://151.80.128.136:3000/user/"
             
             let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
             if hasLoginKey == false {

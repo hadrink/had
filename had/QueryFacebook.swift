@@ -12,10 +12,6 @@ import CoreData
 
 class UserDataFb {
     
-    var profilePicture:UIImage?
-    var backgroundPicture:UIImage?
-    
-    var pictureCache = [String : UIImage]()
     let userSetting = SettingsViewController().userDefaults
     let cache:NSCache = NSCache()
 
@@ -37,13 +33,6 @@ class UserDataFb {
                 let imageURL = NSURL(string: url as String)
                 let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 
-
-                    self.profilePicture = UIImage(data: nsdata!)
-                    self.backgroundPicture = UIImage(data: nsdata!)
-                    self.pictureCache["profile_picture"] = UIImage(data: nsdata!)
-                    print("Profile picture userData")
-                    print(self.pictureCache["profile_picture"]?.description)
-                
                     self.cache.setObject(UIImage(data: nsdata!)!, forKey: "profile_picture")
                     print(self.cache.objectForKey("profile_picture")?.description)
                 
@@ -64,9 +53,9 @@ class UserDataFb {
                 
                     try moContext?.save()
                         
-                    //print("Test sImage\(store.sImage?.description)")
+                    /*print("Test sImage\(store.sImage?.description)")
                     print("test sImage")
-                    print(store.valueForKey("sImage"))
+                    print(store.valueForKey("sImage"))*/
                 
                     }
                 
@@ -96,7 +85,6 @@ class UserDataFb {
     
     func test() {
         print("testpicture")
-        print(pictureCache["profile_picture"]?.description)
         print(cache.objectForKey("profile_picture")?.description)
         print(cache.description)
     }
@@ -208,10 +196,6 @@ class UserDataFb {
                         
                         //-- Post method
                         methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                            var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-                    
-                            print("Response 1 \(response)")
-
                             
                             if(succeeded) {
                                 response = true
@@ -219,8 +203,6 @@ class UserDataFb {
                             else {
                                 response = false
                             }
-                            
-                            print("Response 2 \(response)")
                             
                         }
                     }

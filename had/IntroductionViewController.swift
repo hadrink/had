@@ -100,7 +100,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
                     self.MyKeychainWrapper.writeToKeychain()
                     NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLoginKey")
                     NSUserDefaults.standardUserDefaults().synchronize()
-                    var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
+                    //var pwd = self.MyKeychainWrapper.myObjectForKey("v_Data") as! NSString
                     
                     let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
                     self.showViewController(vc as! UIViewController, sender: vc)

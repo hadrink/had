@@ -156,9 +156,9 @@ class SettingsViewController: UITableViewController{
         print("Bob\(rangeSlider.accessibilityElementCount())")
         
         
-        let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
+        /*let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
             .TopMargin, relatedBy: .Equal, toItem: ageLabel,
-            attribute: .TopMargin, multiplier: 1.0, constant: 20)
+            attribute: .TopMargin, multiplier: 1.0, constant: 20)*/
         
         
         print("get image picture")
@@ -166,14 +166,14 @@ class SettingsViewController: UITableViewController{
         
         
         print("profile picture setting")
-        print(UserDataFb().pictureCache.description)
+        //print(UserDataFb().pictureCache.description)
 
         
     }
     
      override func viewDidLayoutSubviews() {
-        let marginTop: CGFloat = 10.0
-        let marginBottom: CGFloat = 5
+        //let marginTop: CGFloat = 10.0
+        //let marginBottom: CGFloat = 5
         let width = view.bounds.width - 2.0 * 16
         rangeSlider.frame = CGRect(x: 16, y: 27,
             width: width, height: 30.0)
