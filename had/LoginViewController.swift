@@ -12,7 +12,7 @@ import CoreData
 class LoginViewController: UIViewController{
     
     override func viewDidAppear(animated: Bool){
-
+        
         let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
         print(NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey"))
         var vc: AnyObject!
@@ -21,7 +21,7 @@ class LoginViewController: UIViewController{
         {
             vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
             print("redirect sw")
-
+            
         }
         else
         {
@@ -29,9 +29,8 @@ class LoginViewController: UIViewController{
             print("redirect intro")
         }
         self.showViewController(vc as! UIViewController, sender: vc)
-
+        
     }
     
-
 }
 

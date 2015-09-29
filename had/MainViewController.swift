@@ -20,7 +20,7 @@ import MapKit
 
 class MainViewController: UIViewController, MKMapViewDelegate {
     
-     //-- Global const and var
+    //-- Global const and var
     
     var hamburger = UIBarButtonItem()
     //var favButton = UIBarButtonItem()
@@ -54,7 +54,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     let locServices = LocationServices()
     let QServices = QueryServices()
-
+    
     
     //-- Outlets
     
@@ -63,7 +63,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var myMap: MKMapView!
     
     
-     override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         let revealView = self.revealViewController()
@@ -98,7 +98,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Observer for background state
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-
+        
         //- Get Picture Facebook
         
         UserDataFb().getPicture()
@@ -137,7 +137,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         refreshControl.hidden = true
         
         definesPresentationContext = true
-
+        
     }
     
     //-- Table view configuration
@@ -148,7 +148,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
         let regionDistance:CLLocationDistance = 10000
- 
+        
         var latitude = 0.0
         var longitude = 0.0
         print("itineraire")
@@ -163,11 +163,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             latitude = searchArray[indexPath.row].placeLatitudeDegrees!
             longitude = searchArray[indexPath.row].placeLongitudeDegrees!
         }
-
+        
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-       
+        
         let options = [
             MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
             MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)

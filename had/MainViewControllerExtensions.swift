@@ -29,7 +29,7 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
@@ -50,7 +50,7 @@ extension MainViewController: UITableViewDataSource
             if ( type == "cafe") {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }
-            
+                
             else {
                 cell.iconTableview.image = UIImage(named: "bottle-spin")
             }
@@ -81,7 +81,7 @@ extension MainViewController: UITableViewDataSource
             else {
                 cell.iconTableview.image = UIImage(named: "bottle-spin")
             }
-
+            
             return cell
         }
     }
@@ -93,7 +93,7 @@ extension MainViewController: UITableViewDataSource
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
         
         let GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-
+            
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
@@ -133,8 +133,8 @@ extension MainViewController: UITableViewDataSource
             alertController.addAction(cancelAction)
             
             
-           self.presentViewController(alertController, animated: true, completion: nil)
-
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
         })
         
         shareAction.backgroundColor = Design().UIColorFromRGB(0x5B90CE)
@@ -165,7 +165,7 @@ extension MainViewController: UITableViewDataSource
         }
         return 1
     }
-
+    
 }
 
 extension MainViewController: UITableViewDelegate
@@ -204,14 +204,14 @@ extension MainViewController: UISearchResultsUpdating
            /* let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
             
             if let reposArray = obj["searchlist"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                
-                for item in reposArray {
-                    self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
-                    //println("Item \(item)")
-                    print("has Item")
-                }
-                
+            //println("ReposArray \(reposArray)")
+            
+            for item in reposArray {
+            self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
+            //println("Item \(item)")
+            print("has Item")
+            }
+            
             }
             print("reload")
             
@@ -220,7 +220,7 @@ extension MainViewController: UISearchResultsUpdating
             })*/
             
         }
-
+        
     }
 }
 
@@ -518,5 +518,5 @@ extension MainViewController
         self.isRefreshIconsOverlap = false;
         self.refreshColorView.backgroundColor = UIColor.clearColor()
     }
-
+    
 }
