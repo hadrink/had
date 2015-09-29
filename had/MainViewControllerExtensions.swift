@@ -138,12 +138,7 @@ extension MainViewController: UITableViewDataSource
         })
         
         shareAction.backgroundColor = Design().UIColorFromRGB(0x5B90CE)
-        let FavorisAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Favoris" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-            //do favoris action
-        })
-        
-        FavorisAction.backgroundColor = Design().UIColorFromRGB(0x4B75B2)
-        return [GoToAction,shareAction,FavorisAction]
+        return [GoToAction,shareAction]
     }
     
     
@@ -206,7 +201,7 @@ extension MainViewController: UISearchResultsUpdating
         QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text!){
             (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
-            let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+           /* let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
             
             if let reposArray = obj["searchlist"] as? [NSDictionary]  {
                 //println("ReposArray \(reposArray)")
@@ -222,7 +217,7 @@ extension MainViewController: UISearchResultsUpdating
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
-            })
+            })*/
             
         }
 
@@ -252,84 +247,79 @@ extension MainViewController: CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        locServices.latitude = locationManager.location!.coordinate.latitude
-        locServices.longitude = locationManager.location!.coordinate.longitude
-        print("Michel")
-
-    
+        if((locationManager.location) != nil){
+            locServices.latitude = locationManager.location!.coordinate.latitude
+            locServices.longitude = locationManager.location!.coordinate.longitude
+            print("Michel")
+            
+            
             //println(manager.location)
-        if UIApplication.sharedApplication().applicationState == .Active {
-            print("app is activated")
-            
-            manager.stopUpdatingLocation()
-            
-            let settingViewController = SettingsViewController()
-            
-            let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
-            let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
-            print("Latitude \(userLatitude)")
-            print("Longitude \(userLongitude)")
-            let ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
-            print("ageMin \(ageMin)")
-            let ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
-            print("AgeMax \(ageMax)")
-            let distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
-            print("Distance max \(distanceMax)")
-            
-            /*if (distanceMax == "0.0"){
+            if UIApplication.sharedApplication().applicationState == .Active {
+                print("app is activated")
+                
+                manager.stopUpdatingLocation()
+                
+                let settingViewController = SettingsViewController()
+                
+                let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
+                let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
+                print("Latitude \(userLatitude)")
+                print("Longitude \(userLongitude)")
+                let ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
+                print("ageMin \(ageMin)")
+                let ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
+                print("AgeMax \(ageMax)")
+                let distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
+                print("Distance max \(distanceMax)")
+                
+                /*if (distanceMax == "0.0"){
                 distanceMax = "10"
-            }*/
-        
-            
-            let userDataFb = UserDataFb()
-            userDataFb.getFriends()
-            let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-            print("MyFriends\(friends)" )
-            
-            //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-            self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                }*/
                 
                 
-                let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+                let userDataFb = UserDataFb()
+                userDataFb.getFriends()
+                let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
+                print("MyFriends\(friends)" )
                 
-                
-                if let reposArray = obj["listbar"] as? [NSDictionary]  {
-                    //println("ReposArray \(reposArray)")
-                    print("RefreshhhYouhou")
+                //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
+                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                    //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
-                   /* if(self.isAnimating == true) {
                     
-                    }*/
+                    let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
                     
-                    //self.placeItems.removeAll()
                     
-                    for item in reposArray {
-                        self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
-                        //println("Item \(item)")
+                    if let reposArray = obj["listbar"] as? [NSDictionary]  {
+                        self.placeItems.removeAll()
+                        
+                        for item in reposArray {
+                            self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                            //println("Item \(item)")
+                        }
                     }
+                    print("Mon object \(obj)")
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        self.tableData.reloadData()
+                        
+                    })
                 }
-                print("Mon object \(obj)")
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    self.tableData.reloadData()
-                    
-                })
+            } else {
+                NSLog("App is backgrounded. New location is %@", manager.location!)
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                let email: String! = userDefaults.stringForKey("email")
+                QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location?.coordinate.latitude)/\(manager.location?.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                    print("dans le post du backgroundeuuuux")
+                }
+                
+                let distance:CLLocationDistance = 200
+                let time:NSTimeInterval = 60
+                manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
+                
             }
-        
-        } else {
-            NSLog("App is backgrounded. New location is %@", manager.location!)
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            let email: String! = userDefaults.stringForKey("email")
-            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location?.coordinate.latitude)/\(manager.location?.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                print("dans le post du backgroundeuuuux")
-            }
-            
-            let distance:CLLocationDistance = 200
-            let time:NSTimeInterval = 60
-            manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
-            
         }
     }
     

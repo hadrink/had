@@ -64,18 +64,13 @@ class QueryServices{
                 catch let err as NSError? {
                     print(err)
                 }
-                
-                
             })
-            
             task.resume()
-            
         }
         
         catch let err as NSError? {
             print(err)
         }
-        
     }
     
     //-- Func delete for delete account

@@ -23,7 +23,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
      //-- Global const and var
     
     var hamburger = UIBarButtonItem()
-    var favButton = UIBarButtonItem()
+    //var favButton = UIBarButtonItem()
     var searchButton = UIBarButtonItem()
     var messageLabel:UILabel!
     var data: NSMutableData = NSMutableData()
@@ -218,8 +218,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         hamburger.image = UIImage(named: "setting@3x")
         
-        favButton.image = UIImage(named: "heart-hover@3x")
-        favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        //favButton.image = UIImage(named: "heart-hover@3x")
+        //favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         
         searchButton.image = UIImage(named: "search-icon")
         searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
@@ -227,6 +227,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         searchButton.action = "ActivateSearchMode"
         
         navbar.setLeftBarButtonItem(hamburger, animated: true)
-        navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
+        //navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
+        navbar.setRightBarButtonItem(searchButton, animated: true)
     }
 }
