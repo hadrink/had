@@ -24,6 +24,7 @@ class SettingsViewController: UITableViewController{
 
     let QServices = QueryServices()
     let rangeSlider = RangeSlider(frame: CGRectZero)
+    let settingDefault = SettingDefault()
     
     // Outlets setting
 
@@ -121,7 +122,17 @@ class SettingsViewController: UITableViewController{
         firstTime = true
     
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
+        
+        print("distanceSlider\(distanceSlider.value)")
        
+        if userDefaults.floatForKey("DistanceValue").isZero {
+            print("Je suis dedans")
+            distanceSlider.value = settingDefault.distanceMax
+            distanceLabel.text = String(Int(settingDefault.distanceMax)) + " km"
+        } else {
+            distanceSlider.value = userDefaults.floatForKey("DistanceValue")
+            distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + " km"
+        }
 
         
         if (userDefaults.objectForKey("SwitchStateBar") != nil) {
@@ -132,17 +143,29 @@ class SettingsViewController: UITableViewController{
             nightclubSwitch.on = userDefaults.boolForKey("SwitchStateNightclub")
         }
         
+        if userDefaults.floatForKey("AgeMinValue").isZero {
+            ageMin.text = String(Int(settingDefault.ageMin))
+            rangeSlider.lowerValue = settingDefault.ageMin
+        } else {
+            ageMin.text = String(Int(userDefaults.doubleForKey("AgeMinValue")))
+            rangeSlider.lowerValue = userDefaults.doubleForKey("AgeMinValue")
+        }
         
-        distanceLabel.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("DistanceValue"))) + " km"
+        if userDefaults.floatForKey("AgeMaxValue").isZero {
+            ageMax.text = String(Int(settingDefault.ageMax)) + " ans"
+            rangeSlider.upperValue = settingDefault.ageMax
+        } else {
+            ageMax.text = String(Int(userDefaults.doubleForKey("AgeMaxValue"))) + " ans"
+            rangeSlider.upperValue = userDefaults.doubleForKey("AgeMaxValue")
+        }
         
-        ageMin.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMinValue")))
                 
-        if ageMax.text == "0"{
+        /*if ageMax.text == "0"{
             ageMax.text == String(stringInterpolationSegment: Int(rangeSlider.upperValue))
         }
         else {
             ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue"))) + " ans"
-        }
+        }*/
         
         //UserData()
         contentViewTest2.addSubview(rangeSlider)
@@ -180,8 +203,6 @@ class SettingsViewController: UITableViewController{
     }
     
     
-
-    
     // Save user config
     
     let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -201,10 +222,10 @@ class SettingsViewController: UITableViewController{
         }
         
         userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
+        
         distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + " km"
+    
         
-        
-                
     }
     
     let queryServices = QueryServices()
@@ -238,8 +259,8 @@ class SettingsViewController: UITableViewController{
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
         print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
         
-        userDefaults.setFloat(Float(rangeSlider.lowerValue), forKey: "AgeMinValue")
-        userDefaults.setFloat(Float(rangeSlider.upperValue), forKey: "AgeMaxValue")
+        userDefaults.setDouble(rangeSlider.lowerValue, forKey: "AgeMinValue")
+        userDefaults.setDouble(rangeSlider.upperValue, forKey: "AgeMaxValue")
         
         ageMin.text = String(stringInterpolationSegment: Int(rangeSlider.lowerValue))
         ageMax.text = String(stringInterpolationSegment: Int(rangeSlider.upperValue)) + " ans"

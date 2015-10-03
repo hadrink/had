@@ -54,6 +54,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     let locServices = LocationServices()
     let QServices = QueryServices()
+    let settingDefault = SettingDefault()
     
     
     //-- Outlets

@@ -12,7 +12,7 @@ class QueryServices{
     
     var userData :NSDictionary = NSDictionary()
     
-    func post(HTTPMethod: String, params : Dictionary<String, String>, url : String, postCompleted : (succeeded: Bool, msg: String, obj : NSDictionary) -> ()) {
+    func post(HTTPMethod: String, params : Dictionary<String, AnyObject>, url : String, postCompleted : (succeeded: Bool, msg: String, obj : NSDictionary) -> ()) {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
         let session = NSURLSession.sharedSession()
         request.HTTPMethod = HTTPMethod

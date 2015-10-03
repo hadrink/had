@@ -591,7 +591,7 @@
                                                         <rect key="frame" x="16" y="5" width="55" height="16.5"/>
                                                     </variation>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="ZbT-g5-PJX">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="ZbT-g5-PJX">
                                                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
                                                     <connections>
                                                         <action selector="saveSwitchState:" destination="meO-io-U0m" eventType="valueChanged" id="rQm-XS-JfH"/>

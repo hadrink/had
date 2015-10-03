@@ -262,12 +262,51 @@ extension MainViewController: CLLocationManagerDelegate
                 let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
                 print("Latitude \(userLatitude)")
                 print("Longitude \(userLongitude)")
-                let ageMin = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMinValue"))
-                print("ageMin \(ageMin)")
-                let ageMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("AgeMaxValue"))
-                print("AgeMax \(ageMax)")
-                let distanceMax = String(stringInterpolationSegment: settingViewController.userDefaults.floatForKey("DistanceValue"))
+                
+                //-- Variable send to the method post
+                
+                var distanceMax: Float
+                var ageMin : Double
+                var ageMax : Double
+                var displayBar : Bool
+                var displayNightclub : Bool
+                
+                //-- Check if value exist in the userDefault Setting else we get the default values
+                
+                if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
+                    ageMin = settingDefault.ageMin
+                    ageMax = settingDefault.ageMax
+                } else {
+                    ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
+                    ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
+                }
+                
+                if (settingViewController.userDefaults.floatForKey("DistanceValue").isZero) {
+                    distanceMax = settingDefault.distanceMax
+                } else {
+                    distanceMax = settingViewController.userDefaults.floatForKey("DistanceValue")
+                }
+                
+                if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
+                    displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
+                    print("SwitchStateBar")
+                } else {
+                    displayBar = settingDefault.displayBar
+                    print("default setting")
+                }
+                
+                if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                    displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+                } else {
+                    displayNightclub = settingDefault.displayNightclub
+                }
+                
+                //-- Transform to String
+                
+                let distanceMaxString = String(stringInterpolationSegment: distanceMax)
                 print("Distance max \(distanceMax)")
+                let ageMinString = String(stringInterpolationSegment: ageMin)
+                let ageMaxString = String(stringInterpolationSegment: ageMax)
                 
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
@@ -275,7 +314,7 @@ extension MainViewController: CLLocationManagerDelegate
                 print("MyFriends\(friends)" )
                 
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMin, "age_max" : ageMax, "distance_max" : distanceMax], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
                     

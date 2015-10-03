@@ -38,7 +38,7 @@ class RangeSlider: UIControl {
         }
     }
     
-    var upperValue: Double = 20.0 {
+    var upperValue: Double = 30.0 {
         didSet {
             updateLayerFrames()
         }

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/SettingsViewController.swift"
-            timestampString = "464860368.002144"
+            timestampString = "465579457.899471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "rangeSliderValueChanged(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -556,7 +556,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "post(_:params:url:postCompleted:)"
+            landmarkName = "delete(_:url:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -605,6 +605,70 @@
             startingLineNumber = "39"
             endingLineNumber = "39"
             landmarkName = "getPicture()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "465581940.89468"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.MainViewController.locationManager (had.MainViewController)(ObjectiveC.CLLocationManager, didUpdateLocations : Swift.Array&lt;ObjectiveC.CLLocation&gt;) -&gt; ()"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/MainViewControllerExtensions.swift"
+                  timestampString = "465573861.90059"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "278"
+                  endingLineNumber = "278"
+                  offsetFromSymbolStart = "4508">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.MainViewController.(locationManager (had.MainViewController) -&gt; (ObjectiveC.CLLocationManager, didUpdateLocations : Swift.Array&lt;ObjectiveC.CLLocation&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/MainViewControllerExtensions.swift"
+                  timestampString = "465573861.900862"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "465580831.344051"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

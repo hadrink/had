@@ -28,3 +28,14 @@ struct Design {
     }
     
 }
+
+struct SettingDefault {
+    
+    var distanceMax:Float = 20;
+    var ageMin:Double = 18
+    var ageMax:Double = 30
+    var displayBar:Bool = true
+    var displayNightclub:Bool = true
+    var statsDay = 30
+    
+}
