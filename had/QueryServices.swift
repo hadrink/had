@@ -24,45 +24,48 @@ class QueryServices{
             
             let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
                 
-                do {
-                
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
-                    
-                    //-- Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-                    if(error != nil) {
-                        print(error!.localizedDescription)
-                        let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                        print("Error could not parse JSON: '\(jsonStr)'")
-                        if(json != nil){
-                            postCompleted(succeeded: false, msg: "Error", obj : json!)
-                        }
-                    }
-                    else {
-                        //-- The JSONObjectWithData constructor didn't return an error. But, we should still
-                        //-- check and make sure that json has a value using optional binding.
-                        if let parseJSON = json {
-                            // Okay, the parsedJSON is here, let's get the value for 'success' out of it
-                            if let success = parseJSON["success"] as? Bool {
-                                print("Succes: \(success)")
-                                postCompleted(succeeded: success, msg: "Logged in.", obj : json!)
-                            }
-                                
-                            else {
-                                postCompleted(succeeded: true, msg: "ParsedJson", obj: json!)
+                if((data) != nil)
+                {
+                    do {
+                        
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
+                        
+                        //-- Did the JSONObjectWithData constructor return an error? If so, log the error to the console
+                        if(error != nil) {
+                            print(error!.localizedDescription)
+                            let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                            print("Error could not parse JSON: '\(jsonStr)'")
+                            if(json != nil){
+                                postCompleted(succeeded: false, msg: "Error", obj : json!)
                             }
                         }
                         else {
-                            //-- Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
-                            let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                            print("Error could not parse JSON: \(jsonStr)")
-                            postCompleted(succeeded: false, msg: "Error", obj : json!)
+                            //-- The JSONObjectWithData constructor didn't return an error. But, we should still
+                            //-- check and make sure that json has a value using optional binding.
+                            if let parseJSON = json {
+                                // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+                                if let success = parseJSON["success"] as? Bool {
+                                    print("Succes: \(success)")
+                                    postCompleted(succeeded: success, msg: "Logged in.", obj : json!)
+                                }
+                                    
+                                else {
+                                    postCompleted(succeeded: true, msg: "ParsedJson", obj: json!)
+                                }
+                            }
+                            else {
+                                //-- Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
+                                let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                                print("Error could not parse JSON: \(jsonStr)")
+                                postCompleted(succeeded: false, msg: "Error", obj : json!)
+                            }
                         }
+                        
                     }
-                    
-                }
-                
-                catch let err as NSError? {
-                    print(err)
+                        
+                    catch let err as NSError? {
+                        print(err)
+                    }
                 }
             })
             task.resume()
