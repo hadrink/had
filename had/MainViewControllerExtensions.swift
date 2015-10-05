@@ -47,12 +47,12 @@ extension MainViewController: UITableViewDataSource
             
             let type = searchArray[indexPath.row].typeofPlace as String!
             
-            if ( type == "cafe") {
+            if ( type == "cafe" || type == "bar") { 
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }
                 
             else {
-                cell.iconTableview.image = UIImage(named: "bottle-spin")
+                cell.iconTableview.image = UIImage(named: "nightclub-icon@3x")
             }
             
             return cell
@@ -199,8 +199,9 @@ extension MainViewController: UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let isEmpty = searchController.searchBar.text?.isEmpty
         if(isEmpty == false){
+            let textSearch = searchController.searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())
             self.searchArray.removeAll()
-            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+searchController.searchBar.text!){
+            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+textSearch!){
                 (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 
                  let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
@@ -387,9 +388,6 @@ extension MainViewController
     
     func setupRefreshControl() {
         print("")
-        
-        // Programmatically inserting a UIRefreshControl
-        self.refreshControl = UIRefreshControl()
         
         // Setup the loading view, which will hold the moving graphics
         self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)

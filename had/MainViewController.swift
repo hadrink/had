@@ -73,9 +73,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         self.setupRefreshControl()
         
-        // Initialize the refresh control.
-        
-        self.tableData.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
@@ -120,6 +117,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
         searchController.searchBar.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.becomeFirstResponder()
         navigationItem.titleView = searchController.searchBar
         navigationItem.setLeftBarButtonItem(nil, animated: true)
         navigationItem.setRightBarButtonItems(nil, animated: true)
@@ -135,7 +133,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
         
         searchController.active = true
-        refreshControl.hidden = true
+        refreshControl.removeFromSuperview()//deactive le refrsh pendant le search
         
         definesPresentationContext = true
         
@@ -226,7 +224,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.target = self
         searchButton.action = "ActivateSearchMode"
-        
+        self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
         navbar.setLeftBarButtonItem(hamburger, animated: true)
         navbar.setRightBarButtonItem(searchButton, animated: true)
     }
