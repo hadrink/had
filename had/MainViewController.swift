@@ -127,7 +127,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Change color searchBar text and placeholder and set image search icon
         
         textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
-        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        searchController.searchBar.setImage(UIImage(named: "search-icon@3x"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
         
         if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
             let attributeDictSearch = [NSForegroundColorAttributeName: Design().UIColorFromRGB(0xF0F0EF)]

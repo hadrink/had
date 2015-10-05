@@ -120,7 +120,7 @@ class SettingsViewController: UITableViewController{
         super.viewDidLoad()
         
         firstTime = true
-    
+        
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
         
         print("distanceSlider\(distanceSlider.value)")
@@ -267,11 +267,12 @@ class SettingsViewController: UITableViewController{
         
     }
     
-    
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         let section = indexPath.section
+        
+        /*let cellSelected = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: userDefaults.integerForKey("selected_row"), inSection: section))
+        cellSelected?.accessoryType = .Checkmark*/
         
         if (section == 2 || section == 3) {
         
@@ -279,8 +280,26 @@ class SettingsViewController: UITableViewController{
             for row in 0..<numberOfRows {
                 if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
                     cell.accessoryType = row == indexPath.row ? .Checkmark : .None
+                    userDefaults.setInteger(indexPath.row, forKey: "selected_row")
+                    print(userDefaults.integerForKey("selected_row"))
+                    print("Selected row")
+                    
                 }
             }
+            
+            if monthCheckmarkCell.selected {
+                userDefaults.setInteger(30, forKey: "stats_since")
+            }
+            
+            if twoweeksCheckmarkCell.selected {
+                userDefaults.setInteger(14, forKey: "stats_since")
+            }
+            
+            if oneweekCheckmarkCell.selected {
+                userDefaults.setInteger(7, forKey: "stats_since")
+            }
+            
+
         }
     }
     

@@ -270,6 +270,7 @@ extension MainViewController: CLLocationManagerDelegate
                 var ageMax : Double
                 var displayBar : Bool
                 var displayNightclub : Bool
+                var statsSince : NSDate?
                 
                 //-- Check if value exist in the userDefault Setting else we get the default values
                 
@@ -301,6 +302,17 @@ extension MainViewController: CLLocationManagerDelegate
                     displayNightclub = settingDefault.displayNightclub
                 }
                 
+                if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
+                    let day = settingViewController.userDefaults.integerForKey("stats_since")
+                    statsSince = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -day, toDate: NSDate(), options: [])
+                    
+                    print("Value \(statsSince)")
+
+                } else {
+                    statsSince = settingDefault.statsSince
+                    print("stats \(statsSince)")
+                }
+                
                 //-- Transform to String
                 
                 let distanceMaxString = String(stringInterpolationSegment: distanceMax)
@@ -308,13 +320,17 @@ extension MainViewController: CLLocationManagerDelegate
                 let ageMinString = String(stringInterpolationSegment: ageMin)
                 let ageMaxString = String(stringInterpolationSegment: ageMax)
                 
+                let formatter: NSDateFormatter = NSDateFormatter()
+                formatter.dateFormat = "dd-MM-yyyy"
+                let statsSinceString : String = formatter.stringFromDate(statsSince!)
+                
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
                 print("MyFriends\(friends)" )
                 
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSinceString], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
                     

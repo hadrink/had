@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 had. All rights reserved.
 //
 import CoreData
+import UIKit
+import Foundation
 
 struct Urls {
     
@@ -29,13 +31,13 @@ struct Design {
     
 }
 
-struct SettingDefault {
-    
+class SettingDefault {
+        
     var distanceMax:Float = 20;
     var ageMin:Double = 18
     var ageMax:Double = 30
     var displayBar:Bool = true
     var displayNightclub:Bool = true
-    var statsDay = 30
+    var statsSince = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -30, toDate: NSDate(), options: [])
     
 }
