@@ -39,6 +39,7 @@
 		7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		7A70C49B1BB146C300299781 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4991BB146C300299781 /* Store.swift */; settings = {ASSET_TAGS = (); }; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
+		7A84B31E1BC30A3800268D45 /* nightclub-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A84B31D1BC30A3800268D45 /* nightclub-icon@3x.png */; settings = {ASSET_TAGS = (); }; };
 		7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */; };
 		7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */; };
 		7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */; };
@@ -133,6 +134,7 @@
 		7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Store+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A70C4991BB146C300299781 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		7A8272F91A1D3279004603FE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7A84B31D1BC30A3800268D45 /* nightclub-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nightclub-icon@3x.png"; sourceTree = "<group>"; };
 		7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				7A6B5F2E1A8CBBAF00851BA5 /* bottle-intro@3x.png */,
 				7AC74B0A1BB851CA0011165D /* setting@3x.png */,
 				7A31650B1B4E57DE00CFE4B1 /* heart-hover@3x.png */,
+				7A84B31D1BC30A3800268D45 /* nightclub-icon@3x.png */,
 				7A3143201B69138A00122781 /* background-btn-fb@3x.png */,
 				7A31650C1B4E57DE00CFE4B1 /* heart@3x.png */,
 				7AD94FC21B9ADFF1000A9A94 /* background@3x.png */,
@@ -560,6 +563,7 @@
 				7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */,
 				7AE2C8FC1AAF8E4300AD9C59 /* bg-blur@3x.png in Resources */,
 				7A50441F1B4D640400477133 /* Lato-Bold.ttf in Resources */,
+				7A84B31E1BC30A3800268D45 /* nightclub-icon@3x.png in Resources */,
 				7A4109BA1A912FAE000487C5 /* left-arrow@3x.png in Resources */,
 				7AF0B2B71BC16A2D00D966F9 /* search-icon@3x.png in Resources */,
 				7ABF0E2B1A2877D70049720C /* bg-had.png in Resources */,
