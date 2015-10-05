@@ -28,7 +28,7 @@ class QueryServices{
                 {
                     do {
                         
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
                         
                         //-- Did the JSONObjectWithData constructor return an error? If so, log the error to the console
                         if(error != nil) {

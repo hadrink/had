@@ -171,8 +171,7 @@ class SettingsViewController: UITableViewController{
         contentViewTest2.addSubview(rangeSlider)
         contentViewTest2.addSubview(ageLabel)
 
-        nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        initCheckmarksCells()
         
         rangeSlider.translatesAutoresizingMaskIntoConstraints = false
         
@@ -363,4 +362,22 @@ class SettingsViewController: UITableViewController{
             }
         })*/
     }*/
+    
+    func initCheckmarksCells(){
+        nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        let stats_since = userDefaults.integerForKey("stats_since")
+        switch(stats_since){
+        case 30:
+            monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            break
+        case 14:
+            twoweeksCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            break
+        case 7:
+            oneweekCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            break
+        default:
+            monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
+    }
 }
