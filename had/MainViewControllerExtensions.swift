@@ -79,7 +79,7 @@ extension MainViewController: UITableViewDataSource
             }
                 
             else {
-                cell.iconTableview.image = UIImage(named: "bottle-spin")
+                cell.iconTableview.image = UIImage(named: "nightclub-icon@3x")
             }
             
             return cell
