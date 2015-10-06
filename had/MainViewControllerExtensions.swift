@@ -250,7 +250,8 @@ extension MainViewController: CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if((locationManager.location) != nil){
+        if((locationManager.location) != nil)
+        {
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
             
@@ -388,7 +389,6 @@ extension MainViewController
     
     func setupRefreshControl() {
         print("")
-        
         // Setup the loading view, which will hold the moving graphics
         self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)
         self.refreshLoadingView.backgroundColor = UIColor.clearColor()
@@ -427,6 +427,7 @@ extension MainViewController
         
         // When activated, invoke our refresh function
         self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+
     }
     
     func refresh(){
@@ -514,7 +515,7 @@ extension MainViewController
         
         //print("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: \(midX), refreshing: \(self.refreshControl.refreshing)")
     }
-    
+
     func animateRefreshView() {
         print("")
         
@@ -527,6 +528,7 @@ extension MainViewController
             static var colorIndex = 0
         }
         
+        
         // Flag that we are animating
         self.isRefreshAnimating = true;
         
@@ -535,7 +537,11 @@ extension MainViewController
             delay: Double(0.0),
             options: UIViewAnimationOptions.CurveLinear,
             animations: {
-                self.locationManager.startUpdatingLocation()
+                if(self.nbAlertDuringRefresh == 0){
+                    self.isAnimating = self.startLocationManager()
+                    self.nbAlertDuringRefresh++
+                }
+                //self.locationManager.startUpdatingLocation()
                 // Rotate the spinner by M_PI_2 = PI/2 = 90 degrees
                 self.bottle_spinner.transform = CGAffineTransformRotate(self.bottle_spinner.transform, CGFloat(M_PI_2))
                 
@@ -547,7 +553,10 @@ extension MainViewController
                 // If still refreshing, keep spinning, else reset
                 if (self.refreshControl.refreshing) {
                     self.animateRefreshView()
-                    self.locationManager.stopUpdatingLocation()
+                    if(self.isAnimating && self.nbAlertDuringRefresh == 0){
+                        self.locationManager.stopUpdatingLocation()
+                    }
+                    
                 }else {
                     self.resetAnimation()
                 }
