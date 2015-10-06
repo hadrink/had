@@ -38,6 +38,7 @@ extension MainViewController: UITableViewDataSource
         if (self.searchController.active)
         {
             print("active reload")
+            
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
@@ -60,10 +61,11 @@ extension MainViewController: UITableViewDataSource
             
         else
         {
+            
             let type = placeItems[indexPath.row].typeofPlace as String!
             
             print("inactive")
-            
+
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
@@ -343,7 +345,11 @@ extension MainViewController: CLLocationManagerDelegate
                         self.placeItems.removeAll()
                         
                         for item in reposArray {
-                            self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                            if var placeProperties = item["properties"] as? [String:AnyObject] {
+                                if (placeProperties["name"] != nil) {
+                                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                                }
+                            }
                         }
                     }
                     print("Mon object \(obj)")
