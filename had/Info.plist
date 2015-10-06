@@ -57,7 +57,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Your custom message to describe why you need location always goes here!</string>
+	<string>Had a besoin d&apos;accéder à votre position pour afficher les adresses autour de vous !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoSlab-Bold.ttf</string>

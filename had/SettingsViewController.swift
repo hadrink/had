@@ -273,7 +273,7 @@ class SettingsViewController: UITableViewController{
         /*let cellSelected = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: userDefaults.integerForKey("selected_row"), inSection: section))
         cellSelected?.accessoryType = .Checkmark*/
         
-        if (section == 2 || section == 3) {
+        if section == 2 {
         
             let numberOfRows = tableView.numberOfRowsInSection(section)
             for row in 0..<numberOfRows {
@@ -364,7 +364,7 @@ class SettingsViewController: UITableViewController{
     }*/
     
     func initCheckmarksCells(){
-        nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        //nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         let stats_since = userDefaults.integerForKey("stats_since")
         switch(stats_since){
         case 30:
