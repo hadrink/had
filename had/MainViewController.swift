@@ -125,7 +125,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Change color searchBar text and placeholder and set image search icon
         
         textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
-        searchController.searchBar.setImage(UIImage(named: "search-icon@3x"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
         
         if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
             let attributeDictSearch = [NSForegroundColorAttributeName: Design().UIColorFromRGB(0xF0F0EF)]
@@ -188,35 +188,14 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     //-- Refresh places
     
-   /* func refresh(refreshControl: UIRefreshControl) {
-        
-        /*let formatter:NSDateFormatter = NSDateFormatter()
-        let attrsDictionary:NSDictionary  = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
-        formatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")*/
-        
-        print("refreshing")
-        
-        if (placeItems.count != 0) {
-            messageLabel.alpha = 0
-        }
-        
-        //self.isAnimating = true
-        
-        startLocationManager()
-        
-        // End the refreshing
-        
-        refreshControl.endRefreshing()
-    }*/
-    
     func setLogoNavBar(){
-        let logo = UIImage(named: "had-title@3x")
+        let logo = UIImage(named: "had-title")
         let imageView = UIImageView(image:logo)
         imageView.frame = CGRectMake(0, 0, 38.66, 44)
         self.navbar.titleView = imageView
         
         hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-        hamburger.image = UIImage(named: "setting@3x")
+        hamburger.image = UIImage(named: "settings")
         
         //favButton.image = UIImage(named: "heart-hover@3x")
         //favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)

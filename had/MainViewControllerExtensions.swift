@@ -53,7 +53,7 @@ extension MainViewController: UITableViewDataSource
             }
                 
             else {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon@3x")
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
             return cell
@@ -81,7 +81,7 @@ extension MainViewController: UITableViewDataSource
             }
                 
             else {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon@3x")
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
             return cell
@@ -405,11 +405,11 @@ extension MainViewController
         self.refreshColorView.alpha = 0.30
         
         // Create the graphic image views
-        town_background = UIImageView(image: UIImage(named: "pull-to-refresh-bg@3x"))
+        town_background = UIImageView(image: UIImage(named: "pull-to-refresh-bg"))
         //compass_background.frame.size.width = 375
         //compass_background.frame.size.height = 10
         
-        self.bottle_spinner = UIImageView(image: UIImage(named: "bottle-spin@3x"))
+        self.bottle_spinner = UIImageView(image: UIImage(named: "bottle-spin"))
         self.bottle_spinner.frame.size = CGSize(width: 42, height: 42)
         
         
@@ -445,6 +445,7 @@ extension MainViewController
         let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
         dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
             // When done requesting/reloading/processing invoke endRefreshing, to close the control
+            self.nbAlertDuringRefresh = 0
             self.refreshControl.endRefreshing()
         }
         // -- FINISHED SOMETHING AWESOME, WOO! --

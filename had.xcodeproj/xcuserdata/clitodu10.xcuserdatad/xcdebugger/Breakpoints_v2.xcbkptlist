@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "465854698.028893"
+            timestampString = "465856930.543522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "ActivateSearchMode()"
             landmarkType = "5">
          </BreakpointContent>
@@ -343,7 +343,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/QueryServices.swift"
@@ -359,7 +359,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/QueryServices.swift"
@@ -372,14 +372,14 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "had.QueryServices.(post (had.QueryServices) -&gt; (Swift.String, params : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, url : Swift.String, postCompleted : (succeeded : Swift.Bool, msg : Swift.String, obj : ObjectiveC.NSDictionary) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/clitodu10/Documents/xcode/project/had/had/QueryServices.swift"
-                  timestampString = "465855475.327351"
+                  timestampString = "465940309.889865"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
@@ -387,14 +387,14 @@
                   offsetFromSymbolStart = "3500">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "had.QueryServices.(post (had.QueryServices) -&gt; (Swift.String, params : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, url : Swift.String, postCompleted : (succeeded : Swift.Bool, msg : Swift.String, obj : ObjectiveC.NSDictionary) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/clitodu10/Documents/xcode/project/had/had/QueryServices.swift"
-                  timestampString = "465855475.32758"
+                  timestampString = "465940309.890052"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
@@ -443,11 +443,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "465854698.028893"
+            timestampString = "465856930.543522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "ActivateSearchMode()"
             landmarkType = "5">
          </BreakpointContent>
@@ -491,27 +491,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewController.swift"
-            timestampString = "465854698.028893"
+            timestampString = "465939310.324781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "had/MainViewController.swift"
-            timestampString = "465854931.977943"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "startLocationManager()"
             landmarkType = "5">
          </BreakpointContent>
