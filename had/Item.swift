@@ -26,6 +26,9 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var averageAge: UILabel!
     @IBOutlet weak var getLocation: UIButton!
     @IBOutlet weak var iconTableview: UIImageView!
+    @IBOutlet weak var backgroundNbUser: UIView!
+    @IBOutlet weak var backgroundAge: UIView!
+    @IBOutlet weak var backgroundSex: UIView!
 
     
     @IBOutlet var routeButton: UIButton!

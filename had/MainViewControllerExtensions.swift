@@ -13,6 +13,11 @@ import Social
 
 extension MainViewController: UITableViewDataSource
 {
+    
+    /*func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return placeItems[indexPath.row].counter == "nil" ? 300.0 : 250
+    }*/
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if (self.searchController.active)
@@ -65,6 +70,13 @@ extension MainViewController: UITableViewDataSource
             let type = placeItems[indexPath.row].typeofPlace as String!
             
             print("inactive")
+            
+            if placeItems[indexPath.row].counter == "nil"{
+                print("test ma gueule")
+                cell.backgroundNbUser.removeFromSuperview()
+                cell.backgroundAge.removeFromSuperview()
+                cell.backgroundSex.removeFromSuperview()
+            }
 
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
@@ -73,6 +85,7 @@ extension MainViewController: UITableViewDataSource
             cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
+            
             
             print("Type \(type)")
             
