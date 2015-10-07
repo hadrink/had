@@ -62,8 +62,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
-    @IBOutlet weak var myMap: MKMapView!
-    
+    @IBOutlet weak var myMap: MKMapView!    
     
     override func viewDidLoad() {
         super.viewDidLoad()
