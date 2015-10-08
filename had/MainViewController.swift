@@ -100,6 +100,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         UserDataFb().getPicture()
         
+        
     }
     
     override func viewDidLayoutSubviews() {
