@@ -14,10 +14,6 @@ import Social
 extension MainViewController: UITableViewDataSource
 {
     
-    /*func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return placeItems[indexPath.row].counter == "nil" ? 300.0 : 250
-    }*/
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if (self.searchController.active)
@@ -76,6 +72,7 @@ extension MainViewController: UITableViewDataSource
                 cell.backgroundNbUser.removeFromSuperview()
                 cell.backgroundAge.removeFromSuperview()
                 cell.backgroundSex.removeFromSuperview()
+                tableData.rowHeight = 55
             }
 
             //println(placeItems[indexPath.row])
