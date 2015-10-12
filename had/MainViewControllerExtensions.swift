@@ -42,7 +42,7 @@ extension MainViewController: UITableViewDataSource
             
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
-            cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
+            cell.nbUser.text = String(searchArray[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
@@ -67,22 +67,49 @@ extension MainViewController: UITableViewDataSource
             
             print("inactive")
             
-            if placeItems[indexPath.row].counter == "nil"{
-                print("test ma gueule")
-                cell.backgroundNbUser.removeFromSuperview()
-                cell.backgroundAge.removeFromSuperview()
-                cell.backgroundSex.removeFromSuperview()
-                tableData.rowHeight = 55
-            }
-
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
-            cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
+            cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             
+            print("Friends in cell \(placeItems[indexPath.row].friends)")
+            
+            let friends = placeItems[indexPath.row].friends
+            
+            if friends?.count > 0 {
+                print("Count > 0")
+                if let userID:String = friends?[0] {
+                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(userID)/picture?width=90&height=90")
+                    let data = NSData(contentsOfURL: url)
+                    cell.fbFriendsImg.image = UIImage(data: data!)
+                    cell.fbFriendsImg.frame.size = CGSize(width: 30, height: 30)
+                    //cell.fbFriendsImg.layer.borderWidth = 1.0
+                    //cell.fbFriendsImg.layer.borderColor = UIColor.blackColor().CGColor
+                    cell.fbFriendsImg.layer.cornerRadius = cell.fbFriendsImg.frame.size.width / 2
+                }
+            }
+            
+            if placeItems[indexPath.row].counter == nil {
+                print("test ma gueule")
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                cell.fbFriendsImg.layer.opacity = 0
+                tableData.rowHeight = 55
+            } else {
+                tableData.rowHeight = 120
+                /*cell.nbUser.text = String(placeItems[indexPath.row].counter)
+                cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
+                cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)*/
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                cell.fbFriendsImg.layer.opacity = 1
+            }
+
             
             print("Type \(type)")
             
