@@ -30,6 +30,7 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
@@ -42,7 +43,7 @@ extension MainViewController: UITableViewDataSource
             
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
-            cell.nbUser.text = (searchArray[indexPath.row].counter as String!)
+            cell.nbUser.text = String(searchArray[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
@@ -67,25 +68,72 @@ extension MainViewController: UITableViewDataSource
             
             print("inactive")
             
-            if placeItems[indexPath.row].counter == "nil"{
-                print("test ma gueule")
-                cell.backgroundNbUser.removeFromSuperview()
-                cell.backgroundAge.removeFromSuperview()
-                cell.backgroundSex.removeFromSuperview()
-                tableData.rowHeight = 55
-            }
-
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
-            cell.nbUser.text = (placeItems[indexPath.row].counter as String!)
+            cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             
+            //-- Get friends array
+            let friends = placeItems[indexPath.row].friends
             
-            print("Type \(type)")
+            //-- Create an ImageView array
+            var friendsImageView: [UIImageView?] = []
+            friendsImageView.append(cell.fbFriendsImg1)
+            friendsImageView.append(cell.fbFriendsImg2)
             
+            //-- Check if friends in place
+            if friends!.count > 0 {
+                
+                //-- Create index for friends
+                let indexFriends = friends!.count - 1
+                
+                //-- Loop on userId in friends
+                for userId in 0...indexFriends {
+                    
+                    //-- Corner radius (makes circle picture)
+                    friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                    friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                    
+                    //-- Create picture friends url request
+                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                    let request:NSURLRequest = NSURLRequest(URL:url)
+                    let queue:NSOperationQueue = NSOperationQueue()
+                    
+                    //-- Start async request for get facebook picture friends
+                    NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                        
+                        //-- Check if response != nil
+                        if((response) != nil) {
+                            
+                            //-- Lunch async request in main queue for UI elements
+                            dispatch_async(dispatch_get_main_queue()) {
+                                friendsImageView[userId]?.image = UIImage(data: data!)
+                            }
+                        }
+                    })
+                }
+            }
+            
+            //-- Check if users in place (If true elements display else none)
+            if placeItems[indexPath.row].counter == nil {
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                cell.fbFriendsImg1.layer.opacity = 0
+                cell.fbFriendsImg2.layer.opacity = 0
+                tableData.rowHeight = 55
+            } else {
+                tableData.rowHeight = 120
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                cell.fbFriendsImg1.layer.opacity = 1
+                cell.fbFriendsImg2.layer.opacity = 1
+            }
+
             if ( type == "cafe" || type == "bar") {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }

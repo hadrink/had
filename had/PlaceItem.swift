@@ -17,13 +17,14 @@ class PlaceItem : CLLocationManager{
 
     var placeName: String?
     var city : String?
-    var counter: String!
+    var counter: Int!
     var averageAge: Int!
     var pourcentFemale:Float!
     var distance : Double!
     var placeLatitudeDegrees : CLLocationDegrees?
     var placeLongitudeDegrees : CLLocationDegrees?
     var typeofPlace : String?
+    var friends: Array<String>?
     
     // Init variables
     
@@ -36,9 +37,15 @@ class PlaceItem : CLLocationManager{
             typeofPlace = placeProperties["amenity"] as? String
         }
         
+        // Get friends visited place
+        
+        friends = json["friends"] as? Array<String>
+        
+        print("Friends visited \(friends)")
+        
         print(typeofPlace)
         
-        counter = String(stringInterpolationSegment: json["counter"] as! Int!)
+        //counter = String(stringInterpolationSegment: json["counter"] as! Int!)
         
         // Init for location info
         
@@ -78,15 +85,21 @@ class PlaceItem : CLLocationManager{
         
         // Init for users data
         
-        if let usersvisited = json["usersvisited"] as? [NSDictionary] {
+        var cumul:Int = 0
+        var count:Int = 0
+        var sexArray : [String] = []
+        
+        if let usersvisited = json["visitors"] as? [NSDictionary] {
             
-            var cumul:Int = 0
-            var count:Int = 0
-            var sexArray : [String] = []
+            print("visitorsss")
+            print(usersvisited)
             
             for uservisited in usersvisited {
-                let age:String = uservisited.objectForKey("age") as! String
-                let sex:String = uservisited.objectForKey("sex") as! String
+                let age:String = uservisited["age"] as! String
+                let sex:String = uservisited["sex"] as! String
+                print("age")
+                print(sex)
+                print(age)
                 let ageInt = Int(age)
                 
                 sexArray.append(sex)
@@ -102,10 +115,13 @@ class PlaceItem : CLLocationManager{
             }.count
             
             pourcentFemale = (Float(sexFemaleCount) / Float(sexCount))*100
-            averageAge = cumul / count
             
         }
         
+        if cumul != 0 && count != 0 {
+            counter = count
+            averageAge = cumul / count
+        }
         
     }
     /*
