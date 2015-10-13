@@ -45,7 +45,7 @@ extension MainViewController: UITableViewDataSource
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = String(searchArray[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
-            cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentFemale)
+            cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentSex)
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
             
             let type = searchArray[indexPath.row].typeofPlace as String!
@@ -73,8 +73,10 @@ extension MainViewController: UITableViewDataSource
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
-            cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
+            cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
+            cell.sexIcon.image = placeItems[indexPath.row].sexIcon
+            cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
@@ -83,6 +85,7 @@ extension MainViewController: UITableViewDataSource
             var friendsImageView: [UIImageView?] = []
             friendsImageView.append(cell.fbFriendsImg1)
             friendsImageView.append(cell.fbFriendsImg2)
+            friendsImageView.append(cell.fbFriendsImg3)
             
             //-- Check if friends in place
             if friends!.count > 0 {
@@ -124,6 +127,7 @@ extension MainViewController: UITableViewDataSource
                 cell.backgroundSex.layer.opacity = 0
                 cell.fbFriendsImg1.layer.opacity = 0
                 cell.fbFriendsImg2.layer.opacity = 0
+                cell.fbFriendsImg3.layer.opacity = 0
                 tableData.rowHeight = 55
             } else {
                 tableData.rowHeight = 120
@@ -132,6 +136,7 @@ extension MainViewController: UITableViewDataSource
                 cell.backgroundSex.layer.opacity = 1
                 cell.fbFriendsImg1.layer.opacity = 1
                 cell.fbFriendsImg2.layer.opacity = 1
+                cell.fbFriendsImg3.layer.opacity = 1
             }
 
             if ( type == "cafe" || type == "bar") {

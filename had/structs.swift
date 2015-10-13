@@ -18,6 +18,11 @@ struct user {
     static var userProfil = [NSManagedObject]()
 }
 
+struct Colors {
+    let pink = Design().UIColorFromRGB(0xEA88E7)
+    let blue = Design().UIColorFromRGB(0x5A74AE)
+}
+
 struct Design {
     
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
