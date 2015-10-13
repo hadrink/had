@@ -30,7 +30,8 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var backgroundAge: UIView!
     @IBOutlet weak var backgroundSex: UIView!
 
-    @IBOutlet weak var fbFriendsImg: UIImageView!
+    @IBOutlet weak var fbFriendsImg1: UIImageView!
+    @IBOutlet weak var fbFriendsImg2: UIImageView!
     
     @IBOutlet var routeButton: UIButton!
     

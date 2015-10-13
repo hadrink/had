@@ -30,6 +30,7 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
@@ -75,44 +76,64 @@ extension MainViewController: UITableViewDataSource
             cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             
-            print("Friends in cell \(placeItems[indexPath.row].friends)")
-            
+            //-- Get friends array
             let friends = placeItems[indexPath.row].friends
             
-            if friends?.count > 0 {
-                print("Count > 0")
-                if let userID:String = friends?[0] {
-                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(userID)/picture?width=90&height=90")
-                    let data = NSData(contentsOfURL: url)
-                    cell.fbFriendsImg.image = UIImage(data: data!)
-                    cell.fbFriendsImg.frame.size = CGSize(width: 30, height: 30)
-                    //cell.fbFriendsImg.layer.borderWidth = 1.0
-                    //cell.fbFriendsImg.layer.borderColor = UIColor.blackColor().CGColor
-                    cell.fbFriendsImg.layer.cornerRadius = cell.fbFriendsImg.frame.size.width / 2
+            //-- Create an ImageView array
+            var friendsImageView: [UIImageView?] = []
+            friendsImageView.append(cell.fbFriendsImg1)
+            friendsImageView.append(cell.fbFriendsImg2)
+            
+            //-- Check if friends in place
+            if friends!.count > 0 {
+                
+                //-- Create index for friends
+                let indexFriends = friends!.count - 1
+                
+                //-- Loop on userId in friends
+                for userId in 0...indexFriends {
+                    
+                    //-- Corner radius (makes circle picture)
+                    friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                    friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                    
+                    //-- Create picture friends url request
+                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                    let request:NSURLRequest = NSURLRequest(URL:url)
+                    let queue:NSOperationQueue = NSOperationQueue()
+                    
+                    //-- Start async request for get facebook picture friends
+                    NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                        
+                        //-- Check if response != nil
+                        if((response) != nil) {
+                            
+                            //-- Lunch async request in main queue for UI elements
+                            dispatch_async(dispatch_get_main_queue()) {
+                                friendsImageView[userId]?.image = UIImage(data: data!)
+                            }
+                        }
+                    })
                 }
             }
             
+            //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
-                print("test ma gueule")
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
-                cell.fbFriendsImg.layer.opacity = 0
+                cell.fbFriendsImg1.layer.opacity = 0
+                cell.fbFriendsImg2.layer.opacity = 0
                 tableData.rowHeight = 55
             } else {
                 tableData.rowHeight = 120
-                /*cell.nbUser.text = String(placeItems[indexPath.row].counter)
-                cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
-                cell.details.text = String(stringInterpolationSegment: placeItems[indexPath.row].pourcentFemale)*/
                 cell.backgroundNbUser.layer.opacity = 1
                 cell.backgroundAge.layer.opacity = 1
                 cell.backgroundSex.layer.opacity = 1
-                cell.fbFriendsImg.layer.opacity = 1
+                cell.fbFriendsImg1.layer.opacity = 1
+                cell.fbFriendsImg2.layer.opacity = 1
             }
 
-            
-            print("Type \(type)")
-            
             if ( type == "cafe" || type == "bar") {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }
