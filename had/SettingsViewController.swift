@@ -104,7 +104,7 @@ class SettingsViewController: UITableViewController{
         
         let store = stores[0].sImage
         
-        print("Test store \(store)")
+        //print("Test store \(store)")
         
         self.profilePicture.image = UIImage(data: store!)
         self.backgroundPicture.image = UIImage(data: store!)
@@ -112,8 +112,6 @@ class SettingsViewController: UITableViewController{
         firstTime = false
             
         }
-            
-
     }
     
     override func viewDidLoad() {
