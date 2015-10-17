@@ -68,12 +68,15 @@ extension MainViewController: UITableViewDataSource
             
             print("inactive")
             
+            
+            
+            
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
-            cell.averageAge.text = String(stringInterpolationSegment: placeItems[indexPath.row].averageAge)
-            cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
+            cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
+             cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             cell.sexIcon.image = placeItems[indexPath.row].sexIcon
             cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
