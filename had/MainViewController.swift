@@ -39,6 +39,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     var isRefreshIconsOverlap = false
     var isRefreshAnimating = false
     var isAnimating = false
+    var isLocating:Bool = false
     var nbAlertDuringRefresh = 0
     var searchController = UISearchController()
     var searchArray:[PlaceItem] = [PlaceItem](){
@@ -49,7 +50,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
-        manager.requestAlwaysAuthorization()
+        //manager.requestAlwaysAuthorization()
         return manager
         }()
     
@@ -63,23 +64,31 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!    
+  
+    //Essayer de charger les données avant  TODO
+/*    override func viewWillAppear(animated: Bool) {
+        startLocationManager(true)
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let revealView = self.revealViewController()
         
-        // Set Friends to user settings
+        //
+        
+        let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
+            locationManager.requestAlwaysAuthorization()
+            
+/*            */
+        }
         startLocationManager()
         self.setupRefreshControl()
         
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
-        self.searchController = UISearchController(searchResultsController: nil)
-        self.searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        
         setLogoNavBar()
         
         //-- Reveal view configuration
@@ -97,10 +106,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
         //- Get Picture Facebook
-        
         UserDataFb().getPicture()
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,8 +116,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     func ActivateSearchMode() {
         
+        searchController = UISearchController(searchResultsController: nil)
         let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
         searchController.searchBar.becomeFirstResponder()
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
@@ -136,7 +145,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         refreshControl.removeFromSuperview()//deactive le refrsh pendant le search
         
         definesPresentationContext = true
-        
     }
     
     //-- Table view configuration
@@ -213,26 +221,40 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     /*
     * StartUpdatingLocation if the location is deactivate an ui alert is shown
     */
-    func startLocationManager() -> Bool{
-        var isLocating:Bool = false
-        if(locationManager.location != nil){
-            locationManager.startUpdatingLocation()
-            isLocating = true
+    func startLocationManager(/*isInViewWillAppear:Bool = false*/) -> Bool{
+        if(self.locationManager.location != nil){
+                        print("pause")
+            self.locationManager.pausesLocationUpdatesAutomatically = false
+            print(self.locationManager.pausesLocationUpdatesAutomatically)
+            self.locationManager.startMonitoringSignificantLocationChanges()
+            //self.locationManager.startUpdatingLocation()
+            self.isLocating = true
         }
-        else
-        {
-            let alertController = UIAlertController(title: "Service de Localisation Désactivé", message:
-                "Merci d'activer le service de localisation dans les Réglages !", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-            alertController.addAction(UIAlertAction(title: "Réglages", style: .Default) { (_) -> Void in
-                let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-                if let url = settingsUrl {
-                    UIApplication.sharedApplication().openURL(url)
-                }
-            })
-            //alertController.addAction(UIAlertAction(title: "Réglages", style: UIAlertActionStyle.Default,handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        /*else{
+            throwAlert(alertMessage.titleAlertLocationManagerOff,message: alertMessage.messageAlertLocationManagerOff,
+                actions: alertMessage.alertActionOK,alertMessage.alertActionSettings)
+        }*/
         return isLocating
+    }
+    
+    func throwAlert(title: String,message:String,actions:String...){
+        let alertController = UIAlertController(title: title, message:
+            message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        for action in actions{
+            if(action == alertMessage.alertActionSettings){
+                alertController.addAction(UIAlertAction(title: action, style: .Default) { (_) -> Void in
+                    let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+                    if let url = settingsUrl {
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                    })
+            }
+            else{
+                alertController.addAction(UIAlertAction(title: action, style: .Default,handler: nil))
+            }
+        }
+        //alertController.addAction(UIAlertAction(title: "Réglages", style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }

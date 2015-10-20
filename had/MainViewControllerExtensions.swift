@@ -159,13 +159,44 @@ extension MainViewController: UITableViewDataSource
     
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
+        var GoActionTitle:String = "Itinéraire"
+        /*var fontSize_iOS8AndUpDefault  = 18.0
+        var fontSize_actuallyUsedUnderImage = 13.0
         
-        let GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Itinéraire" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+        var margin_horizontal_iOS8AndUp = 15.0
+        var margin_vertical_betweenTextAndImage = 2.0
+        if(tableView.cellForRowAtIndexPath(indexPath)?.heightAnchor as? double >= 64.0){
+            margin_vertical_betweenTextAndImage =  3.0
+        }*/
+        
+        let GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: GoActionTitle , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
+        //----------------------------
+       /* NSString.stringByPaddingToLength(GoActionTitle)
+        var titleSpaceString:NSString = stringByPaddingToLength(GoAction.length()*(fontSize_actuallyUsedUnderImage/fontSize_iOS8AndUpDefault)/1.1f withString:"\u3000" startingAtIndex:0); // This isn't exact, but it's close enough in most instances? I tested with full-width Asian characters and it accounts for those pretty well.
         
+        var frameGuess:CGSize =CGSizeMake(15*2, <#T##height: CGFloat##CGFloat#>)
+        CGSizeMake((margin_horizontal_iOS8AndUp*2)+[titleSpaceString boundingRectWithSize:CGSizeMake(MAXFLOAT, cellHeight) options:NSStringDrawingUsesLineFragmentOrigin attributes:{ NSFontAttributeName: [UIFont systemFontOfSize:fontSize_iOS8AndUpDefault] } context:nil].size.width, cellHeight);
+        
+        var tripleFrame:CGSize=CGSizeMake(frameGuess.width*3.0f, frameGuess.height*3.0f);
+        
+        UIGraphicsBeginImageContextWithOptions(tripleFrame, YES, [[UIScreen mainScreen] scale]);
+        CGContextRef context=UIGraphicsGetCurrentContext();
+        
+        [backgroundColor set];
+        CGContextFillRect(context, CGRectMake(0, 0, tripleFrame.width, tripleFrame.height));
+        
+        CGSize drawnTextSize=[title boundingRectWithSize:CGSizeMake(MAXFLOAT, cellHeight) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:fontSize_actuallyUsedUnderImage] } context:nil].size;
+        
+        [image drawAtPoint:CGPointMake((frameGuess.width/2.0f)-([image size].width/2.0f), (frameGuess.height/2.0f)-[image size].height-(margin_vertical_betweenTextAndImage/2.0f)+2.0f)];
+        [title drawInRect:CGRectMake((frameGuess.width/2.0f)-(drawnTextSize.width/2.0f), (frameGuess.height/2.0f)+(margin_vertical_betweenTextAndImage/2.0f)+2.0f, frameGuess.width, frameGuess.height) withAttributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:fontSize_actuallyUsedUnderImage], NSForegroundColorAttributeName: [UIColor whiteColor] }];
+        
+        [rowAction setBackgroundColor:[UIColor colorWithPatternImage:UIGraphicsGetImageFromCurrentImageContext()]];
+        UIGraphicsEndImageContext();*/
+        //----------------------------
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             
             let shareToFacebookButton = NSLocalizedString("Facebook", comment: "Facebook")
@@ -301,7 +332,21 @@ extension MainViewController: CLLocationManagerDelegate
     //-- Func Observer Method for start Updating Location
     
     func myObserverMethod (notification: NSNotification) {
-        locationManager.startUpdatingLocation()
+//
+//        if #available(iOS 9.0, *) {
+//            locationManager.requestLocation()
+//        } else {
+//            // Fallback on earlier versions
+//            locationManager.startUpdatingLocation()
+//        }
+        print("allow dans l'observer")
+        if #available(iOS 9.0, *) {
+            self.locationManager.allowsBackgroundLocationUpdates = true
+        //    self.locationManager.requestLocation()
+            print(self.locationManager.allowsBackgroundLocationUpdates)
+        }
+        self.locationManager.startUpdatingLocation()
+        //self.locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func WillAppTerminate(notification: NSNotification){
@@ -316,13 +361,27 @@ extension MainViewController: CLLocationManagerDelegate
         print("deferredUpdates")
     }
     
+//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        switch(status){
+//        case .AuthorizedAlways:
+//            self.isLocating=true
+//            break
+//        default:
+//            self.isLocating=false
+//        }
+//        
+//        startLocationManager()
+//        print(" authorisation status change")
+//    }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if((locationManager.location) != nil)
         {
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
-            
+            let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
+            let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
             if UIApplication.sharedApplication().applicationState == .Active {
                 print("app is activated")
                 
@@ -330,8 +389,8 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 let settingViewController = SettingsViewController()
                 
-                let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
-                let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
+                //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
+                //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
                 print("Latitude \(userLatitude)")
                 print("Longitude \(userLongitude)")
                 
@@ -419,7 +478,7 @@ extension MainViewController: CLLocationManagerDelegate
                             }
                         }
                     }
-                    print("Mon object \(obj)")
+                    //print("Mon object \(obj)")
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         
@@ -432,11 +491,11 @@ extension MainViewController: CLLocationManagerDelegate
                 NSLog("App is backgrounded. New location is %@", manager.location!)
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 let email: String! = userDefaults.stringForKey("email")
-                QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(manager.location?.coordinate.latitude)/\(manager.location?.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 }
                 
                 let distance:CLLocationDistance = 200
-                let time:NSTimeInterval = 60
+                let time:NSTimeInterval = 10
                 manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
                 
             }

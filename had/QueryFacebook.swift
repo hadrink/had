@@ -34,7 +34,7 @@ class UserDataFb {
                 let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 
                     self.cache.setObject(UIImage(data: nsdata!)!, forKey: "profile_picture")
-                    print(self.cache.objectForKey("profile_picture")?.description)
+                    //print(self.cache.objectForKey("profile_picture")?.description)
                 
                 
                     let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
@@ -73,7 +73,7 @@ class UserDataFb {
                 //settingViewController.backgroundPicture.image = UIImage(data: nsdata!)
                 
                 //self.profilePicture.image = UIImage(data: NSData(contentsOfURL: NSURL(fileURLWithPath: url as String)!)!)
-                print(url)
+                //print(url)
             } else {
                 print("\(error)")
             }
@@ -85,8 +85,8 @@ class UserDataFb {
     
     func test() {
         print("testpicture")
-        print(cache.objectForKey("profile_picture")?.description)
-        print(cache.description)
+        //print(cache.objectForKey("profile_picture")?.description)
+        //print(cache.description)
     }
         
     
@@ -105,16 +105,16 @@ class UserDataFb {
             }
             else {
                 
-                print(result)
+                //print(result)
                 
                 var allFriends = [String]()
                 let friends = result["data"] as! NSArray
                 
-                print("friends\(friends)")
+                //print("friends\(friends)")
                 for friend in friends {
                     let thisFriend = friend["id"] as! String
                     allFriends.append(thisFriend)
-                    print("Thisfriends\(thisFriend)")
+                    //print("Thisfriends\(thisFriend)")
 
                 }
                 
@@ -152,7 +152,7 @@ class UserDataFb {
             else {
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 
-                print("result FB \(result)")
+                //print("result FB \(result)")
 
                 let userEmailFb:String = result.valueForKey("email") as! String
                 let userFirstnameFb:String = result.valueForKey("first_name") as! String
@@ -178,7 +178,7 @@ class UserDataFb {
                         print("Error: \(error)")
                     }
                     else {
-                        print("Friends\(result)")
+                        //print("Friends\(result)")
                         
                         var allFriends = [String]()
                         let friends = result["data"] as! NSArray
@@ -188,7 +188,7 @@ class UserDataFb {
                         }
                         
                         let allFriendsFb = allFriends.joinWithSeparator(",")
-                        print(allFriendsFb)
+                        //print(allFriendsFb)
 
                         let userArray:Dictionary = ["gender":userGenderFb, "email":userEmailFb, "lastname":userLastnameFb, "firstname":userFirstnameFb, "link":userLinkFb, "friends":allFriendsFb /*"Birthday":userBirthday*/]
 

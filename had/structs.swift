@@ -33,16 +33,22 @@ struct Design {
             alpha: CGFloat(1.0)
         )
     }
-    
 }
 
 class SettingDefault {
         
-    var distanceMax:Float = 20;
+    var distanceMax:Float = 300;
     var ageMin:Double = 18
     var ageMax:Double = 30
     var displayBar:Bool = true
     var displayNightclub:Bool = true
     var statsSince = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -30, toDate: NSDate(), options: [])
     
+}
+
+struct alertMessage {
+    static let titleAlertLocationManagerOff = "Service de Localisation Désactivé"
+    static let messageAlertLocationManagerOff = "Merci d'activer le service de localisation dans les Réglages !"
+    static let alertActionOK = "OK"
+    static let alertActionSettings = "Réglages"
 }

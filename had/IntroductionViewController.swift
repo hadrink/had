@@ -28,23 +28,23 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
     
     var whiteColor :UIColor = UIColor(red: (255/255.0), green: (255/255.0), blue: (255/255.0), alpha: 1)
     
-    let MyKeychainWrapper = KeychainWrapper()
+//    let MyKeychainWrapper = KeychainWrapper()
     
-    @IBOutlet var createAccountLabel: UILabel!
+   // @IBOutlet var createAccountLabel: UILabel!
 
 
-    @IBOutlet var textEmail: UIButton!
+/*    @IBOutlet var textEmail: UIButton!
     @IBOutlet weak var textFieldMail: UITextField!
-    @IBOutlet weak var textFieldPsw: UITextField!
-    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var textFieldPsw: UITextField!*/
+    //@IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var facebookBtn: UIButton!
     @IBOutlet weak var buttleHad: UIImageView!
     @IBOutlet weak var backgroundIntro: UIImageView!
 
-    var methodePost = QueryServices()
-    var myJsonResult = ""
+    //var methodePost = QueryServices()
+    //var myJsonResult = ""
 
-    
+    /*
     func textFieldShouldReturn(textField : UITextField) -> Bool{
         
         if (textField === textFieldMail) {
@@ -120,7 +120,7 @@ class IntroductionViewController: ResponsiveTextFieldViewController, UITextField
             return true
         }
     }
-
+*/
     /*func isUserConnected()
     {
         var user: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("Username")

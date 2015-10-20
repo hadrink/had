@@ -13,7 +13,13 @@ import Parse
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var userProfil:User = User()
+/*    lazy var locationManager: CLLocationManager! = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        return manager
+        }()*/
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -53,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        //startUpdatingLocation()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -124,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     // MARK: - Core Data Saving support
     
-    
+   /*
     
     func saveContext () {
         if let moc = self.managedObjectContext {
@@ -141,6 +149,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-    }
+    }*/
 }
 
