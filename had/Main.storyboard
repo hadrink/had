@@ -1719,10 +1719,11 @@
                                                     <exclude reference="wts-lI-qyb"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="3S5-1H-UWO"/>
-                                                    <exclude reference="eeR-6u-0fj"/>
-                                                    <exclude reference="j0y-1h-cWk"/>
-                                                    <exclude reference="qq7-YM-CFx"/>
+                                                    <exclude reference="Fkj-aF-Nd1"/>
+                                                    <exclude reference="ULI-Xy-WqA"/>
+                                                    <exclude reference="4L1-rG-UTn"/>
+                                                    <exclude reference="7Pz-BK-HR6"/>
+                                                    <exclude reference="twx-H3-e6d"/>
                                                     <exclude reference="C74-F1-jYh"/>
                                                     <exclude reference="FOW-bY-Sny"/>
                                                     <exclude reference="O4A-41-NpO"/>
@@ -1730,7 +1731,6 @@
                                                     <exclude reference="gKN-BF-rCY"/>
                                                     <exclude reference="XJd-0b-aYd"/>
                                                     <exclude reference="jMd-FM-bEp"/>
-<<<<<<< HEAD
                                                     <exclude reference="ApP-QR-TdZ"/>
                                                     <exclude reference="OgP-aJ-bSE"/>
                                                     <exclude reference="ftc-jM-cWf"/>
@@ -1738,19 +1738,16 @@
                                                     <exclude reference="gyM-hM-pm4"/>
                                                     <exclude reference="FQp-D0-3st"/>
                                                     <exclude reference="VnN-sP-0kw"/>
-=======
-                                                    <exclude reference="FPa-5l-zeE"/>
-                                                    <exclude reference="vSk-V2-9dW"/>
-                                                    <exclude reference="Fkj-aF-Nd1"/>
-                                                    <exclude reference="ULI-Xy-WqA"/>
-                                                    <exclude reference="4L1-rG-UTn"/>
-                                                    <exclude reference="7Pz-BK-HR6"/>
-                                                    <exclude reference="twx-H3-e6d"/>
->>>>>>> origin/fix_bug_chris
                                                     <exclude reference="4Sz-au-daC"/>
                                                     <exclude reference="gdl-2s-cuQ"/>
                                                     <exclude reference="L31-Uo-pUy"/>
                                                     <exclude reference="Qh8-Qa-IRH"/>
+                                                    <exclude reference="FPa-5l-zeE"/>
+                                                    <exclude reference="vSk-V2-9dW"/>
+                                                    <exclude reference="3S5-1H-UWO"/>
+                                                    <exclude reference="eeR-6u-0fj"/>
+                                                    <exclude reference="j0y-1h-cWk"/>
+                                                    <exclude reference="qq7-YM-CFx"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1765,18 +1762,11 @@
                                                     <include reference="wts-lI-qyb"/>
                                                 </mask>
                                                 <mask key="constraints">
-<<<<<<< HEAD
                                                     <include reference="Fkj-aF-Nd1"/>
                                                     <include reference="ULI-Xy-WqA"/>
                                                     <exclude reference="4L1-rG-UTn"/>
                                                     <include reference="7Pz-BK-HR6"/>
                                                     <include reference="twx-H3-e6d"/>
-=======
-                                                    <exclude reference="3S5-1H-UWO"/>
-                                                    <include reference="eeR-6u-0fj"/>
-                                                    <include reference="j0y-1h-cWk"/>
-                                                    <exclude reference="qq7-YM-CFx"/>
->>>>>>> origin/fix_bug_chris
                                                     <exclude reference="C74-F1-jYh"/>
                                                     <exclude reference="FOW-bY-Sny"/>
                                                     <exclude reference="NKB-1w-v0s"/>
@@ -1788,7 +1778,6 @@
                                                     <exclude reference="HFl-Xc-IJe"/>
                                                     <include reference="XJd-0b-aYd"/>
                                                     <include reference="jMd-FM-bEp"/>
-<<<<<<< HEAD
                                                     <include reference="ApP-QR-TdZ"/>
                                                     <include reference="OgP-aJ-bSE"/>
                                                     <exclude reference="ftc-jM-cWf"/>
@@ -1800,21 +1789,14 @@
                                                     <include reference="gdl-2s-cuQ"/>
                                                     <include reference="L31-Uo-pUy"/>
                                                     <include reference="Qh8-Qa-IRH"/>
-=======
->>>>>>> origin/fix_bug_chris
                                                     <exclude reference="96g-or-f8C"/>
                                                     <include reference="FPa-5l-zeE"/>
                                                     <exclude reference="Q4K-Rl-5Ip"/>
                                                     <include reference="vSk-V2-9dW"/>
-                                                    <include reference="Fkj-aF-Nd1"/>
-                                                    <include reference="ULI-Xy-WqA"/>
-                                                    <include reference="4L1-rG-UTn"/>
-                                                    <include reference="7Pz-BK-HR6"/>
-                                                    <include reference="twx-H3-e6d"/>
-                                                    <include reference="4Sz-au-daC"/>
-                                                    <include reference="gdl-2s-cuQ"/>
-                                                    <include reference="L31-Uo-pUy"/>
-                                                    <include reference="Qh8-Qa-IRH"/>
+                                                    <exclude reference="3S5-1H-UWO"/>
+                                                    <include reference="eeR-6u-0fj"/>
+                                                    <include reference="j0y-1h-cWk"/>
+                                                    <exclude reference="qq7-YM-CFx"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1927,7 +1909,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-intro@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="1J7-ek-eFV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-intro" translatesAutoresizingMaskIntoConstraints="NO" id="1J7-ek-eFV">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
                                 <constraints>
@@ -2259,7 +2241,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Créer un compte" id="15J-BE-3kP">
-                                        <barButtonItem key="leftBarButtonItem" image="left-arrow@3x.png" width="4" id="bQG-ej-EEx">
+                                        <barButtonItem key="leftBarButtonItem" image="left-arrow" width="4" id="bQG-ej-EEx">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <segue destination="Ivj-Zd-cle" kind="show" id="9jQ-jM-iaC"/>
@@ -2672,13 +2654,13 @@
     </scenes>
     <resources>
         <image name="background" width="414" height="736"/>
-        <image name="background-btn-fb" width="250" height="40"/>
+        <image name="background-btn-fb" width="1242" height="2208"/>
         <image name="bar-icon" width="31" height="33"/>
         <image name="bg-intro" width="414" height="736"/>
-        <image name="bg-intro@3x.png" width="1242" height="2208"/>
+        <image name="bg-intro" width="1242" height="2208"/>
         <image name="bottle-intro" width="106" height="336"/>
         <image name="heart" width="21" height="20"/>
-        <image name="left-arrow@3x.png" width="81" height="69"/>
+        <image name="left-arrow" width="81" height="69"/>
         <image name="line-separator.png" width="220" height="1"/>
         <image name="sexicon-male" width="14" height="14"/>
     </resources>
