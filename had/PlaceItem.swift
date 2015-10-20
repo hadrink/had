@@ -19,12 +19,14 @@ class PlaceItem : CLLocationManager{
     var city : String?
     var counter: Int!
     var averageAge: Int!
-    var pourcentFemale:Float!
+    var pourcentSex:Float!
     var distance : Double!
     var placeLatitudeDegrees : CLLocationDegrees?
     var placeLongitudeDegrees : CLLocationDegrees?
     var typeofPlace : String?
     var friends: Array<String>?
+    var sexIcon : UIImage?
+    var majoritySex : String?
     
     // Init variables
     
@@ -114,7 +116,20 @@ class PlaceItem : CLLocationManager{
                 $0 == "F"
             }.count
             
-            pourcentFemale = (Float(sexFemaleCount) / Float(sexCount))*100
+            //-- Calc average male and female
+            let pourcentFemale = (Float(sexFemaleCount) / Float(sexCount))*100
+            let pourcentMale = 100 - pourcentFemale
+            
+            //-- Check if male or female is in majority and return values in function
+            if pourcentFemale > 50 {
+                pourcentSex = pourcentFemale
+                sexIcon = UIImage(named: "sexicon-female")
+                majoritySex = "F"
+            } else {
+                pourcentSex = pourcentMale
+                sexIcon = UIImage(named: "sexicon-male")
+                majoritySex = "M"
+            }
             
         }
         

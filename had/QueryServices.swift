@@ -102,7 +102,6 @@ class QueryServices{
             print(err)
         }
         
-        
     }
     
     /*var userName:AnyObject = 101
