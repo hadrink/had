@@ -30,11 +30,11 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         cell.layoutMargins = UIEdgeInsetsZero
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         print(self.searchController.active)
         
         if (self.searchController.active)
@@ -67,10 +67,6 @@ extension MainViewController: UITableViewDataSource
             let type = placeItems[indexPath.row].typeofPlace as String!
             
             print("inactive")
-            
-            
-            
-            
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
@@ -125,6 +121,8 @@ extension MainViewController: UITableViewDataSource
             
             //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
+                print("index")
+                print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
@@ -269,24 +267,6 @@ extension MainViewController: UITableViewDataSource
 
 extension MainViewController: UITableViewDelegate
 {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if(selectedIndex == indexPath.row){
-            selectedIndex = -1
-            tableData.reloadRowsAtIndexPaths(NSArray(object: indexPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-            return
-        }
-        if(selectedIndex != -1){
-            let prevPath:NSIndexPath = NSIndexPath(forRow: indexPath.row, inSection: 0)
-            tableData.reloadRowsAtIndexPaths(NSArray(object: prevPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        }
-        selectedIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths(NSArray(object: indexPath) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-    }
-    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
     }
