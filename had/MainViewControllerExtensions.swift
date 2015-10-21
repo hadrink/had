@@ -526,11 +526,11 @@ extension MainViewController
         print("")
         // Setup the loading view, which will hold the moving graphics
         self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)
-        self.refreshLoadingView.backgroundColor = UIColor.whiteColor()
+        self.refreshLoadingView.backgroundColor = UIColor.clearColor()
         
         // Setup the color view, which will display the rainbowed background
         self.refreshColorView = UIView(frame: self.refreshControl.bounds)
-        self.refreshColorView.backgroundColor = UIColor.whiteColor()
+        self.refreshColorView.backgroundColor = UIColor.clearColor()
         self.refreshColorView.alpha = 0.30
         
         // Create the graphic image views
@@ -550,7 +550,7 @@ extension MainViewController
         self.refreshLoadingView.clipsToBounds = true;
         
         // Hide the original spinner icon
-        self.refreshControl.tintColor = UIColor.whiteColor()
+        self.refreshControl.tintColor = UIColor.clearColor()
         
         // Add the loading and colors views to our refresh control
         self.refreshControl.addSubview(self.refreshColorView)
