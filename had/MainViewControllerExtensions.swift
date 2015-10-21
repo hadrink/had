@@ -81,6 +81,10 @@ extension MainViewController: UITableViewDataSource
             cell.sexIcon.image = placeItems[indexPath.row].sexIcon
             cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             
+            cell.backgroundSex.layer.cornerRadius = 4.0
+            cell.backgroundAge.layer.cornerRadius = 4.0
+            cell.backgroundNbUser.layer.cornerRadius = 4.0
+            
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
             
@@ -522,11 +526,11 @@ extension MainViewController
         print("")
         // Setup the loading view, which will hold the moving graphics
         self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)
-        self.refreshLoadingView.backgroundColor = UIColor.clearColor()
+        self.refreshLoadingView.backgroundColor = UIColor.whiteColor()
         
         // Setup the color view, which will display the rainbowed background
         self.refreshColorView = UIView(frame: self.refreshControl.bounds)
-        self.refreshColorView.backgroundColor = UIColor.clearColor()
+        self.refreshColorView.backgroundColor = UIColor.whiteColor()
         self.refreshColorView.alpha = 0.30
         
         // Create the graphic image views
@@ -546,7 +550,7 @@ extension MainViewController
         self.refreshLoadingView.clipsToBounds = true;
         
         // Hide the original spinner icon
-        self.refreshControl.tintColor = UIColor.clearColor()
+        self.refreshControl.tintColor = UIColor.whiteColor()
         
         // Add the loading and colors views to our refresh control
         self.refreshControl.addSubview(self.refreshColorView)
