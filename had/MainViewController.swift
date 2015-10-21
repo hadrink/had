@@ -93,7 +93,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         //-- Reveal view configuration
         
-        revealView.frontViewShadowOpacity = 1.0
+        revealView.frontViewShadowOpacity = 0.0
         revealView.rearViewRevealOverdraw = 0
         self.view.addGestureRecognizer(revealView.panGestureRecognizer())
         hamburger.target = revealView

@@ -1145,7 +1145,7 @@
                                     <constraint firstAttribute="width" constant="620" id="80W-hH-r6H"/>
                                     <constraint firstAttribute="height" constant="672" id="BW3-ia-fms"/>
                                 </constraints>
-                                <color key="separatorColor" red="0.61960784313725492" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
