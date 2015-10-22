@@ -1145,7 +1145,7 @@
                                     <constraint firstAttribute="width" constant="620" id="80W-hH-r6H"/>
                                     <constraint firstAttribute="height" constant="672" id="BW3-ia-fms"/>
                                 </constraints>
-                                <color key="separatorColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1662,7 +1662,9 @@
                                                 <constraint firstItem="7gf-53-C2O" firstAttribute="top" secondItem="xQA-K6-DJE" secondAttribute="bottom" id="Q4K-Rl-5Ip">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
                                                 </constraint>
-                                                <constraint firstItem="dhM-ZC-iew" firstAttribute="leading" secondItem="PcX-XA-BDf" secondAttribute="trailing" constant="1" id="Qh8-Qa-IRH"/>
+                                                <constraint firstItem="dhM-ZC-iew" firstAttribute="leading" secondItem="PcX-XA-BDf" secondAttribute="trailing" constant="1" id="Qh8-Qa-IRH">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                </constraint>
                                                 <constraint firstItem="3MB-Jd-tuw" firstAttribute="top" secondItem="y2d-Ly-p4H" secondAttribute="topMargin" constant="1" id="TDq-WT-45W">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
@@ -1677,7 +1679,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="41T-67-GIX" secondAttribute="trailing" constant="16" id="eeR-6u-0fj"/>
                                                 <constraint firstAttribute="bottom" secondItem="VgX-NQ-MdX" secondAttribute="bottom" constant="10" id="ftc-jM-cWf"/>
                                                 <constraint firstItem="3MB-Jd-tuw" firstAttribute="top" secondItem="y2d-Ly-p4H" secondAttribute="top" constant="4" id="gKN-BF-rCY"/>
-                                                <constraint firstItem="PcX-XA-BDf" firstAttribute="leading" secondItem="737-W1-buJ" secondAttribute="trailing" constant="1" id="gdl-2s-cuQ"/>
+                                                <constraint firstItem="PcX-XA-BDf" firstAttribute="leading" secondItem="737-W1-buJ" secondAttribute="trailing" constant="1" id="gdl-2s-cuQ">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                </constraint>
                                                 <constraint firstItem="Foo-sY-EpS" firstAttribute="leading" secondItem="VgX-NQ-MdX" secondAttribute="trailing" constant="5" id="gyM-hM-pm4"/>
                                                 <constraint firstItem="41T-67-GIX" firstAttribute="top" secondItem="y2d-Ly-p4H" secondAttribute="top" constant="10" id="j0y-1h-cWk"/>
                                                 <constraint firstItem="xQA-K6-DJE" firstAttribute="top" secondItem="3MB-Jd-tuw" secondAttribute="bottom" constant="3" id="jMd-FM-bEp">

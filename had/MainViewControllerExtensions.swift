@@ -34,7 +34,7 @@ extension MainViewController: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
         print(self.searchController.active)
         
         if (self.searchController.active)
@@ -178,6 +178,8 @@ extension MainViewController: UITableViewDataSource
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
+        
+        GoToAction.backgroundColor = Colors().blue
         //----------------------------
        /* NSString.stringByPaddingToLength(GoActionTitle)
         var titleSpaceString:NSString = stringByPaddingToLength(GoAction.length()*(fontSize_actuallyUsedUnderImage/fontSize_iOS8AndUpDefault)/1.1f withString:"\u3000" startingAtIndex:0); // This isn't exact, but it's close enough in most instances? I tested with full-width Asian characters and it accounts for those pretty well.
@@ -240,7 +242,7 @@ extension MainViewController: UITableViewDataSource
             
         })
         
-        shareAction.backgroundColor = Design().UIColorFromRGB(0x5B90CE)
+        shareAction.backgroundColor = Colors().blue
         return [GoToAction,shareAction]
     }
     
