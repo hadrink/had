@@ -121,6 +121,9 @@ class SettingsViewController: UITableViewController{
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
         
+        // Get First name and Last name and display it in view
+        self.Name.text = (userDefaults.stringForKey("first_name")! + " " + userDefaults.stringForKey("last_name")!)
+        
         print("distanceSlider\(distanceSlider.value)")
        
         if userDefaults.floatForKey("DistanceValue").isZero {
