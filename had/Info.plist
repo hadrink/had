@@ -6,6 +6,10 @@
 	<string>fr</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -57,7 +61,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Had a besoin d&apos;accéder à votre position pour afficher les adresses autour de vous !</string>
+	<string>Had a besoin d'accéder à votre position pour afficher les adresses autour de vous !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoSlab-Bold.ttf</string>

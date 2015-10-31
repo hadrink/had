@@ -22,9 +22,9 @@
 		7A65B69C1AF5027F00A124EC /* RobotoSlab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */; };
 		7A65B69D1AF5027F00A124EC /* RobotoSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */; };
 		7A65B69E1AF5027F00A124EC /* RobotoSlab-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */; };
-		7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4951BB1463500299781 /* had.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
-		7A70C49B1BB146C300299781 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4991BB146C300299781 /* Store.swift */; settings = {ASSET_TAGS = (); }; };
+		7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4951BB1463500299781 /* had.xcdatamodeld */; };
+		7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */; };
+		7A70C49B1BB146C300299781 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4991BB146C300299781 /* Store.swift */; };
 		7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8272F91A1D3279004603FE /* CoreLocation.framework */; };
 		7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */; };
 		7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */; };
@@ -35,9 +35,9 @@
 		7AA2251419CDA9D1002003ED /* hadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251319CDA9D1002003ED /* hadTests.swift */; };
 		7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */; };
 		7AA2252019CDBED4002003ED /* QueryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251F19CDBED4002003ED /* QueryServices.swift */; };
-		7AB065201BADA5DE001293C2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB0651F1BADA5DE001293C2 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
-		7AB065231BADA5F5001293C2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065211BADA5F5001293C2 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		7AB065241BADA5F5001293C2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065221BADA5F5001293C2 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		7AB065201BADA5DE001293C2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB0651F1BADA5DE001293C2 /* Bolts.framework */; };
+		7AB065231BADA5F5001293C2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065211BADA5F5001293C2 /* FBSDKCoreKit.framework */; };
+		7AB065241BADA5F5001293C2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB065221BADA5F5001293C2 /* FBSDKLoginKit.framework */; };
 		7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */; };
 		7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9981BADAAC10025477A /* libsqlite3.tbd */; };
 		7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */; };

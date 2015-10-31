@@ -63,12 +63,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
-    @IBOutlet weak var myMap: MKMapView!    
-  
-    //Essayer de charger les données avant  TODO
-/*    override func viewWillAppear(animated: Bool) {
-        startLocationManager(true)
-    }*/
+    @IBOutlet weak var myMap: MKMapView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

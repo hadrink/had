@@ -15,20 +15,22 @@ class LoginViewController: UIViewController{
         
         let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
         print(NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey"))
-        var vc: AnyObject!
+        var vc: UIViewController
         print("willappear")
         if (FBSDKAccessToken.currentAccessToken() != nil || hasLoginKey == true)
         {
-            vc = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController")
+            vc = self.storyboard!.instantiateViewControllerWithIdentifier("SWRevealViewController")
             print("redirect sw")
             
         }
         else
         {
-            vc = self.storyboard?.instantiateViewControllerWithIdentifier("Introduction")
+            vc = self.storyboard!.instantiateViewControllerWithIdentifier("Introduction")
+            vc.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+
             print("redirect intro")
         }
-        self.showViewController(vc as! UIViewController, sender: vc)
+        self.showViewController(vc , sender: vc)
         
     }
     
