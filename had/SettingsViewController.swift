@@ -288,7 +288,7 @@ class SettingsViewController: UITableViewController{
             }
             
             if monthCheckmarkCell.selected {
-                userDefaults.setInteger(30, forKey: "stats_since")
+                userDefaults.setInteger(31, forKey: "stats_since")
             }
             
             if twoweeksCheckmarkCell.selected {

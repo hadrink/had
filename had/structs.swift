@@ -43,7 +43,7 @@ class SettingDefault {
     var ageMax:Double = 30
     var displayBar:Bool = true
     var displayNightclub:Bool = true
-    var statsSince = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -30, toDate: NSDate(), options: [])
+    var statsSince = 31
     
 }
 

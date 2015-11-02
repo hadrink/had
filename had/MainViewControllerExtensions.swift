@@ -33,12 +33,9 @@ extension MainViewController: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
-<<<<<<< HEAD
-        cell.layoutMargins = UIEdgeInsetsZero
+
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-=======
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
->>>>>>> new_design_tableview
         print(self.searchController.active)
         
         if (self.searchController.active)
@@ -391,7 +388,7 @@ extension MainViewController: CLLocationManagerDelegate
                 var ageMax : Double
                 var displayBar : Bool
                 var displayNightclub : Bool
-                var statsSince : NSDate?
+                var statsSince : Int
                 
                 //-- Check if value exist in the userDefault Setting else we get the default values
                 
@@ -424,11 +421,8 @@ extension MainViewController: CLLocationManagerDelegate
                 }
                 
                 if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
-                    let day = settingViewController.userDefaults.integerForKey("stats_since")
-                    statsSince = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.Day, value: -day, toDate: NSDate(), options: [])
-                    
+                    statsSince = settingViewController.userDefaults.integerForKey("stats_since")
                     print("Value \(statsSince)")
-
                 } else {
                     statsSince = settingDefault.statsSince
                     print("stats \(statsSince)")
@@ -443,7 +437,6 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 let formatter: NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "dd-MM-yyyy"
-                let statsSinceString : String = formatter.stringFromDate(statsSince!)
                 
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
@@ -451,7 +444,7 @@ extension MainViewController: CLLocationManagerDelegate
                 print("MyFriends\(friends)" )
                 
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
-                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSinceString], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
                     
