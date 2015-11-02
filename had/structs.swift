@@ -19,8 +19,9 @@ struct user {
 }
 
 struct Colors {
-    let pink = Design().UIColorFromRGB(0xEA88E7)
+    let pink = Design().UIColorFromRGB(0xFA6D84)
     let blue = Design().UIColorFromRGB(0x5A74AE)
+    let grey = Design().UIColorFromRGB(0xFCFCFB)
 }
 
 struct Design {

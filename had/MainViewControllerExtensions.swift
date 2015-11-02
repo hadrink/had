@@ -33,8 +33,12 @@ extension MainViewController: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
+<<<<<<< HEAD
         cell.layoutMargins = UIEdgeInsetsZero
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+=======
+        cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
+>>>>>>> new_design_tableview
         print(self.searchController.active)
         
         if (self.searchController.active)
@@ -76,6 +80,10 @@ extension MainViewController: UITableViewDataSource
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             cell.sexIcon.image = placeItems[indexPath.row].sexIcon
             cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            
+            cell.backgroundSex.layer.cornerRadius = 4.0
+            cell.backgroundAge.layer.cornerRadius = 4.0
+            cell.backgroundNbUser.layer.cornerRadius = 4.0
             
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
@@ -172,6 +180,8 @@ extension MainViewController: UITableViewDataSource
             self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
             
         })
+        
+        GoToAction.backgroundColor = Colors().blue
         //----------------------------
        /* NSString.stringByPaddingToLength(GoActionTitle)
         var titleSpaceString:NSString = stringByPaddingToLength(GoAction.length()*(fontSize_actuallyUsedUnderImage/fontSize_iOS8AndUpDefault)/1.1f withString:"\u3000" startingAtIndex:0); // This isn't exact, but it's close enough in most instances? I tested with full-width Asian characters and it accounts for those pretty well.
@@ -234,7 +244,7 @@ extension MainViewController: UITableViewDataSource
             
         })
         
-        shareAction.backgroundColor = Design().UIColorFromRGB(0x5B90CE)
+        shareAction.backgroundColor = Colors().blue
         return [GoToAction,shareAction]
     }
     
