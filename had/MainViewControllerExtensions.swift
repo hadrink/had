@@ -73,7 +73,7 @@ extension MainViewController: UITableViewDataSource
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
-             cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
+            cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             cell.sexIcon.image = placeItems[indexPath.row].sexIcon
             cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
@@ -151,6 +151,29 @@ extension MainViewController: UITableViewDataSource
                 
             else {
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
+            }
+            
+            //-- Init settingViewController and variable ageMin ageMax
+            let settingViewController = SettingsViewController()
+            var ageMin : Double
+            var ageMax : Double
+            
+            //-- If userDefault value exist use it, else take the default value
+            if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
+                ageMin = settingDefault.ageMin
+                ageMax = settingDefault.ageMax
+            } else {
+                ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
+                ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
+            }
+            
+            //-- Check if average Age is between ageMax and ageMin and hide cell if it's false
+            if placeItems[indexPath.row].averageAge != nil {
+                if (placeItems[indexPath.row].averageAge < Int(ageMin) && placeItems[indexPath.row].averageAge < Int(ageMax) || placeItems[indexPath.row].averageAge > Int(ageMin) && placeItems[indexPath.row].averageAge > Int(ageMax)) {
+                    cell.hidden = true
+                    tableData.rowHeight = 0
+                }
+            
             }
             
             return cell
@@ -361,6 +384,7 @@ extension MainViewController: CLLocationManagerDelegate
 //        print(" authorisation status change")
 //    }
     
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if((locationManager.location) != nil)
@@ -374,7 +398,6 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 locationManager.stopUpdatingLocation()
                 
-                let settingViewController = SettingsViewController()
                 
                 //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
                 //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
@@ -391,6 +414,8 @@ extension MainViewController: CLLocationManagerDelegate
                 var statsSince : Int
                 
                 //-- Check if value exist in the userDefault Setting else we get the default values
+                
+                let settingViewController = SettingsViewController()
                 
                 if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
                     ageMin = settingDefault.ageMin

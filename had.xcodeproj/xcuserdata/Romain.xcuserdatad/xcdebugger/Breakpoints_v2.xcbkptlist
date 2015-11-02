@@ -615,11 +615,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468186652.207923"
+            timestampString = "468193633.586746"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "5">
             <Locations>
@@ -663,11 +663,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468186652.207923"
+            timestampString = "468193633.586746"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
