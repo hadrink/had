@@ -310,7 +310,7 @@ extension MainViewController: UISearchResultsUpdating
         if(isEmpty == false){
             let textSearch = searchController.searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())
             self.searchArray.removeAll()
-            QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/search/places/"+textSearch!){
+            QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/search/places/"+textSearch!){
                 (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 
                  let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
@@ -362,7 +362,7 @@ extension MainViewController: CLLocationManagerDelegate
     func WillAppTerminate(notification: NSNotification){
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let email: String! = userDefaults.stringForKey("email")
-        QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+        QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             print("dans le post du backgroundeuuuux")
         }
     }
@@ -499,7 +499,7 @@ extension MainViewController: CLLocationManagerDelegate
                 NSLog("App is backgrounded. New location is %@", manager.location!)
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 let email: String! = userDefaults.stringForKey("email")
-                QServices.post("POST", params:["object":"object"], url: "http://151.80.128.136:3000/usercoordinate/user/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 }
                 
                 let distance:CLLocationDistance = 200

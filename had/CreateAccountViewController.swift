@@ -326,7 +326,7 @@ class CreateAccountViewController: ResponsiveTextFieldViewController, UITextFiel
             
             //println("http://151.80.128.136:3000/user/\(mail.text)")
             
-            methodePost.post("POST", params:tabUser, url: "http://151.80.128.136:3000/user/\(mail.text)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            methodePost.post("POST", params:tabUser, url: "https://hadrink.herokuapp.com/users/\(mail.text)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 let alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                 
                 if(succeeded) {

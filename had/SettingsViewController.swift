@@ -240,7 +240,7 @@ class SettingsViewController: UITableViewController{
         
         let emailDict:Dictionary<String,String> = ["email": email]
         
-        queryServices.post("DELETE", params: emailDict, url: "http://151.80.128.136:3000/user/delete") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+        queryServices.post("DELETE", params: emailDict, url: "https://hadrink.herokuapp.com/users/delete") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             
             if(succeeded) {
                 print("Delete account : DONE")

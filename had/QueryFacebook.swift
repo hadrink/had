@@ -195,7 +195,7 @@ class UserDataFb {
                         
                         
                         //-- Post method
-                        methodePost.post("POST", params: userArray, url: "http://151.80.128.136:3000/user/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                        methodePost.post("POST", params: userArray, url: "https://hadrink.herokuapp.com/users/create/") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                             
                             if(succeeded) {
                                 response = true
