@@ -14,7 +14,8 @@ class PlaceItem : CLLocationManager{
     var locationManager = CLLocationManager()
     
     // Global variables for cells
-
+    
+    var placeId: String?
     var placeName: String?
     var city : String?
     var counter: Int!
@@ -33,6 +34,8 @@ class PlaceItem : CLLocationManager{
     required init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
+        
+        placeId = json["_id"] as? String
         
         if var placeProperties = json["properties"] as? [String:AnyObject] {
             placeName = placeProperties["name"] as? String

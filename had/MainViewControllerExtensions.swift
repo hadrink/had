@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import CoreData
 import Social
 
 extension MainViewController: UITableViewDataSource
@@ -59,6 +60,7 @@ extension MainViewController: UITableViewDataSource
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
+            
             return cell
         }
             
@@ -81,7 +83,9 @@ extension MainViewController: UITableViewDataSource
             cell.backgroundSex.layer.cornerRadius = 4.0
             cell.backgroundAge.layer.cornerRadius = 4.0
             cell.backgroundNbUser.layer.cornerRadius = 4.0
+            cell.placeId = placeItems[indexPath.row].placeId!
             
+                       
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
             
@@ -90,6 +94,14 @@ extension MainViewController: UITableViewDataSource
             friendsImageView.append(cell.fbFriendsImg1)
             friendsImageView.append(cell.fbFriendsImg2)
             friendsImageView.append(cell.fbFriendsImg3)
+            
+            if (IsPlaceInCoreData(cell.placeId)) {
+                cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
+            }
+            
+            else {
+                cell.heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
+            }
             
             //-- Check if friends in place
             if friends!.count > 0 {
@@ -291,6 +303,37 @@ extension MainViewController: UITableViewDataSource
             
         }
         return 1
+    }
+    
+    func IsPlaceInCoreData(placeId : String) -> Bool {
+        
+        let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        var places = [Place]()
+        var isChecked:Bool = false
+
+        let request = NSFetchRequest(entityName: "Place")
+        do {
+            
+            places = try moContext?.executeFetchRequest(request) as! [Place]
+            
+        }
+            
+        catch let err as NSError {
+            
+            print(err)
+            
+        }
+        
+        for var p in places {
+            var id = p.place_id
+            
+            if placeId == id {
+                isChecked = p.is_checked as! Bool
+            }
+            
+        }
+        
+        return isChecked
     }
     
 }
