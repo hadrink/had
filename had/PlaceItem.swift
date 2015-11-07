@@ -34,6 +34,7 @@ class PlaceItem : CLLocationManager{
     required init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
+        print(json)
         
         placeId = json["_id"] as? String
         

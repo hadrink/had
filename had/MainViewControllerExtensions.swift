@@ -156,19 +156,28 @@ extension MainViewController: UITableViewDataSource
                 cell.fbFriendsImg2.layer.opacity = 1
                 cell.fbFriendsImg3.layer.opacity = 1
             }
-
-            if ( type == "cafe" || type == "bar") {
-                cell.iconTableview.image = UIImage(named: "bar-icon")
-            }
-                
-            else {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon")
-            }
+            
             
             //-- Init settingViewController and variable ageMin ageMax
             let settingViewController = SettingsViewController()
             var ageMin : Double
             var ageMax : Double
+            
+            //cell.clearsContextBeforeDrawing = false
+            
+            if ((type == "cafe" || type == "bar" || type == "pub") && settingViewController.userDefault.boolForKey("SwitchStateBar") ) {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+                
+            else if(type == "nightclub" && settingViewController.userDefault.boolForKey("SwitchStateNightclub") ) {
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
+            }
+            
+            else {
+                tableData.rowHeight = 0
+                cell.hidden = true
+            }
+
             
             //-- If userDefault value exist use it, else take the default value
             if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -400,6 +409,15 @@ extension MainViewController: CLLocationManagerDelegate
         }
         self.locationManager.startUpdatingLocation()
         //self.locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func RevealViewObserver (notication: NSNotification) {
+        let revealView = self.revealViewController()
+        
+        print("Observer")
+        if revealView.rearViewRevealWidth == 0 {
+            tableData.reloadData()
+        }
     }
     
     func WillAppTerminate(notification: NSNotification){
