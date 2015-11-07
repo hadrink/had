@@ -22,6 +22,8 @@
 		7A65B69C1AF5027F00A124EC /* RobotoSlab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */; };
 		7A65B69D1AF5027F00A124EC /* RobotoSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */; };
 		7A65B69E1AF5027F00A124EC /* RobotoSlab-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */; };
+		7A6A30651BEC07760028901A /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A30631BEC07760028901A /* Place+CoreDataProperties.swift */; };
+		7A6A30661BEC07760028901A /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6A30641BEC07760028901A /* Place.swift */; };
 		7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4951BB1463500299781 /* had.xcdatamodeld */; };
 		7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */; };
 		7A70C49B1BB146C300299781 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A70C4991BB146C300299781 /* Store.swift */; };
@@ -91,6 +93,8 @@
 		7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Light.ttf"; sourceTree = "<group>"; };
 		7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Regular.ttf"; sourceTree = "<group>"; };
 		7A65B69A1AF5027F00A124EC /* RobotoSlab-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Thin.ttf"; sourceTree = "<group>"; };
+		7A6A30631BEC07760028901A /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7A6A30641BEC07760028901A /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		7A70C4961BB1463500299781 /* had.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = had.xcdatamodel; sourceTree = "<group>"; };
 		7A70C4981BB146C300299781 /* Store+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Store+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A70C4991BB146C300299781 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				7A6A30631BEC07760028901A /* Place+CoreDataProperties.swift */,
+				7A6A30641BEC07760028901A /* Place.swift */,
 				7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */,
 				7AB6C9981BADAAC10025477A /* libsqlite3.tbd */,
 				EBABF9371B1772090096D705 /* Framework */,
@@ -507,8 +513,10 @@
 				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
 				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
 				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,
+				7A6A30651BEC07760028901A /* Place+CoreDataProperties.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
 				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
+				7A6A30661BEC07760028901A /* Place.swift in Sources */,
 				EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */,
 				7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */,
 			);
