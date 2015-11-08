@@ -217,6 +217,9 @@
                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="79.5" y="482.5" width="255.5" height="28"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passe la meilleure soirée." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlS-E8-KJU">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -224,6 +227,9 @@
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="77" y="511.5" width="260" height="27"/>
+                                </variation>
                             </label>
                         </subviews>
                         <animations/>
@@ -366,7 +372,7 @@
         <!--Title-->
         <scene sceneID="xnO-Qt-iaf">
             <objects>
-                <tableViewController id="meO-io-U0m" customClass="SettingsViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingView" id="meO-io-U0m" customClass="SettingsViewController" customModule="had" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zWd-m8-TnZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -444,6 +450,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.95301359891891479" green="0.95310205221176147" blue="0.94993084669113159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="188.5" y="128" width="37.5" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -510,6 +519,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="125.5" height="20"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -555,6 +567,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="5" width="25" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ageMin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyq-sy-Rsu">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -562,6 +577,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="291.5" y="5" width="46.5" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ageMax" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-MB-es2">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -569,6 +587,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="347.5" y="5" width="50.5" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kl2-w2-4NX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -576,6 +597,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="340" y="5" width="5.5" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -643,6 +667,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="5" width="55" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="ZbT-g5-PJX">
                                                     <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
@@ -833,6 +860,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="127.5" height="20"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -878,6 +908,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="82" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -928,6 +961,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="96" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -971,6 +1007,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="52" height="16.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -1018,6 +1057,9 @@
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="10" width="129" height="20"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -1176,7 +1218,7 @@
                                         <rect key="frame" x="0.0" y="22" width="620" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTQ-A1-6w0" id="y2d-Ly-p4H">
-                                            <rect key="frame" x="0.0" y="0.0" width="620" height="119"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="620" height="119.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="city" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQA-K6-DJE">
@@ -1307,7 +1349,8 @@
                                                             <exclude reference="pLe-OB-ebq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="17" y="47" width="103" height="26.5"/>
                                                         <mask key="subviews">
                                                             <include reference="XZb-ky-v8W"/>
                                                             <include reference="fUQ-Y6-wBe"/>
@@ -1338,6 +1381,9 @@
                                                             <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                             <color key="textColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="10" y="5" width="23.5" height="16.5"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ans" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQH-ip-fH2">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1345,6 +1391,9 @@
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="9"/>
                                                             <color key="textColor" red="0.29411764705882354" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="33.5" y="10" width="17" height="10.5"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <animations/>
@@ -1383,7 +1432,8 @@
                                                             <exclude reference="zT5-hv-93e"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="125" y="47" width="60.5" height="26.5"/>
                                                         <mask key="subviews">
                                                             <include reference="dOD-lR-biQ"/>
                                                             <include reference="QQH-ip-fH2"/>
@@ -1420,7 +1470,7 @@
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="380" y="10" width="21" height="20"/>
+                                                        <rect key="frame" x="583" y="10" width="21" height="20"/>
                                                         <mask key="constraints">
                                                             <include reference="QLy-Zr-8uf"/>
                                                             <include reference="WAt-u9-wdn"/>
@@ -1473,6 +1523,9 @@
                                                             <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                             <color key="textColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="33" y="5.5" width="14" height="16.5"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLH-4p-pQc">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1480,6 +1533,9 @@
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="9"/>
                                                             <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="47" y="10.5" width="9" height="10.5"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <animations/>
@@ -1537,7 +1593,8 @@
                                                             <exclude reference="wJ0-RZ-1GY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="190.5" y="47" width="66" height="27"/>
                                                         <mask key="subviews">
                                                             <include reference="J2g-fv-Qc9"/>
                                                             <include reference="Aaa-Si-uel"/>
@@ -1578,7 +1635,8 @@
                                                             <exclude reference="rmt-EO-TaL"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="16" y="78.5" width="30" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="4Q7-am-jkr"/>
                                                             <include reference="rmt-EO-TaL"/>
@@ -1598,7 +1656,8 @@
                                                             <exclude reference="py3-kH-oQR"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="51" y="78.5" width="30" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="2Vx-Ij-0Wy"/>
                                                             <include reference="py3-kH-oQR"/>
@@ -1618,7 +1677,8 @@
                                                             <exclude reference="hUy-zW-H1S"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="86" y="78.5" width="30" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="94w-rl-SsQ"/>
                                                             <include reference="hUy-zW-H1S"/>
@@ -1710,10 +1770,6 @@
                                                     <exclude reference="wts-lI-qyb"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="3S5-1H-UWO"/>
-                                                    <exclude reference="eeR-6u-0fj"/>
-                                                    <exclude reference="j0y-1h-cWk"/>
-                                                    <exclude reference="qq7-YM-CFx"/>
                                                     <exclude reference="Fkj-aF-Nd1"/>
                                                     <exclude reference="ULI-Xy-WqA"/>
                                                     <exclude reference="13d-OI-q3z"/>
@@ -1732,6 +1788,10 @@
                                                     <exclude reference="jMd-FM-bEp"/>
                                                     <exclude reference="FPa-5l-zeE"/>
                                                     <exclude reference="vSk-V2-9dW"/>
+                                                    <exclude reference="3S5-1H-UWO"/>
+                                                    <exclude reference="eeR-6u-0fj"/>
+                                                    <exclude reference="j0y-1h-cWk"/>
+                                                    <exclude reference="qq7-YM-CFx"/>
                                                     <exclude reference="4L1-rG-UTn"/>
                                                     <exclude reference="7Pz-BK-HR6"/>
                                                     <exclude reference="twx-H3-e6d"/>
@@ -1753,10 +1813,6 @@
                                                     <include reference="wts-lI-qyb"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="3S5-1H-UWO"/>
-                                                    <include reference="eeR-6u-0fj"/>
-                                                    <include reference="j0y-1h-cWk"/>
-                                                    <exclude reference="qq7-YM-CFx"/>
                                                     <include reference="Fkj-aF-Nd1"/>
                                                     <include reference="ULI-Xy-WqA"/>
                                                     <include reference="13d-OI-q3z"/>
@@ -1781,6 +1837,10 @@
                                                     <include reference="FPa-5l-zeE"/>
                                                     <exclude reference="Q4K-Rl-5Ip"/>
                                                     <include reference="vSk-V2-9dW"/>
+                                                    <exclude reference="3S5-1H-UWO"/>
+                                                    <include reference="eeR-6u-0fj"/>
+                                                    <include reference="j0y-1h-cWk"/>
+                                                    <exclude reference="qq7-YM-CFx"/>
                                                     <exclude reference="4L1-rG-UTn"/>
                                                     <include reference="7Pz-BK-HR6"/>
                                                     <include reference="twx-H3-e6d"/>

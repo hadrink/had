@@ -69,6 +69,7 @@ class SettingsViewController: UITableViewController{
     
     var stores = [Store]()
     
+    
     override func viewDidAppear(animated: Bool) {
         
         if firstTime == true {

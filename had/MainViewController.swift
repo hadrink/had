@@ -66,12 +66,12 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var myMap: MKMapView!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let revealView = self.revealViewController()
         
-        //
+        let revealView = self.revealViewController()
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
@@ -100,6 +100,11 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Observer for background state
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(revealView.rearViewRevealWidth, selector: Selector("RevealViewObserver:"), name: "Reveal View Width Observer", object: nil)
+        
+        revealView
+        
         
         //- Get Picture Facebook
         UserDataFb().getPicture()
