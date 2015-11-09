@@ -139,7 +139,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         searchController.active = true
         refreshControl.removeFromSuperview()//deactive le refrsh pendant le search
-        
+        self.placeItems.removeAll()
+        self.tableData.reloadData()
         definesPresentationContext = true
     }
     
@@ -211,8 +212,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
         navbar.setLeftBarButtonItem(hamburger, animated: true)
         navbar.setRightBarButtonItem(searchButton, animated: true)
-        self.searchArray.removeAll()
-        
     }
     /*
     * StartUpdatingLocation if the location is deactivate an ui alert is shown

@@ -53,6 +53,7 @@
 		EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */; };
 		EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */; };
 		EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */; };
+		EB3F36361BEE4E630018CE92 /* SearchViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F36351BEE4E630018CE92 /* SearchViewControllerExtension.swift */; };
 		EB444F901A9527D600E533B2 /* structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F8F1A9527D600E533B2 /* structs.swift */; };
 		EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB444F9D1A9E30A000E533B2 /* CoreData.framework */; };
 		EB444FA01AAE3ADF00E533B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */; };
@@ -131,6 +132,7 @@
 		EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EB1BBE211B4DC4B400F46E99 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		EB1BBE221B4DC4B400F46E99 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		EB3F36351BEE4E630018CE92 /* SearchViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewControllerExtension.swift; sourceTree = "<group>"; };
 		EB444F8F1A9527D600E533B2 /* structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = structs.swift; sourceTree = "<group>"; };
 		EB444F9D1A9E30A000E533B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */,
 				EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */,
 				EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */,
+				EB3F36351BEE4E630018CE92 /* SearchViewControllerExtension.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */,
 				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
 				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
+				EB3F36361BEE4E630018CE92 /* SearchViewControllerExtension.swift in Sources */,
 				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,
 				7A6A30651BEC07760028901A /* Place+CoreDataProperties.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,

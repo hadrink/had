@@ -43,7 +43,7 @@ class UserDataFb {
                 
                     let entityName : String = "Store"
                     let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
-                    print(" Yoyo\(storeDesctiption)")
+                    //print(" Yoyo\(storeDesctiption)")
                     let store = Store(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
                 
                     let img = UIImage(data: nsdata!)
@@ -119,7 +119,7 @@ class UserDataFb {
                 }
                 
                 let allFriendsFb = allFriends.joinWithSeparator(",")
-                print(allFriendsFb)
+                //print(allFriendsFb)
                 
                 
                 
@@ -161,7 +161,7 @@ class UserDataFb {
                 let userLinkFb = result.valueForKey("link") as! String
                 
                 //-- Set userData
-                print("fetched user: \(result)")
+                //print("fetched user: \(result)")
                 userDefaults.setValue(userEmailFb as String, forKey: "email")
                 userDefaults.setValue(userFirstnameFb as String, forKey: "first_name")
                 userDefaults.setValue(userLastnameFb as String, forKey: "last_name")

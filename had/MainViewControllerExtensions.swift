@@ -19,14 +19,14 @@ extension MainViewController: UITableViewDataSource
     {
         if (self.searchController.active)
         {
-            print("search")
-            print(self.searchArray.count)
+            //print("search")
+            //print(self.searchArray.count)
             return self.searchArray.count
         }
         else
         {
-            print("normal")
-            print(self.placeItems.count)
+            //print("normal")
+            //print(self.placeItems.count)
             return self.placeItems.count
         }
     }
@@ -37,11 +37,11 @@ extension MainViewController: UITableViewDataSource
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
-        print(self.searchController.active)
+        //print(self.searchController.active)
         
         if (self.searchController.active)
         {
-            print("active reload")
+            //print("active reload")
             
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
@@ -60,6 +60,13 @@ extension MainViewController: UITableViewDataSource
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
+            if (IsPlaceInCoreData(cell.placeId)) {
+                cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
+            }
+                
+            else {
+                cell.heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
+            }
             
             return cell
         }
@@ -69,7 +76,7 @@ extension MainViewController: UITableViewDataSource
             
             let type = placeItems[indexPath.row].typeofPlace as String!
             
-            print("inactive")
+            //print("inactive")
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
@@ -138,8 +145,8 @@ extension MainViewController: UITableViewDataSource
             
             //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
+                //print("index")
+                //print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
@@ -324,10 +331,9 @@ extension MainViewController: UITableViewDataSource
             
         }
         
-        for var p in places {
-            var id = p.place_id
+        for p in places {
             
-            if placeId == id {
+            if placeId == p.place_id {
                 isChecked = p.is_checked as! Bool
             }
             
@@ -356,28 +362,31 @@ extension MainViewController: UISearchResultsUpdating
             QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/search/places/"+textSearch!){
                 (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 
-                 let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+                let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
                 
                 if let reposArray = obj["searchlist"] as? [NSDictionary]  {
-                //println("ReposArray \(reposArray)")
-                
-                for item in reposArray {
-                self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
-                //println("Item \(item)")
-                print("has Item")
+                    //println("ReposArray \(reposArray)")
+                    
+                    for item in reposArray {
+                        self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
+                        //println("Item \(item)")
+                        //print("has Item")
+                    }
+                    
                 }
-                
-                }
-                print("reload")
+                //print("reload")
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                self.tableData.reloadData()
+                    self.tableData.reloadData()
+                    print("nbSectiontebleview")
+                    print(self.tableData.numberOfSections)
                 })
                 
             }
         }
     }
 }
+
 
 extension MainViewController: CLLocationManagerDelegate
 {
@@ -392,11 +401,11 @@ extension MainViewController: CLLocationManagerDelegate
 //            // Fallback on earlier versions
 //            locationManager.startUpdatingLocation()
 //        }
-        print("allow dans l'observer")
+        //print("allow dans l'observer")
         if #available(iOS 9.0, *) {
             self.locationManager.allowsBackgroundLocationUpdates = true
         //    self.locationManager.requestLocation()
-            print(self.locationManager.allowsBackgroundLocationUpdates)
+            //print(self.locationManager.allowsBackgroundLocationUpdates)
         }
         self.locationManager.startUpdatingLocation()
         //self.locationManager.startMonitoringSignificantLocationChanges()
@@ -406,7 +415,7 @@ extension MainViewController: CLLocationManagerDelegate
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let email: String! = userDefaults.stringForKey("email")
         QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            print("dans le post du backgroundeuuuux")
+            //print("dans le post du backgroundeuuuux")
         }
     }
     
@@ -444,8 +453,8 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
                 //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
-                print("Latitude \(userLatitude)")
-                print("Longitude \(userLongitude)")
+                //print("Latitude \(userLatitude)")
+                //print("Longitude \(userLongitude)")
                 
                 //-- Variable send to the method post
                 
@@ -476,10 +485,10 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                     displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                    print("SwitchStateBar")
+                    //print("SwitchStateBar")
                 } else {
                     displayBar = settingDefault.displayBar
-                    print("default setting")
+                    //print("default setting")
                 }
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -490,16 +499,16 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
                     statsSince = settingViewController.userDefaults.integerForKey("stats_since")
-                    print("Value \(statsSince)")
+                    //print("Value \(statsSince)")
                 } else {
                     statsSince = settingDefault.statsSince
-                    print("stats \(statsSince)")
+                    //print("stats \(statsSince)")
                 }
                 
                 //-- Transform to String
                 
                 let distanceMaxString = String(stringInterpolationSegment: distanceMax)
-                print("Distance max \(distanceMax)")
+                //print("Distance max \(distanceMax)")
                 let ageMinString = String(stringInterpolationSegment: ageMin)
                 let ageMaxString = String(stringInterpolationSegment: ageMax)
                 
@@ -509,7 +518,7 @@ extension MainViewController: CLLocationManagerDelegate
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                print("MyFriends\(friends)" )
+                //print("MyFriends\(friends)" )
                 
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
@@ -563,6 +572,12 @@ extension MainViewController: UISearchBarDelegate
 {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.setLogoNavBar()
+        self.searchArray.removeAll()
+        //      print("nbplace")
+        //        print(self.placeItems.count)
+        //self.tableData.reloadData()
+        //TODO modifier pour ne pas faire une nouvelle requete mais un reloadData
+        self.startLocationManager()
     }
 }
 
@@ -570,7 +585,7 @@ extension MainViewController
 {
     
     func setupRefreshControl() {
-        print("")
+        //print("")
         // Setup the loading view, which will hold the moving graphics
         self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)
         self.refreshLoadingView.backgroundColor = UIColor.clearColor()
@@ -613,7 +628,7 @@ extension MainViewController
     }
     
     func refresh(){
-        print("")
+        //print("")
         
         // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
         // This is where you'll make requests to an API, reload data, or process information
@@ -700,7 +715,7 @@ extension MainViewController
     }
 
     func animateRefreshView() {
-        print("")
+        //print("")
         
         // Background color to loop through for our color view
         
@@ -748,7 +763,7 @@ extension MainViewController
     }
     
     func resetAnimation() {
-        print("")
+        //print("")
         
         // Reset our flags and }background color
         self.isRefreshAnimating = false;

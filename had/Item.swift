@@ -56,7 +56,10 @@ class PlaceCell: UITableViewCell {
         let entityName : String = "Place"
         let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
         let place = Place(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
-        
+        print("placename")
+        print(placeName)
+        print("placeid")
+        print(placeId)
         //-- Test if place is in Core Data
         if MainViewController().IsPlaceInCoreData(placeId) {
             
