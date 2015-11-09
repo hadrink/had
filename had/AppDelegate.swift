@@ -24,6 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController: UIViewController
+        
+        initialViewController = pageController
+        
+        window?.rootViewController = initialViewController*/
+        //self.window?.makeKeyAndVisible()
+
+        
         //-- Code analytics Parse
         
         Parse.setApplicationId("OPLwhpxUAsrLtXpboVLCEmyttPrcR62yFWoUD4uR",
@@ -33,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //-- Light statusbar everywhere
 
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         
         //-- Override point for customization after application launch.
                 

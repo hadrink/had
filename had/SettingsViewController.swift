@@ -69,6 +69,19 @@ class SettingsViewController: UITableViewController{
     
     var stores = [Store]()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.titleView = UIImageView(image: UIImage(named: "settings"))
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "bottle-spin"), style: .Plain, target: self, action: "goToMainView:")
+        navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
+        
+    }
+    
+    func goToMainView(button: UIBarButtonItem) {
+       pageController.goToNextVC()
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         
@@ -117,6 +130,9 @@ class SettingsViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5b90ce)
+        self.navigationController?.navigationBar.translucent = false
         
         firstTime = true
         

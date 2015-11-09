@@ -18,6 +18,7 @@
 		7A3143231B69607500122781 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143221B69607500122781 /* Accounts.framework */; };
 		7A3143251B6960A000122781 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143241B6960A000122781 /* Social.framework */; };
 		7A50441F1B4D640400477133 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A50441E1B4D640400477133 /* Lato-Bold.ttf */; };
+		7A51A9A81BEF84CE00AC861B /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A51A9A71BEF84CE00AC861B /* viewController.swift */; };
 		7A65B69B1AF5027F00A124EC /* RobotoSlab-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6971AF5027F00A124EC /* RobotoSlab-Bold.ttf */; };
 		7A65B69C1AF5027F00A124EC /* RobotoSlab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */; };
 		7A65B69D1AF5027F00A124EC /* RobotoSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */; };
@@ -89,6 +90,7 @@
 		7A3143221B69607500122781 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		7A3143241B6960A000122781 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7A50441E1B4D640400477133 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		7A51A9A71BEF84CE00AC861B /* viewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		7A65B6971AF5027F00A124EC /* RobotoSlab-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Bold.ttf"; sourceTree = "<group>"; };
 		7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Light.ttf"; sourceTree = "<group>"; };
 		7A65B6991AF5027F00A124EC /* RobotoSlab-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Regular.ttf"; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				7AF659681A49F235002C6745 /* SidebarViewController.swift */,
 				7AF6596A1A49F74E002C6745 /* MainViewController.swift */,
 				EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */,
+				7A51A9A71BEF84CE00AC861B /* viewController.swift */,
 				EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */,
 				EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */,
 			);
@@ -506,6 +509,7 @@
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */,
+				7A51A9A81BEF84CE00AC861B /* viewController.swift in Sources */,
 				7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */,
 				7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */,
 				EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */,

@@ -580,7 +580,7 @@ extension MainViewController: CLLocationManagerDelegate
 extension MainViewController: UISearchBarDelegate
 {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.setLogoNavBar()
+        //self.setLogoNavBar()
     }
 }
 
