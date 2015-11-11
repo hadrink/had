@@ -115,6 +115,22 @@ class SettingsViewController: UITableViewController{
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Réglages"
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "Lato-BoldItalic", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
+        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5b90ce)
+        self.navigationController?.navigationBar.translucent = false
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "had-return"), style: .Plain, target: self, action: "goToMainView:")
+        navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
+        rightBarButtonItem.tintColor = Colors().grey
+    }
+    
+    func goToMainView(button: UIBarButtonItem) {
+        pageController.goToNextVC()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -231,7 +247,7 @@ class SettingsViewController: UITableViewController{
     
     let queryServices = QueryServices()
     let userDefault = NSUserDefaults.standardUserDefaults()
-    let FBLogOut = FBSDKLoginManager()
+    //let FBLogOut = FBSDKLoginManager()
     
     @IBAction func deleteUserAccount(sender: AnyObject) {
         
@@ -247,7 +263,7 @@ class SettingsViewController: UITableViewController{
                 print("Delete account : DONE")
                 self.userDefault.removeObjectForKey("email")
                 //println(self.userDefault.stringForKey("email"))
-                self.FBLogOut.logOut()
+                //self.FBLogOut.logOut()
                 let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
                 self.showViewController(vc as! UIViewController, sender: vc)
             }

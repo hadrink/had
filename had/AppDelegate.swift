@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,23 +23,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController: UIViewController
+        
+        
         //-- Code analytics Parse
         
         Parse.setApplicationId("OPLwhpxUAsrLtXpboVLCEmyttPrcR62yFWoUD4uR",
             clientKey: "XbTtLmK0TFIvTWeLqil7Hcgs8NXz7hATjOpmKq5X")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         //-- Light statusbar everywhere
 
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        if PFUser.currentUser() != nil {
+            initialViewController = pageController
+        } else {
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") 
+        }
+        
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+
+        
         //-- Override point for customization after application launch.
                 
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        return true
         
     }
     
-    func application(application: UIApplication,
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        FBSDKAppEvents.activateApp()
+    }
+    
+    /*func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String?,
         annotation: AnyObject) -> Bool {
@@ -49,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 openURL: url,
                 sourceApplication: sourceApplication,
                 annotation: annotation)
-    }
+    }*/
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -67,10 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        FBSDKAppEvents.activateApp()
-    }
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

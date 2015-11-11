@@ -27,10 +27,12 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1559557587665840</string>
+				<string>fb1559557587665840foo</string>
 			</array>
 		</dict>
 	</array>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>foo</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
@@ -61,17 +63,17 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Had a besoin d'accéder à votre position pour afficher les adresses autour de vous !</string>
+	<string>Had a besoin d&apos;accéder à votre position pour afficher les adresses autour de vous !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoSlab-Bold.ttf</string>
 		<string>RobotoSlab-Light.ttf</string>
 		<string>RobotoSlab-Regular.ttf</string>
 		<string>RobotoSlab-Thin.ttf</string>
-		<string>Lato-Bolditalic.ttf</string>
 		<string>Lato-Light.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>Lato-Bold.ttf</string>
+		<string>Lato-BoldItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

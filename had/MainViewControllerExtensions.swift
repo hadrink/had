@@ -525,7 +525,7 @@ extension MainViewController: CLLocationManagerDelegate
                 formatter.dateFormat = "dd-MM-yyyy"
                 
                 let userDataFb = UserDataFb()
-                userDataFb.getFriends()
+                //userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
                 print("MyFriends\(friends)" )
                 

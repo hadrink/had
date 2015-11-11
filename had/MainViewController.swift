@@ -66,12 +66,21 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var myMap: MKMapView!
     
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.titleView = UIImageView(image: UIImage(named: "had-title"))
+        let leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: self, action: "goToSettings:")
+        navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: true)
+        
+        leftBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let revealView = self.revealViewController()
+        setLogoNavBar()
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
@@ -85,15 +94,10 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
-        setLogoNavBar()
+
         
         //-- Reveal view configuration
         
-        revealView.frontViewShadowOpacity = 0.0
-        revealView.rearViewRevealOverdraw = 0
-        self.view.addGestureRecognizer(revealView.panGestureRecognizer())
-        hamburger.target = revealView
-        hamburger.action = "revealToggle:"
         self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
         self.navigationController?.navigationBar.translucent = false
         
@@ -101,13 +105,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(revealView.rearViewRevealWidth, selector: Selector("RevealViewObserver:"), name: "Reveal View Width Observer", object: nil)
-        
-        revealView
-        
         
         //- Get Picture Facebook
-        UserDataFb().getPicture()
+        //UserDataFb().getPicture()
+    }
+    
+    func goToSettings(button: UIBarButtonItem) {
+        pageController.goToPreviousVC()
     }
     
     override func viewDidLayoutSubviews() {
@@ -198,13 +202,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     //-- Refresh places
     
     func setLogoNavBar(){
-        let logo = UIImage(named: "had-title")
-        let imageView = UIImageView(image:logo)
-        imageView.frame = CGRectMake(0, 0, 38.66, 44)
-        self.navbar.titleView = imageView
-        
-        hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-        hamburger.image = UIImage(named: "settings")
         
         //favButton.image = UIImage(named: "heart-hover@3x")
         //favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
