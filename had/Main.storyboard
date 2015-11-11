@@ -1065,9 +1065,12 @@
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <animations/>
                                                     <color key="tintColor" red="0.98039215686274506" green="0.42745098039215684" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal" title="Supprimer mon compte">
+                                                    <state key="normal" title="Se déconnecter">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="126" y="3.5" width="162" height="30"/>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="deleteUserAccount:" destination="meO-io-U0m" eventType="touchUpInside" id="2AS-Bc-aVT"/>
                                                     </connections>

@@ -251,7 +251,11 @@ class SettingsViewController: UITableViewController{
     
     @IBAction func deleteUserAccount(sender: AnyObject) {
         
-        print("Userdefault\(userDefault.dictionaryRepresentation().keys)")
+        PFUser.logOutInBackground()
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+        /*print("Userdefault\(userDefault.dictionaryRepresentation().keys)")
         
         let email:String = userDefault.stringForKey("email")!
         
@@ -270,7 +274,7 @@ class SettingsViewController: UITableViewController{
             else {
                 print("Failed to delete your account. Please try again later.")
             }
-        }
+        }*/
     }
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {

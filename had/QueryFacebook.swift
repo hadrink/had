@@ -12,7 +12,7 @@ import CoreData
 
 class UserDataFb {
     
-    /*let userSetting = SettingsViewController().userDefaults
+    let userSetting = SettingsViewController().userDefaults
     let cache:NSCache = NSCache()
 
 
@@ -212,6 +212,6 @@ class UserDataFb {
         
         return response
         
-    }*/
+    }
     
 }

@@ -107,7 +107,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         
         //- Get Picture Facebook
-        //UserDataFb().getPicture()
+        UserDataFb().getPicture()
     }
     
     func goToSettings(button: UIBarButtonItem) {

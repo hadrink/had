@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/SettingsViewController.swift"
-            timestampString = "468885347.793005"
+            timestampString = "468964518.957453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "rangeSliderValueChanged(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -197,7 +197,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.332129"
+                  timestampString = "468942842.019438"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -212,7 +212,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.332655"
+                  timestampString = "468942842.019873"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -227,7 +227,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.333034"
+                  timestampString = "468942842.020226"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -258,7 +258,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.335961"
+                  timestampString = "468942842.022648"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -273,7 +273,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.336341"
+                  timestampString = "468942842.023025"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -288,7 +288,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.336699"
+                  timestampString = "468942842.023374"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -319,7 +319,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.339086"
+                  timestampString = "468942842.025829"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -334,7 +334,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.339468"
+                  timestampString = "468942842.026249"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -349,7 +349,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.339824"
+                  timestampString = "468942842.026593"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -380,7 +380,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.342296"
+                  timestampString = "468942842.029026"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -395,7 +395,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.342684"
+                  timestampString = "468942842.029392"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -410,7 +410,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.343021"
+                  timestampString = "468942842.029739"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -441,7 +441,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.345356"
+                  timestampString = "468942842.032002"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -456,7 +456,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.345664"
+                  timestampString = "468942842.032366"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -471,7 +471,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.345959"
+                  timestampString = "468942842.0327"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -502,7 +502,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.348413"
+                  timestampString = "468942842.035156"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -517,7 +517,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.348733"
+                  timestampString = "468942842.035514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -532,7 +532,7 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "468890973.349032"
+                  timestampString = "468942842.035847"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -885,11 +885,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "5">
             <Locations>
@@ -933,11 +933,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
             landmarkName = "MainViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1043,11 +1043,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1059,11 +1059,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1075,11 +1075,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1091,11 +1091,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1107,11 +1107,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1171,11 +1171,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "468606688.931097"
+            timestampString = "468967118.527961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1267,11 +1267,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/viewController.swift"
-            timestampString = "468888770.795876"
+            timestampString = "468965169.264626"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1337,6 +1337,118 @@
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468942392.510385"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468942729.92892"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468942757.221303"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468967118.527961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468967118.527961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468967118.527961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "had/MainViewControllerExtensions.swift"
+            timestampString = "468967118.527961"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

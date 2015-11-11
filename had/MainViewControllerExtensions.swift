@@ -165,11 +165,28 @@ extension MainViewController: UITableViewDataSource
             
             //cell.clearsContextBeforeDrawing = false
             
-            if ((type == "cafe" || type == "bar" || type == "pub") && settingViewController.userDefault.boolForKey("SwitchStateBar") ) {
+            var displayBar:Bool?
+            var displayNightclub:Bool?
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
+                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
+                print("SwitchStateBar")
+            } else {
+                displayBar = settingDefault.displayBar
+                print("default setting")
+            }
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+            } else {
+                displayNightclub = settingDefault.displayNightclub
+            }
+            
+            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }
                 
-            else if(type == "nightclub" && settingViewController.userDefault.boolForKey("SwitchStateNightclub") ) {
+            else if(type == "nightclub" && displayNightclub! ) {
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
@@ -525,7 +542,7 @@ extension MainViewController: CLLocationManagerDelegate
                 formatter.dateFormat = "dd-MM-yyyy"
                 
                 let userDataFb = UserDataFb()
-                //userDataFb.getFriends()
+                userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
                 print("MyFriends\(friends)" )
                 

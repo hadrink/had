@@ -245,13 +245,18 @@ import CoreData
                 } else if user!.isNew {
                     print("User just signed up and logged in for the first time.")
                     
-                    let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture,first_name,birthday,gender", parameters: nil)
+                    let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture,first_name,last_name,birthday,gender", parameters: nil)
                     FBRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
                         
                         let r = result as! NSDictionary
+                        let settingViewController = SettingsViewController()
                         
                         user!["firstName"] = r["first_name"]
+                        user!["lastName"] = r["last_name"]
                         user!["gender"] = r["gender"]
+                        
+                        settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
+                        settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
                         
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -273,8 +278,10 @@ import CoreData
                     print("User logged in through Facebook.")
                 }
                 
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MainViewController")
-                self.presentViewController(vc, animated: true, completion: nil)
+                
+                //let vc = UIStoryboard(name: "Main", bundle: nil)
+                let pageController = ViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+                self.presentViewController(pageController, animated: true, completion: nil)
             })
         }
         
