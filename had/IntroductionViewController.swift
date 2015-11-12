@@ -257,6 +257,7 @@ import CoreData
                         
                         settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
                         settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
+                        settingViewController.userDefaults.synchronize()
                         
                         let dateFormatter = NSDateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
