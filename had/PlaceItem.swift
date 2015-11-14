@@ -31,7 +31,7 @@ class PlaceItem : CLLocationManager{
     
     // Init variables
     
-    required init (json : NSDictionary, userLocation : NSDictionary) {
+     init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
         print(json)
@@ -141,6 +141,11 @@ class PlaceItem : CLLocationManager{
             counter = count
             averageAge = cumul / count
         }
+        
+    }
+    
+    override init()
+    {
         
     }
     /*

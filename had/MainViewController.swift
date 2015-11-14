@@ -17,13 +17,14 @@
 import UIKit
 import CoreLocation
 import MapKit
+import CoreData
 
 class MainViewController: UIViewController, MKMapViewDelegate {
     
     //-- Global const and var
     
     var hamburger = UIBarButtonItem()
-    //var favButton = UIBarButtonItem()
+    var favButton = UIBarButtonItem()
     var searchButton = UIBarButtonItem()
     var messageLabel:UILabel!
     var data: NSMutableData = NSMutableData()
@@ -40,6 +41,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     var isRefreshAnimating = false
     var isAnimating = false
     var isLocating:Bool = false
+    var isFavOn = false
     var nbAlertDuringRefresh = 0
     var searchController = UISearchController()
     var searchArray:[PlaceItem] = [PlaceItem](){
@@ -58,7 +60,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     let QServices = QueryServices()
     let settingDefault = SettingDefault()
     
-    
     //-- Outlets
     
     @IBOutlet var tableData: UITableView!
@@ -68,19 +69,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.titleView = UIImageView(image: UIImage(named: "had-title"))
-        let leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: self, action: "goToSettings:")
-        navigationItem.setLeftBarButtonItem(leftBarButtonItem, animated: true)
-        
-        leftBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        setLogoNavBar()
         
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setLogoNavBar()
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
@@ -137,7 +132,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         navigationItem.setRightBarButtonItems(nil, animated: true)
         
         //-- Change color searchBar text and placeholder and set image search icon
-        
         textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
         searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
         
@@ -201,21 +195,31 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     //-- Refresh places
     
-    func setLogoNavBar(){
-        
-        //favButton.image = UIImage(named: "heart-hover@3x")
-        //favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-        
+    func setLogoNavBar()
+    {
+        let SettingsBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: self, action: "goToSettings:")
+        navbar.titleView = UIImageView(image: UIImage(named: "had-title"))
+        /*hamburger.image = UIImage(named: "settings")
+        hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        hamburger.action = "goToSettings:"*/
+        favButton.image = UIImage(named: "heart-hover")
+        SettingsBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        //favBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        favButton.target = self
+        favButton.action = "GetFavPlaces:"
+        favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.image = UIImage(named: "search-icon")
         searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.target = self
         searchButton.action = "ActivateSearchMode"
         self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
-        navbar.setLeftBarButtonItem(hamburger, animated: true)
-        navbar.setRightBarButtonItem(searchButton, animated: true)
+        navbar.setLeftBarButtonItem(SettingsBarButtonItem, animated: true)
+        navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
+        //navbar.setRightBarButtonItem(searchButton, animated: true)
         self.searchArray.removeAll()
         
     }
+    
     /*
     * StartUpdatingLocation if the location is deactivate an ui alert is shown
     */
@@ -254,5 +258,51 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         }
         //alertController.addAction(UIAlertAction(title: "Réglages", style: UIAlertActionStyle.Default,handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func GetFavPlaces(sender:UIButton)
+    {
+        if !isFavOn
+        {
+            isFavOn = true
+            favButton.tintColor = Colors().pink
+            let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+            var places = [Place]()
+            self.placeItems.removeAll()
+            let request = NSFetchRequest(entityName: "Place")
+            do {
+                
+                places = try moContext?.executeFetchRequest(request) as! [Place]
+                
+            }
+                
+            catch let err as NSError {
+                
+                print(err)
+                
+            }
+            
+            for  p in places {
+                let place:PlaceItem = PlaceItem()
+                place.placeId = p.place_id
+                place.placeName = p.place_name
+                place.city = p.place_city
+                place.averageAge = p.place_average_age?.integerValue
+                place.pourcentSex = p.place_pourcent_sex?.floatValue
+                place.typeofPlace = p.place_type
+                place.counter = p.place_counter?.integerValue
+                place.distance = p.place_distance?.doubleValue
+                place.placeLatitudeDegrees = p.place_latitude?.doubleValue
+                place.placeLongitudeDegrees = p.place_longitude?.doubleValue
+                placeItems.append(place)
+                print("nbplace")
+                print(placeItems.count)
+            }
+            self.tableData.reloadData()
+        }
+        else{
+            isFavOn = false
+            favButton.tintColor = Colors().grey
+        }
     }
 }
