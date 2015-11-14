@@ -17,16 +17,12 @@ extension MainViewController: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if (self.searchController.active)
+        if (self.searchController.active || isFavOn)
         {
-            print("search")
-            print(self.searchArray.count)
             return self.searchArray.count
         }
         else
         {
-            print("normal")
-            print(self.placeItems.count)
             return self.placeItems.count
         }
     }
@@ -39,31 +35,149 @@ extension MainViewController: UITableViewDataSource
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
         print(self.searchController.active)
         
-        if (self.searchController.active)
+        if (self.searchController.active || isFavOn)
         {
-            print("active reload")
-            
+            print("indexpathrow")
+            print(indexPath.row)
+            let type = searchArray[indexPath.row].typeofPlace as String!
+
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = String(searchArray[indexPath.row].counter)
-            cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
-            cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentSex)
+            cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
+            cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
+            cell.sexIcon.image = searchArray[indexPath.row].sexIcon
+            cell.backgroundSex.backgroundColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             
-            let type = searchArray[indexPath.row].typeofPlace as String!
+            cell.backgroundSex.layer.cornerRadius = 4.0
+            cell.backgroundAge.layer.cornerRadius = 4.0
+            cell.backgroundNbUser.layer.cornerRadius = 4.0
+            cell.placeId = searchArray[indexPath.row].placeId!
+            cell.typeofPlace = searchArray[indexPath.row].typeofPlace
             
-            if ( type == "cafe" || type == "bar") { 
-                cell.iconTableview.image = UIImage(named: "bar-icon")
+            //-- Get friends array
+            let friends = searchArray[indexPath.row].friends
+            
+            //-- Create an ImageView array
+            var friendsImageView: [UIImageView?] = []
+            friendsImageView.append(cell.fbFriendsImg1)
+            friendsImageView.append(cell.fbFriendsImg2)
+            friendsImageView.append(cell.fbFriendsImg3)
+            
+            if (IsPlaceInCoreData(cell.placeId!)) {
+                cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             }
                 
             else {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon")
+                cell.heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
+            }
+            
+            //-- Check if friends in place
+            if (friends != nil){
+                if friends!.count > 0 {
+                    
+                    //-- Create index for friends
+                    let indexFriends = friends!.count - 1
+                    
+                    //-- Loop on userId in friends
+                    for userId in 0...indexFriends {
+                        
+                        //-- Corner radius (makes circle picture)
+                        friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                        friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                        
+                        //-- Create picture friends url request
+                        let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                        let request:NSURLRequest = NSURLRequest(URL:url)
+                        let queue:NSOperationQueue = NSOperationQueue()
+                        
+                        //-- Start async request for get facebook picture friends
+                        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                            
+                            //-- Check if response != nil
+                            if((response) != nil) {
+                                
+                                //-- Lunch async request in main queue for UI elements
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    friendsImageView[userId]?.image = UIImage(data: data!)
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+            
+            //-- Check if users in place (If true elements display else none)
+            if searchArray[indexPath.row].counter == nil {
+                print("index")
+                print(indexPath.row)
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                cell.fbFriendsImg1.layer.opacity = 0
+                cell.fbFriendsImg2.layer.opacity = 0
+                cell.fbFriendsImg3.layer.opacity = 0
+                tableData.rowHeight = 55
+            } else {
+                tableData.rowHeight = 120
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                cell.fbFriendsImg1.layer.opacity = 1
+                cell.fbFriendsImg2.layer.opacity = 1
+                cell.fbFriendsImg3.layer.opacity = 1
             }
             
             
-            return cell
-        }
+            //-- Init settingViewController and variable ageMin ageMax
+            let settingViewController = SettingsViewController()
+            var ageMin : Double
+            var ageMax : Double
             
+            //cell.clearsContextBeforeDrawing = false
+            
+            var displayBar:Bool?
+            var displayNightclub:Bool?
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
+                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
+                print("SwitchStateBar")
+            } else {
+                displayBar = settingDefault.displayBar
+                print("default setting")
+            }
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+            } else {
+                displayNightclub = settingDefault.displayNightclub
+            }
+            
+            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+                
+            else if(type == "nightclub" && displayNightclub! ) {
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
+            }
+                
+            else {
+                tableData.rowHeight = 0
+                cell.hidden = true
+            }
+            
+            
+            //-- If userDefault value exist use it, else take the default value
+            if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
+                ageMin = settingDefault.ageMin
+                ageMax = settingDefault.ageMax
+            } else {
+                ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
+                ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
+            }
+
+        }
         else
         {
             
@@ -72,6 +186,8 @@ extension MainViewController: UITableViewDataSource
             print("inactive")
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
+/*            print("placename")
+            print(placeItems[indexPath.row].placeName)*/
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
@@ -208,16 +324,15 @@ extension MainViewController: UITableViewDataSource
             }
             
             //-- Check if average Age is between ageMax and ageMin and hide cell if it's false
-            if placeItems[indexPath.row].averageAge != nil {
+            /*if placeItems[indexPath.row].averageAge != nil {
                 if (placeItems[indexPath.row].averageAge < Int(ageMin) && placeItems[indexPath.row].averageAge < Int(ageMax) || placeItems[indexPath.row].averageAge > Int(ageMin) && placeItems[indexPath.row].averageAge > Int(ageMax)) {
                     cell.hidden = true
                     tableData.rowHeight = 0
                 }
             
-            }
-            
-            return cell
+            }*/
         }
+        return cell
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

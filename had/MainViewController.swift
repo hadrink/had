@@ -70,7 +70,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setLogoNavBar()
-        
     }
     
     
@@ -80,8 +79,6 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
             locationManager.requestAlwaysAuthorization()
-            
-/*            */
         }
         startLocationManager()
         self.setupRefreshControl()
@@ -213,8 +210,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         searchButton.target = self
         searchButton.action = "ActivateSearchMode"
         self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
-        navbar.setLeftBarButtonItem(SettingsBarButtonItem, animated: true)
-        navbar.setRightBarButtonItems([favButton,searchButton], animated: true)
+        navbar.setLeftBarButtonItems([SettingsBarButtonItem,searchButton], animated: true)
+        navbar.setRightBarButtonItems([favButton], animated: true)
         //navbar.setRightBarButtonItem(searchButton, animated: true)
         self.searchArray.removeAll()
         
@@ -268,7 +265,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             favButton.tintColor = Colors().pink
             let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
             var places = [Place]()
-            self.placeItems.removeAll()
+            self.searchArray.removeAll()
             let request = NSFetchRequest(entityName: "Place")
             do {
                 
@@ -286,6 +283,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 let place:PlaceItem = PlaceItem()
                 place.placeId = p.place_id
                 place.placeName = p.place_name
+                print("placename")
+                print(p.place_name)
                 place.city = p.place_city
                 place.averageAge = p.place_average_age?.integerValue
                 place.pourcentSex = p.place_pourcent_sex?.floatValue
@@ -294,15 +293,15 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 place.distance = p.place_distance?.doubleValue
                 place.placeLatitudeDegrees = p.place_latitude?.doubleValue
                 place.placeLongitudeDegrees = p.place_longitude?.doubleValue
-                placeItems.append(place)
-                print("nbplace")
-                print(placeItems.count)
+                searchArray.append(place)
+                print("nbplace saerch")
+                print(searchArray.count)
             }
-            self.tableData.reloadData()
         }
         else{
             isFavOn = false
             favButton.tintColor = Colors().grey
         }
+        self.tableData.reloadData()
     }
 }

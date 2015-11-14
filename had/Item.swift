@@ -100,6 +100,14 @@ class PlaceCell: UITableViewCell {
             place.setValue(placeId, forKey: "place_id")
             place.setValue(true, forKey: "is_checked")
             place.setValue(typeofPlace, forKey: "place_type")
+            place.setValue(placeName.text, forKey: "place_name")
+            place.setValue(city.text, forKey: "place_city")
+            place.setValue(Double(distance.text!), forKey: "place_distance")
+            place.setValue(Int(nbUser.text!), forKey: "place_counter")
+            place.setValue(Float(averageAge.text!) , forKey: "place_average_age")
+            //place.setValue(, forKey: "place_latitude")
+            //place.setValue(city, forKey: "place_longitude")
+            place.setValue(Float(details.text!), forKey: "place_pourcent_sex")
             
             do {
                 
