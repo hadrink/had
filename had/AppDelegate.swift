@@ -13,8 +13,10 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var locationTracker: LocationTracker = LocationTracker()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: UIViewController
@@ -27,8 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
+        locationTracker.startLocationTracking()
+        var time:NSTimeInterval = 1.0;
+        var locationUpdateTimer :NSTimer?
+        locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
+//         NSTimer(timeInterval: time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
+        //locationTracker.getBestLocationForServer()
         //-- Light statusbar everywhere
-
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if PFUser.currentUser() != nil {
@@ -47,6 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
         
+    }
+    
+    func updateLocation(){
+        locationTracker.getBestLocationForServer()
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -77,8 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
-        //startUpdatingLocation()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
