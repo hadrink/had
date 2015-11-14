@@ -84,7 +84,7 @@ extension MainViewController: UITableViewDataSource
             cell.backgroundAge.layer.cornerRadius = 4.0
             cell.backgroundNbUser.layer.cornerRadius = 4.0
             cell.placeId = placeItems[indexPath.row].placeId!
-            
+            cell.typeofPlace = placeItems[indexPath.row].typeofPlace
                        
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
@@ -95,7 +95,7 @@ extension MainViewController: UITableViewDataSource
             friendsImageView.append(cell.fbFriendsImg2)
             friendsImageView.append(cell.fbFriendsImg3)
             
-            if (IsPlaceInCoreData(cell.placeId)) {
+            if (IsPlaceInCoreData(cell.placeId!)) {
                 cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             }
             
@@ -104,35 +104,37 @@ extension MainViewController: UITableViewDataSource
             }
             
             //-- Check if friends in place
-            if friends!.count > 0 {
-                
-                //-- Create index for friends
-                let indexFriends = friends!.count - 1
-                
-                //-- Loop on userId in friends
-                for userId in 0...indexFriends {
+            if (friends != nil){
+                if friends!.count > 0 {
                     
-                    //-- Corner radius (makes circle picture)
-                    friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
-                    friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                    //-- Create index for friends
+                    let indexFriends = friends!.count - 1
                     
-                    //-- Create picture friends url request
-                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
-                    let request:NSURLRequest = NSURLRequest(URL:url)
-                    let queue:NSOperationQueue = NSOperationQueue()
-                    
-                    //-- Start async request for get facebook picture friends
-                    NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                    //-- Loop on userId in friends
+                    for userId in 0...indexFriends {
                         
-                        //-- Check if response != nil
-                        if((response) != nil) {
+                        //-- Corner radius (makes circle picture)
+                        friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                        friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                        
+                        //-- Create picture friends url request
+                        let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                        let request:NSURLRequest = NSURLRequest(URL:url)
+                        let queue:NSOperationQueue = NSOperationQueue()
+                        
+                        //-- Start async request for get facebook picture friends
+                        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
                             
-                            //-- Lunch async request in main queue for UI elements
-                            dispatch_async(dispatch_get_main_queue()) {
-                                friendsImageView[userId]?.image = UIImage(data: data!)
+                            //-- Check if response != nil
+                            if((response) != nil) {
+                                
+                                //-- Lunch async request in main queue for UI elements
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    friendsImageView[userId]?.image = UIImage(data: data!)
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
             }
             
@@ -311,7 +313,7 @@ extension MainViewController: UITableViewDataSource
         if placeItems.count != 0
         {
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            return 1;
+            //return 1;
         }
         else
         {
@@ -351,9 +353,8 @@ extension MainViewController: UITableViewDataSource
         }
         
         for var p in places {
-            var id = p.place_id
             
-            if placeId == id {
+            if placeId == p.place_id {
                 isChecked = p.is_checked as! Bool
             }
             
@@ -598,6 +599,7 @@ extension MainViewController: UISearchBarDelegate
 {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.setLogoNavBar()
+        self.tableData.reloadData()
     }
 }
 
