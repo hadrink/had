@@ -105,6 +105,27 @@ class QueryServices{
         
     }
     
+        func send(url: String, f: (NSString) -> ()) {
+           
+            do {
+                var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+                request.HTTPMethod = "POST"
+                var response: NSURLResponse?
+                var error: NSErrorPointer = nil
+                let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+                let reply = NSString(data: data, encoding: NSUTF8StringEncoding)
+                if reply != nil {
+                    f(reply!)
+                }
+            }
+            
+            catch let err as NSError {
+                print(err)
+            }
+            
+        }
+    
+    
     /*var userName:AnyObject = 101
     func loadUserDataFromPList() {
         // getting path to GameData.plist

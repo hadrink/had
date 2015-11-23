@@ -13,7 +13,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var locationTracker: LocationTracker = LocationTracker()
+    var locationTracker: LocationTracker = LocationTracker.init()
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    var backgroundTaskManager:BackgroundTaskManager?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -29,19 +31,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        locationTracker.startLocationTracking()
-        var time:NSTimeInterval = 1.0;
-        var locationUpdateTimer :NSTimer?
-        locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
-//         NSTimer(timeInterval: time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
-        //locationTracker.getBestLocationForServer()
+        
+        
+        UIApplication.sharedApplication().idleTimerDisabled = true
+        
+        if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
+            
+            locationTracker.startLocationWhenAppIsKilled()
+            locationTracker.updateLocationToServer()
+            return true;
+        }
+        
+        
         //-- Light statusbar everywhere
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if PFUser.currentUser() != nil {
+            locationTracker.startLocationTracking()
+            var time:NSTimeInterval = 10;
+            var locationUpdateTimer :NSTimer?
+            locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
+            self.backgroundTaskManager?.beginNewBackgroundTask()
+
         } else {
             initialViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") 
+        }
+        
+        //-- Notification parse
+        
+        
+        // Register for Push Notitications
+        if application.applicationState != UIApplicationState.Background {
+            // Track an app open here if we launch with a push, unless
+            // "content_available" was used to trigger a background push (introduced in iOS 7).
+            // In that case, we skip tracking here to avoid double counting the app-open.
+            
+            let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
+            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+            var pushPayload = false
+            if let options = launchOptions {
+                pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
+            }
+            if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
+                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+            }
+        }
+        if application.respondsToSelector("registerUserNotificationSettings:") {
+            let settings = UIUserNotificationSettings(forTypes: UIUserNotificationType([.Badge, .Sound, .Alert]), categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        } else {
+            let types = UIRemoteNotificationType([.Badge, .Sound, .Alert])
+            application.registerForRemoteNotificationTypes(types)
         }
         
         window?.rootViewController = initialViewController
@@ -57,8 +99,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateLocation(){
-        locationTracker.getBestLocationForServer()
+        
+        self.locationTracker.restartLocationUpdates()
+        self.locationTracker.updateLocationToServer()
+        
     }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        if error.code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        PFPush.handlePush(userInfo)
+        if application.applicationState == UIApplicationState.Inactive {
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            /*locationTracker.startLocationTracking()
+            locationTracker.updateLocationToServer()*/
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if userInfo["aps"]!["content-available"] as! Int == 1 {
+            locationTracker.startLocationTracking()
+            locationTracker.updateLocationToServer()
+        }
+    }
+    
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
@@ -88,6 +164,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        NSLog("Ta mère")
+        locationTracker.startLocationWhenAppIsKilled()
+        locationTracker.updateLocationToServer()
+        
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -97,6 +177,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        print("significantLOc")
+        print(CLLocationManager.significantLocationChangeMonitoringAvailable())
+        locationTracker.startLocationWhenAppIsKilled()
     }
     
     // MARK: - Core Data stack

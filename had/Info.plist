@@ -11,7 +11,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.hadrink.had</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,14 +31,14 @@
 			</array>
 		</dict>
 	</array>
-	<key>FacebookUrlSchemeSuffix</key>
-	<string>foo</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>1559557587665840</string>
 	<key>FacebookDisplayName</key>
 	<string>had</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>foo</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -63,7 +63,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Had a besoin d&apos;accéder à votre position pour afficher les adresses autour de vous !</string>
+	<string>Had a besoin d'accéder à votre position pour afficher les adresses autour de vous !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoSlab-Bold.ttf</string>
@@ -79,6 +79,7 @@
 	<array>
 		<string>fetch</string>
 		<string>location</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

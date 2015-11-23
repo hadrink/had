@@ -60,6 +60,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     // MARK: Application in background
     func applicationEnterBackground() {
         var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        locationManager.pausesLocationUpdatesAutomatically = false
+        if #available(iOS 9.0, *) {
+            locationManager.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
@@ -78,10 +84,18 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         }
         
         var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        locationManager.pausesLocationUpdatesAutomatically = false
+        
+        if #available(iOS 9.0, *) {
+            locationManager.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
+        //locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func startLocationTracking() {
@@ -99,10 +113,49 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 print("authorizationStatus failed")
             } else {
                 var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+                locationManager.pausesLocationUpdatesAutomatically = false
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = true
+                } else {
+                    // Fallback on earlier versions
+                }
                 locationManager.delegate = self
                 locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
                 locationManager.distanceFilter = kCLDistanceFilterNone
+                //locationManager.startUpdatingLocation()
                 locationManager.startUpdatingLocation()
+            }
+        }
+    }
+    
+    func startLocationWhenAppIsKilled() {
+        print("startLocationTracking when the app is killed\n")
+        
+        if CLLocationManager.locationServicesEnabled() == false {
+            print("locationServicesEnabled false\n")
+            var servicesDisabledAlert : UIAlertView = UIAlertView(title: "Location Services Disabled", message: "You currently have all location services for this device disabled", delegate: nil, cancelButtonTitle: "OK")
+            servicesDisabledAlert.show()
+        } else {
+            
+            
+            var authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+            if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
+                print("authorizationStatus failed")
+            } else {
+                var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+                locationManager.pausesLocationUpdatesAutomatically = false
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = true
+                } else {
+                    // Fallback on earlier versions
+                }
+                locationManager.delegate = self
+                locationManager.requestAlwaysAuthorization()
+                locationManager.startMonitoringSignificantLocationChanges()
+                let distance : CLLocationDistance = 200
+                let time:NSTimeInterval = 10
+                locationManager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
+                
             }
         }
     }
@@ -151,12 +204,13 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         // The location manager will only operate for 10 seconds to save battery
         let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
         var delay10Seconds : NSTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
+        updateLocationToServer()
     }
     
     //MARK: Stop the locationManager
     func stopLocationDelayBy10Seconds() {
         var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
-        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
         print("locationManager stop Updating after 10 seconds\n")
     }
     
@@ -187,7 +241,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
             self.shareModel!.timer = nil
         }
         var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
-        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
     }
     
     // MARK: Update location to server
@@ -228,7 +282,13 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         print("Send to server: latitude \(self.myLocation?.latitude) longitude \(self.myLocation?.longitude) accuracy \(self.myLocationAcuracy)\n")
 
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
-
+        
+        var request = QueryServices()
+        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSString)-> () in
+            print(result)
+        })
+        
+        
         
         // After sending the location to the server successful,
         // remember to clear the current array with the following code. It is to make sure that you clear up old location in the array 
@@ -284,6 +344,21 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         print("Send to server: latitude \(self.myLocation?.latitude) longitude \(self.myLocation?.longitude) accuracy \(self.myLocationAcuracy)\n")
         
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
+        
+        
+        
+        var request = QueryServices()
+        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSString)-> () in
+            print(result)
+        })
+        
+        /*request.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+            print("dans le post du backgroundeuuuux")
+        }*/
+        
+        
+        
+        
         
         
         // After sending the location to the server successful,
