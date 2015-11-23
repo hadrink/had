@@ -541,7 +541,7 @@ extension MainViewController: CLLocationManagerDelegate
             print(self.locationManager.allowsBackgroundLocationUpdates)
         }
         self.locationManager.startUpdatingLocation()
-        //self.locationManager.startMonitoringSignificantLocationChanges()
+        self.locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func RevealViewObserver (notication: NSNotification) {

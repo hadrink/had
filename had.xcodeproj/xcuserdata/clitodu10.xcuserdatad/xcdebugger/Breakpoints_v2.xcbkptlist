@@ -79,8 +79,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -224,8 +224,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
-            landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
-            landmarkType = "5">
+            landmarkName = "MainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -400,7 +400,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "740"
             endingLineNumber = "740"
-            landmarkName = "searchBarCancelButtonClicked(_:)"
+            landmarkName = "setupRefreshControl()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -432,7 +432,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "443"
             endingLineNumber = "443"
-            landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
+            landmarkName = "numberOfSectionsInTableView(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -448,7 +448,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "529"
             endingLineNumber = "529"
-            landmarkName = "updateSearchResultsForSearchController(_:)"
+            landmarkName = "myObserverMethod(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -496,7 +496,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "536"
             endingLineNumber = "536"
-            landmarkName = "updateSearchResultsForSearchController(_:)"
+            landmarkName = "myObserverMethod(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -528,7 +528,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "556"
             endingLineNumber = "556"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "WillAppTerminate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -544,7 +544,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "557"
             endingLineNumber = "557"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "WillAppTerminate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -576,8 +576,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "567"
             endingLineNumber = "567"
-            landmarkName = "myObserverMethod(_:)"
-            landmarkType = "5">
+            landmarkName = "MainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -592,7 +592,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "562"
             endingLineNumber = "562"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "WillAppTerminate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -880,7 +880,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "352"
             endingLineNumber = "352"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
