@@ -115,6 +115,22 @@ class SettingsViewController: UITableViewController{
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Réglages"
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "Lato-BoldItalic", size: 20)!]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
+        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5b90ce)
+        self.navigationController?.navigationBar.translucent = false
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "had-return"), style: .Plain, target: self, action: "goToMainView:")
+        navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
+        rightBarButtonItem.tintColor = Colors().grey
+    }
+    
+    func goToMainView(button: UIBarButtonItem) {
+        pageController.goToNextVC()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,7 +141,7 @@ class SettingsViewController: UITableViewController{
         // Get First name and Last name and display it in view
         self.Name.text = (userDefaults.stringForKey("first_name")! + " " + userDefaults.stringForKey("last_name")!)
         
-        print("distanceSlider\(distanceSlider.value)")
+        //print("distanceSlider\(distanceSlider.value)")
        
         if userDefaults.floatForKey("DistanceValue").isZero {
             print("Je suis dedans")
@@ -177,7 +193,7 @@ class SettingsViewController: UITableViewController{
         
         rangeSlider.translatesAutoresizingMaskIntoConstraints = false
         
-        print("Bob\(rangeSlider.accessibilityElementCount())")
+        //print("Bob\(rangeSlider.accessibilityElementCount())")
         
         
         /*let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
@@ -185,11 +201,11 @@ class SettingsViewController: UITableViewController{
             attribute: .TopMargin, multiplier: 1.0, constant: 20)*/
         
         
-        print("get image picture")
+        //print("get image picture")
        
         
         
-        print("profile picture setting")
+        //print("profile picture setting")
         //print(UserDataFb().pictureCache.description)
 
         
@@ -231,11 +247,15 @@ class SettingsViewController: UITableViewController{
     
     let queryServices = QueryServices()
     let userDefault = NSUserDefaults.standardUserDefaults()
-    let FBLogOut = FBSDKLoginManager()
+    //let FBLogOut = FBSDKLoginManager()
     
     @IBAction func deleteUserAccount(sender: AnyObject) {
         
-        print("Userdefault\(userDefault.dictionaryRepresentation().keys)")
+        PFUser.logOutInBackground()
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+        /*print("Userdefault\(userDefault.dictionaryRepresentation().keys)")
         
         let email:String = userDefault.stringForKey("email")!
         
@@ -247,18 +267,18 @@ class SettingsViewController: UITableViewController{
                 print("Delete account : DONE")
                 self.userDefault.removeObjectForKey("email")
                 //println(self.userDefault.stringForKey("email"))
-                self.FBLogOut.logOut()
+                //self.FBLogOut.logOut()
                 let vc: AnyObject! = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
                 self.showViewController(vc as! UIViewController, sender: vc)
             }
             else {
                 print("Failed to delete your account. Please try again later.")
             }
-        }
+        }*/
     }
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
-        print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+        //print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
         
         userDefaults.setDouble(rangeSlider.lowerValue, forKey: "AgeMinValue")
         userDefaults.setDouble(rangeSlider.upperValue, forKey: "AgeMaxValue")

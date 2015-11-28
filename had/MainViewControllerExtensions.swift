@@ -17,16 +17,12 @@ extension MainViewController: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if (self.searchController.active)
+        if (self.searchController.active || isFavOn)
         {
-            print("search")
-            print(self.searchArray.count)
             return self.searchArray.count
         }
         else
         {
-            print("normal")
-            print(self.placeItems.count)
             return self.placeItems.count
         }
     }
@@ -37,57 +33,31 @@ extension MainViewController: UITableViewDataSource
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
-        print(self.searchController.active)
+        //print(self.searchController.active)
         
-        if (self.searchController.active)
+        if (self.searchController.active || isFavOn)
         {
-            print("active reload")
-            
+            //print("indexpathrow")
+            //print(indexPath.row)
+            let type = searchArray[indexPath.row].typeofPlace as String!
+
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
             cell.city.text = searchArray[indexPath.row].city as String?
             cell.nbUser.text = String(searchArray[indexPath.row].counter)
-            cell.averageAge.text = String(stringInterpolationSegment: searchArray[indexPath.row].averageAge)
-            cell.details.text = String(stringInterpolationSegment: searchArray[indexPath.row].pourcentSex)
+            cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
+            cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
             cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
-            
-            let type = searchArray[indexPath.row].typeofPlace as String!
-            
-            if ( type == "cafe" || type == "bar") { 
-                cell.iconTableview.image = UIImage(named: "bar-icon")
-            }
-                
-            else {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon")
-            }
-            
-            
-            return cell
-        }
-            
-        else
-        {
-            
-            let type = placeItems[indexPath.row].typeofPlace as String!
-            
-            print("inactive")
-            //println(placeItems[indexPath.row])
-            cell.placeName.text = placeItems[indexPath.row].placeName as String?
-            cell.city.text = placeItems[indexPath.row].city as String?
-            cell.nbUser.text = String(placeItems[indexPath.row].counter)
-            cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
-            cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
-            cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
-            cell.sexIcon.image = placeItems[indexPath.row].sexIcon
-            cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            cell.sexIcon.image = searchArray[indexPath.row].sexIcon
+            cell.backgroundSex.backgroundColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             
             cell.backgroundSex.layer.cornerRadius = 4.0
             cell.backgroundAge.layer.cornerRadius = 4.0
             cell.backgroundNbUser.layer.cornerRadius = 4.0
-            cell.placeId = placeItems[indexPath.row].placeId!
+            cell.placeId = searchArray[indexPath.row].placeId!
+            cell.typeofPlace = searchArray[indexPath.row].typeofPlace
             
-                       
             //-- Get friends array
-            let friends = placeItems[indexPath.row].friends
+            let friends = searchArray[indexPath.row].friends
             
             //-- Create an ImageView array
             var friendsImageView: [UIImageView?] = []
@@ -95,51 +65,53 @@ extension MainViewController: UITableViewDataSource
             friendsImageView.append(cell.fbFriendsImg2)
             friendsImageView.append(cell.fbFriendsImg3)
             
-            if (IsPlaceInCoreData(cell.placeId)) {
+            if (IsPlaceInCoreData(cell.placeId!)) {
                 cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             }
-            
+                
             else {
                 cell.heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
             }
             
             //-- Check if friends in place
-            if friends!.count > 0 {
-                
-                //-- Create index for friends
-                let indexFriends = friends!.count - 1
-                
-                //-- Loop on userId in friends
-                for userId in 0...indexFriends {
+            if (friends != nil){
+                if friends!.count > 0 {
                     
-                    //-- Corner radius (makes circle picture)
-                    friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
-                    friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                    //-- Create index for friends
+                    let indexFriends = friends!.count - 1
                     
-                    //-- Create picture friends url request
-                    let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
-                    let request:NSURLRequest = NSURLRequest(URL:url)
-                    let queue:NSOperationQueue = NSOperationQueue()
-                    
-                    //-- Start async request for get facebook picture friends
-                    NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                    //-- Loop on userId in friends
+                    for userId in 0...indexFriends {
                         
-                        //-- Check if response != nil
-                        if((response) != nil) {
+                        //-- Corner radius (makes circle picture)
+                        friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                        friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                        
+                        //-- Create picture friends url request
+                        let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                        let request:NSURLRequest = NSURLRequest(URL:url)
+                        let queue:NSOperationQueue = NSOperationQueue()
+                        
+                        //-- Start async request for get facebook picture friends
+                        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
                             
-                            //-- Lunch async request in main queue for UI elements
-                            dispatch_async(dispatch_get_main_queue()) {
-                                friendsImageView[userId]?.image = UIImage(data: data!)
+                            //-- Check if response != nil
+                            if((response) != nil) {
+                                
+                                //-- Lunch async request in main queue for UI elements
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    friendsImageView[userId]?.image = UIImage(data: data!)
+                                }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
             }
             
             //-- Check if users in place (If true elements display else none)
-            if placeItems[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
+            if searchArray[indexPath.row].counter == nil {
+                //print("index")
+//                print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
@@ -165,11 +137,174 @@ extension MainViewController: UITableViewDataSource
             
             //cell.clearsContextBeforeDrawing = false
             
-            if ((type == "cafe" || type == "bar" || type == "pub") && settingViewController.userDefault.boolForKey("SwitchStateBar") ) {
+            var displayBar:Bool?
+            var displayNightclub:Bool?
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
+                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
+                //print("SwitchStateBar")
+            } else {
+                displayBar = settingDefault.displayBar
+                //print("default setting")
+            }
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+            } else {
+                displayNightclub = settingDefault.displayNightclub
+            }
+            
+            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
             }
                 
-            else if(type == "nightclub" && settingViewController.userDefault.boolForKey("SwitchStateNightclub") ) {
+            else if(type == "nightclub" && displayNightclub! ) {
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
+            }
+                
+            else {
+                tableData.rowHeight = 0
+                cell.hidden = true
+            }
+            
+            
+            //-- If userDefault value exist use it, else take the default value
+            if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
+                ageMin = settingDefault.ageMin
+                ageMax = settingDefault.ageMax
+            } else {
+                ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
+                ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
+            }
+
+        }
+        else
+        {
+            
+            let type = placeItems[indexPath.row].typeofPlace as String!
+            
+            //print("inactive")
+            //println(placeItems[indexPath.row])
+            cell.placeName.text = placeItems[indexPath.row].placeName as String?
+/*            print("placename")
+            print(placeItems[indexPath.row].placeName)*/
+            cell.city.text = placeItems[indexPath.row].city as String?
+            cell.nbUser.text = String(placeItems[indexPath.row].counter)
+            cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
+            cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
+            cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
+            cell.sexIcon.image = placeItems[indexPath.row].sexIcon
+            cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            
+            cell.backgroundSex.layer.cornerRadius = 4.0
+            cell.backgroundAge.layer.cornerRadius = 4.0
+            cell.backgroundNbUser.layer.cornerRadius = 4.0
+            cell.placeId = placeItems[indexPath.row].placeId!
+            cell.typeofPlace = placeItems[indexPath.row].typeofPlace
+                       
+            //-- Get friends array
+            let friends = placeItems[indexPath.row].friends
+            
+            //-- Create an ImageView array
+            var friendsImageView: [UIImageView?] = []
+            friendsImageView.append(cell.fbFriendsImg1)
+            friendsImageView.append(cell.fbFriendsImg2)
+            friendsImageView.append(cell.fbFriendsImg3)
+            
+            if (IsPlaceInCoreData(cell.placeId!)) {
+                cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
+            }
+            
+            else {
+                cell.heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
+            }
+            
+            //-- Check if friends in place
+            if (friends != nil){
+                if friends!.count > 0 {
+                    
+                    //-- Create index for friends
+                    let indexFriends = friends!.count - 1
+                    
+                    //-- Loop on userId in friends
+                    for userId in 0...indexFriends {
+                        
+                        //-- Corner radius (makes circle picture)
+                        friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                        friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                        
+                        //-- Create picture friends url request
+                        let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                        let request:NSURLRequest = NSURLRequest(URL:url)
+                        let queue:NSOperationQueue = NSOperationQueue()
+                        
+                        //-- Start async request for get facebook picture friends
+                        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                            
+                            //-- Check if response != nil
+                            if((response) != nil) {
+                                
+                                //-- Lunch async request in main queue for UI elements
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    friendsImageView[userId]?.image = UIImage(data: data!)
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+            
+            //-- Check if users in place (If true elements display else none)
+            if placeItems[indexPath.row].counter == nil {
+                //print("index")
+                //print(indexPath.row)
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                cell.fbFriendsImg1.layer.opacity = 0
+                cell.fbFriendsImg2.layer.opacity = 0
+                cell.fbFriendsImg3.layer.opacity = 0
+                tableData.rowHeight = 55
+            } else {
+                tableData.rowHeight = 120
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                cell.fbFriendsImg1.layer.opacity = 1
+                cell.fbFriendsImg2.layer.opacity = 1
+                cell.fbFriendsImg3.layer.opacity = 1
+            }
+            
+            
+            //-- Init settingViewController and variable ageMin ageMax
+            let settingViewController = SettingsViewController()
+            var ageMin : Double
+            var ageMax : Double
+            
+            //cell.clearsContextBeforeDrawing = false
+            
+            var displayBar:Bool?
+            var displayNightclub:Bool?
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
+                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
+                //print("SwitchStateBar")
+            } else {
+                displayBar = settingDefault.displayBar
+                //print("default setting")
+            }
+            
+            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+            } else {
+                displayNightclub = settingDefault.displayNightclub
+            }
+            
+            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+                
+            else if(type == "nightclub" && displayNightclub! ) {
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
             }
             
@@ -189,16 +324,15 @@ extension MainViewController: UITableViewDataSource
             }
             
             //-- Check if average Age is between ageMax and ageMin and hide cell if it's false
-            if placeItems[indexPath.row].averageAge != nil {
+            /*if placeItems[indexPath.row].averageAge != nil {
                 if (placeItems[indexPath.row].averageAge < Int(ageMin) && placeItems[indexPath.row].averageAge < Int(ageMax) || placeItems[indexPath.row].averageAge > Int(ageMin) && placeItems[indexPath.row].averageAge > Int(ageMax)) {
                     cell.hidden = true
                     tableData.rowHeight = 0
                 }
             
-            }
-            
-            return cell
+            }*/
         }
+        return cell
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -294,7 +428,7 @@ extension MainViewController: UITableViewDataSource
         if placeItems.count != 0
         {
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            return 1;
+            //return 1;
         }
         else
         {
@@ -334,9 +468,8 @@ extension MainViewController: UITableViewDataSource
         }
         
         for var p in places {
-            var id = p.place_id
             
-            if placeId == id {
+            if placeId == p.place_id {
                 isChecked = p.is_checked as! Bool
             }
             
@@ -373,11 +506,11 @@ extension MainViewController: UISearchResultsUpdating
                 for item in reposArray {
                 self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
                 //println("Item \(item)")
-                print("has Item")
+                //print("has Item")
                 }
                 
                 }
-                print("reload")
+                //print("reload")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
@@ -390,7 +523,47 @@ extension MainViewController: UISearchResultsUpdating
 
 extension MainViewController: CLLocationManagerDelegate
 {
+    func startMonitoringGeotification(geotification: Geotification) {
+        // 1
+        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) {
+            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
+            return
+        }
+        // 2
+        if CLLocationManager.authorizationStatus() != .AuthorizedAlways {
+            showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
+        }
+        // 3
+        let region = regionWithGeotification(geotification)
+        // 4
+        locationManager.startMonitoringForRegion(region)
+        //locationManager.startMonitoringSignificantLocationChanges()
+    }
     
+    func stopMonitoringGeotification(geotification: Geotification) {
+        for region in locationManager.monitoredRegions {
+            if let circularRegion = region as? CLCircularRegion {
+                if circularRegion.identifier == geotification.identifier {
+                    locationManager.stopMonitoringForRegion(circularRegion)
+                }
+            }
+        }
+    }
+    
+    func removeGeotification(geotification: Geotification) {
+        if let indexInArray = geotifications.indexOf(geotification) {
+            geotifications.removeAtIndex(indexInArray)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print(manager.monitoredRegions.count)
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Location Manager failed with the following error: \(error)")
+    }
     //-- Func Observer Method for start Updating Location
     
     func myObserverMethod (notification: NSNotification) {
@@ -401,31 +574,40 @@ extension MainViewController: CLLocationManagerDelegate
 //            // Fallback on earlier versions
 //            locationManager.startUpdatingLocation()
 //        }
-        print("allow dans l'observer")
+        //print("allow dans l'observer")
         if #available(iOS 9.0, *) {
             self.locationManager.allowsBackgroundLocationUpdates = true
         //    self.locationManager.requestLocation()
-            print(self.locationManager.allowsBackgroundLocationUpdates)
+            //print(self.locationManager.allowsBackgroundLocationUpdates)
         }
         self.locationManager.startUpdatingLocation()
-        //self.locationManager.startMonitoringSignificantLocationChanges()
+        self.locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func RevealViewObserver (notication: NSNotification) {
         let revealView = self.revealViewController()
         
-        print("Observer")
+        //print("Observer")
         if revealView.rearViewRevealWidth == 0 {
             tableData.reloadData()
         }
     }
     
     func WillAppTerminate(notification: NSNotification){
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        /*let userDefaults = NSUserDefaults.standardUserDefaults()
         let email: String! = userDefaults.stringForKey("email")
         QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             print("dans le post du backgroundeuuuux")
+        }*/
+        print("notifTerminte")
+        if(self.locationManager.monitoredRegions.count != 0){
+            for geotification in geotifications{
+                stopMonitoringGeotification(geotification)
+                removeGeotification(geotification)
+            }
         }
+        addRegions()
+        
     }
     
     func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
@@ -445,25 +627,37 @@ extension MainViewController: CLLocationManagerDelegate
 //        print(" authorisation status change")
 //    }
     
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("enter regiokn")
+    }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+    func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
+        print("startmonitoringforregion")
+        print(region.identifier)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+
         if((locationManager.location) != nil)
         {
+            let clampedRadius = CLLocationDistance(50)
+            
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
             let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
             let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
             if UIApplication.sharedApplication().applicationState == .Active {
-                print("app is activated")
+                //print("app is activated")
                 
-                locationManager.stopUpdatingLocation()
+                //locationManager.stopUpdatingLocation()
+                locationManager.stopMonitoringSignificantLocationChanges()
                 
                 
                 //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
                 //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
-                print("Latitude \(userLatitude)")
-                print("Longitude \(userLongitude)")
+                //print("Latitude \(userLatitude)")
+                //print("Longitude \(userLongitude)")
                 
                 //-- Variable send to the method post
                 
@@ -494,10 +688,10 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                     displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                    print("SwitchStateBar")
+                    //print("SwitchStateBar")
                 } else {
                     displayBar = settingDefault.displayBar
-                    print("default setting")
+                    //print("default setting")
                 }
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -508,16 +702,16 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
                     statsSince = settingViewController.userDefaults.integerForKey("stats_since")
-                    print("Value \(statsSince)")
+                    //print("Value \(statsSince)")
                 } else {
                     statsSince = settingDefault.statsSince
-                    print("stats \(statsSince)")
+                    //print("stats \(statsSince)")
                 }
                 
                 //-- Transform to String
                 
                 let distanceMaxString = String(stringInterpolationSegment: distanceMax)
-                print("Distance max \(distanceMax)")
+                //print("Distance max \(distanceMax)")
                 let ageMinString = String(stringInterpolationSegment: ageMin)
                 let ageMaxString = String(stringInterpolationSegment: ageMax)
                 
@@ -527,8 +721,11 @@ extension MainViewController: CLLocationManagerDelegate
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                print("MyFriends\(friends)" )
-                
+//                print("MyFriends\(friends)" )
+               // print("latitude")
+                //print(userLatitude)
+               //print("longitude")
+                //print(userLongitude)
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
@@ -542,7 +739,9 @@ extension MainViewController: CLLocationManagerDelegate
                         for item in reposArray {
                             if var placeProperties = item["properties"] as? [String:AnyObject] {
                                 if (placeProperties["name"] != nil) {
-                                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                                    
+                                    let place: PlaceItem = PlaceItem(json: item, userLocation : locationDictionary)
+                                    self.placeItems.append(place)
                                 }
                             }
                         }
@@ -560,20 +759,16 @@ extension MainViewController: CLLocationManagerDelegate
                 NSLog("App is backgrounded. New location is %@", manager.location!)
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 let email: String! = userDefaults.stringForKey("email")
+                
                 QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 }
-                
+
                 let distance:CLLocationDistance = 200
                 let time:NSTimeInterval = 10
                 manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
-                
             }
-            locationManager = nil
+            //locationManager = nil
         }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location" + error.localizedDescription)
     }
 }
 
@@ -581,6 +776,7 @@ extension MainViewController: UISearchBarDelegate
 {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.setLogoNavBar()
+        self.tableData.reloadData()
     }
 }
 
@@ -774,4 +970,22 @@ extension MainViewController
         self.refreshColorView.backgroundColor = UIColor.clearColor()
     }
     
+}
+
+func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+    alert.addAction(action)
+    viewController.presentViewController(alert, animated: true, completion: nil)
+}
+
+func regionWithGeotification(geotification: Geotification) -> CLCircularRegion {
+    // 1
+    let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
+    // 2
+    region.notifyOnEntry = true
+    region.notifyOnExit = true
+    //region.notifyOnEntry = (geotification.eventType == .OnEntry)
+    //region.notifyOnExit = !region.notifyOnEntry
+    return region
 }

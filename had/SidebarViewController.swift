@@ -41,8 +41,8 @@ class SidebarViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "hasLoginKey")
         NSUserDefaults.standardUserDefaults().synchronize()
         print(NSUserDefaults.standardUserDefaults().valueForKey("hasLoginKey"))
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut()
+        //let loginManager = FBSDKLoginManager()
+        //loginManager.logOut()
 /*        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         appDelegate.userProfil.getUserCoreData()
         println("getuser")

@@ -31,10 +31,10 @@ class PlaceItem : CLLocationManager{
     
     // Init variables
     
-    required init (json : NSDictionary, userLocation : NSDictionary) {
+     init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
-        print(json)
+        //print(json)
         
         placeId = json["_id"] as? String
         
@@ -47,9 +47,9 @@ class PlaceItem : CLLocationManager{
         
         friends = json["friends"] as? Array<String>
         
-        print("Friends visited \(friends)")
+        //print("Friends visited \(friends)")
         
-        print(typeofPlace)
+        //print(typeofPlace)
         
         //counter = String(stringInterpolationSegment: json["counter"] as! Int!)
         
@@ -97,15 +97,15 @@ class PlaceItem : CLLocationManager{
         
         if let usersvisited = json["visitors"] as? [NSDictionary] {
             
-            print("visitorsss")
-            print(usersvisited)
+            //print("visitorsss")
+            //print(usersvisited)
             
             for uservisited in usersvisited {
                 let age:String = uservisited["age"] as! String
                 let sex:String = uservisited["sex"] as! String
-                print("age")
-                print(sex)
-                print(age)
+               // print("age")
+                //print(sex)
+                //print(age)
                 let ageInt = Int(age)
                 
                 sexArray.append(sex)
@@ -141,6 +141,11 @@ class PlaceItem : CLLocationManager{
             counter = count
             averageAge = cumul / count
         }
+        
+    }
+    
+    override init()
+    {
         
     }
     /*
