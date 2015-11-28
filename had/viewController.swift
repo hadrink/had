@@ -13,6 +13,7 @@ let pageController = ViewController(transitionStyle: .Scroll, navigationOrientat
 class ViewController: UIPageViewController, UIScrollViewDelegate {
     
     let MainVC: UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MainViewController")
+//    UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("GeotificationViewController")
     let SettingsVC: UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SettingsViewController")
     //let matchesVC: UIViewController! = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MatchesNavController") as! UIViewController
     

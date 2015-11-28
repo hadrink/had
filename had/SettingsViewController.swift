@@ -141,7 +141,7 @@ class SettingsViewController: UITableViewController{
         // Get First name and Last name and display it in view
         self.Name.text = (userDefaults.stringForKey("first_name")! + " " + userDefaults.stringForKey("last_name")!)
         
-        print("distanceSlider\(distanceSlider.value)")
+        //print("distanceSlider\(distanceSlider.value)")
        
         if userDefaults.floatForKey("DistanceValue").isZero {
             print("Je suis dedans")
@@ -193,7 +193,7 @@ class SettingsViewController: UITableViewController{
         
         rangeSlider.translatesAutoresizingMaskIntoConstraints = false
         
-        print("Bob\(rangeSlider.accessibilityElementCount())")
+        //print("Bob\(rangeSlider.accessibilityElementCount())")
         
         
         /*let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
@@ -201,11 +201,11 @@ class SettingsViewController: UITableViewController{
             attribute: .TopMargin, multiplier: 1.0, constant: 20)*/
         
         
-        print("get image picture")
+        //print("get image picture")
        
         
         
-        print("profile picture setting")
+        //print("profile picture setting")
         //print(UserDataFb().pictureCache.description)
 
         
@@ -278,7 +278,7 @@ class SettingsViewController: UITableViewController{
     }
     
     func rangeSliderValueChanged(rangeSlider: RangeSlider) {
-        print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
+        //print("Range slider value changed: (\(rangeSlider.lowerValue) \(rangeSlider.upperValue))")
         
         userDefaults.setDouble(rangeSlider.lowerValue, forKey: "AgeMinValue")
         userDefaults.setDouble(rangeSlider.upperValue, forKey: "AgeMaxValue")

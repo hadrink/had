@@ -62,10 +62,14 @@
 		EB4EF7651BF656CD00461020 /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EF7631BF656CD00461020 /* Place+CoreDataProperties.swift */; };
 		EB4EF7661BF656CD00461020 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EF7641BF656CD00461020 /* Place.swift */; };
 		EB4EF76C1BF76AF400461020 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4EF7671BF76AF400461020 /* ParseCrashReporting.framework */; };
-		EB4EF76D1BF76AF400461020 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4EF7681BF76AF400461020 /* Bolts.framework */; };
 		EB4EF76E1BF76AF400461020 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4EF7691BF76AF400461020 /* ParseTwitterUtils.framework */; };
-		EB4EF76F1BF76AF400461020 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4EF76A1BF76AF400461020 /* ParseUI.framework */; };
-		EB4EF7701BF76AF400461020 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4EF76B1BF76AF400461020 /* Parse.framework */; };
+		EB63733C1C064DF9002934D3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6373391C064DF9002934D3 /* Bolts.framework */; };
+		EB63733D1C064DF9002934D3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB63733A1C064DF9002934D3 /* ParseUI.framework */; };
+		EB63733E1C064DF9002934D3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB63733B1C064DF9002934D3 /* Parse.framework */; };
+		EB6373401C064E6F002934D3 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB63733F1C064E6F002934D3 /* Geotification.swift */; };
+		EB6373421C0652F5002934D3 /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB6373411C0652F5002934D3 /* TestLocations.gpx */; };
+		EB6373461C09FC5F002934D3 /* GeotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6373451C09FC5F002934D3 /* GeotificationViewController.swift */; };
+		EB6373481C09FE20002934D3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6373471C09FE20002934D3 /* MapKit.framework */; };
 		EB797E721B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
 		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
@@ -147,10 +151,14 @@
 		EB4EF7631BF656CD00461020 /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EB4EF7641BF656CD00461020 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		EB4EF7671BF76AF400461020 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		EB4EF7681BF76AF400461020 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		EB4EF7691BF76AF400461020 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
-		EB4EF76A1BF76AF400461020 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		EB4EF76B1BF76AF400461020 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		EB6373391C064DF9002934D3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		EB63733A1C064DF9002934D3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		EB63733B1C064DF9002934D3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		EB63733F1C064E6F002934D3 /* Geotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
+		EB6373411C0652F5002934D3 /* TestLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
+		EB6373451C09FC5F002934D3 /* GeotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeotificationViewController.swift; sourceTree = "<group>"; };
+		EB6373471C09FE20002934D3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtensions.swift; sourceTree = "<group>"; };
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB6373481C09FE20002934D3 /* MapKit.framework in Frameworks */,
 				7A94E5571BF1E5B5009AA114 /* MobileCoreServices.framework in Frameworks */,
 				7A7BEFDB1BF14E4A0037396A /* libz.tbd in Frameworks */,
 				7A94E5921BF221E5009AA114 /* ParseFacebookUtilsV4.framework in Frameworks */,
@@ -173,7 +182,6 @@
 				EB4EF76E1BF76AF400461020 /* ParseTwitterUtils.framework in Frameworks */,
 				7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */,
 				7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */,
-				EB4EF76D1BF76AF400461020 /* Bolts.framework in Frameworks */,
 				7A8AD86B1BF2390D00DA0B85 /* FBSDKLoginKit.framework in Frameworks */,
 				7A3143251B6960A000122781 /* Social.framework in Frameworks */,
 				7A3143231B69607500122781 /* Accounts.framework in Frameworks */,
@@ -186,9 +194,10 @@
 				7A1017A41B67AF6100781E54 /* CFNetwork.framework in Frameworks */,
 				7A1017A21B67AF5600781E54 /* AudioToolbox.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
+				EB63733C1C064DF9002934D3 /* Bolts.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
-				EB4EF76F1BF76AF400461020 /* ParseUI.framework in Frameworks */,
-				EB4EF7701BF76AF400461020 /* Parse.framework in Frameworks */,
+				EB63733D1C064DF9002934D3 /* ParseUI.framework in Frameworks */,
+				EB63733E1C064DF9002934D3 /* Parse.framework in Frameworks */,
 				7A94E5911BF221E5009AA114 /* ParseFacebookUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,11 +215,11 @@
 		773A7255470E77A4BDC45B39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB6373391C064DF9002934D3 /* Bolts.framework */,
+				EB63733A1C064DF9002934D3 /* ParseUI.framework */,
+				EB63733B1C064DF9002934D3 /* Parse.framework */,
 				EB4EF7671BF76AF400461020 /* ParseCrashReporting.framework */,
-				EB4EF7681BF76AF400461020 /* Bolts.framework */,
 				EB4EF7691BF76AF400461020 /* ParseTwitterUtils.framework */,
-				EB4EF76A1BF76AF400461020 /* ParseUI.framework */,
-				EB4EF76B1BF76AF400461020 /* Parse.framework */,
 				7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */,
 				7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */,
 				7A94E58A1BF221E5009AA114 /* ParseFacebookUtils.framework */,
@@ -286,6 +295,7 @@
 		7AA224EB19CDA9D0002003ED = {
 			isa = PBXGroup;
 			children = (
+				EB6373471C09FE20002934D3 /* MapKit.framework */,
 				EB4EF7631BF656CD00461020 /* Place+CoreDataProperties.swift */,
 				EB4EF7641BF656CD00461020 /* Place.swift */,
 				7A7BEFDA1BF14E4A0037396A /* libz.tbd */,
@@ -320,6 +330,7 @@
 				F6E2B65A1A2F9F8C00B085DC /* Controller */,
 				F6A5521F1A27A2E5001C371E /* ItemCell */,
 				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
+				EB6373411C0652F5002934D3 /* TestLocations.gpx */,
 				7AA2250419CDA9D1002003ED /* Images.xcassets */,
 				7AA2250619CDA9D1002003ED /* LaunchScreen.xib */,
 				7A081BCC1BB6DDAE0061D775 /* Assets */,
@@ -391,6 +402,7 @@
 			children = (
 				F6A5521D1A279D6A001C371E /* PlaceItem.swift */,
 				F6A552201A27A317001C371E /* Item.swift */,
+				EB63733F1C064E6F002934D3 /* Geotification.swift */,
 			);
 			name = ItemCell;
 			sourceTree = "<group>";
@@ -408,6 +420,7 @@
 				EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */,
 				EB444F9F1AAE3ADF00E533B2 /* LoginViewController.swift */,
 				EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */,
+				EB6373451C09FC5F002934D3 /* GeotificationViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -482,6 +495,9 @@
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
 						};
 					};
 					7AA2250C19CDA9D1002003ED = {
@@ -522,6 +538,7 @@
 				7A65B69D1AF5027F00A124EC /* RobotoSlab-Regular.ttf in Resources */,
 				7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */,
 				7A50441F1B4D640400477133 /* Lato-Bold.ttf in Resources */,
+				EB6373421C0652F5002934D3 /* TestLocations.gpx in Resources */,
 				7A65B69E1AF5027F00A124EC /* RobotoSlab-Thin.ttf in Resources */,
 				7A1045711A8F7EC4008DAF8C /* Lato-BoldItalic.ttf in Resources */,
 				7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */,
@@ -550,6 +567,7 @@
 				F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */,
 				EB444F901A9527D600E533B2 /* structs.swift in Sources */,
 				EB1BBE231B4DC4B400F46E99 /* SWRevealViewController.m in Sources */,
+				EB6373461C09FC5F002934D3 /* GeotificationViewController.swift in Sources */,
 				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7A70C49B1BB146C300299781 /* Store.swift in Sources */,
 				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
@@ -570,6 +588,7 @@
 				EB4EF7651BF656CD00461020 /* Place+CoreDataProperties.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
 				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
+				EB6373401C064E6F002934D3 /* Geotification.swift in Sources */,
 				EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */,
 				7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */,
 			);

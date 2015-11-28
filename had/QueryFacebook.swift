@@ -18,16 +18,16 @@ class UserDataFb {
 
     func getPicture() {
         
-        print("Func get profil picture")
+        //print("Func get profil picture")
         
         let pictureRequest = FBSDKGraphRequest(graphPath: "/v2.2/me/picture?type=large&redirect=false", parameters: nil)
         
-        print("picture request")
+       // print("picture request")
         
         pictureRequest.startWithCompletionHandler({
             (connection, result, error: NSError!) -> Void in
             if error == nil {
-                print("\(result)")
+                //print("\(result)")
                 let data: AnyObject  = result.objectForKey("data")!
                 let url :NSString = data.valueForKey("url") as! NSString
                 let imageURL = NSURL(string: url as String)
@@ -43,7 +43,7 @@ class UserDataFb {
                 
                     let entityName : String = "Store"
                     let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
-                    print(" Yoyo\(storeDesctiption)")
+                    //print(" Yoyo\(storeDesctiption)")
                     let store = Store(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
                 
                     let img = UIImage(data: nsdata!)
@@ -61,7 +61,7 @@ class UserDataFb {
                 
                     catch let err as NSError {
                         
-                        print(err)
+                        //print(err)
                 
                     }
                 
@@ -84,7 +84,7 @@ class UserDataFb {
     
     
     func test() {
-        print("testpicture")
+        //print("testpicture")
         //print(cache.objectForKey("profile_picture")?.description)
         //print(cache.description)
     }
@@ -119,7 +119,7 @@ class UserDataFb {
                 }
                 
                 let allFriendsFb = allFriends.joinWithSeparator(",")
-                print(allFriendsFb)
+                //print(allFriendsFb)
                 
                 
                 
@@ -147,7 +147,7 @@ class UserDataFb {
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil) {
-                print("Error: \(error)")
+                //print("Error: \(error)")
             }
             else {
                 let userDefaults = NSUserDefaults.standardUserDefaults()

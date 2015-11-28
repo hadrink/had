@@ -33,12 +33,12 @@ extension MainViewController: UITableViewDataSource
 
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
-        print(self.searchController.active)
+        //print(self.searchController.active)
         
         if (self.searchController.active || isFavOn)
         {
-            print("indexpathrow")
-            print(indexPath.row)
+            //print("indexpathrow")
+            //print(indexPath.row)
             let type = searchArray[indexPath.row].typeofPlace as String!
 
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
@@ -110,8 +110,8 @@ extension MainViewController: UITableViewDataSource
             
             //-- Check if users in place (If true elements display else none)
             if searchArray[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
+                //print("index")
+//                print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
@@ -142,10 +142,10 @@ extension MainViewController: UITableViewDataSource
             
             if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                 displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                print("SwitchStateBar")
+                //print("SwitchStateBar")
             } else {
                 displayBar = settingDefault.displayBar
-                print("default setting")
+                //print("default setting")
             }
             
             if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -183,7 +183,7 @@ extension MainViewController: UITableViewDataSource
             
             let type = placeItems[indexPath.row].typeofPlace as String!
             
-            print("inactive")
+            //print("inactive")
             //println(placeItems[indexPath.row])
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
 /*            print("placename")
@@ -256,8 +256,8 @@ extension MainViewController: UITableViewDataSource
             
             //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
+                //print("index")
+                //print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
@@ -288,10 +288,10 @@ extension MainViewController: UITableViewDataSource
             
             if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                 displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                print("SwitchStateBar")
+                //print("SwitchStateBar")
             } else {
                 displayBar = settingDefault.displayBar
-                print("default setting")
+                //print("default setting")
             }
             
             if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -506,11 +506,11 @@ extension MainViewController: UISearchResultsUpdating
                 for item in reposArray {
                 self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
                 //println("Item \(item)")
-                print("has Item")
+                //print("has Item")
                 }
                 
                 }
-                print("reload")
+                //print("reload")
                 
                 dispatch_async(dispatch_get_main_queue(), {
                 self.tableData.reloadData()
@@ -523,7 +523,47 @@ extension MainViewController: UISearchResultsUpdating
 
 extension MainViewController: CLLocationManagerDelegate
 {
+    func startMonitoringGeotification(geotification: Geotification) {
+        // 1
+        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) {
+            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
+            return
+        }
+        // 2
+        if CLLocationManager.authorizationStatus() != .AuthorizedAlways {
+            showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
+        }
+        // 3
+        let region = regionWithGeotification(geotification)
+        // 4
+        locationManager.startMonitoringForRegion(region)
+        //locationManager.startMonitoringSignificantLocationChanges()
+    }
     
+    func stopMonitoringGeotification(geotification: Geotification) {
+        for region in locationManager.monitoredRegions {
+            if let circularRegion = region as? CLCircularRegion {
+                if circularRegion.identifier == geotification.identifier {
+                    locationManager.stopMonitoringForRegion(circularRegion)
+                }
+            }
+        }
+    }
+    
+    func removeGeotification(geotification: Geotification) {
+        if let indexInArray = geotifications.indexOf(geotification) {
+            geotifications.removeAtIndex(indexInArray)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print(manager.monitoredRegions.count)
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Location Manager failed with the following error: \(error)")
+    }
     //-- Func Observer Method for start Updating Location
     
     func myObserverMethod (notification: NSNotification) {
@@ -534,11 +574,11 @@ extension MainViewController: CLLocationManagerDelegate
 //            // Fallback on earlier versions
 //            locationManager.startUpdatingLocation()
 //        }
-        print("allow dans l'observer")
+        //print("allow dans l'observer")
         if #available(iOS 9.0, *) {
             self.locationManager.allowsBackgroundLocationUpdates = true
         //    self.locationManager.requestLocation()
-            print(self.locationManager.allowsBackgroundLocationUpdates)
+            //print(self.locationManager.allowsBackgroundLocationUpdates)
         }
         self.locationManager.startUpdatingLocation()
         self.locationManager.startMonitoringSignificantLocationChanges()
@@ -547,18 +587,27 @@ extension MainViewController: CLLocationManagerDelegate
     func RevealViewObserver (notication: NSNotification) {
         let revealView = self.revealViewController()
         
-        print("Observer")
+        //print("Observer")
         if revealView.rearViewRevealWidth == 0 {
             tableData.reloadData()
         }
     }
     
     func WillAppTerminate(notification: NSNotification){
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        /*let userDefaults = NSUserDefaults.standardUserDefaults()
         let email: String! = userDefaults.stringForKey("email")
         QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
             print("dans le post du backgroundeuuuux")
+        }*/
+        print("notifTerminte")
+        if(self.locationManager.monitoredRegions.count != 0){
+            for geotification in geotifications{
+                stopMonitoringGeotification(geotification)
+                removeGeotification(geotification)
+            }
         }
+        addRegions()
+        
     }
     
     func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
@@ -578,25 +627,37 @@ extension MainViewController: CLLocationManagerDelegate
 //        print(" authorisation status change")
 //    }
     
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("enter regiokn")
+    }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+    func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
+        print("startmonitoringforregion")
+        print(region.identifier)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+
         if((locationManager.location) != nil)
         {
+            let clampedRadius = CLLocationDistance(50)
+            
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
             let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
             let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
             if UIApplication.sharedApplication().applicationState == .Active {
-                print("app is activated")
+                //print("app is activated")
                 
-                locationManager.stopUpdatingLocation()
+                //locationManager.stopUpdatingLocation()
+                locationManager.stopMonitoringSignificantLocationChanges()
                 
                 
                 //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
                 //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
-                print("Latitude \(userLatitude)")
-                print("Longitude \(userLongitude)")
+                //print("Latitude \(userLatitude)")
+                //print("Longitude \(userLongitude)")
                 
                 //-- Variable send to the method post
                 
@@ -627,10 +688,10 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                     displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                    print("SwitchStateBar")
+                    //print("SwitchStateBar")
                 } else {
                     displayBar = settingDefault.displayBar
-                    print("default setting")
+                    //print("default setting")
                 }
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -641,16 +702,16 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
                     statsSince = settingViewController.userDefaults.integerForKey("stats_since")
-                    print("Value \(statsSince)")
+                    //print("Value \(statsSince)")
                 } else {
                     statsSince = settingDefault.statsSince
-                    print("stats \(statsSince)")
+                    //print("stats \(statsSince)")
                 }
                 
                 //-- Transform to String
                 
                 let distanceMaxString = String(stringInterpolationSegment: distanceMax)
-                print("Distance max \(distanceMax)")
+                //print("Distance max \(distanceMax)")
                 let ageMinString = String(stringInterpolationSegment: ageMin)
                 let ageMaxString = String(stringInterpolationSegment: ageMax)
                 
@@ -660,8 +721,11 @@ extension MainViewController: CLLocationManagerDelegate
                 let userDataFb = UserDataFb()
                 userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                print("MyFriends\(friends)" )
-                
+//                print("MyFriends\(friends)" )
+               // print("latitude")
+                //print(userLatitude)
+               //print("longitude")
+                //print(userLongitude)
                 //locServices.doQueryPost(&placeItems,tableData: tableData,isRefreshing: false)
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
@@ -675,7 +739,9 @@ extension MainViewController: CLLocationManagerDelegate
                         for item in reposArray {
                             if var placeProperties = item["properties"] as? [String:AnyObject] {
                                 if (placeProperties["name"] != nil) {
-                                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                                    
+                                    let place: PlaceItem = PlaceItem(json: item, userLocation : locationDictionary)
+                                    self.placeItems.append(place)
                                 }
                             }
                         }
@@ -693,20 +759,16 @@ extension MainViewController: CLLocationManagerDelegate
                 NSLog("App is backgrounded. New location is %@", manager.location!)
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 let email: String! = userDefaults.stringForKey("email")
+                
                 QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 }
-                
+
                 let distance:CLLocationDistance = 200
                 let time:NSTimeInterval = 10
                 manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
-                
             }
-            locationManager = nil
+            //locationManager = nil
         }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location" + error.localizedDescription)
     }
 }
 
@@ -908,4 +970,22 @@ extension MainViewController
         self.refreshColorView.backgroundColor = UIColor.clearColor()
     }
     
+}
+
+func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+    alert.addAction(action)
+    viewController.presentViewController(alert, animated: true, completion: nil)
+}
+
+func regionWithGeotification(geotification: Geotification) -> CLCircularRegion {
+    // 1
+    let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
+    // 2
+    region.notifyOnEntry = true
+    region.notifyOnExit = true
+    //region.notifyOnEntry = (geotification.eventType == .OnEntry)
+    //region.notifyOnExit = !region.notifyOnEntry
+    return region
 }

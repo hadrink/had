@@ -48,13 +48,16 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         didSet  {self.tableData.reloadData()}
     }
     
-    lazy var locationManager: CLLocationManager! = {
+/*    lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         //manager.requestAlwaysAuthorization()
         return manager
-        }()
+        }()*/
+    
+    let locationManager = CLLocationManager()
+    var geotifications = [Geotification]()
     
     let locServices = LocationServices()
     let QServices = QueryServices()
@@ -76,10 +79,15 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        locationManager.delegate = self
+        // 2
+        locationManager.requestAlwaysAuthorization()
+        
+        
+        /*let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
             locationManager.requestAlwaysAuthorization()
-        }
+        }*/
         startLocationManager()
         self.setupRefreshControl()
         
@@ -96,7 +104,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         //-- Observer for background state
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("WillAppTerminate"), name: UIApplicationWillTerminateNotification, object: nil)
         
         //- Get Picture Facebook
         UserDataFb().getPicture()
@@ -154,8 +162,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         var latitude = 0.0
         var longitude = 0.0
-        print("itineraire")
-        print(self.searchController.active)
+        //print("itineraire")
+        //print(self.searchController.active)
         if !self.searchController.active
         {
             latitude = placeItems[indexPath.row].placeLatitudeDegrees!
@@ -222,9 +230,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     */
     func startLocationManager(/*isInViewWillAppear:Bool = false*/) -> Bool{
         if(self.locationManager.location != nil){
-                        print("pause")
+                      //  print("pause")
             self.locationManager.pausesLocationUpdatesAutomatically = false
-            print(self.locationManager.pausesLocationUpdatesAutomatically)
+            //print(self.locationManager.pausesLocationUpdatesAutomatically)
             self.locationManager.startMonitoringSignificantLocationChanges()
             //self.locationManager.startUpdatingLocation()
             self.isLocating = true
@@ -283,8 +291,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 let place:PlaceItem = PlaceItem()
                 place.placeId = p.place_id
                 place.placeName = p.place_name
-                print("placename")
-                print(p.place_name)
+               // print("placename")
+                //print(p.place_name)
                 place.city = p.place_city
                 place.averageAge = p.place_average_age?.integerValue
                 place.pourcentSex = p.place_pourcent_sex?.floatValue
@@ -294,8 +302,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 place.placeLatitudeDegrees = p.place_latitude?.doubleValue
                 place.placeLongitudeDegrees = p.place_longitude?.doubleValue
                 searchArray.append(place)
-                print("nbplace saerch")
-                print(searchArray.count)
+                //print("nbplace saerch")
+                //print(searchArray.count)
             }
         }
         else{
@@ -303,5 +311,31 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             favButton.tintColor = Colors().grey
         }
         self.tableData.reloadData()
+    }
+    
+    func addRegions()
+    {
+        for place in placeItems
+        {
+            if(locationManager.monitoredRegions.count < 20){
+                let identifier = NSUUID().UUIDString
+                let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: place.placeLatitudeDegrees!, longitude: place.placeLongitudeDegrees!)
+                let geotification = Geotification(coordinate: coordinate, radius: 50, identifier: identifier)
+                self.geotifications.append(geotification)
+                self.startMonitoringGeotification(geotification)
+            }
+        }
+        /*
+        let identifierTaff = NSUUID().UUIDString
+        let identifierHome = NSUUID().UUIDString
+        let coordinateTaff : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: CLLocationDegrees(48.369463), longitude: CLLocationDegrees(3.994963))
+        let coordinateHome : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: CLLocationDegrees(48.371272), longitude: CLLocationDegrees(3.993760))
+        
+        let geotificationTaff = Geotification(coordinate: coordinateTaff, radius: 50, identifier: identifierTaff)
+        let geotificationHome = Geotification(coordinate: coordinateHome, radius: 50, identifier: identifierHome)
+        self.startMonitoringGeotification(geotificationTaff)
+        self.startMonitoringGeotification(geotificationHome)*/
+        print("manager.monitoredRegions.count")
+        print(locationManager.monitoredRegions.count)
     }
 }
