@@ -41,6 +41,7 @@
 		7AA2251419CDA9D1002003ED /* hadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251319CDA9D1002003ED /* hadTests.swift */; };
 		7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */; };
 		7AA2252019CDBED4002003ED /* QueryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2251F19CDBED4002003ED /* QueryServices.swift */; };
+		7AAA6B991C13379E00879D51 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA6B981C13379E00879D51 /* Geotification.swift */; };
 		7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */; };
 		7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9981BADAAC10025477A /* libsqlite3.tbd */; };
 		7AB7D29C1BF791B800475DD6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB7D2981BF791B800475DD6 /* Bolts.framework */; };
@@ -127,6 +128,7 @@
 		7AA2251319CDA9D1002003ED /* hadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hadTests.swift; sourceTree = "<group>"; };
 		7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		7AA2251F19CDBED4002003ED /* QueryServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryServices.swift; sourceTree = "<group>"; };
+		7AAA6B981C13379E00879D51 /* Geotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
 		7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		7AB6C9981BADAAC10025477A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7AB7D2981BF791B800475DD6 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				7A1CF9011B5ED83400410F32 /* Setting */,
 				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
 				7AB7D2A01BF79E7F00475DD6 /* BackgroundTaskManager.swift */,
+				7AAA6B981C13379E00879D51 /* Geotification.swift */,
 				7AB7D2A11BF79E7F00475DD6 /* LocationShareModel.swift */,
 				7AB7D2A21BF79E7F00475DD6 /* LocationTracker.swift */,
 				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
@@ -568,6 +571,7 @@
 				7AF204F01BF13107006E0DCB /* viewController.swift in Sources */,
 				7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */,
 				7A70C4971BB1463500299781 /* had.xcdatamodeld in Sources */,
+				7AAA6B991C13379E00879D51 /* Geotification.swift in Sources */,
 				EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */,
 				EB444FA21AAE3F7700E533B2 /* SidebarViewController.swift in Sources */,
 				EB4EF7661BF656CD00461020 /* Place.swift in Sources */,

@@ -32,6 +32,9 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     var myLocationAcuracy : CLLocationAccuracy?
     var myLocationAltitude : CLLocationDistance?
     
+    var geotifications = [Geotification]()
+    var placeItems = [PlaceItem]()
+    
     override init()  {
         super.init()
         self.shareModel = LocationShareModel()
@@ -75,6 +78,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         self.shareModel?.bgTask?.beginNewBackgroundTask()
     }
     
+    
     func restartLocationUpdates() {
         print("restartLocationUpdates\n")
     
@@ -94,8 +98,8 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
-        //locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startUpdatingLocation()
+        //locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func startLocationTracking() {
@@ -129,18 +133,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     func startLocationWhenAppIsKilled() {
-        print("startLocationTracking when the app is killed\n")
-        
-        if CLLocationManager.locationServicesEnabled() == false {
-            print("locationServicesEnabled false\n")
-            var servicesDisabledAlert : UIAlertView = UIAlertView(title: "Location Services Disabled", message: "You currently have all location services for this device disabled", delegate: nil, cancelButtonTitle: "OK")
-            servicesDisabledAlert.show()
-        } else {
+        NSLog("startLocationTracking when the app is killed\n")
             
             
             var authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
             if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
-                print("authorizationStatus failed")
+                NSLog("authorizationStatus failed")
             } else {
                 var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
                 locationManager.pausesLocationUpdatesAutomatically = false
@@ -152,12 +150,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 locationManager.delegate = self
                 locationManager.requestAlwaysAuthorization()
                 locationManager.startMonitoringSignificantLocationChanges()
-                let distance : CLLocationDistance = 200
-                let time:NSTimeInterval = 10
-                locationManager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
-                
             }
-        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -188,23 +181,130 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 self.shareModel!.myLocationArray!.addObject(dict)
             }
         }
-        // If the timer still valid, return it (Will not run the code below)
-        if self.shareModel!.timer != nil {
-            return
+        
+        //if UIApplication.sharedApplication().applicationState != .Inactive {
+            
+            // If the timer still valid, return it (Will not run the code below)
+            if self.shareModel!.timer != nil {
+                return
+            }
+            
+            self.shareModel!.bgTask = BackgroundTaskManager.sharedBackgroundTaskManager()
+            self.shareModel!.bgTask!.beginNewBackgroundTask()
+            
+            // Restart the locationMaanger after 1 minute
+            let restartLocationUpdates : Selector = "restartLocationUpdates"
+            self.shareModel!.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: restartLocationUpdates, userInfo: nil, repeats: false)
+            
+            // Will only stop the locationManager after 10 seconds, so that we can get some accurate locations
+            // The location manager will only operate for 10 seconds to save battery
+            let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
+            var delay10Seconds : NSTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
+       // }
+        
+        if UIApplication.sharedApplication().applicationState == .Background {
+            updateLocationToServer()
+            createRegionsForSignificantChanges()
+        }
+    }
+    
+    func createRegionsForSignificantChanges() {
+        print("notifTerminte")
+        var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        if(locationManager.monitoredRegions.count != 0){
+            for geotification in geotifications{
+                stopMonitoringGeotification(geotification)
+                removeGeotification(geotification)
+            }
         }
         
-        self.shareModel!.bgTask = BackgroundTaskManager.sharedBackgroundTaskManager()
-        self.shareModel!.bgTask!.beginNewBackgroundTask()
+        var request = QueryServices()
+        request.send("https://hadrink.herokuapp.com/closeplaces/places/\(self.myLocation?.latitude)/\(self.myLocation?.longitude)/1000/", f: {(result: NSDictionary)-> () in
+            print(result)
+            
+            let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.myLocation?.latitude), "longitude" : String(stringInterpolationSegment: self.myLocation!.longitude)]
+            
+            if let reposArray = result["listbar"] as? [NSDictionary]  {
+                self.placeItems.removeAll()
+                
+                for item in reposArray {
+                    if var placeProperties = item["properties"] as? [String:AnyObject] {
+                        if (placeProperties["name"] != nil) {
+                            self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                        }
+                    }
+                }
+            }
+        })
         
-        // Restart the locationMaanger after 1 minute
-        let restartLocationUpdates : Selector = "restartLocationUpdates"
-        self.shareModel!.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: restartLocationUpdates, userInfo: nil, repeats: false)
-        
-        // Will only stop the locationManager after 10 seconds, so that we can get some accurate locations
-        // The location manager will only operate for 10 seconds to save battery
-        let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
-        var delay10Seconds : NSTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
-        updateLocationToServer()
+        for place in placeItems
+        {
+            if(locationManager.monitoredRegions.count < 20){
+                let identifier = NSUUID().UUIDString
+                let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: place.placeLatitudeDegrees!, longitude: place.placeLongitudeDegrees!)
+                let geotification = Geotification(coordinate: coordinate, radius: 50, identifier: identifier)
+                self.geotifications.append(geotification)
+                self.startMonitoringGeotification(geotification)
+            }
+        }
+    }
+    
+    func regionWithGeotification(geotification: Geotification) -> CLCircularRegion {
+        // 1
+        let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
+        // 2
+        region.notifyOnEntry = true
+        region.notifyOnExit = true
+        //region.notifyOnEntry = (geotification.eventType == .OnEntry)
+        //region.notifyOnExit = !region.notifyOnEntry
+        return region
+    }
+    
+    func startMonitoringGeotification(geotification: Geotification) {
+        // 1
+        var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) {
+            //showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
+            return
+        }
+        // 2
+        /*if CLLocationManager.authorizationStatus() != .AuthorizedAlways {
+            //showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
+        }*/
+        // 3
+        let region = regionWithGeotification(geotification)
+        // 4
+        locationManager.startMonitoringForRegion(region)
+        //locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func stopMonitoringGeotification(geotification: Geotification) {
+        var locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        for region in locationManager.monitoredRegions {
+            if let circularRegion = region as? CLCircularRegion {
+                if circularRegion.identifier == geotification.identifier {
+                    locationManager.stopMonitoringForRegion(circularRegion)
+                }
+            }
+        }
+    }
+    
+    func removeGeotification(geotification: Geotification) {
+        if let indexInArray = geotifications.indexOf(geotification) {
+            geotifications.removeAtIndex(indexInArray)
+        }
+    }
+    
+    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(action)
+        viewController.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print(manager.monitoredRegions.count)
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
     }
     
     //MARK: Stop the locationManager
@@ -284,7 +384,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
         
         var request = QueryServices()
-        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSString)-> () in
+        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSDictionary)-> () in
             print(result)
         })
         
@@ -348,22 +448,9 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         
         
         var request = QueryServices()
-        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSString)-> () in
+        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSDictionary)-> () in
             print(result)
         })
-        
-        /*request.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            print("dans le post du backgroundeuuuux")
-        }*/
-        
-        
-        
-        
-        
-        
-        // After sending the location to the server successful,
-        // remember to clear the current array with the following code. It is to make sure that you clear up old location in the array
-        // and add the new locations from locationManager
         
         self.shareModel!.myLocationArray!.removeAllObjects()
         self.shareModel!.myLocationArray = nil

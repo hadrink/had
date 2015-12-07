@@ -105,7 +105,7 @@ class QueryServices{
         
     }
     
-        func send(url: String, f: (NSString) -> ()) {
+        func send(url: String, f: (NSDictionary) -> ()) {
            
             do {
                 var request = NSMutableURLRequest(URL: NSURL(string: url)!)
@@ -113,10 +113,9 @@ class QueryServices{
                 var response: NSURLResponse?
                 var error: NSErrorPointer = nil
                 let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-                let reply = NSString(data: data, encoding: NSUTF8StringEncoding)
-                if reply != nil {
-                    f(reply!)
-                }
+                let reply = NSDictionary(object: data, forKey: NSUTF8StringEncoding)
+                f(reply)
+            
             }
             
             catch let err as NSError {

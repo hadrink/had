@@ -35,20 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().idleTimerDisabled = true
         
-        if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
-            
-            locationTracker.startLocationWhenAppIsKilled()
-            locationTracker.updateLocationToServer()
-            return true;
-        }
         
+        /*if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
+            NSLog("It's a location event")
+            
+            self.locationTracker.startLocationWhenAppIsKilled()
+            self.locationTracker.updateLocationToServer()
+            
+        }*/
         
         //-- Light statusbar everywhere
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if PFUser.currentUser() != nil {
             locationTracker.startLocationTracking()
-            var time:NSTimeInterval = 10;
+            var time:NSTimeInterval = 10 * 60;
             var locationUpdateTimer :NSTimer?
             locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
@@ -100,12 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func updateLocation(){
         
-        self.locationTracker.restartLocationUpdates()
         self.locationTracker.updateLocationToServer()
         
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    /*func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
@@ -123,17 +123,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFPush.handlePush(userInfo)
         if application.applicationState == UIApplicationState.Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            NSLog("Remote notification 1")
             /*locationTracker.startLocationTracking()
             locationTracker.updateLocationToServer()*/
         }
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if userInfo["aps"]!["content-available"] as! Int == 1 {
+        //if userInfo["aps"]!["content-available"] as! Int == 1 {
+            NSLog("Remote notification 2")
             locationTracker.startLocationTracking()
             locationTracker.updateLocationToServer()
-        }
-    }
+        //}
+    }*/
     
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -164,10 +166,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        NSLog("Ta mère")
-        locationTracker.startLocationWhenAppIsKilled()
-        locationTracker.updateLocationToServer()
-        
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -177,9 +175,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        print("significantLOc")
-        print(CLLocationManager.significantLocationChangeMonitoringAvailable())
+        print("terminate")
         locationTracker.startLocationWhenAppIsKilled()
+    }
+    
+    func handleRegionEvent(region: CLRegion) {
+        // Show an alert if application is active
+        if UIApplication.sharedApplication().applicationState == .Active {
+            //if //notefromRegionIdentifier(region.identifier) {
+            let message = "Dans la région"
+            if let viewController = window?.rootViewController {
+                locationTracker.showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
+            }
+            print("handleRegionevent")
+            //print(self.locationManager.monitoredRegions.count)
+            //}
+        } else {
+            // Otherwise present a local notification
+            let notification = UILocalNotification()
+            notification.alertBody = "Dans la région (pas active)"
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        }
+        locationTracker.startLocationTracking()
+    }
+    
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleRegionEvent(region)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleRegionEvent(region)
+        }
     }
     
     // MARK: - Core Data stack
