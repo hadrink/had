@@ -261,6 +261,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     {
         if !isFavOn
         {
+            refreshControl.removeFromSuperview()
             isFavOn = true
             favButton.tintColor = Colors().pink
             let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext

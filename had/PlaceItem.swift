@@ -28,9 +28,12 @@ class PlaceItem : CLLocationManager{
     var friends: Array<String>?
     var sexIcon : UIImage?
     var majoritySex : String?
+    var showDetails : Bool = false
     
     // Init variables
-    
+    override init() {
+        //default
+    }
      init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
@@ -96,7 +99,7 @@ class PlaceItem : CLLocationManager{
         var sexArray : [String] = []
         
         if let usersvisited = json["visitors"] as? [NSDictionary] {
-            
+            showDetails = true
             print("visitorsss")
             print(usersvisited)
             
@@ -136,89 +139,12 @@ class PlaceItem : CLLocationManager{
             }
             
         }
-        
+            
         if cumul != 0 && count != 0 {
             counter = count
             averageAge = cumul / count
         }
         
     }
-    
-    override init()
-    {
-        
-    }
-    /*
-    required init (json : NSDictionary) {
-        
-        // Init for place name and counter
-        
-        if var placeProperties = json["properties"] as? [String:AnyObject] {
-            placeName = placeProperties["name"] as? String
-            typeofPlace = placeProperties["amenity"] as? String
-        }
-        
-        print(typeofPlace)
-        
-        counter = String(stringInterpolationSegment: json["counter"] as! Int!)
-        
-        // Init for location info
-        
-        var usersVisitedInfo: NSDictionary = NSDictionary()
-        
-        if var placeLocation = json["loc"] as? [String:AnyObject]
-        {
-            var placeCoordinate = placeLocation["coordinates"]! as? NSArray
-            var placeLongitude = placeCoordinate!.firstObject as! NSObject
-            var placeLatitude = placeCoordinate!.lastObject as! NSObject
-            placeLatitudeDegrees = placeLatitude as? Double
-            placeLongitudeDegrees = placeLongitude as? Double
-            
-            var placeCoordinatesDegrees = CLLocation(latitude: placeLatitudeDegrees!, longitude: placeLongitudeDegrees!)
-            
-            func roundToPlaces(value:Double, places:Int) -> Double {
-                let divisor = pow(10.0, Double(places))
-                return round(value * divisor) / divisor
-            }
-        }
-        
-        // Init for address data
-        
-        if var addressValues = json["properties"] as? [String:AnyObject] {
-            city = (addressValues["city"] as? String)
-        }
-        
-        // Init for users data
-        
-        if let usersvisited = json["usersvisited"] as? [NSDictionary] {
-            
-            var cumul:Int = 0
-            var count:Int = 0
-            var sexArray : [String] = []
-            
-            for uservisited in usersvisited {
-                let age:String = uservisited.objectForKey("age") as! String
-                let sex:String = uservisited.objectForKey("sex") as! String
-                let ageInt = Int(age)
-                
-                sexArray.append(sex)
-                
-                count = usersvisited.count
-                cumul += ageInt!
-                
-            }
-            
-            let sexCount = sexArray.count
-            let sexFemaleCount = sexArray.filter {
-                $0 == "F"
-                }.count
-            
-            pourcentFemale = (Float(sexFemaleCount) / Float(sexCount))*100
-            averageAge = cumul / count
-            
-        }
-    }
-*/
-    
 }
 

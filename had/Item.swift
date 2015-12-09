@@ -36,7 +36,7 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var fbFriendsImg3: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
     
-    var placeId: String?
+    var placeId: String!
     var typeofPlace : String?
     
     @IBOutlet var routeButton: UIButton!
@@ -59,7 +59,7 @@ class PlaceCell: UITableViewCell {
         let place = Place(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
         
         //-- Test if place is in Core Data
-        if MainViewController().IsPlaceInCoreData(placeId!) {
+        if MainViewController().IsPlaceInCoreData(placeId) {
             
             request.includesSubentities = false
             request.returnsObjectsAsFaults = false
@@ -97,6 +97,8 @@ class PlaceCell: UITableViewCell {
             heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             
             //-- Set values for place_id and set at true is_checked
+            print("placeid in item")
+            print(placeId)
             place.setValue(placeId, forKey: "place_id")
             place.setValue(true, forKey: "is_checked")
             place.setValue(typeofPlace, forKey: "place_type")

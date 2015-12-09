@@ -35,21 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().idleTimerDisabled = true
         
-        
-        /*if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
-            NSLog("It's a location event")
-            
-            self.locationTracker.startLocationWhenAppIsKilled()
-            self.locationTracker.updateLocationToServer()
-            
-        }*/
-        
         //-- Light statusbar everywhere
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if PFUser.currentUser() != nil {
             locationTracker.startLocationTracking()
-            var time:NSTimeInterval = 10 * 60;
+            let time:NSTimeInterval = 15 * 60;
             var locationUpdateTimer :NSTimer?
             locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
@@ -100,9 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func updateLocation(){
-        
         self.locationTracker.updateLocationToServer()
-        
+        self.locationTracker.createRegionsForSignificantChanges()
     }
     
     /*func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -146,18 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FBSDKAppEvents.activateApp()
     }
-    
-    /*func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject) -> Bool {
-            return FBSDKApplicationDelegate.sharedInstance().application(
-                application,
-                openURL: url,
-                sourceApplication: sourceApplication,
-                annotation: annotation)
-    }*/
-    
+
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -166,6 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        self.locationTracker.createRegionsForSignificantChanges()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -265,26 +245,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
-        
-    // MARK: - Core Data Saving support
-    
-   /*
-    
-    func saveContext () {
-        if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges {
-                do {
-                    try moc.save()
-                } catch let error1 as NSError {
-                    error = error1
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    NSLog("Unresolved error \(error), \(error!.userInfo)")
-                    abort()
-                }
-            }
-        }
-    }*/
 }
 

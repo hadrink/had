@@ -108,10 +108,9 @@ class QueryServices{
         func send(url: String, f: (NSDictionary) -> ()) {
            
             do {
-                var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+                let request = NSMutableURLRequest(URL: NSURL(string: url)!)
                 request.HTTPMethod = "POST"
                 var response: NSURLResponse?
-                var error: NSErrorPointer = nil
                 let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
                 let reply = NSDictionary(object: data, forKey: NSUTF8StringEncoding)
                 f(reply)

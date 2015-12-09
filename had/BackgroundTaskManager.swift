@@ -33,7 +33,7 @@ class BackgroundTaskManager : NSObject {
     }
     
     func beginNewBackgroundTask() -> UIBackgroundTaskIdentifier? {
-        var application : UIApplication = UIApplication.sharedApplication()
+        let application : UIApplication = UIApplication.sharedApplication()
         
         var bgTaskId : UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
         
@@ -67,15 +67,15 @@ class BackgroundTaskManager : NSObject {
     
     func drainBGTaskList(all:Bool) {
         //mark end of each of our background task
-        var application: UIApplication = UIApplication.sharedApplication()
+        let application: UIApplication = UIApplication.sharedApplication()
         
         
         let endBackgroundTask : Selector = "endBackgroundTask"
         
         if application.respondsToSelector(endBackgroundTask) {
-            var count: Int = self.bgTaskIdList!.count
+            let count: Int = self.bgTaskIdList!.count
             for (var i = (all==true ? 0:1); i<count; i++) {
-                var bgTaskId : UIBackgroundTaskIdentifier = self.bgTaskIdList!.objectAtIndex(0) as! Int
+                let bgTaskId : UIBackgroundTaskIdentifier = self.bgTaskIdList!.objectAtIndex(0) as! Int
                 print("ending background task with id \(bgTaskId as Int)\n")
                 application.endBackgroundTask(bgTaskId)
                 self.bgTaskIdList!.removeObjectAtIndex(0)
