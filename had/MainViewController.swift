@@ -25,7 +25,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     
     var hamburger = UIBarButtonItem()
     var favButton = UIBarButtonItem()
-    var searchButton = UIBarButtonItem()
+    //var searchButton = UIBarButtonItem()
     var messageLabel:UILabel!
     var data: NSMutableData = NSMutableData()
     var jsonData: NSArray = NSArray()
@@ -43,7 +43,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     var isLocating:Bool = false
     var isFavOn = false
     var nbAlertDuringRefresh = 0
-    var searchController = UISearchController()
+    //var searchController = UISearchController()
     var searchArray:[PlaceItem] = [PlaceItem](){
         didSet  {self.tableData.reloadData()}
     }
@@ -54,7 +54,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         manager.delegate = self
         //manager.requestAlwaysAuthorization()
         return manager
-        }()
+    }()
     
     let locServices = LocationServices()
     let QServices = QueryServices()
@@ -86,7 +86,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Configure countrySearchController
-
+        
         
         //-- Reveal view configuration
         
@@ -110,39 +110,39 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLayoutSubviews()
         self.tableData.layoutMargins = UIEdgeInsetsZero
     }
-    
+    /*
     func ActivateSearchMode() {
-        
-        searchController = UISearchController(searchResultsController: nil)
-        let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
-        searchController.searchBar.becomeFirstResponder()
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
-        searchController.searchBar.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-        searchController.dimsBackgroundDuringPresentation = false
-        
-        navigationItem.titleView = searchController.searchBar
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
-        navigationItem.setRightBarButtonItems(nil, animated: true)
-        
-        //-- Change color searchBar text and placeholder and set image search icon
-        textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
-        searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
-        
-        if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
-            let attributeDictSearch = [NSForegroundColorAttributeName: Design().UIColorFromRGB(0xF0F0EF)]
-            textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
-        }
-        
-        searchController.active = true
-        refreshControl.removeFromSuperview()//deactive le refrsh pendant le search
-        
-        definesPresentationContext = true
+    
+    searchController = UISearchController(searchResultsController: nil)
+    let textFieldInsideSearchBar = searchController.searchBar.valueForKey("searchField") as? UITextField
+    searchController.searchBar.becomeFirstResponder()
+    searchController.searchResultsUpdater = self
+    searchController.hidesNavigationBarDuringPresentation = false
+    searchController.searchBar.delegate = self
+    searchController.searchBar.searchBarStyle = .Minimal
+    searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+    searchController.searchBar.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+    searchController.dimsBackgroundDuringPresentation = false
+    
+    navigationItem.titleView = searchController.searchBar
+    navigationItem.setLeftBarButtonItem(nil, animated: true)
+    navigationItem.setRightBarButtonItems(nil, animated: true)
+    
+    //-- Change color searchBar text and placeholder and set image search icon
+    textFieldInsideSearchBar?.textColor = Design().UIColorFromRGB(0xF0F0EF)
+    searchController.searchBar.setImage(UIImage(named: "search-icon"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+    
+    if textFieldInsideSearchBar!.respondsToSelector(Selector("attributedPlaceholder")) {
+    let attributeDictSearch = [NSForegroundColorAttributeName: Design().UIColorFromRGB(0xF0F0EF)]
+    textFieldInsideSearchBar!.attributedPlaceholder = NSAttributedString(string: "search", attributes: attributeDictSearch)
     }
     
+    searchController.active = true
+    refreshControl.removeFromSuperview()//deactive le refrsh pendant le search
+    
+    definesPresentationContext = true
+    }
+    */
     //-- Table view configuration
     
     var placeItems = [PlaceItem]()
@@ -155,18 +155,18 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         var latitude = 0.0
         var longitude = 0.0
         print("itineraire")
-        print(self.searchController.active)
+        /*        print(self.searchController.active)
         if !self.searchController.active
-        {
-            latitude = placeItems[indexPath.row].placeLatitudeDegrees!
-            longitude = placeItems[indexPath.row].placeLongitudeDegrees!
-        }
+        {*/
+        latitude = placeItems[indexPath.row].placeLatitudeDegrees!
+        longitude = placeItems[indexPath.row].placeLongitudeDegrees!
+        /*      }
         else
         {
-            latitude = searchArray[indexPath.row].placeLatitudeDegrees!
-            longitude = searchArray[indexPath.row].placeLongitudeDegrees!
+        latitude = searchArray[indexPath.row].placeLatitudeDegrees!
+        longitude = searchArray[indexPath.row].placeLongitudeDegrees!
         }
-        
+        */
         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
         
         let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
@@ -178,14 +178,14 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
-        if !self.searchController.active
-        {
-            mapItem.name = placeItems[indexPath.row].placeName
-        }
+        /*        if !self.searchController.active
+        {*/
+        mapItem.name = placeItems[indexPath.row].placeName
+        /*        }
         else
         {
-            mapItem.name = searchArray[indexPath.row].placeName
-        }
+        mapItem.name = searchArray[indexPath.row].placeName
+        }*/
         mapItem.openInMapsWithLaunchOptions(options)
     }
     
@@ -205,12 +205,13 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         favButton.target = self
         favButton.action = "GetFavPlaces:"
         favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-        searchButton.image = UIImage(named: "search-icon")
+        /*searchButton.image = UIImage(named: "search-icon")
         searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.target = self
-        searchButton.action = "ActivateSearchMode"
+        searchButton.action = "ActivateSearchMode"*/
         self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
-        navbar.setLeftBarButtonItems([SettingsBarButtonItem,searchButton], animated: true)
+        //        navbar.setLeftBarButtonItems([SettingsBarButtonItem,searchButton], animated: true)
+        navbar.setLeftBarButtonItems([SettingsBarButtonItem], animated: true)
         navbar.setRightBarButtonItems([favButton], animated: true)
         //navbar.setRightBarButtonItem(searchButton, animated: true)
         self.searchArray.removeAll()
@@ -222,7 +223,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
     */
     func startLocationManager(/*isInViewWillAppear:Bool = false*/) -> Bool{
         if(self.locationManager.location != nil){
-                        print("pause")
+            print("pause")
             self.locationManager.pausesLocationUpdatesAutomatically = false
             print(self.locationManager.pausesLocationUpdatesAutomatically)
             self.locationManager.startMonitoringSignificantLocationChanges()
@@ -230,8 +231,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             self.isLocating = true
         }
         /*else{
-            throwAlert(alertMessage.titleAlertLocationManagerOff,message: alertMessage.messageAlertLocationManagerOff,
-                actions: alertMessage.alertActionOK,alertMessage.alertActionSettings)
+        throwAlert(alertMessage.titleAlertLocationManagerOff,message: alertMessage.messageAlertLocationManagerOff,
+        actions: alertMessage.alertActionOK,alertMessage.alertActionSettings)
         }*/
         return isLocating
     }
@@ -279,9 +280,12 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 print(err)
                 
             }
-            
+            print("nbplace places")
+            print(places.count)
+            var idArray:Array<String> = Array()
             for  p in places {
-                let place:PlaceItem = PlaceItem()
+                idArray.append(p.place_id!)
+                /*let place:PlaceItem = PlaceItem()
                 place.placeId = p.place_id
                 place.placeName = p.place_name
                 print("placename")
@@ -294,9 +298,48 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 place.distance = p.place_distance?.doubleValue
                 place.placeLatitudeDegrees = p.place_latitude?.doubleValue
                 place.placeLongitudeDegrees = p.place_longitude?.doubleValue
-                searchArray.append(place)
+                searchArray.append(place)*/
                 print("nbplace saerch")
                 print(searchArray.count)
+            }
+            if idArray.count != 0
+            {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                var statsSince = 0
+                if (userDefaults.objectForKey("stats_since") != nil) {
+                    statsSince = userDefaults.integerForKey("stats_since")
+                } else {
+                    statsSince = settingDefault.statsSince
+                }
+                QServices.post("POST", params: ["ids":idArray], url: "https://hadrink.herokuapp.com/likeplaces/\(statsSince)", postCompleted: { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                    if let reposArray = obj["likeplaces"] as? [NSDictionary]  {
+                        self.searchArray.removeAll()
+                        let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
+                        
+                        for item in reposArray {
+                            if var placeProperties = item["properties"] as? [String:AnyObject] {
+                                if (placeProperties["name"] != nil) {
+                                    self.searchArray.append(PlaceItem(json: item, userLocation : locationDictionary))
+                                }
+                            }
+                        }
+                    }
+                    print("Mon object listfav\(obj)")
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        self.tableData.reloadData()
+                        
+                    })
+                    }
+                )
+            }
+            else
+            {
+                let notification = UILocalNotification()
+                notification.alertBody = "Pas d'ids de place"
+                notification.soundName = "Default";
+                UIApplication.sharedApplication().presentLocalNotificationNow(notification)
             }
         }
         else{

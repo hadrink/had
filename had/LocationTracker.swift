@@ -41,7 +41,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         self.shareModel!.myLocationArray = NSMutableArray()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
-
+        
     }
     
     class func sharedLocationManager()->CLLocationManager? {
@@ -81,8 +81,8 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     
     
     func restartLocationUpdates() {
-        print("restartLocationUpdates\n")
-    
+        //print("restartLocationUpdates\n")
+        
         if self.shareModel?.timer != nil {
             self.shareModel?.timer?.invalidate()
             self.shareModel!.timer = nil
@@ -104,10 +104,10 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     func startLocationTracking() {
-        print("startLocationTracking\n")
+        //print("startLocationTracking\n")
         
         if CLLocationManager.locationServicesEnabled() == false {
-            print("locationServicesEnabled false\n")
+            //print("locationServicesEnabled false\n")
             let servicesDisabledAlert : UIAlertView = UIAlertView(title: "Location Services Disabled", message: "You currently have all location services for this device disabled", delegate: nil, cancelButtonTitle: "OK")
             servicesDisabledAlert.show()
         } else {
@@ -115,7 +115,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
             
             let authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
             if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
-                print("authorizationStatus failed")
+                //print("authorizationStatus failed")
             } else {
                 let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
                 locationManager.pausesLocationUpdatesAutomatically = false
@@ -139,25 +139,25 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         userDefaults.setValue("UIApplicationStateInactive", forKey: "applicationState")
         print(userDefaults.valueForKey("applicationState"))
         
-            let authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
-            if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
-                NSLog("authorizationStatus failed")
+        let authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
+            NSLog("authorizationStatus failed")
+        } else {
+            let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+            locationManager.pausesLocationUpdatesAutomatically = false
+            if #available(iOS 9.0, *) {
+                locationManager.allowsBackgroundLocationUpdates = true
             } else {
-                let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
-                locationManager.pausesLocationUpdatesAutomatically = false
-                if #available(iOS 9.0, *) {
-                    locationManager.allowsBackgroundLocationUpdates = true
-                } else {
-                    // Fallback on earlier versions
-                }
-                locationManager.delegate = self
-                locationManager.requestAlwaysAuthorization()
-                locationManager.startMonitoringSignificantLocationChanges()
+                // Fallback on earlier versions
             }
+            locationManager.delegate = self
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startMonitoringSignificantLocationChanges()
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("locationManager didUpdateLocations\n")
+        //print("locationManager didUpdateLocations\n")
         for (var i : Int = 0; i < locations.count; i++) {
             let newLocation : CLLocation? = locations[i] as CLLocation
             let theLocation : CLLocationCoordinate2D = newLocation!.coordinate
@@ -198,12 +198,13 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         
         // Will only stop the locationManager after 10 seconds, so that we can get some accurate locations
         // The location manager will only operate for 10 seconds to save battery
-        let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
-        let delay  = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
-    
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        
         let appState:NSString = String(userDefaults.valueForKey("applicationState")!)
+        if(appState == "UIApplicationStateActive"){
+            let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
+            let delay  = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
+        }
+        
         let notification = UILocalNotification()
         notification.alertBody = appState as String
         notification.soundName = "Default";
@@ -222,7 +223,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         notification.soundName = "Default";
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         if(locationManager.monitoredRegions.count != 0){
-
+            
             for geotification in geotifications{
                 stopMonitoringGeotification(geotification)
                 removeGeotification(geotification)
@@ -232,13 +233,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         let lat = bestLoc.valueForKey("lat")
         let lon = bestLoc.valueForKey("lon")
         let request = QueryServices()
-        request.send("https://hadrink.herokuapp.com/closeplaces/places/\(lat!)/\(lon!)/1000/", f: {(result: NSDictionary)-> () in
-            print(result)
-            
+        request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(lat!)/\(lon!)/1000/", f: {(result: NSDictionary) -> () in
             let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: lat), "longitude" : String(stringInterpolationSegment: lon)]
             
             if let reposArray = result["listbar"] as? [NSDictionary]  {
                 self.placeItems.removeAll()
+                
                 
                 for item in reposArray {
                     if var placeProperties = item["properties"] as? [String:AnyObject] {
@@ -248,6 +248,11 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                     }
                 }
             }
+            
+            notification.alertBody = String(self.placeItems.count)
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            
         })
         
         for place in placeItems
@@ -267,7 +272,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
         // 2
         region.notifyOnEntry = true
-        region.notifyOnExit = true
+        //region.notifyOnExit = true
         //region.notifyOnEntry = (geotification.eventType == .OnEntry)
         //region.notifyOnExit = !region.notifyOnEntry
         return region
@@ -282,7 +287,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         }
         // 2
         /*if CLLocationManager.authorizationStatus() != .AuthorizedAlways {
-            //showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
+        //showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
         }*/
         // 3
         let region = regionWithGeotification(geotification)
@@ -343,9 +348,9 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         default:
             break
         }
-
+        
     }
-
+    
     func stopLocationTracking () {
         print("stopLocationTracking\n")
         
@@ -374,15 +379,15 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 }
             }
         }
-        print("My Best location \(myBestLocation)\n")
-
+        //print("My Best location \(myBestLocation)\n")
+        
         // If the array is 0, get the last location
-        // Sometimes due to network issue or unknown reason, 
+        // Sometimes due to network issue or unknown reason,
         // you could not get the location during that period, the best you can do is
         // sending the last known location to the server
         
         if self.shareModel!.myLocationArray!.count == 0 {
-            print("Unable to get location, use the last known location\n")
+            //print("Unable to get location, use the last known location\n")
             self.myLocation = self.myLastLocation
             self.myLocationAcuracy = self.myLastLocationAccuracy
         } else {
@@ -392,19 +397,19 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
             self.myLocation = theBestLocation
             self.myLocationAcuracy = myBestLocation.objectForKey(ACCURACY) as! CLLocationAccuracy!
         }
-        print("Send to server: latitude \(self.myLocation!.latitude) longitude \(self.myLocation!.longitude) accuracy \(self.myLocationAcuracy)\n")
-
+        //print("Send to server: latitude \(self.myLocation!.latitude) longitude \(self.myLocation!.longitude) accuracy \(self.myLocationAcuracy)\n")
+        
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
         
         let request = QueryServices()
         request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSDictionary)-> () in
-            print(result)
+            //print(result)
         })
         
         
         
         // After sending the location to the server successful,
-        // remember to clear the current array with the following code. It is to make sure that you clear up old location in the array 
+        // remember to clear the current array with the following code. It is to make sure that you clear up old location in the array
         // and add the new locations from locationManager
         
         self.shareModel!.myLocationArray!.removeAllObjects()
@@ -413,7 +418,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     func getBestLocation()->NSDictionary? {
-        print("getBestLocationForServer\n")
+        //print("getBestLocationForServer\n")
         
         // Find the best location from the array based on accuracy
         var myBestLocation : NSMutableDictionary = NSMutableDictionary()
@@ -428,7 +433,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 }
             }
         }
-        print("My Best location \(myBestLocation)\n")
+        //print("My Best location \(myBestLocation)\n")
         
         // If the array is 0, get the last location
         // Sometimes due to network issue or unknown reason,
@@ -436,7 +441,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         // sending the last known location to the server
         
         if self.shareModel!.myLocationArray!.count == 0 {
-            print("Unable to get location, use the last known location\n")
+            //print("Unable to get location, use the last known location\n")
             self.myLocation = self.myLastLocation
             self.myLocationAcuracy = self.myLastLocationAccuracy
         } else {
@@ -454,15 +459,15 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         returnType.setValue(self.myLocationAcuracy, forKey: "acc")
         
         
-        print("Send to server: latitude \(self.myLocation?.latitude) longitude \(self.myLocation?.longitude) accuracy \(self.myLocationAcuracy)\n")
+        //print("Send to server: latitude \(self.myLocation?.latitude) longitude \(self.myLocation?.longitude) accuracy \(self.myLocationAcuracy)\n")
         
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
         
-       /*
+        /*
         
         let request = QueryServices()
         request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSDictionary)-> () in
-            print(result)
+        print(result)
         })
         */
         self.shareModel!.myLocationArray!.removeAllObjects()
