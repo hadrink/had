@@ -55,14 +55,11 @@ class PlaceCell: UITableViewCell {
     @IBAction func heartAction(sender: UIButton) {
         
         let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        var places = [Place]()
-        let entityName : String = "Place"
-        let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
-        let place = Place(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
         
         //-- Test if place is in Core Data
         if IsPlaceInCoreData(placeId) {
             
+            var places = [Place]()
             let request = NSFetchRequest(entityName: "Place")
             request.includesSubentities = false
             request.returnsObjectsAsFaults = false
@@ -72,9 +69,8 @@ class PlaceCell: UITableViewCell {
             //-- Declare predicate and get specific value
             
             //TODO
-            //let predicate = NSPredicate(format: "place_id = %@", placeId)
-//            NSPredicate(format: "place_id == '\(placeId)'")
-            //request.predicate = predicate
+            let predicate = NSPredicate(format: "place_id == '\(placeId)'")
+            request.predicate = predicate
             
             do {
                 
@@ -83,30 +79,11 @@ class PlaceCell: UITableViewCell {
                 print("nb item dans coredata")
                 print(places.count)
                 //-- Loop on items for delete all items found out
-
-                //let item = items.first as! NSManagedObject
-                for item in places {
-                    print(item.place_name)
-                    moContext?.deleteObject(item)
-                }
-//                items.removeAtIndex(0)
-                //-- Save context
-
-                do {
-                    try moContext?.save()
-                    /*dispatch_async(dispatch_get_main_queue()) {
-                        print("dispatch async coredata")
-                    }*/
-                } catch {
-                    let saveError = error as NSError
-                    print("save ko")
-                    print(saveError)
-                }
-                let request2 = NSFetchRequest(entityName: "Place")
-                    
-                places = try moContext?.executeFetchRequest(request2) as! [Place]
-                print("nb item dans coredata apres delete")
-                print(places.count)
+                let item = places.first! as NSManagedObject
+                moContext?.deleteObject(item)
+                
+                try moContext?.save()
+            
                 //-- Change heart image
                 heartButton.setImage(UIImage(named: "heart"), forState: .Normal)
             
@@ -114,12 +91,14 @@ class PlaceCell: UITableViewCell {
             } catch let error as NSError {
                 print("Fetch failed: \(error.localizedDescription)")
             }
-            
         }
         
         //-- If is'nt
         else {
             
+            let entityName : String = "Place"
+            let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
+            let place = Place(entity: storeDesctiption!, insertIntoManagedObjectContext : moContext!)
             //-- Change heart image
             heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             

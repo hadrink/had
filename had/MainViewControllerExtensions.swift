@@ -37,68 +37,68 @@ extension MainViewController: UITableViewDataSource
         
         if (/*self.searchController.active ||*/ isFavOn)
         {
-//            let type = searchArray[indexPath.row].typeofPlace as String?
+            let type = searchArray[indexPath.row].typeofPlace as String?
             cell.placeName.text = searchArray[indexPath.row].placeName as String?
-//            cell.city.text = searchArray[indexPath.row].city as String?
-//            cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
-//            
-//            if(searchArray[indexPath.row].showDetails)
-//            {
-//                cell.nbUser.text = String(searchArray[indexPath.row].counter)
-//                cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
-//                cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
-//                cell.sexIcon.image = searchArray[indexPath.row].sexIcon
-//                cell.backgroundSex.backgroundColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
-//                cell.backgroundSex.layer.cornerRadius = 4.0
-//                cell.backgroundAge.layer.cornerRadius = 4.0
-//                cell.backgroundNbUser.layer.cornerRadius = 4.0
+            cell.city.text = searchArray[indexPath.row].city as String?
+            cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
+            
+            if(searchArray[indexPath.row].showDetails)
+            {
+                cell.nbUser.text = String(searchArray[indexPath.row].counter)
+                cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
+                cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
+                cell.sexIcon.image = searchArray[indexPath.row].sexIcon
+                cell.backgroundSex.backgroundColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+                cell.backgroundSex.layer.cornerRadius = 4.0
+                cell.backgroundAge.layer.cornerRadius = 4.0
+                cell.backgroundNbUser.layer.cornerRadius = 4.0
                 cell.placeId = searchArray[indexPath.row].placeId!
-//                cell.typeofPlace = searchArray[indexPath.row].typeofPlace
-//                
-//                //-- Get friends array
-//                let friends = searchArray[indexPath.row].friends
-//                //-- Create an ImageView array
-//                var friendsImageView: [UIImageView?] = []
-//                friendsImageView.append(cell.fbFriendsImg1)
-//                friendsImageView.append(cell.fbFriendsImg2)
-//                friendsImageView.append(cell.fbFriendsImg3)
-//                
-//                //-- Check if friends in place
-//                if (friends != nil){
-//                    if friends!.count > 0 {
-//                        
-//                        //-- Create index for friends
-//                        let indexFriends = friends!.count - 1
-//                        
-//                        //-- Loop on userId in friends
-//                        for userId in 0...indexFriends {
-//                            
-//                            //-- Corner radius (makes circle picture)
-//                            friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
-//                            friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
-//                            
-//                            //-- Create picture friends url request
-//                            let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
-//                            let request:NSURLRequest = NSURLRequest(URL:url)
-//                            let queue:NSOperationQueue = NSOperationQueue()
-//                            
-//                            //-- Start async request for get facebook picture friends
-//                            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
-//                                
-//                                //-- Check if response != nil
-//                                if((response) != nil) {
-//                                    
-//                                    //-- Lunch async request in main queue for UI elements
-//                                    dispatch_async(dispatch_get_main_queue()) {
-//                                        friendsImageView[userId]?.image = UIImage(data: data!)
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    }
-//                }
-//                
-//            }
+                cell.typeofPlace = searchArray[indexPath.row].typeofPlace
+                
+                //-- Get friends array
+                let friends = searchArray[indexPath.row].friends
+                //-- Create an ImageView array
+                var friendsImageView: [UIImageView?] = []
+                friendsImageView.append(cell.fbFriendsImg1)
+                friendsImageView.append(cell.fbFriendsImg2)
+                friendsImageView.append(cell.fbFriendsImg3)
+                
+                //-- Check if friends in place
+                if (friends != nil){
+                    if friends!.count > 0 {
+                        
+                        //-- Create index for friends
+                        let indexFriends = friends!.count - 1
+                        
+                        //-- Loop on userId in friends
+                        for userId in 0...indexFriends {
+                            
+                            //-- Corner radius (makes circle picture)
+                            friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
+                            friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                            
+                            //-- Create picture friends url request
+                            let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
+                            let request:NSURLRequest = NSURLRequest(URL:url)
+                            let queue:NSOperationQueue = NSOperationQueue()
+                            
+                            //-- Start async request for get facebook picture friends
+                            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
+                                
+                                //-- Check if response != nil
+                                if((response) != nil) {
+                                    
+                                    //-- Lunch async request in main queue for UI elements
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        friendsImageView[userId]?.image = UIImage(data: data!)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+                
+            }
             setHeartButtonImage(cell,isFavOn: isFavOn)
             
             
@@ -147,19 +147,19 @@ extension MainViewController: UITableViewDataSource
                 displayNightclub = settingDefault.displayNightclub
             }
             
-//            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
-//                cell.iconTableview.image = UIImage(named: "bar-icon")
-//            }
-//                
-//            else if(type == "nightclub" && displayNightclub! ) {
-//                cell.iconTableview.image = UIImage(named: "nightclub-icon")
-//            }
-//                
-//            else {
-//                tableData.rowHeight = 0
-//                cell.hidden = true
-//            }
-//            
+            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
+                cell.iconTableview.image = UIImage(named: "bar-icon")
+            }
+                
+            else if(type == "nightclub" && displayNightclub! ) {
+                cell.iconTableview.image = UIImage(named: "nightclub-icon")
+            }
+                
+            else {
+                tableData.rowHeight = 0
+                cell.hidden = true
+            }
+            
             
             //-- If userDefault value exist use it, else take the default value
             if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -366,16 +366,22 @@ extension MainViewController: UITableViewDataSource
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if placeItems.count != 0
+        if (placeItems.count != 0 && !isFavOn) || (searchArray.count != 0 && isFavOn)
         {
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            messageLabel.text?.removeAll()
             //return 1;
         }
         else
         {
             // Display a message when the table is empty
             messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            //messageLabel.text = "No data is currently available. Please pull down to refresh."
+            var mess = "Aucune données disponible actuellement..."
+            if(searchArray.count == 0 && isFavOn)
+            {
+                mess = "Vous n'avez pas encore de favoris !!"
+            }
+            messageLabel.text = mess
             messageLabel.textColor = UIColor.blackColor()
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = NSTextAlignment.Center

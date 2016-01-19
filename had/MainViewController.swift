@@ -272,6 +272,8 @@ class MainViewController: UIViewController, MKMapViewDelegate {
             do {
                 
                 places = try moContext?.executeFetchRequest(request) as! [Place]
+                print("nb fav dans getfavplaces")
+                print(places.count)
                 
             }
                 
@@ -298,9 +300,9 @@ class MainViewController: UIViewController, MKMapViewDelegate {
                 place.distance = p.place_distance?.doubleValue
                 place.placeLatitudeDegrees = p.place_latitude?.doubleValue
                 place.placeLongitudeDegrees = p.place_longitude?.doubleValue
-                searchArray.append(place)*/
+                searchArray.append(place)
                 print("nbplace saerch")
-                print(searchArray.count)
+                print(searchArray.count)*/
             }
             if idArray.count != 0
             {

@@ -15,7 +15,7 @@ import CoreData
 extension Place {
 
     @NSManaged var is_checked: NSNumber?
-    @NSManaged var place_id: String?
+    @NSManaged var place_id: String!
     @NSManaged var place_name: String?
     @NSManaged var place_city: String?
     @NSManaged var place_counter: NSNumber?
