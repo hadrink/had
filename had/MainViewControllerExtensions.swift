@@ -652,6 +652,11 @@ extension MainViewController: CLLocationManagerDelegate
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
+                    let alert = UIAlertController(title: "Yo", message: String(obj), preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+
                     let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
                     
                     if let reposArray = obj["listbar"] as? [NSDictionary]  {
@@ -673,6 +678,36 @@ extension MainViewController: CLLocationManagerDelegate
                         
                     })
                 }
+                
+                /*let bestLoc: NSDictionary = LocationTracker().getBestLocation()!
+                let lat = bestLoc.valueForKey("lat")
+                let lon = bestLoc.valueForKey("lon")
+                let request = QueryServices()
+                request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(userLatitude)/\(userLongitude)/1000/", f: {(result: NSDictionary) -> () in
+                    print(result)
+                    
+                    let alert = UIAlertController(title: "Yo", message: String(result), preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: lat), "longitude" : String(stringInterpolationSegment: lon)]
+                    
+                    if let reposArray = result["listbar"] as? [NSDictionary]  {
+                        self.placeItems.removeAll()
+                        
+                        for item in reposArray {
+                            if var placeProperties = item["properties"] as? [String:AnyObject] {
+                                if (placeProperties["name"] != nil) {
+                                    self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
+                                }
+                            }
+                        }
+                    }
+                
+                    
+                })*/
+
                 
             } else {
                 NSLog("App is backgrounded. New location is %@", manager.location!)

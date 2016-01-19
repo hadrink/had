@@ -90,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    
     func updateLocation(){
         self.locationTracker.updateLocationToServer()
         self.locationTracker.createRegionsForSignificantChanges()

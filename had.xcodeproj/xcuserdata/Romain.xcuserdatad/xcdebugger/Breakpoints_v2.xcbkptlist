@@ -890,7 +890,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "485"
             endingLineNumber = "485"
-            landmarkName = "tableView(_:willDisplayCell:forRowAtIndexPath:)"
+            landmarkName = "IsPlaceInCoreData(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -1380,12 +1380,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/LocationTracker.swift"
-            timestampString = "471026028.761003"
+            timestampString = "471628540.741345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "getBestLocationForServer()"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "updateLocationToServer()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

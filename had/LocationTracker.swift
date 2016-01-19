@@ -232,22 +232,35 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         let lat = bestLoc.valueForKey("lat")
         let lon = bestLoc.valueForKey("lon")
         let request = QueryServices()
-        request.send("https://hadrink.herokuapp.com/closeplaces/places/\(lat!)/\(lon!)/1000/", f: {(result: NSDictionary)-> () in
+        request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(lat!)/\(lon!)/1000/", f: {(result: NSDictionary) -> () in
             print(result)
+            
+            notification.alertBody = String(result)
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
             
             let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: lat), "longitude" : String(stringInterpolationSegment: lon)]
             
             if let reposArray = result["listbar"] as? [NSDictionary]  {
                 self.placeItems.removeAll()
                 
+                
                 for item in reposArray {
                     if var placeProperties = item["properties"] as? [String:AnyObject] {
                         if (placeProperties["name"] != nil) {
+                            notification.alertBody = placeProperties["name"] as! String
+                            notification.soundName = "Default";
+                            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
                             self.placeItems.append(PlaceItem(json: item, userLocation : locationDictionary))
                         }
                     }
                 }
             }
+            
+            notification.alertBody = String(self.placeItems.count)
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+
         })
         
         for place in placeItems

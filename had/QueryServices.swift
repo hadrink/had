@@ -123,6 +123,27 @@ class QueryServices{
             
         }
     
+    func sendForRegion(url: String, f: (NSDictionary) -> ()) {
+        
+        do {
+            let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(["object":"object"], options: .PrettyPrinted)
+            var response: NSURLResponse?
+            let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? NSDictionary
+            //let reply = NSDictionary(object: json!, forKey: NSUTF8StringEncoding)
+            f(json!)
+            
+        }
+            
+        catch let err as NSError {
+            print(err)
+        }
+        
+    }
+
+    
     
     /*var userName:AnyObject = 101
     func loadUserDataFromPList() {
