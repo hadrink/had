@@ -46,9 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             initialViewController = pageController
             self.backgroundTaskManager?.beginNewBackgroundTask()
 
+        } else if NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") {
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
         } else {
-            initialViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") 
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "HasLaunchedOnce")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("LaunchViewController")
         }
+        
         
         //-- Notification parse
         
