@@ -19,7 +19,7 @@ import CoreLocation
 import MapKit
 import CoreData
 
-class MainViewController: UIViewController, MKMapViewDelegate {
+class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
     //-- Global const and var
     
@@ -72,9 +72,23 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         setLogoNavBar()
     }
     
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        let panGesture:UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        let velocity = panGesture.velocityInView(view)
+        
+        if velocity.x < 0 {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
@@ -99,7 +113,7 @@ class MainViewController: UIViewController, MKMapViewDelegate {
         
         
         //- Get Picture Facebook
-        UserDataFb().getPicture()
+        //UserDataFb().getPicture()
     }
     
     func goToSettings(button: UIBarButtonItem) {

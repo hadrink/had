@@ -245,9 +245,11 @@ class LoginViewController: UIViewController{
             }
             else if user!.isAuthenticated(){
                 self.getParseUserInfo(user!)
+                UserDataFb().getPicture()
             } else if user!.isNew {
                 print("User just signed up and logged in for the first time.")
                 self.getParseUserInfo(user!)
+                UserDataFb().getPicture()
             } else {
                 print("User logged in through Facebook.")
             }
@@ -278,17 +280,7 @@ class LoginViewController: UIViewController{
             dateFormatter.dateFormat = "MM/dd/yyyy"
             user["birthDay"] = dateFormatter.dateFromString(r["birthday"] as! String)
             
-            let pictureURL = ((r["picture"] as! NSDictionary)["data"] as! NSDictionary) ["url"] as! String
-            let url = NSURL(string: pictureURL)
-            let request = NSURLRequest(URL: url!)
             
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-                response, data, error in
-                
-                let imageFile = PFFile(name: "avatar.jpg", data: data!)
-                user["picture"] = imageFile
-                user.saveInBackgroundWithBlock(nil)
-            })
         })
         
     }

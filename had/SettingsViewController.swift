@@ -61,59 +61,6 @@ class SettingsViewController: UITableViewController{
     
     @IBOutlet var contentViewTest2: UIView!
     
-    var firstTime: Bool?
-    
-    //var moContext: NSManagedObjectContext!
-    
-    let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-    
-    var stores = [Store]()
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        if firstTime == true {
-        
-        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
-        self.profilePicture.clipsToBounds = true;
-
-        
-        func blurImage() {
-            let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            
-            let blurView = UIVisualEffectView(effect: lightBlur)
-            blurView.frame = backgroundPicture.bounds
-            backgroundPicture.addSubview(blurView)
-        }
-        
-        blurImage()
-        
-        
-        let request = NSFetchRequest(entityName: "Store")
-        
-        do {
-            
-            stores = try moContext?.executeFetchRequest(request) as! [Store]
-            
-        }
-            
-        catch let err as NSError {
-            
-            print(err)
-            
-        }
-        
-        let store = stores[0].sImage
-        
-        //print("Test store \(store)")
-        
-        self.profilePicture.image = UIImage(data: store!)
-        self.backgroundPicture.image = UIImage(data: store!)
-            
-        firstTime = false
-            
-        }
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -125,6 +72,7 @@ class SettingsViewController: UITableViewController{
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "had-return"), style: .Plain, target: self, action: "goToMainView:")
         navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
         rightBarButtonItem.tintColor = Colors().grey
+        
     }
     
     func goToMainView(button: UIBarButtonItem) {
@@ -134,7 +82,9 @@ class SettingsViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstTime = true
+        
+        //-- Set design for profile views
+        designProfileViews()
         
         rangeSlider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
         
@@ -324,66 +274,6 @@ class SettingsViewController: UITableViewController{
         }
     }
     
-    /*func UserData()
-    {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                print("Error: \(error)")
-            }
-            else
-            {
-                print("fetched user: \(result)")
-                print(result.valueForKey("age_range") as? String)
-                self.Name.text = result.valueForKey("name") as? String
-               /* self.Age.text = result.valueForKey("birthday") as? String
-                self.Mail.text = result.valueForKey("email") as? String
-                self.Gender.text = result.valueForKey("gender") as? String
-                self.Loc.text = result.valueForKey("locale") as? String
-                //Link.text = userData.valueForKey("link") as? String
-                self.Languages.text = result.valueForKey("languages") as? String
-                self.SeekingAge.text = result.valueForKey("relationship_status") as? String*/
-                
-            }
-        })
-        
-        /*let pictureRequest = FBSDKGraphRequest(graphPath: "me/picture?type=large&redirect=false", parameters: nil)
-        pictureRequest.startWithCompletionHandler({
-            (connection, result, error: NSError!) -> Void in
-            if error == nil {
-                print("\(result)")
-                var data: AnyObject  = result.objectForKey("data")!
-                var url :NSString = data.valueForKey("url") as! NSString
-                let imageURL = NSURL(string: url as String)
-                let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-                self.profilePicture.image = UIImage(data: nsdata!)
-                self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
-                self.profilePicture.clipsToBounds = true;
-                
-                self.backgroundPicture.image = UIImage(data: nsdata!)
-                
-                func blurImage() {
-                    let lightBlur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-                    
-                    let blurView = UIVisualEffectView(effect: lightBlur)
-                    blurView.frame = self.backgroundPicture.bounds
-                    self.backgroundPicture.addSubview(blurView)
-                }
-                
-                blurImage()
-                
-                
-               
-                
-                //self.profilePicture.image = UIImage(data: NSData(contentsOfURL: NSURL(fileURLWithPath: url as String)!)!)
-                print(url)
-            } else {
-                print("\(error)")
-            }
-        })*/
-    }*/
     
     func initCheckmarksCells(){
         //nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -401,5 +291,36 @@ class SettingsViewController: UITableViewController{
         default:
             monthCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
+    }
+    
+    func designProfileViews() {
+        //-- Fill profilePicture & backgroundPicture with the facebook profile picture
+        do {
+            let currentUserPhoto:PFFile = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
+            let profilePicture = try UIImage(data: currentUserPhoto.getData())
+            
+            self.profilePicture.image = profilePicture
+            self.backgroundPicture.image = profilePicture
+            
+        } catch {
+            print("Cannot get profile picture")
+        }
+        
+        //-- Add blur on the profile picture views
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.view.backgroundColor = UIColor.clearColor()
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            
+            //always fill the view
+            blurEffectView.frame = backgroundPicture.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            
+            backgroundPicture.addSubview(blurEffectView)
+        }
+        
+        //-- Add corner radius on profile picture view
+        profilePicture.layer.cornerRadius = 45
+        profilePicture.clipsToBounds = true
     }
 }

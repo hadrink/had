@@ -143,6 +143,16 @@ class QueryServices{
             
         }
     
+    func saveImage(image: UIImage, path: String ) -> Bool{
+        
+        //let pngImageData = UIImagePNGRepresentation(image)
+        let jpgImageData = UIImageJPEGRepresentation(image, 1.0)   // if you want to save as JPEG
+        let result = jpgImageData!.writeToFile(path, atomically: true)
+        
+        return result
+        
+    }
+    
     
     /*var userName:AnyObject = 101
     func loadUserDataFromPList() {

@@ -27,13 +27,14 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0, right: 0)
+        cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 58.0, bottom: 0, right: 0)
         
         if (/*self.searchController.active ||*/ isFavOn)
         {
@@ -112,9 +113,9 @@ extension MainViewController: UITableViewDataSource
                 cell.fbFriendsImg1.layer.opacity = 0
                 cell.fbFriendsImg2.layer.opacity = 0
                 cell.fbFriendsImg3.layer.opacity = 0
-                tableData.rowHeight = 55
+                tableData.rowHeight = 82
             } else {
-                tableData.rowHeight = 120
+                tableData.rowHeight = 153
                 cell.backgroundNbUser.layer.opacity = 1
                 cell.backgroundAge.layer.opacity = 1
                 cell.backgroundSex.layer.opacity = 1
@@ -247,9 +248,9 @@ extension MainViewController: UITableViewDataSource
                 cell.fbFriendsImg1.layer.opacity = 0
                 cell.fbFriendsImg2.layer.opacity = 0
                 cell.fbFriendsImg3.layer.opacity = 0
-                tableData.rowHeight = 55
+                tableData.rowHeight = 82
             } else {
-                tableData.rowHeight = 120
+                tableData.rowHeight = 153
                 cell.backgroundNbUser.layer.opacity = 1
                 cell.backgroundAge.layer.opacity = 1
                 cell.backgroundSex.layer.opacity = 1

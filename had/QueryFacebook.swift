@@ -33,14 +33,17 @@ class UserDataFb {
                 let imageURL = NSURL(string: url as String)
                 let nsdata = NSData(contentsOfURL: imageURL!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 
-                    self.cache.setObject(UIImage(data: nsdata!)!, forKey: "profile_picture")
+                
                     //print(self.cache.objectForKey("profile_picture")?.description)
+                
+                
+                
                 
                 
                     let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
                 
                     do {
-                
+                        
                     let entityName : String = "Store"
                     let storeDesctiption = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moContext!)
                     print(" Yoyo\(storeDesctiption)")
@@ -49,6 +52,21 @@ class UserDataFb {
                     let img = UIImage(data: nsdata!)
                     let imgData = UIImageJPEGRepresentation(img!, 1)
                     store.setValue(imgData, forKey: "sImage")
+                        
+                        //var picture = PFFile(data: nsdata!)
+                        
+                        
+                        let imageData:NSData = UIImageJPEGRepresentation(img!, 1)!
+                        let imageFile = PFFile(name: "avatar.jpg", data: imageData)
+                        imageFile?.saveInBackground()
+                        
+                        let user:PFUser = PFUser.currentUser()!
+                        user.setObject(imageFile!, forKey: "profile_picture")
+                        user.saveInBackground()
+                        
+                        
+                        
+                    
                 
                 
                     try moContext?.save()
@@ -64,7 +82,7 @@ class UserDataFb {
                         print(err)
                 
                     }
-                
+
                 
                 //settingViewController.profilePicture.image = UIImage(data: nsdata!)
                 //settingViewController.profilePicture.layer.cornerRadius = settingViewController.profilePicture.frame.size.width / 2

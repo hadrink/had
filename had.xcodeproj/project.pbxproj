@@ -272,6 +272,7 @@
 		7A081BCC1BB6DDAE0061D775 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				7A4BCF7D1C56585100AFD1CF /* Images */,
 				7A081BCB1BB6DCF30061D775 /* Fonts */,
 			);
 			name = Assets;
@@ -286,6 +287,13 @@
 				EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		7A4BCF7D1C56585100AFD1CF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		7AA224EB19CDA9D0002003ED = {

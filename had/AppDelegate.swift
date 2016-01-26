@@ -83,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes(types)
         }
         
+        
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
 
