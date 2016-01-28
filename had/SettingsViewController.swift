@@ -18,7 +18,7 @@ class CellSetting:UITableViewCell{
 
 
 
-class SettingsViewController: UITableViewController{
+class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate{
     
     //let userDataFb = UserDataFb.sharedInstance
 
@@ -323,4 +323,19 @@ class SettingsViewController: UITableViewController{
         profilePicture.layer.cornerRadius = 45
         profilePicture.clipsToBounds = true
     }
+    
+    //-- Avoid Bounce effect
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        let panGesture:UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        let velocity = panGesture.velocityInView(view)
+        
+        if velocity.x > 0 {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
 }

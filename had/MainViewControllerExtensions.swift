@@ -77,6 +77,8 @@ extension MainViewController: UITableViewDataSource
                             //-- Corner radius (makes circle picture)
                             friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
                             friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                            friendsImageView[userId]?.layer.masksToBounds = true
+                            
                             
                             //-- Create picture friends url request
                             let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
@@ -181,9 +183,13 @@ extension MainViewController: UITableViewDataSource
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
             cell.averageAge.text = String(placeItems[indexPath.row].averageAge) + " - " + String(placeItems[indexPath.row].averageAge != nil ? placeItems[indexPath.row].averageAge + 1 : 0)
             cell.details.text = String(format: "%.0f", round(placeItems[indexPath.row].pourcentSex))
+            cell.details.textColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            cell.percent.textColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
             cell.sexIcon.image = placeItems[indexPath.row].sexIcon
-            cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            //cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            cell.backgroundSex.layer.borderColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink.CGColor : Colors().blue.CGColor
+            cell.backgroundSex.layer.borderWidth = 1.5
             
             cell.backgroundSex.layer.cornerRadius = 4.0
             cell.backgroundAge.layer.cornerRadius = 4.0
@@ -216,6 +222,7 @@ extension MainViewController: UITableViewDataSource
                         //-- Corner radius (makes circle picture)
                         friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
                         friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
+                        friendsImageView[userId]?.layer.masksToBounds = true
                         
                         //-- Create picture friends url request
                         let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")

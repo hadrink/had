@@ -35,6 +35,7 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var fbFriendsImg2: UIImageView!
     @IBOutlet weak var fbFriendsImg3: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
+    @IBOutlet weak var percent: UILabel!
     
     var placeId: String!
     var typeofPlace : String?

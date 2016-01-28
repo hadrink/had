@@ -56,6 +56,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         return manager
     }()
     
+    
     let locServices = LocationServices()
     let QServices = QueryServices()
     let settingDefault = SettingDefault()
@@ -70,19 +71,6 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setLogoNavBar()
-    }
-    
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        let panGesture:UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
-        let velocity = panGesture.velocityInView(view)
-        
-        if velocity.x < 0 {
-            return true
-        } else {
-            return false
-        }
-        
     }
     
     
@@ -160,48 +148,6 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     //-- Table view configuration
     
     var placeItems = [PlaceItem]()
-    
-    func routeButtonClicked(sender:UIButton) {
-        
-        let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!.tag)
-        let regionDistance:CLLocationDistance = 10000
-        
-        var latitude = 0.0
-        var longitude = 0.0
-        print("itineraire")
-        /*        print(self.searchController.active)
-        if !self.searchController.active
-        {*/
-        latitude = placeItems[indexPath.row].placeLatitudeDegrees!
-        longitude = placeItems[indexPath.row].placeLongitudeDegrees!
-        /*      }
-        else
-        {
-        latitude = searchArray[indexPath.row].placeLatitudeDegrees!
-        longitude = searchArray[indexPath.row].placeLongitudeDegrees!
-        }
-        */
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        
-        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-        
-        let options = [
-            MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-            MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
-        ]
-        
-        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        let mapItem = MKMapItem(placemark: placemark)
-        /*        if !self.searchController.active
-        {*/
-        mapItem.name = placeItems[indexPath.row].placeName
-        /*        }
-        else
-        {
-        mapItem.name = searchArray[indexPath.row].placeName
-        }*/
-        mapItem.openInMapsWithLaunchOptions(options)
-    }
     
     
     //-- Refresh places
@@ -364,4 +310,86 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         }
         self.tableData.reloadData()
     }
+    
+    //-- Give route place
+    @IBAction func routeClicked(sender: AnyObject) {
+        
+        var indexPath: NSIndexPath
+        
+        if let button = sender as? UIButton {
+            if let superview = button.superview {
+                if let cell = superview.superview as? PlaceCell {
+                    indexPath = tableData.indexPathForCell(cell)!
+                    //let indexPath:NSIndexPath = NSIndexPath(forRow: sender.tag, inSection: sender.superview!!.tag)
+                    let regionDistance:CLLocationDistance = 10000
+                    
+                    var latitude = 0.0
+                    var longitude = 0.0
+                    latitude = placeItems[indexPath.row].placeLatitudeDegrees!
+                    longitude = placeItems[indexPath.row].placeLongitudeDegrees!
+                    
+                    let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+                    let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+                    
+                    let options = [
+                        MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+                        MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
+                    ]
+                    
+                    let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                    let mapItem = MKMapItem(placemark: placemark)
+                    
+                    mapItem.name = placeItems[indexPath.row].placeName
+                    mapItem.openInMapsWithLaunchOptions(options)
+
+                }
+            }
+        }
+    }
+    
+    @IBAction func shareClicked(sender: AnyObject) {
+        
+        if let button = sender as? UIButton {
+            if let superview = button.superview {
+                if let cell = superview.superview as? PlaceCell {
+                    // text to share
+                    let textToShare = "Patient is unstable."
+        
+                    // url to share, if any
+                    let urlToShare = NSURL(string: "www.islandtechph.com")
+        
+                    // place the items to share in an array of type AnyObject
+                    let objectsToShare: [AnyObject] = [textToShare, urlToShare!]
+        
+                    // initialize the controller that will show the share options
+                    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+                    // exclude some activities that are irrelevant to your app,
+                    // leaving only CopyToPasteboard, Mail, Message
+                    if #available(iOS 9.0, *) {
+                        activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeOpenInIBooks, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll, UIActivityTypePrint]
+                    } else {
+                        // Fallback on earlier versions
+                    }
+        
+                    // show the share options view
+                    self.presentViewController(activityVC, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    //-- Avoid Bounce effect
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        let panGesture:UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        let velocity = panGesture.velocityInView(view)
+        
+        if velocity.x < 0 {
+            return true
+        } else {
+            return false
+        }
+        
+    }
+
 }
