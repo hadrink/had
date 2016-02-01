@@ -22,6 +22,7 @@ struct Colors {
     let pink = Design().UIColorFromRGB(0xFA6D84)
     let blue = Design().UIColorFromRGB(0x5A74AE)
     let grey = Design().UIColorFromRGB(0xFCFCFB)
+    let darkGrey = Design().UIColorFromRGB(0xE3E2E2)
 }
 
 struct Design {
@@ -34,6 +35,7 @@ struct Design {
             alpha: CGFloat(1.0)
         )
     }
+    
 }
 
 class SettingDefault {
@@ -52,4 +54,34 @@ struct alertMessage {
     static let messageAlertLocationManagerOff = "Merci d'activer le service de localisation dans les Réglages !"
     static let alertActionOK = "OK"
     static let alertActionSettings = "Réglages"
+}
+
+extension String {
+    
+    func textSizeWithFont(font: UIFont, constrainedToSize size:CGSize) -> CGFloat {
+        
+        var textSize:CGSize!
+        
+        if CGSizeEqualToSize(size, CGSizeZero) {
+            
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            
+            textSize = self.sizeWithAttributes(attributes as! [String : AnyObject] as [String : AnyObject])
+            
+        } else {
+            
+            let option = NSStringDrawingOptions.UsesLineFragmentOrigin
+            
+            let attributes = NSDictionary(object: font, forKey: NSFontAttributeName)
+            
+            let stringRect = self.boundingRectWithSize(size, options: option, attributes: attributes as! [String : AnyObject] as [String : AnyObject], context: nil)
+            
+            textSize = stringRect.size
+            
+        }
+        
+        return textSize.width
+        
+    }
+    
 }

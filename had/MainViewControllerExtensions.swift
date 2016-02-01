@@ -198,6 +198,11 @@ extension MainViewController: UITableViewDataSource
             cell.placeId = id
             cell.typeofPlace = placeItems[indexPath.row].typeofPlace
             
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+            cell.fbFriendsImg1.userInteractionEnabled = true
+            cell.fbFriendsImg1.addGestureRecognizer(tapGestureRecognizer)
+            
+            
             //-- Get friends array
             let friends = placeItems[indexPath.row].friends
             
@@ -207,6 +212,7 @@ extension MainViewController: UITableViewDataSource
             friendsImageView.append(cell.fbFriendsImg2)
             friendsImageView.append(cell.fbFriendsImg3)
             
+            
             setHeartButtonImage(cell,isFavOn: isFavOn)
             
             //-- Check if friends in place
@@ -215,6 +221,11 @@ extension MainViewController: UITableViewDataSource
                     
                     //-- Create index for friends
                     let indexFriends = friends!.count - 1
+                    
+                    /*for i in 0...indexFriends {
+                        var fbImageView = UIImageView!
+                        
+                    }*/
                     
                     //-- Loop on userId in friends
                     for userId in 0...indexFriends {
@@ -380,20 +391,34 @@ extension MainViewController: UITableViewDataSource
             messageLabel.text?.removeAll()
             //return 1;
         }
+        else if Reachability.isConnectedToNetwork() == false {
+            messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            var mess = "Petit problème d'internet ? ;)"
+            
+            messageLabel.text = mess
+            messageLabel.textColor = Colors().darkGrey
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = NSTextAlignment.Center
+            messageLabel.font = UIFont(name: "Lato-Regular", size: 18)
+            messageLabel.sizeToFit()
+            self.tableData.backgroundView = messageLabel
+            self.tableData.separatorStyle = UITableViewCellSeparatorStyle.None
+
+        }
         else
         {
             // Display a message when the table is empty
             messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            var mess = "Aucune données disponible actuellement..."
+            var mess = "Aucune données disponible actuellement. Tire pour rafraîchir"
             if(searchArray.count == 0 && isFavOn)
             {
                 mess = "Vous n'avez pas encore de favoris !!"
             }
             messageLabel.text = mess
-            messageLabel.textColor = UIColor.blackColor()
+            messageLabel.textColor = Colors().darkGrey
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = NSTextAlignment.Center
-            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
+            messageLabel.font = UIFont(name: "Lato-Regular", size: 18)
             messageLabel.sizeToFit()
             
             self.tableData.backgroundView = messageLabel
@@ -589,7 +614,9 @@ extension MainViewController: CLLocationManagerDelegate
                     dispatch_async(dispatch_get_main_queue(), {
                         
                         self.tableData.reloadData()
-                        
+                        if ((self.activity.myActivityIndicator) != nil) {
+                            self.activity.StopActivityIndicator(self, indicator: self.activity.myActivityIndicator)
+                        }
                     })
                 }
                 

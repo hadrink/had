@@ -229,12 +229,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
                 removeGeotification(geotification)
             }
         }
-        let bestLoc: NSDictionary = getBestLocation()!
+        /*let bestLoc: NSDictionary = getBestLocation()!
         let lat = bestLoc.valueForKey("lat")
-        let lon = bestLoc.valueForKey("lon")
+        let lon = bestLoc.valueForKey("lon")*/
         let request = QueryServices()
-        request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(lat!)/\(lon!)/1000/", f: {(result: NSDictionary) -> () in
-            let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: lat), "longitude" : String(stringInterpolationSegment: lon)]
+        request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(self.myLocation?.latitude)/\(self.myLocation?.longitude)/1000/", f: {(result: NSDictionary) -> () in
+            let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.myLocation?.latitude), "longitude" : String(stringInterpolationSegment: self.myLocation?.longitude)]
             
             if let reposArray = result["listbar"] as? [NSDictionary]  {
                 self.placeItems.removeAll()

@@ -34,6 +34,7 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var fbFriendsImg1: UIImageView!
     @IBOutlet weak var fbFriendsImg2: UIImageView!
     @IBOutlet weak var fbFriendsImg3: UIImageView!
+    var fbFriendsImgArray = []
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var percent: UILabel!
     

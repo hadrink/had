@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        //-- Notification parse
+        /*//-- Notification parse
         
         
         // Register for Push Notitications
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let types = UIRemoteNotificationType([.Badge, .Sound, .Alert])
             application.registerForRemoteNotificationTypes(types)
-        }
+        }*/
         
         
         window?.rootViewController = initialViewController

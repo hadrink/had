@@ -15,6 +15,8 @@
 //
 
 import UIKit
+import SystemConfiguration
+import Foundation
 import CoreLocation
 import MapKit
 import CoreData
@@ -73,24 +75,25 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         setLogoNavBar()
     }
     
+    let activity = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        activity.StartActivityIndicator(self)
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
             locationManager.requestAlwaysAuthorization()
         }
         startLocationManager()
+        
+        //-- Start Updating Location
+        locationManager.startUpdatingLocation()
+
         self.setupRefreshControl()
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // Configure countrySearchController
-        
-        
-        //-- Reveal view configuration
         
         self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
         self.navigationController?.navigationBar.translucent = false
@@ -98,8 +101,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         //-- Observer for background state
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        
-        
+                
         //- Get Picture Facebook
         //UserDataFb().getPicture()
     }
@@ -151,6 +153,47 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     
     //-- Refresh places
+    
+    func imageTapped(image: UIGestureRecognizer)
+    {
+        print("image tapped")
+        
+        //using sender, we can get the point in respect to the table view
+        let tapLocationInView = image.locationInView(self.view)
+        let tapLocationInTableView = image.locationInView(self.tableData)
+        
+        //using the tapLocation, we retrieve the corresponding indexPath
+        let indexPath = self.tableData.indexPathForRowAtPoint(tapLocationInTableView)
+        
+        //finally, we print out the value
+        print(indexPath)
+        
+        //we could even get the cell from the index, too
+        let cell = self.tableData.cellForRowAtIndexPath(indexPath!)
+        
+        var test:String
+        test = placeItems[indexPath!.row].placeName!
+        print(test)
+        print(tapLocationInView)
+        
+        var profileNameView:UIView = Annotation().createAnnotation(test, postition: tapLocationInView)
+        profileNameView.alpha = 0.0
+        self.view.addSubview(profileNameView)
+        
+        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            profileNameView.alpha = 0.9
+            }, completion: {
+                (finished: Bool) -> Void in
+                
+                // Fade in
+                UIView.animateWithDuration(0.5, delay: 2.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                    profileNameView.alpha = 0.0
+                    }, completion: nil)
+        })
+
+    
+        //cell.textLabel?.text = "Hello, Cell!"
+    }
     
     func setLogoNavBar()
     {
@@ -349,11 +392,19 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     @IBAction func shareClicked(sender: AnyObject) {
         
+        var indexPath: NSIndexPath
+        
         if let button = sender as? UIButton {
             if let superview = button.superview {
                 if let cell = superview.superview as? PlaceCell {
                     // text to share
-                    let textToShare = "Patient is unstable."
+                    
+                    indexPath = tableData.indexPathForCell(cell)!
+                    
+                    var namePlace = placeItems[indexPath.row].placeName
+                    var nbUsers = placeItems[indexPath.row].counter
+
+                    let textToShare = "\(nbUsers) Hadder sont allés au \(namePlace!). Voir plus d'info sur l'application Had"
         
                     // url to share, if any
                     let urlToShare = NSURL(string: "www.islandtechph.com")
@@ -392,4 +443,86 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         
     }
 
+}
+
+class ActivityIndicator: NSObject {
+    
+    var myActivityIndicator:UIActivityIndicatorView!
+    var imageConnexionFailed:UIImageView!
+    
+    func StartActivityIndicator(obj:UIViewController)
+    {
+        
+        
+        if (Reachability.isConnectedToNetwork() == false) {
+            imageConnexionFailed = UIImageView(frame: CGRectMake(40, 50, 100, 80))
+            imageConnexionFailed.image = UIImage(named: "wifi-icon")
+            obj.view.center.y = (obj.view.frame.height / 2) - 100
+            imageConnexionFailed.center = obj.view.center
+            obj.view.addSubview(imageConnexionFailed)
+        } else {
+        
+        self.myActivityIndicator = UIActivityIndicatorView(frame:CGRectMake(100, 100, 100, 100)) as UIActivityIndicatorView;
+        
+        self.myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        self.myActivityIndicator.center = obj.view.center;
+        
+        obj.view.addSubview(self.myActivityIndicator);
+        
+        self.myActivityIndicator.startAnimating();
+        //return self.myActivityIndicator;
+        }
+    }
+    
+    func StopActivityIndicator(obj:UIViewController,indicator:UIActivityIndicatorView)-> Void
+    {
+        indicator.removeFromSuperview();
+    }
+    
+    
+}
+
+public class Reachability {
+    class func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
+    }
+}
+
+class Annotation {
+    func createAnnotation(message : String, postition : CGPoint) -> UIView {
+        var labelMessage : UILabel!
+        var annotationView : UIView!
+        
+        let messageSize = message.textSizeWithFont(UIFont(name: "Lato-Italic", size: 14)!, constrainedToSize: CGSize(width: 1000, height: 200))
+        
+        annotationView = UIView(frame:CGRectMake(0, 0, messageSize + 20, 30))
+        labelMessage = UILabel(frame:CGRectMake(0, 0, messageSize, 20))
+        labelMessage.font = UIFont(name: "Lato-Italic", size: 14)
+        
+        labelMessage.text = message
+        labelMessage.center = annotationView.center
+        annotationView.addSubview(labelMessage as UIView)
+        annotationView.center = postition
+        annotationView.backgroundColor = UIColor.whiteColor()
+        annotationView.layer.shadowColor = UIColor.blackColor().CGColor
+        annotationView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        annotationView.layer.shadowOpacity = 0.8
+        annotationView.layer.cornerRadius = 4
+        annotationView.layer.position.x = postition.x + (messageSize / 2)
+        annotationView.layer.position.y = postition.y - 10
+        
+        return annotationView
+    }
 }
