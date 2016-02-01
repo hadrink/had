@@ -46,7 +46,6 @@ class PlaceCell: UITableViewCell {
     func configureForPlaceItem(place: PlaceItem) {
         routeButton.layer.zPosition = 100
         routeButton.layer.setNeedsDisplay()
-        
     }
     
     
@@ -75,11 +74,10 @@ class PlaceCell: UITableViewCell {
             request.predicate = predicate
             
             do {
-                
                 //-- Execute fetch request after set request.predicate
                 places = try moContext?.executeFetchRequest(request) as! [Place]
-                print("nb item dans coredata")
-                print(places.count)
+                /*print("nb item dans coredata")
+                print(places.count)*/
                 //-- Loop on items for delete all items found out
                 let item = places.first! as NSManagedObject
                 moContext?.deleteObject(item)
@@ -93,6 +91,8 @@ class PlaceCell: UITableViewCell {
             } catch let error as NSError {
                 print("Fetch failed: \(error.localizedDescription)")
             }
+            //var cell :UITableViewCell =  sender.superview as! UITableViewCell
+            //var index :NSIndexPath =
         }
         
         //-- If is'nt
@@ -105,17 +105,17 @@ class PlaceCell: UITableViewCell {
             heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
             
             //-- Set values for place_id and set at true is_checked
-            print("<")
+            /*print("<")
             print("placeid in item")
-            print(placeId)
+            print(placeId)*/
             place.setValue(placeId, forKey: "place_id")
             place.setValue(true, forKey: "is_checked")
             place.setValue(typeofPlace, forKey: "place_type")
             place.setValue(placeName.text, forKey: "place_name")
             
-            print("placeid in item")
+            /*print("placeid in item")
             print(placeName.text)
-            print(">")
+            print(">")*/
             
             place.setValue(city.text, forKey: "place_city")
             place.setValue(Double(distance.text!), forKey: "place_distance")
