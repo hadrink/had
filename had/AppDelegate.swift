@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if PFUser.currentUser() != nil {
             locationTracker.startLocationTracking()
             let time:NSTimeInterval = 15 * 60;
-            var locationUpdateTimer :NSTimer?
-            locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
+            //var locationUpdateTimer :NSTimer?
+            //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
             self.backgroundTaskManager?.beginNewBackgroundTask()
 
@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        /*//-- Notification parse
+        //-- Notification parse
         
         
         // Register for Push Notitications
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             let types = UIRemoteNotificationType([.Badge, .Sound, .Alert])
             application.registerForRemoteNotificationTypes(types)
-        }*/
+        }
         
         
         window?.rootViewController = initialViewController

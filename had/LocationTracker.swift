@@ -110,18 +110,23 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
             //print("locationServicesEnabled false\n")
             let servicesDisabledAlert : UIAlertView = UIAlertView(title: "Location Services Disabled", message: "You currently have all location services for this device disabled", delegate: nil, cancelButtonTitle: "OK")
             servicesDisabledAlert.show()
-        } else {
-            
-            
+        }
+        else
+        {
             let authorizationStatus : CLAuthorizationStatus = CLLocationManager.authorizationStatus()
-            if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted) {
+            if (authorizationStatus == CLAuthorizationStatus.Denied) || (authorizationStatus == CLAuthorizationStatus.Restricted)
+            {
                 //print("authorizationStatus failed")
-            } else {
+            }
+            else
+            {
                 let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
                 locationManager.pausesLocationUpdatesAutomatically = false
                 if #available(iOS 9.0, *) {
                     locationManager.allowsBackgroundLocationUpdates = true
-                } else {
+                }
+                else
+                {
                     // Fallback on earlier versions
                 }
                 locationManager.delegate = self
@@ -192,9 +197,9 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         self.shareModel!.bgTask = BackgroundTaskManager.sharedBackgroundTaskManager()
         self.shareModel!.bgTask!.beginNewBackgroundTask()
         
-        // Restart the locationMaanger after 1 minute
+        // Restart the locationMaanger after 30 minute
         let restartLocationUpdates : Selector = "restartLocationUpdates"
-        self.shareModel!.timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: restartLocationUpdates, userInfo: nil, repeats: false)
+        self.shareModel!.timer = NSTimer.scheduledTimerWithTimeInterval(60*30, target: self, selector: restartLocationUpdates, userInfo: nil, repeats: false)
         
         // Will only stop the locationManager after 10 seconds, so that we can get some accurate locations
         // The location manager will only operate for 10 seconds to save battery
@@ -202,7 +207,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         let appState:NSString = String(userDefaults.valueForKey("applicationState")!)
         if(appState == "UIApplicationStateActive"){
             let stopLocationDelayBy10Seconds : Selector = "stopLocationDelayBy10Seconds"
-            let delay  = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
+            let delay  = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: stopLocationDelayBy10Seconds, userInfo: nil, repeats: false)
         }
         
         let notification = UILocalNotification()
@@ -328,6 +333,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     //MARK: Stop the locationManager
     func stopLocationDelayBy10Seconds() {
         let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        locationManager.stopUpdatingLocation()
         locationManager.stopMonitoringSignificantLocationChanges()
         print("locationManager stop Updating after 10 seconds\n")
     }
