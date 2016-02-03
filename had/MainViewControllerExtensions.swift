@@ -12,6 +12,15 @@ import CoreLocation
 import CoreData
 import Social
 
+extension UIColor {
+    class func randomColor() -> UIColor {
+        let hue = CGFloat(arc4random() % 100) / 100
+        let saturation = CGFloat(arc4random() % 100) / 100
+        let brightness = CGFloat(arc4random() % 100) / 100
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+    }
+}
+
 extension MainViewController: UITableViewDataSource
 {
     
@@ -27,6 +36,7 @@ extension MainViewController: UITableViewDataSource
         }
     }
     
+        
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
@@ -35,6 +45,7 @@ extension MainViewController: UITableViewDataSource
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 58.0, bottom: 0, right: 0)
+    
         
         if (/*self.searchController.active ||*/ isFavOn)
         {
@@ -198,63 +209,6 @@ extension MainViewController: UITableViewDataSource
             cell.placeId = id
             cell.typeofPlace = placeItems[indexPath.row].typeofPlace
             
-            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
-            cell.fbFriendsImg1.userInteractionEnabled = true
-            cell.fbFriendsImg1.addGestureRecognizer(tapGestureRecognizer)
-            
-            
-            //-- Get friends array
-            let friends = placeItems[indexPath.row].friends
-            
-            //-- Create an ImageView array
-            var friendsImageView: [UIImageView?] = []
-            friendsImageView.append(cell.fbFriendsImg1)
-            friendsImageView.append(cell.fbFriendsImg2)
-            friendsImageView.append(cell.fbFriendsImg3)
-            
-            
-            setHeartButtonImage(cell,isFavOn: isFavOn)
-            
-            //-- Check if friends in place
-            if (friends != nil){
-                if friends!.count > 0 {
-                    
-                    //-- Create index for friends
-                    let indexFriends = friends!.count - 1
-                    
-                    /*for i in 0...indexFriends {
-                        var fbImageView = UIImageView!
-                        
-                    }*/
-                    
-                    //-- Loop on userId in friends
-                    for userId in 0...indexFriends {
-                        
-                        //-- Corner radius (makes circle picture)
-                        friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
-                        friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
-                        friendsImageView[userId]?.layer.masksToBounds = true
-                        
-                        //-- Create picture friends url request
-                        let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
-                        let request:NSURLRequest = NSURLRequest(URL:url)
-                        let queue:NSOperationQueue = NSOperationQueue()
-                        
-                        //-- Start async request for get facebook picture friends
-                        NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
-                            
-                            //-- Check if response != nil
-                            if((response) != nil) {
-                                
-                                //-- Lunch async request in main queue for UI elements
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    friendsImageView[userId]?.image = UIImage(data: data!)
-                                }
-                            }
-                        })
-                    }
-                }
-            }
             
             //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
@@ -263,18 +217,18 @@ extension MainViewController: UITableViewDataSource
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
-                cell.fbFriendsImg1.layer.opacity = 0
-                cell.fbFriendsImg2.layer.opacity = 0
-                cell.fbFriendsImg3.layer.opacity = 0
+                //cell.fbFriendsImg1.layer.opacity = 0
+                //cell.fbFriendsImg2.layer.opacity = 0
+                //cell.fbFriendsImg3.layer.opacity = 0
                 tableData.rowHeight = 82
             } else {
                 tableData.rowHeight = 153
                 cell.backgroundNbUser.layer.opacity = 1
                 cell.backgroundAge.layer.opacity = 1
                 cell.backgroundSex.layer.opacity = 1
-                cell.fbFriendsImg1.layer.opacity = 1
-                cell.fbFriendsImg2.layer.opacity = 1
-                cell.fbFriendsImg3.layer.opacity = 1
+                //cell.fbFriendsImg1.layer.opacity = 1
+                //cell.fbFriendsImg2.layer.opacity = 1
+                //cell.fbFriendsImg3.layer.opacity = 1
             }
             
             //-- Init settingViewController and variable ageMin ageMax
@@ -436,9 +390,16 @@ extension MainViewController: UITableViewDelegate
 {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
+        
+        guard let tableViewCell = cell as? PlaceCell else { return }
+        
+      
+        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+            
     }
     
 }
+
 /*
 extension MainViewController: UISearchResultsUpdating
 {

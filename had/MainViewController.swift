@@ -23,6 +23,10 @@ import CoreData
 
 class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
+    let model: [[UIColor]] = Design().generateRandomData()
+    
+    
+    
     //-- Global const and var
     
     var hamburger = UIBarButtonItem()
@@ -153,48 +157,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     
     //-- Refresh places
-    
-    func imageTapped(image: UIGestureRecognizer)
-    {
-        print("image tapped")
-        
-        //using sender, we can get the point in respect to the table view
-        let tapLocationInView = image.locationInView(self.view)
-        let tapLocationInTableView = image.locationInView(self.tableData)
-        
-        //using the tapLocation, we retrieve the corresponding indexPath
-        let indexPath = self.tableData.indexPathForRowAtPoint(tapLocationInTableView)
-        
-        //finally, we print out the value
-        print(indexPath)
-        
-        //we could even get the cell from the index, too
-        let cell = self.tableData.cellForRowAtIndexPath(indexPath!)
-        
-        var test:String
-        test = placeItems[indexPath!.row].placeName!
-        print(test)
-        print(tapLocationInView)
-        
-        var profileNameView:UIView = Annotation().createAnnotation(test, postition: tapLocationInView)
-        profileNameView.alpha = 0.0
-        self.view.addSubview(profileNameView)
-        
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-            profileNameView.alpha = 0.9
-            }, completion: {
-                (finished: Bool) -> Void in
-                
-                // Fade in
-                UIView.animateWithDuration(0.5, delay: 2.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                    profileNameView.alpha = 0.0
-                    }, completion: nil)
-        })
-
-    
-        //cell.textLabel?.text = "Hello, Cell!"
-    }
-    
+       
     func setLogoNavBar()
     {
         let SettingsBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: self, action: "goToSettings:")

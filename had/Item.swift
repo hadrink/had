@@ -38,8 +38,10 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var percent: UILabel!
     
+    @IBOutlet weak var FbCollectionView: UICollectionView!
     var placeId: String!
     var typeofPlace : String?
+    var folderCount:Int?
     
     @IBOutlet var routeButton: UIButton!
     
@@ -49,7 +51,15 @@ class PlaceCell: UITableViewCell {
         
     }
     
-    
+    func setCollectionViewDataSourceDelegate
+        <D: protocol<UICollectionViewDataSource, UICollectionViewDelegate>>
+        (dataSourceDelegate: D, forRow row: Int) {
+            
+            FbCollectionView.delegate = dataSourceDelegate
+            FbCollectionView.dataSource = dataSourceDelegate
+            FbCollectionView.tag = row
+            FbCollectionView.reloadData()
+    }
     
     
     
