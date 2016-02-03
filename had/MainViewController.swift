@@ -84,8 +84,6 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         activity.StartActivityIndicator(self)
         
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
@@ -166,22 +164,32 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         hamburger.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         hamburger.action = "goToSettings:"*/
         favButton.image = UIImage(named: "heart-hover")
+        if(isFavOn)
+        {
+            favButton.tintColor = Colors().pink
+            refreshControl.removeFromSuperview()
+        }
+        else
+        {
+            favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+            self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
+        }
         SettingsBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         //favBarButtonItem.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         favButton.target = self
         favButton.action = "GetFavPlaces:"
-        favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+        
         /*searchButton.image = UIImage(named: "search-icon")
         searchButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
         searchButton.target = self
         searchButton.action = "ActivateSearchMode"*/
-        self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
+        
         //        navbar.setLeftBarButtonItems([SettingsBarButtonItem,searchButton], animated: true)
         navbar.setLeftBarButtonItems([SettingsBarButtonItem], animated: true)
         navbar.setRightBarButtonItems([favButton], animated: true)
         //navbar.setRightBarButtonItem(searchButton, animated: true)
-        self.searchArray.removeAll()
-        
+        //self.searchArray.removeAll()
+        //self.tableData.reloadData()
     }
     
     /*
@@ -311,6 +319,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
             }
         }
         else{
+            self.tableData.addSubview(refreshControl)
             isFavOn = false
             favButton.tintColor = Colors().grey
         }
