@@ -33,8 +33,6 @@
 		7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */; };
 		7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */; };
 		7A86BA701B527D89005E1A2F /* RangeSliderThumbLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */; };
-		7A8AD86A1BF2390D00DA0B85 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */; };
-		7A8AD86B1BF2390D00DA0B85 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */; };
 		7A94E5571BF1E5B5009AA114 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A94E5561BF1E5B5009AA114 /* MobileCoreServices.framework */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
 		7AA2250519CDA9D1002003ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2250419CDA9D1002003ED /* Images.xcassets */; };
@@ -52,17 +50,11 @@
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
 		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
 		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
-		7AC1C8AA1C629BE100DADEE0 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */; };
-		7AC1C8AB1C629BE100DADEE0 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */; };
-		7AC1C8AC1C629BE100DADEE0 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */; };
-		7AC1C8AD1C629BE100DADEE0 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */; };
 		7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */; };
 		7AE2C8FA1AAF89BA00AD9C59 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */; };
 		7AF204F01BF13107006E0DCB /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF204EF1BF13107006E0DCB /* viewController.swift */; };
 		7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6596A1A49F74E002C6745 /* MainViewController.swift */; };
-		EB112E311C62A023005BAF26 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E2E1C62A023005BAF26 /* Bolts.framework */; };
-		EB112E321C62A023005BAF26 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E2F1C62A023005BAF26 /* ParseUI.framework */; };
-		EB112E331C62A023005BAF26 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E301C62A023005BAF26 /* Parse.framework */; };
+		CF0F06616E4E4F5D44A2C944 /* libPods-had.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E168794293799FD32208FA /* libPods-had.a */; };
 		EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE151B45CABE00F46E99 /* locationServices.swift */; };
 		EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */; };
 		EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */; };
@@ -91,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19745D2ECD82375E8F5E05CB /* Pods-had.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-had.debug.xcconfig"; path = "Pods/Target Support Files/Pods-had/Pods-had.debug.xcconfig"; sourceTree = "<group>"; };
+		4BFBB4FD153C36FBA90D4CD4 /* Pods-had.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-had.release.xcconfig"; path = "Pods/Target Support Files/Pods-had/Pods-had.release.xcconfig"; sourceTree = "<group>"; };
 		7A1017A11B67AF5600781E54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7A1017A31B67AF6100781E54 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,8 +111,6 @@
 		7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderThumbLayer.swift; sourceTree = "<group>"; };
-		7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		7A94E5561BF1E5B5009AA114 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7A94E5781BF20F0E009AA114 /* had-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "had-Bridging-Header.h"; sourceTree = "<group>"; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,18 +133,12 @@
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
-		7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveTextFieldViewController.swift; sourceTree = "<group>"; };
 		7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		7AF204EF1BF13107006E0DCB /* viewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		7AF659681A49F235002C6745 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		7AF6596A1A49F74E002C6745 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		EB112E2E1C62A023005BAF26 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		EB112E2F1C62A023005BAF26 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		EB112E301C62A023005BAF26 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		E4E168794293799FD32208FA /* libPods-had.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-had.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1BBE151B45CABE00F46E99 /* locationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationServices.swift; sourceTree = "<group>"; };
 		EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -180,25 +166,17 @@
 				7A7BEFD91BF14DF30037396A /* StoreKit.framework in Frameworks */,
 				7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */,
 				7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */,
-				7AC1C8AD1C629BE100DADEE0 /* ParseTwitterUtils.framework in Frameworks */,
-				7A8AD86B1BF2390D00DA0B85 /* FBSDKLoginKit.framework in Frameworks */,
 				7A3143251B6960A000122781 /* Social.framework in Frameworks */,
 				7A3143231B69607500122781 /* Accounts.framework in Frameworks */,
 				7A1017AC1B67AFA100781E54 /* SystemConfiguration.framework in Frameworks */,
 				EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */,
-				7AC1C8AC1C629BE100DADEE0 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				7A1017A81B67AF7E00781E54 /* QuartzCore.framework in Frameworks */,
-				7AC1C8AA1C629BE100DADEE0 /* ParseCrashReporting.framework in Frameworks */,
-				7A8AD86A1BF2390D00DA0B85 /* FBSDKCoreKit.framework in Frameworks */,
 				7A1017A61B67AF6E00781E54 /* CoreGraphics.framework in Frameworks */,
-				7AC1C8AB1C629BE100DADEE0 /* ParseFacebookUtils.framework in Frameworks */,
 				7A1017A41B67AF6100781E54 /* CFNetwork.framework in Frameworks */,
 				7A1017A21B67AF5600781E54 /* AudioToolbox.framework in Frameworks */,
-				EB112E311C62A023005BAF26 /* Bolts.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
-				EB112E321C62A023005BAF26 /* ParseUI.framework in Frameworks */,
-				EB112E331C62A023005BAF26 /* Parse.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
+				CF0F06616E4E4F5D44A2C944 /* libPods-had.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,18 +190,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		570E23CFB87C8EBC68708248 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4E168794293799FD32208FA /* libPods-had.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		773A7255470E77A4BDC45B39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EB112E2E1C62A023005BAF26 /* Bolts.framework */,
-				EB112E2F1C62A023005BAF26 /* ParseUI.framework */,
-				EB112E301C62A023005BAF26 /* Parse.framework */,
-				7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */,
-				7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */,
-				7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */,
-				7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */,
-				7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */,
-				7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */,
 				7A1017A11B67AF5600781E54 /* AudioToolbox.framework */,
 				7A1017A31B67AF6100781E54 /* CFNetwork.framework */,
 				7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */,
@@ -353,6 +330,8 @@
 				7AA224F619CDA9D1002003ED /* had */,
 				7AA2251019CDA9D1002003ED /* hadTests */,
 				7AA224F519CDA9D1002003ED /* Products */,
+				FA0C8A07D778C1F8521B0134 /* Pods */,
+				570E23CFB87C8EBC68708248 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -465,6 +444,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		FA0C8A07D778C1F8521B0134 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				19745D2ECD82375E8F5E05CB /* Pods-had.debug.xcconfig */,
+				4BFBB4FD153C36FBA90D4CD4 /* Pods-had.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -482,10 +470,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AA2251719CDA9D1002003ED /* Build configuration list for PBXNativeTarget "had" */;
 			buildPhases = (
+				27924367717F259C03765F16 /* Check Pods Manifest.lock */,
 				7AA224F019CDA9D1002003ED /* Sources */,
 				7AA224F119CDA9D1002003ED /* Frameworks */,
 				7AA224F219CDA9D1002003ED /* Resources */,
 				7A94E57F1BF21C5B009AA114 /* Headers */,
+				45ED689CA0A26B444BD0315D /* Embed Pods Frameworks */,
+				3C2284D281D3E034B3768126 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -591,6 +582,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		27924367717F259C03765F16 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3C2284D281D3E034B3768126 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-had/Pods-had-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		45ED689CA0A26B444BD0315D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-had/Pods-had-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7AA224F019CDA9D1002003ED /* Sources */ = {
@@ -749,6 +788,7 @@
 		};
 		7AA2251819CDA9D1002003ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19745D2ECD82375E8F5E05CB /* Pods-had.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -783,6 +823,7 @@
 		};
 		7AA2251919CDA9D1002003ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BFBB4FD153C36FBA90D4CD4 /* Pods-had.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;

@@ -5,6 +5,7 @@
 //  Created by Rplay on 03/02/16.
 //  Copyright © 2016 had. All rights reserved.
 //
+import UIKit
 
 extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     
