@@ -36,8 +36,6 @@
 		7A8AD86A1BF2390D00DA0B85 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */; };
 		7A8AD86B1BF2390D00DA0B85 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */; };
 		7A94E5571BF1E5B5009AA114 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A94E5561BF1E5B5009AA114 /* MobileCoreServices.framework */; };
-		7A94E5911BF221E5009AA114 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A94E58A1BF221E5009AA114 /* ParseFacebookUtils.framework */; };
-		7A94E5921BF221E5009AA114 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A94E58B1BF221E5009AA114 /* ParseFacebookUtilsV4.framework */; };
 		7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA224F919CDA9D1002003ED /* AppDelegate.swift */; };
 		7AA2250519CDA9D1002003ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2250419CDA9D1002003ED /* Images.xcassets */; };
 		7AA2250819CDA9D1002003ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AA2250619CDA9D1002003ED /* LaunchScreen.xib */; };
@@ -47,7 +45,6 @@
 		7AAA6B991C13379E00879D51 /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA6B981C13379E00879D51 /* Geotification.swift */; };
 		7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */; };
 		7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9981BADAAC10025477A /* libsqlite3.tbd */; };
-		7AB7D29E1BF791B800475DD6 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB7D29A1BF791B800475DD6 /* ParseCrashReporting.framework */; };
 		7AB7D2A31BF79E7F00475DD6 /* BackgroundTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7D2A01BF79E7F00475DD6 /* BackgroundTaskManager.swift */; };
 		7AB7D2A41BF79E7F00475DD6 /* LocationShareModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7D2A11BF79E7F00475DD6 /* LocationShareModel.swift */; };
 		7AB7D2A51BF79E7F00475DD6 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB7D2A21BF79E7F00475DD6 /* LocationTracker.swift */; };
@@ -55,13 +52,17 @@
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
 		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
 		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
+		7AC1C8A81C629BE100DADEE0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A11C629BE100DADEE0 /* Bolts.framework */; };
+		7AC1C8A91C629BE100DADEE0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A21C629BE100DADEE0 /* Parse.framework */; };
+		7AC1C8AA1C629BE100DADEE0 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */; };
+		7AC1C8AB1C629BE100DADEE0 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */; };
+		7AC1C8AC1C629BE100DADEE0 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */; };
+		7AC1C8AD1C629BE100DADEE0 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */; };
+		7AC1C8AE1C629BE100DADEE0 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC1C8A71C629BE100DADEE0 /* ParseUI.framework */; };
 		7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */; };
 		7AE2C8FA1AAF89BA00AD9C59 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */; };
 		7AF204F01BF13107006E0DCB /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF204EF1BF13107006E0DCB /* viewController.swift */; };
 		7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF6596A1A49F74E002C6745 /* MainViewController.swift */; };
-		EB112E2B1C5FFBF2005BAF26 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E281C5FFBF2005BAF26 /* Bolts.framework */; };
-		EB112E2C1C5FFBF2005BAF26 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E291C5FFBF2005BAF26 /* ParseUI.framework */; };
-		EB112E2D1C5FFBF2005BAF26 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB112E2A1C5FFBF2005BAF26 /* Parse.framework */; };
 		EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE151B45CABE00F46E99 /* locationServices.swift */; };
 		EB1BBE1A1B4B164A00F46E99 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */; };
 		EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */; };
@@ -120,8 +121,6 @@
 		7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		7A94E5561BF1E5B5009AA114 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7A94E5781BF20F0E009AA114 /* had-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "had-Bridging-Header.h"; sourceTree = "<group>"; };
-		7A94E58A1BF221E5009AA114 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		7A94E58B1BF221E5009AA114 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		7AA224F419CDA9D1002003ED /* had.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = had.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA224F819CDA9D1002003ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AA224F919CDA9D1002003ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,7 +134,6 @@
 		7AAA6B981C13379E00879D51 /* Geotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
 		7AB6C9971BADAAC10025477A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		7AB6C9981BADAAC10025477A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		7AB7D29A1BF791B800475DD6 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		7AB7D2A01BF79E7F00475DD6 /* BackgroundTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTaskManager.swift; sourceTree = "<group>"; };
 		7AB7D2A11BF79E7F00475DD6 /* LocationShareModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationShareModel.swift; sourceTree = "<group>"; };
 		7AB7D2A21BF79E7F00475DD6 /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
@@ -143,14 +141,18 @@
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7AC1C8A11C629BE100DADEE0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		7AC1C8A21C629BE100DADEE0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
+		7AC1C8A71C629BE100DADEE0 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveTextFieldViewController.swift; sourceTree = "<group>"; };
 		7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		7AF204EF1BF13107006E0DCB /* viewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		7AF659681A49F235002C6745 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		7AF6596A1A49F74E002C6745 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		EB112E281C5FFBF2005BAF26 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		EB112E291C5FFBF2005BAF26 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		EB112E2A1C5FFBF2005BAF26 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		EB1BBE151B45CABE00F46E99 /* locationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationServices.swift; sourceTree = "<group>"; };
 		EB1BBE191B4B164A00F46E99 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -173,29 +175,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB112E2C1C5FFBF2005BAF26 /* ParseUI.framework in Frameworks */,
 				7A94E5571BF1E5B5009AA114 /* MobileCoreServices.framework in Frameworks */,
 				7A7BEFDB1BF14E4A0037396A /* libz.tbd in Frameworks */,
-				7A94E5921BF221E5009AA114 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				7A7BEFD91BF14DF30037396A /* StoreKit.framework in Frameworks */,
 				7AB6C9991BADAAC10025477A /* libsqlite3.0.tbd in Frameworks */,
 				7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */,
-				EB112E2B1C5FFBF2005BAF26 /* Bolts.framework in Frameworks */,
+				7AC1C8AD1C629BE100DADEE0 /* ParseTwitterUtils.framework in Frameworks */,
+				7AC1C8AE1C629BE100DADEE0 /* ParseUI.framework in Frameworks */,
 				7A8AD86B1BF2390D00DA0B85 /* FBSDKLoginKit.framework in Frameworks */,
 				7A3143251B6960A000122781 /* Social.framework in Frameworks */,
 				7A3143231B69607500122781 /* Accounts.framework in Frameworks */,
-				7AB7D29E1BF791B800475DD6 /* ParseCrashReporting.framework in Frameworks */,
 				7A1017AC1B67AFA100781E54 /* SystemConfiguration.framework in Frameworks */,
 				EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */,
+				7AC1C8AC1C629BE100DADEE0 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				7A1017A81B67AF7E00781E54 /* QuartzCore.framework in Frameworks */,
+				7AC1C8AA1C629BE100DADEE0 /* ParseCrashReporting.framework in Frameworks */,
 				7A8AD86A1BF2390D00DA0B85 /* FBSDKCoreKit.framework in Frameworks */,
-				EB112E2D1C5FFBF2005BAF26 /* Parse.framework in Frameworks */,
 				7A1017A61B67AF6E00781E54 /* CoreGraphics.framework in Frameworks */,
+				7AC1C8AB1C629BE100DADEE0 /* ParseFacebookUtils.framework in Frameworks */,
+				7AC1C8A91C629BE100DADEE0 /* Parse.framework in Frameworks */,
 				7A1017A41B67AF6100781E54 /* CFNetwork.framework in Frameworks */,
 				7A1017A21B67AF5600781E54 /* AudioToolbox.framework in Frameworks */,
+				7AC1C8A81C629BE100DADEE0 /* Bolts.framework in Frameworks */,
 				EB444F9E1A9E30A000E533B2 /* CoreData.framework in Frameworks */,
 				7A8272FA1A1D3279004603FE /* CoreLocation.framework in Frameworks */,
-				7A94E5911BF221E5009AA114 /* ParseFacebookUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,14 +215,15 @@
 		773A7255470E77A4BDC45B39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EB112E281C5FFBF2005BAF26 /* Bolts.framework */,
-				EB112E291C5FFBF2005BAF26 /* ParseUI.framework */,
-				EB112E2A1C5FFBF2005BAF26 /* Parse.framework */,
-				7AB7D29A1BF791B800475DD6 /* ParseCrashReporting.framework */,
+				7AC1C8A11C629BE100DADEE0 /* Bolts.framework */,
+				7AC1C8A21C629BE100DADEE0 /* Parse.framework */,
+				7AC1C8A31C629BE100DADEE0 /* ParseCrashReporting.framework */,
+				7AC1C8A41C629BE100DADEE0 /* ParseFacebookUtils.framework */,
+				7AC1C8A51C629BE100DADEE0 /* ParseFacebookUtilsV4.framework */,
+				7AC1C8A61C629BE100DADEE0 /* ParseTwitterUtils.framework */,
+				7AC1C8A71C629BE100DADEE0 /* ParseUI.framework */,
 				7A8AD8681BF2390D00DA0B85 /* FBSDKCoreKit.framework */,
 				7A8AD8691BF2390D00DA0B85 /* FBSDKLoginKit.framework */,
-				7A94E58A1BF221E5009AA114 /* ParseFacebookUtils.framework */,
-				7A94E58B1BF221E5009AA114 /* ParseFacebookUtilsV4.framework */,
 				7A1017A11B67AF5600781E54 /* AudioToolbox.framework */,
 				7A1017A31B67AF6100781E54 /* CFNetwork.framework */,
 				7A1017A51B67AF6E00781E54 /* CoreGraphics.framework */,
