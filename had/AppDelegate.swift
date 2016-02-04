@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ParseFacebookUtilsV4
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             clientKey: "XbTtLmK0TFIvTWeLqil7Hcgs8NXz7hATjOpmKq5X")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
         
         
         UIApplication.sharedApplication().idleTimerDisabled = true

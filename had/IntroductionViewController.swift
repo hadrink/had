@@ -223,6 +223,7 @@ observeProfileChange()
 }
 }*/
 
+import ParseFacebookUtilsV4
 
 class LoginViewController: UIViewController{
     
@@ -236,6 +237,7 @@ class LoginViewController: UIViewController{
     }
     
     @IBAction func loginButtonPressed(sender: UIButton) {
+        
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "user_about_me", "user_birthday"], block: {
             user, error in
             
@@ -243,7 +245,7 @@ class LoginViewController: UIViewController{
                 print("Ruh-roh, the user cancelled the Facebook login.")
                 return
             }
-            else if user!.isAuthenticated(){
+            else if user!.authenticated{
                 self.getParseUserInfo(user!)
                 UserDataFb().getPicture()
             } else if user!.isNew {
