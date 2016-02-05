@@ -50,6 +50,8 @@
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
 		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
 		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
+		7ACC176A1C64FD2400082E42 /* CheckConnexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC17691C64FD2400082E42 /* CheckConnexion.swift */; };
+		7ACC176C1C64FE6900082E42 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC176B1C64FE6900082E42 /* Tooltip.swift */; };
 		7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */; };
 		7AE2C8FA1AAF89BA00AD9C59 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */; };
 		7AF204F01BF13107006E0DCB /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF204EF1BF13107006E0DCB /* viewController.swift */; };
@@ -133,6 +135,8 @@
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7ACC17691C64FD2400082E42 /* CheckConnexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckConnexion.swift; sourceTree = "<group>"; };
+		7ACC176B1C64FE6900082E42 /* Tooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveTextFieldViewController.swift; sourceTree = "<group>"; };
 		7AE2C8F91AAF89BA00AD9C59 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		7AF204EF1BF13107006E0DCB /* viewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 				7AA2251F19CDBED4002003ED /* QueryServices.swift */,
 				EB1BBE151B45CABE00F46E99 /* locationServices.swift */,
 				F3C67E061B601B6600191138 /* QueryFacebook.swift */,
+				7ACC17691C64FD2400082E42 /* CheckConnexion.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 			children = (
 				F6A5521D1A279D6A001C371E /* PlaceItem.swift */,
 				F6A552201A27A317001C371E /* Item.swift */,
+				7ACC176B1C64FE6900082E42 /* Tooltip.swift */,
 			);
 			name = ItemCell;
 			sourceTree = "<group>";
@@ -649,6 +655,7 @@
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
 				EB1BBE161B45CABE00F46E99 /* locationServices.swift in Sources */,
+				7ACC176C1C64FE6900082E42 /* Tooltip.swift in Sources */,
 				7AB7D2A41BF79E7F00475DD6 /* LocationShareModel.swift in Sources */,
 				7AF204F01BF13107006E0DCB /* viewController.swift in Sources */,
 				7A7DA73A1C5023E30047C64D /* ContentViewController.swift in Sources */,
@@ -660,6 +667,7 @@
 				EB4EF7661BF656CD00461020 /* Place.swift in Sources */,
 				7AB7D2A31BF79E7F00475DD6 /* BackgroundTaskManager.swift in Sources */,
 				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
+				7ACC176A1C64FD2400082E42 /* CheckConnexion.swift in Sources */,
 				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
 				7A7CC7791C626B9E00FAD7C7 /* CollectionView.swift in Sources */,
 				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,

@@ -264,7 +264,7 @@ class LoginViewController: UIViewController{
     
     func getParseUserInfo(user: PFUser){
         
-        let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture,first_name,last_name,birthday,gender", parameters: nil)
+        let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture,first_name,last_name,birthday,gender,friends", parameters: nil)
         FBRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             let r = result as! NSDictionary
@@ -273,9 +273,12 @@ class LoginViewController: UIViewController{
             user["firstName"] = r["first_name"]
             user["lastName"] = r["last_name"]
             user["gender"] = r["gender"]
+            user["friends"] = r["friends"]
+            print("Friends intror\(r["friends"])")
             
             settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
             settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
+            settingViewController.userDefaults.setObject(r["friends"], forKey: "friends")
             settingViewController.userDefaults.synchronize()
             
             let dateFormatter = NSDateFormatter()

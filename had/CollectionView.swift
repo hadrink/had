@@ -12,15 +12,23 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //-- Return number of cells in CollectionView
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-            
+        
             collectionView.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
             var indexPath: NSIndexPath?
             if let superview = collectionView.superview {
                 if let cell = superview.superview as? PlaceCell {
                     indexPath = tableData.indexPathForCell(cell)
+                    print("Index Path Row \(indexPath?.row)")
                     if indexPath != nil {
-                        let friendsCount = placeItems[indexPath!.row].friends?.count
-                        return friendsCount!
+                        if isFavOn {
+                            print(searchArray[indexPath!.row].friends)
+                        }
+                        let friendsCount:Int? = isFavOn ? searchArray[indexPath!.row].friends?.count : placeItems[indexPath!.row].friends?.count
+                        if isFavOn {
+                            print(searchArray[indexPath!.row])
+                        }
+                        print(isFavOn)
+                        return friendsCount != nil ? friendsCount! : 0
                     }
                     
                 }
@@ -41,7 +49,7 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 
                 indexPathTableView = tableData.indexPathForCell(tableViewCell)!
                 
-                var friends = placeItems[indexPathTableView.row].friends
+                var friends = isFavOn ? searchArray[indexPathTableView.row].friends : placeItems[indexPathTableView.row].friends
                 let userId = indexPath.row
                 let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "\(friends![userId])?fields=picture,first_name,last_name,birthday,gender", parameters: nil)
                 
@@ -91,7 +99,7 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
             if let superview = collectionView.superview {
                 if let tableViewCell = superview.superview as? PlaceCell {
                     indexPathTableView = tableData.indexPathForCell(tableViewCell)!
-                    var friends = placeItems[indexPathTableView.row].friends
+                    var friends = isFavOn ? searchArray[indexPathTableView.row].friends : placeItems[indexPathTableView.row].friends
                     let userId = indexPath.row
                     
                     let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")

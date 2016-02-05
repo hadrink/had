@@ -49,6 +49,7 @@ class PlaceItem : CLLocationManager{
         // Get friends visited place
         
         friends = json["friends"] as? Array<String>
+        print(friends)
         
         print("Friends visited \(friends)")
         

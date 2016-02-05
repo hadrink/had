@@ -40,155 +40,20 @@ extension MainViewController: UITableViewDataSource
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
+        //-- Get cell
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
         
+        //-- Design cell
+        cell.alpha = 0
+        UIView.animateWithDuration(0.5, animations: { cell.alpha = 1 })
+        cell.backgroundSex.layer.borderWidth = 1.5
+        cell.backgroundSex.layer.cornerRadius = 4.0
+        cell.backgroundAge.layer.cornerRadius = 4.0
+        cell.backgroundNbUser.layer.cornerRadius = 4.0
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.layoutMargins = UIEdgeInsets.init(top: 0.0, left: 58.0, bottom: 0, right: 0)
-    
         
-        if (/*self.searchController.active ||*/ isFavOn)
-        {
-            let type = searchArray[indexPath.row].typeofPlace as String?
-            cell.placeName.text = searchArray[indexPath.row].placeName as String?
-            cell.city.text = searchArray[indexPath.row].city as String?
-            cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
-            
-            if(searchArray[indexPath.row].showDetails)
-            {
-                cell.nbUser.text = String(searchArray[indexPath.row].counter)
-                cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
-                cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
-                cell.sexIcon.image = searchArray[indexPath.row].sexIcon
-                cell.backgroundSex.backgroundColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
-                cell.backgroundSex.layer.cornerRadius = 4.0
-                cell.backgroundAge.layer.cornerRadius = 4.0
-                cell.backgroundNbUser.layer.cornerRadius = 4.0
-                cell.placeId = searchArray[indexPath.row].placeId!
-                cell.typeofPlace = searchArray[indexPath.row].typeofPlace
-                
-                //-- Get friends array
-                let friends = searchArray[indexPath.row].friends
-                //-- Create an ImageView array
-                var friendsImageView: [UIImageView?] = []
-                friendsImageView.append(cell.fbFriendsImg1)
-                friendsImageView.append(cell.fbFriendsImg2)
-                friendsImageView.append(cell.fbFriendsImg3)
-                
-                //-- Check if friends in place
-                if (friends != nil){
-                    if friends!.count > 0 {
-                        
-                        //-- Create index for friends
-                        let indexFriends = friends!.count - 1
-                        
-                        //-- Loop on userId in friends
-                        for userId in 0...indexFriends {
-                            
-                            //-- Corner radius (makes circle picture)
-                            friendsImageView[userId]?.frame.size = CGSize(width: 30, height: 30)
-                            friendsImageView[userId]?.layer.cornerRadius = (friendsImageView[userId]?.frame.size.width)! / 2
-                            friendsImageView[userId]?.layer.masksToBounds = true
-                            
-                            
-                            //-- Create picture friends url request
-                            let url: NSURL! = NSURL(string: "https://graph.facebook.com/\(friends![userId])/picture?width=90&height=90")
-                            let request:NSURLRequest = NSURLRequest(URL:url)
-                            let queue:NSOperationQueue = NSOperationQueue()
-                            
-                            //-- Start async request for get facebook picture friends
-                            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler:{ response, data, error in
-                                
-                                //-- Check if response != nil
-                                if((response) != nil) {
-                                    
-                                    //-- Lunch async request in main queue for UI elements
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        friendsImageView[userId]?.image = UIImage(data: data!)
-                                    }
-                                }
-                            })
-                        }
-                    }
-                }
-                
-            }
-            setHeartButtonImage(cell,isFavOn: isFavOn)
-            
-            
-            //-- Check if users in place (If true elements display else none)
-            if searchArray[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
-                cell.backgroundNbUser.layer.opacity = 0
-                cell.backgroundAge.layer.opacity = 0
-                cell.backgroundSex.layer.opacity = 0
-                cell.fbFriendsImg1.layer.opacity = 0
-                cell.fbFriendsImg2.layer.opacity = 0
-                cell.fbFriendsImg3.layer.opacity = 0
-                tableData.rowHeight = 82
-            } else {
-                tableData.rowHeight = 153
-                cell.backgroundNbUser.layer.opacity = 1
-                cell.backgroundAge.layer.opacity = 1
-                cell.backgroundSex.layer.opacity = 1
-                cell.fbFriendsImg1.layer.opacity = 1
-                cell.fbFriendsImg2.layer.opacity = 1
-                cell.fbFriendsImg3.layer.opacity = 1
-            }
-            
-            
-            //-- Init settingViewController and variable ageMin ageMax
-            let settingViewController = SettingsViewController()
-            var ageMin : Double
-            var ageMax : Double
-            
-            //cell.clearsContextBeforeDrawing = false
-            
-            var displayBar:Bool?
-            var displayNightclub:Bool?
-            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
-                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                print("SwitchStateBar")
-            } else {
-                displayBar = settingDefault.displayBar
-                print("default setting")
-            }
-            
-            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
-                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
-            } else {
-                displayNightclub = settingDefault.displayNightclub
-            }
-            
-            if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
-                cell.iconTableview.image = UIImage(named: "bar-icon")
-            }
-                
-            else if(type == "nightclub" && displayNightclub! ) {
-                cell.iconTableview.image = UIImage(named: "nightclub-icon")
-            }
-                
-            else {
-                tableData.rowHeight = 0
-                cell.hidden = true
-            }
-            
-            
-            //-- If userDefault value exist use it, else take the default value
-            if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
-                ageMin = settingDefault.ageMin
-                ageMax = settingDefault.ageMax
-            } else {
-                ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
-                ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
-            }
-            
-        }
-        else
-        {
-            let type = placeItems[indexPath.row].typeofPlace as String!
-            
+        func cellDataMainView() {
             cell.placeName.text = placeItems[indexPath.row].placeName as String?
             cell.city.text = placeItems[indexPath.row].city as String?
             cell.nbUser.text = String(placeItems[indexPath.row].counter)
@@ -197,75 +62,65 @@ extension MainViewController: UITableViewDataSource
             cell.details.textColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             cell.percent.textColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
             cell.distance.text = String(stringInterpolationSegment: placeItems[indexPath.row].distance) + "km"
-            cell.sexIcon.image = placeItems[indexPath.row].sexIcon
-            //cell.backgroundSex.backgroundColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
-            cell.backgroundSex.layer.borderColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink.CGColor : Colors().blue.CGColor
-            cell.backgroundSex.layer.borderWidth = 1.5
-            
-            cell.backgroundSex.layer.cornerRadius = 4.0
-            cell.backgroundAge.layer.cornerRadius = 4.0
-            cell.backgroundNbUser.layer.cornerRadius = 4.0
             let id = placeItems[indexPath.row].placeId
             cell.placeId = id
+            cell.sexIcon.image = placeItems[indexPath.row].sexIcon
+            cell.backgroundSex.layer.borderColor = placeItems[indexPath.row].majoritySex == "F" ? Colors().pink.CGColor : Colors().blue.CGColor
             cell.typeofPlace = placeItems[indexPath.row].typeofPlace
-            
-            
-            //-- Check if users in place (If true elements display else none)
-            if placeItems[indexPath.row].counter == nil {
-                print("index")
-                print(indexPath.row)
-                cell.backgroundNbUser.layer.opacity = 0
-                cell.backgroundAge.layer.opacity = 0
-                cell.backgroundSex.layer.opacity = 0
-                //cell.fbFriendsImg1.layer.opacity = 0
-                //cell.fbFriendsImg2.layer.opacity = 0
-                //cell.fbFriendsImg3.layer.opacity = 0
-                tableData.rowHeight = 82
-            } else {
-                tableData.rowHeight = 153
-                cell.backgroundNbUser.layer.opacity = 1
-                cell.backgroundAge.layer.opacity = 1
-                cell.backgroundSex.layer.opacity = 1
-                //cell.fbFriendsImg1.layer.opacity = 1
-                //cell.fbFriendsImg2.layer.opacity = 1
-                //cell.fbFriendsImg3.layer.opacity = 1
-            }
+        }
+        
+        func cellDataFav() {
+            cell.placeName.text = searchArray[indexPath.row].placeName as String?
+            cell.city.text = searchArray[indexPath.row].city as String?
+            cell.nbUser.text = String(searchArray[indexPath.row].counter)
+            cell.averageAge.text = String(searchArray[indexPath.row].averageAge) + " - " + String(searchArray[indexPath.row].averageAge != nil ? searchArray[indexPath.row].averageAge + 1 : 0)
+            cell.details.text = String(format: "%.0f", round(searchArray[indexPath.row].pourcentSex))
+            cell.details.textColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            cell.percent.textColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink : Colors().blue
+            cell.distance.text = String(stringInterpolationSegment: searchArray[indexPath.row].distance) + "km"
+            let id = searchArray[indexPath.row].placeId
+            cell.placeId = id
+            cell.sexIcon.image = searchArray[indexPath.row].sexIcon
+            cell.backgroundSex.layer.borderColor = searchArray[indexPath.row].majoritySex == "F" ? Colors().pink.CGColor : Colors().blue.CGColor
+            cell.typeofPlace = searchArray[indexPath.row].typeofPlace
+        }
+        
+        func displayBarOrNightClub(type : String) {
             
             //-- Init settingViewController and variable ageMin ageMax
             let settingViewController = SettingsViewController()
+            let userDefaults = settingViewController.userDefaults
             var ageMin : Double
             var ageMax : Double
-            
-            //cell.clearsContextBeforeDrawing = false
-            
             var displayBar:Bool?
             var displayNightclub:Bool?
-            if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
-                displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                //print("SwitchStateBar")
+            var switchStateBar = userDefaults.boolForKey("SwitchStateBar")
+            var switchStateNightclub = userDefaults.boolForKey("SwitchStateNightclub")
+            
+            //-- Check if SwitchStateBar is set
+            if (userDefaults.objectForKey("SwitchStateBar") != nil) {
+                displayBar = userDefaults.boolForKey("SwitchStateBar")
             } else {
                 displayBar = settingDefault.displayBar
-                //print("default setting")
             }
             
-            if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
-                displayNightclub = settingViewController.userDefault.boolForKey("SwitchStateNightclub")
+            //-- Check if SwitchStateNightclub is set
+            if (userDefaults.objectForKey("SwitchStateNightclub") != nil) {
+                displayNightclub = switchStateNightclub
             } else {
                 displayNightclub = settingDefault.displayNightclub
             }
             
+            //-- Set appropiate image for bar or nightclub
             if ((type == "cafe" || type == "bar" || type == "pub") && displayBar! ) {
                 cell.iconTableview.image = UIImage(named: "bar-icon")
-            }
-                
-            else if(type == "nightclub" && displayNightclub! ) {
+            } else if(type == "nightclub" && displayNightclub! ) {
                 cell.iconTableview.image = UIImage(named: "nightclub-icon")
-            }
-                
-            else {
+            } else {
                 tableData.rowHeight = 0
                 cell.hidden = true
             }
+            
             
             //-- If userDefault value exist use it, else take the default value
             if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -275,66 +130,65 @@ extension MainViewController: UITableViewDataSource
                 ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
                 ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
             }
+
         }
-        return cell
-    }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
-    
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
-        var GoActionTitle:String = "Itinéraire"
         
-        let GoToAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: GoActionTitle , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
+        if (/*self.searchController.active ||*/ isFavOn) {
+            let type = searchArray[indexPath.row].typeofPlace as String!
             
-          //  self.locServices.mapsHandler(indexPath, placeItems: self.placeItems,searchArray: self.searchArray,placesSearchController: self.searchController)
+            cellDataFav()
+            setHeartButtonImage(cell,isFavOn: isFavOn)
             
-        })
-        
-        GoToAction.backgroundColor = Colors().blue
-      
-        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Partager" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
-            
-            let shareToFacebookButton = NSLocalizedString("Facebook", comment: "Facebook")
-            let shareToTwitterButton = NSLocalizedString("Twitter", comment: "Twitter")
-            let cancelButton = NSLocalizedString("Annuler", comment: "Annuler")
-            
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            
-            //-- Create the actions
-            let shareToFacebookAction = UIAlertAction(title: shareToFacebookButton, style: .Destructive ) { action in
-                let shareToFacebook : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                let thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
-                shareToFacebook.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
-                self.presentViewController(shareToFacebook, animated: true, completion: nil)
+            //-- Check if users in place (If true elements display else none)
+            if searchArray[indexPath.row].counter == nil {
+                print("index")
+                print(indexPath.row)
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                tableData.rowHeight = 82
+            } else {
+                tableData.rowHeight = 153
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                
             }
             
-            let shareToTwitterAction = UIAlertAction(title: shareToTwitterButton, style: .Destructive) { action in
-                let shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-                let thisTitle: AnyObject! = self.placeItems[indexPath.row].placeName
-                shareToTwitter.setInitialText("\(thisTitle) : ce lieu à l'air vraiment génial !")
-                self.presentViewController(shareToTwitter, animated: true, completion: nil)
+            
+            //-- Define bar or Nightclub
+            
+            displayBarOrNightClub(type)
+            return cell
+            
+        } else {
+            
+            let type = placeItems[indexPath.row].typeofPlace as String!
+            
+            //-- Cell Data MainView
+            cellDataMainView()
+            
+            setHeartButtonImage(cell,isFavOn: isFavOn)
+
+            
+            //-- Check if users in place (If true elements display else none)
+            if placeItems[indexPath.row].counter == nil {
+                print("index")
+                print(indexPath.row)
+                cell.backgroundNbUser.layer.opacity = 0
+                cell.backgroundAge.layer.opacity = 0
+                cell.backgroundSex.layer.opacity = 0
+                tableData.rowHeight = 82
+            } else {
+                tableData.rowHeight = 153
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
             }
             
-            let cancelAction = UIAlertAction(title: cancelButton, style: .Cancel) { action in
-                alertController.dismissViewControllerAnimated(true, completion: {
-                    self.performSegueWithIdentifier("postview", sender: self)
-                })
-            }
-            
-            //-- Add the actions.
-            alertController.addAction(shareToFacebookAction)
-            alertController.addAction(shareToTwitterAction)
-            alertController.addAction(cancelAction)
-            
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-            
-        })
-        
-        shareAction.backgroundColor = Colors().blue
-        return [GoToAction,shareAction]
+            displayBarOrNightClub(type)        }
+            return cell
     }
     
     
@@ -550,11 +404,11 @@ extension MainViewController: CLLocationManagerDelegate
                 formatter.dateFormat = "dd-MM-yyyy"
                 
                 let userDataFb = UserDataFb()
-                userDataFb.getFriends()
+                //userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
                 print("MyFriends\(friends)" )
                 
-                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince, "friends" : friends!], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
                     let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
