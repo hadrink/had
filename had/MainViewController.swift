@@ -51,7 +51,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     var nbAlertDuringRefresh = 0
     //var searchController = UISearchController()
     var searchArray:[PlaceItem] = [PlaceItem](){
-        didSet  {self.tableData.reloadData()}
+        didSet  {}
     }
     
     lazy var locationManager: CLLocationManager! = {
@@ -201,7 +201,6 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
             isFavOn = false
             favButton.tintColor = Colors().grey
         }
-        self.tableData.reloadData()
     }
     
     func getFavPlacesRequest() {

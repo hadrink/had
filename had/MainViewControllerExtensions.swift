@@ -42,6 +42,7 @@ extension MainViewController: UITableViewDataSource
     {
         //-- Get cell
         let cell:PlaceCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PlaceCell
+        let settingViewController = SettingsViewController()
         
         //-- Design cell
         cell.alpha = 0
@@ -88,10 +89,7 @@ extension MainViewController: UITableViewDataSource
         func displayBarOrNightClub(type : String) {
             
             //-- Init settingViewController and variable ageMin ageMax
-            let settingViewController = SettingsViewController()
             let userDefaults = settingViewController.userDefaults
-            var ageMin : Double
-            var ageMax : Double
             var displayBar:Bool?
             var displayNightclub:Bool?
             var switchStateBar = userDefaults.boolForKey("SwitchStateBar")
@@ -121,6 +119,13 @@ extension MainViewController: UITableViewDataSource
                 cell.hidden = true
             }
             
+        }
+        
+        func filterAge() {
+            var ageMin : Double
+            var ageMax : Double
+            var place = placeItems[indexPath.row]
+            var placeAverageAge: Int? = place.averageAge
             
             //-- If userDefault value exist use it, else take the default value
             if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -130,9 +135,16 @@ extension MainViewController: UITableViewDataSource
                 ageMin = settingViewController.userDefaults.doubleForKey("AgeMinValue")
                 ageMax = settingViewController.userDefaults.doubleForKey("AgeMaxValue")
             }
+            
+            if place.averageAge != nil {
+                if  Double(placeAverageAge!) < ageMin || Double(placeAverageAge!) > ageMax {
+                    cell.hidden = true
+                    tableData.rowHeight = 0
+                }
+            }
 
         }
-    
+        
         
         if (/*self.searchController.active ||*/ isFavOn) {
             let type = searchArray[indexPath.row].typeofPlace as String!
@@ -187,7 +199,9 @@ extension MainViewController: UITableViewDataSource
                 cell.backgroundSex.layer.opacity = 1
             }
             
-            displayBarOrNightClub(type)        }
+            displayBarOrNightClub(type)
+            filterAge()
+        }
             return cell
     }
     

@@ -72,7 +72,13 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                             // Fade in
                             UIView.animateWithDuration(0.5, delay: 2.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
                                 tooltip.alpha = 0.0
-                                }, completion: nil)
+                                }, completion: {
+                                    (finished: Bool) -> Void in
+                                    if finished {
+                                        Annotation().removeAnnotation(tooltip)
+                                    }
+                                })
+                            
                     })
                     
                 })

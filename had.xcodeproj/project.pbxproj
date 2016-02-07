@@ -16,6 +16,8 @@
 		7A1045711A8F7EC4008DAF8C /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A1045701A8F7EC4008DAF8C /* Lato-BoldItalic.ttf */; };
 		7A3143231B69607500122781 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143221B69607500122781 /* Accounts.framework */; };
 		7A3143251B6960A000122781 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A3143241B6960A000122781 /* Social.framework */; };
+		7A4A263C1C676C6C000BD0B2 /* legal.html in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A263B1C676C6C000BD0B2 /* legal.html */; };
+		7A4A263E1C67770F000BD0B2 /* Legal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A263D1C67770F000BD0B2 /* Legal.swift */; };
 		7A50441F1B4D640400477133 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A50441E1B4D640400477133 /* Lato-Bold.ttf */; };
 		7A65B69B1AF5027F00A124EC /* RobotoSlab-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6971AF5027F00A124EC /* RobotoSlab-Bold.ttf */; };
 		7A65B69C1AF5027F00A124EC /* RobotoSlab-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */; };
@@ -96,6 +98,8 @@
 		7A1045701A8F7EC4008DAF8C /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		7A3143221B69607500122781 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		7A3143241B6960A000122781 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		7A4A263B1C676C6C000BD0B2 /* legal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = legal.html; sourceTree = "<group>"; };
+		7A4A263D1C67770F000BD0B2 /* Legal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legal.swift; sourceTree = "<group>"; };
 		7A50441E1B4D640400477133 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		7A65B6971AF5027F00A124EC /* RobotoSlab-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Bold.ttf"; sourceTree = "<group>"; };
 		7A65B6981AF5027F00A124EC /* RobotoSlab-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Light.ttf"; sourceTree = "<group>"; };
@@ -266,12 +270,22 @@
 		7A1CF9011B5ED83400410F32 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				7A4A263F1C679A43000BD0B2 /* Legal */,
 				7A86BA6F1B527D89005E1A2F /* RangeSliderThumbLayer.swift */,
 				7A86BA6B1B5279D2005E1A2F /* RangeSlider.swift */,
 				7A86BA6D1B527BD2005E1A2F /* RangeSliderTrackLayer.swift */,
 				EB1BBE1B1B4D825700F46E99 /* SettingsViewController.swift */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		7A4A263F1C679A43000BD0B2 /* Legal */ = {
+			isa = PBXGroup;
+			children = (
+				7A4A263D1C67770F000BD0B2 /* Legal.swift */,
+				7A4A263B1C676C6C000BD0B2 /* legal.html */,
+			);
+			name = Legal;
 			sourceTree = "<group>";
 		};
 		7A4BCF7D1C56585100AFD1CF /* Images */ = {
@@ -564,6 +578,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4A263C1C676C6C000BD0B2 /* legal.html in Resources */,
 				7AE2C8FA1AAF89BA00AD9C59 /* Lato-Italic.ttf in Resources */,
 				7A10456F1A8F779C008DAF8C /* signpainter-housescript-webfont.ttf in Resources */,
 				7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */,
@@ -669,6 +684,7 @@
 				7A86BA6C1B5279D2005E1A2F /* RangeSlider.swift in Sources */,
 				7ACC176A1C64FD2400082E42 /* CheckConnexion.swift in Sources */,
 				7A86BA6E1B527BD2005E1A2F /* RangeSliderTrackLayer.swift in Sources */,
+				7A4A263E1C67770F000BD0B2 /* Legal.swift in Sources */,
 				7A7CC7791C626B9E00FAD7C7 /* CollectionView.swift in Sources */,
 				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,
 				EB4EF7651BF656CD00461020 /* Place+CoreDataProperties.swift in Sources */,

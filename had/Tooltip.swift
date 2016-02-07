@@ -32,4 +32,8 @@ class Annotation {
         
         return annotationView
     }
+    
+    func removeAnnotation(annotation : UIView) {
+            annotation.removeFromSuperview()
+    }
 }

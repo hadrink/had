@@ -67,7 +67,7 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
         navigationItem.title = "Réglages"
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "Lato-BoldItalic", size: 20)!]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
-        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5b90ce)
+        self.navigationController?.navigationBar.barTintColor = Colors().lightBlue
         self.navigationController?.navigationBar.translucent = false
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "had-return"), style: .Plain, target: self, action: "goToMainView:")
         navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
