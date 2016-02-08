@@ -39,6 +39,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //-- Action when tapping on cell
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
+        PFAnalytics.trackEventInBackground("DisplayFbName", block: nil)
+        
         var indexPathTableView: NSIndexPath
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CollectionCell",
             forIndexPath: indexPath)

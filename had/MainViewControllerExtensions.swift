@@ -525,6 +525,7 @@ extension MainViewController
     
     func refresh(){
         //print("")
+        PFAnalytics.trackEventInBackground("RefrechMainView", block: nil)
         
         // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
         // This is where you'll make requests to an API, reload data, or process information
@@ -707,6 +708,7 @@ func IsPlaceInCoreData(placeId : String) -> Bool {
 
 func setHeartButtonImage(cell:PlaceCell,isFavOn:Bool)
 {
+    PFAnalytics.trackEventInBackground("ClickOnHeart", block: nil)
     if (IsPlaceInCoreData(cell.placeId!) || isFavOn) {
         cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
     }

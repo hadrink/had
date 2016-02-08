@@ -81,7 +81,7 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        PFAnalytics.trackEventInBackground("SettingViewLoaded", block: nil)
         
         //-- Set design for profile views
         designProfileViews()
@@ -177,14 +177,18 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     @IBAction func saveSwitchState(sender: AnyObject) {
         
         if barSwitch.on {
+            PFAnalytics.trackEventInBackground("BarSwitchOn", block: nil)
             userDefaults.setBool(true, forKey: "SwitchStateBar")
         } else {
+            PFAnalytics.trackEventInBackground("BarSwitchOff", block: nil)
             userDefaults.setBool(false, forKey: "SwitchStateBar")
         }
         
         if nightclubSwitch.on {
+            PFAnalytics.trackEventInBackground("NightClubSwitchOn", block: nil)
             userDefaults.setBool(true, forKey: "SwitchStateNightclub")
         } else {
+            PFAnalytics.trackEventInBackground("NightClubSwitchOff", block: nil)
             userDefaults.setBool(false, forKey: "SwitchStateNightclub")
         }
         
@@ -200,7 +204,7 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     //let FBLogOut = FBSDKLoginManager()
     
     @IBAction func deleteUserAccount(sender: AnyObject) {
-        
+        PFAnalytics.trackEventInBackground("DeconnectAccount", block: nil)
         PFUser.logOutInBackground()
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
         self.presentViewController(vc, animated: true, completion: nil)
@@ -260,13 +264,16 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
             
             if monthCheckmarkCell.selected {
                 userDefaults.setInteger(31, forKey: "stats_since")
+                PFAnalytics.trackEventInBackground("OneMonthCheckmarkCell", block: nil)
             }
             
             if twoweeksCheckmarkCell.selected {
+                PFAnalytics.trackEventInBackground("TwoWeekCheckmarkCell", block: nil)
                 userDefaults.setInteger(14, forKey: "stats_since")
             }
             
             if oneweekCheckmarkCell.selected {
+                PFAnalytics.trackEventInBackground("OneWeekCheckmarkCell", block: nil)
                 userDefaults.setInteger(7, forKey: "stats_since")
             }
             

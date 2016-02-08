@@ -76,6 +76,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableData.reloadData()
         setLogoNavBar()
     }
     
@@ -96,7 +97,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         locationManager.startUpdatingLocation()
 
         self.setupRefreshControl()
-        tableData.reloadData()
+        //tableData.reloadData()
         
         self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
         self.navigationController?.navigationBar.translucent = false
@@ -187,10 +188,12 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     func GetFavPlaces(sender:UIButton)
     {
+       
         getFavPlacesRequest()
         
         if !isFavOn
         {
+            PFAnalytics.trackEventInBackground("ClickOnFav", block: nil)
             refreshControl.removeFromSuperview()
             isFavOn = true
             favButton.tintColor = Colors().pink
@@ -273,6 +276,8 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     //-- Give route place
     @IBAction func routeClicked(sender: AnyObject) {
         
+        PFAnalytics.trackEventInBackground("ClickOnRoute", block: nil)
+        
         var indexPath: NSIndexPath
         
         if let button = sender as? UIButton {
@@ -306,6 +311,8 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     }
     
     @IBAction func shareClicked(sender: AnyObject) {
+        
+        PFAnalytics.trackEventInBackground("ClickOnShare", block: nil)
         
         var indexPath: NSIndexPath
         
