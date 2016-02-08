@@ -20,14 +20,18 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                     indexPath = tableData.indexPathForCell(cell)
                     print("Index Path Row \(indexPath?.row)")
                     if indexPath != nil {
-                        if isFavOn {
+                        /*if isFavOn {
                             print(searchArray[indexPath!.row].friends)
+                        }*/
+                        var friendsCount:Int? = 0
+                        if ((isFavOn && searchArray.count > indexPath!.row ) || (!isFavOn && placeItems.count > indexPath!.row))
+                        {
+                             friendsCount = isFavOn ? searchArray[indexPath!.row].friends?.count : placeItems[indexPath!.row].friends?.count
                         }
-                        let friendsCount:Int? = isFavOn ? searchArray[indexPath!.row].friends?.count : placeItems[indexPath!.row].friends?.count
-                        if isFavOn {
+                        /*if isFavOn {
                             print(searchArray[indexPath!.row])
                         }
-                        print(isFavOn)
+                        print(isFavOn)*/
                         return friendsCount != nil ? friendsCount! : 0
                     }
                     

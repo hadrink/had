@@ -35,6 +35,9 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     var geotifications = [Geotification]()
     var placeItems = [PlaceItem]()
     
+    var isGeorgeClooneyInside:Bool = false
+    var isOut=true
+    
     override init()  {
         super.init()
         self.shareModel = LocationShareModel()
@@ -82,25 +85,34 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     
     func restartLocationUpdates() {
         //print("restartLocationUpdates\n")
-        
-        if self.shareModel?.timer != nil {
-            self.shareModel?.timer?.invalidate()
-            self.shareModel!.timer = nil
+        if (!isGeorgeClooneyInside || !isOut)
+        {
+            if self.shareModel?.timer != nil {
+                self.shareModel?.timer?.invalidate()
+                self.shareModel!.timer = nil
+            }
+            
+            let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+            locationManager.pausesLocationUpdatesAutomatically = false
+            
+            if #available(iOS 9.0, *) {
+                locationManager.allowsBackgroundLocationUpdates = true
+            } else {
+                // Fallback on earlier versions
+            }
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            locationManager.distanceFilter = kCLDistanceFilterNone
+            locationManager.startUpdatingLocation()
+            //locationManager.startMonitoringSignificantLocationChanges()
         }
-        
-        let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
-        locationManager.pausesLocationUpdatesAutomatically = false
-        
-        if #available(iOS 9.0, *) {
-            locationManager.allowsBackgroundLocationUpdates = true
-        } else {
-            // Fallback on earlier versions
+        else
+        {
+            let notification = UILocalNotification()
+            notification.alertBody = "Dans le bar avec George"
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-        //locationManager.startMonitoringSignificantLocationChanges()
     }
     
     func startLocationTracking() {
@@ -408,8 +420,19 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         //TODO: Your code to send the self.myLocation and self.myLocationAccuracy to your server
         
         let request = QueryServices()
-        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/\(self.myLocation!.latitude)/\(self.myLocation!.longitude)", f: {(result: NSDictionary)-> () in
-            //print(result)
+        request.send("https://hadrink.herokuapp.com/usercoordinate/users/romain.rui10@gmail.com/48.2973173/4.0721258", f: {(result: NSDictionary)-> () in
+            
+            /*if let reposArray = result["result"]as? [NSDictionary]  {
+                for item in reposArray {
+                    if var placeProperties = item["success"] as? Bool {
+                    }
+                }
+            }*/
+            //self.isGeorgeClooneyInside =
+            print("george")
+            print(self.isGeorgeClooneyInside)
+            print("result")
+            print("result\(result)" )
         })
         
         

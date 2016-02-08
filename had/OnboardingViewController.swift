@@ -22,10 +22,10 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OnboardingViewController") as! UIPageViewController
         self.pageViewController.dataSource = self
         
-        var startVC = self.viewControllerAtIndex(0) as ContentViewController
-        var viewControllers = NSArray(object: startVC)
+        let startVC = self.viewControllerAtIndex(0) as ContentViewController
+        let viewControllers = NSArray(object: startVC)
         
-        self.pageViewController.setViewControllers(viewControllers as! [UIViewController], direction: .Forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers((viewControllers as! [UIViewController]), direction: .Forward, animated: true, completion: nil)
         self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         //self.pageViewController.view.frame = self.view.bounds
         self.addChildViewController(self.pageViewController)
@@ -46,7 +46,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
         
         self.pageViewController.setViewControllers(viewControllers as! [UIViewController], direction: .Forward, animated: true, completion: nil)*/
         
-        var vc: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController!
+        let vc: UIViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController!
         self.presentViewController(vc, animated: true, completion: nil)
 
     }
@@ -56,7 +56,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
             return ContentViewController()
         }
         
-        var vc: ContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContentViewController") as! ContentViewController
+        let vc: ContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContentViewController") as! ContentViewController
         vc.imageFile = self.pageImages[index] as! String
         vc.pageIndex = index
         
@@ -68,7 +68,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
 
-        var vc = viewController as! ContentViewController
+        let vc = viewController as! ContentViewController
         var index = vc.pageIndex as Int
         
         if (index == 0 || index == NSNotFound) {
@@ -83,7 +83,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var vc = viewController as! ContentViewController
+        let vc = viewController as! ContentViewController
         var index = vc.pageIndex as Int
         
         if (index == NSNotFound) {

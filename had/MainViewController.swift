@@ -73,10 +73,11 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        tableData.reloadData()
+        if (!isFavOn){
+            tableData.reloadData()
+        }
         setLogoNavBar()
     }
     
@@ -188,28 +189,29 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     func GetFavPlaces(sender:UIButton)
     {
-       
-        getFavPlacesRequest()
-        
+        let displayFav = getFavPlacesRequest()
         if !isFavOn
         {
             PFAnalytics.trackEventInBackground("ClickOnFav", block: nil)
             refreshControl.removeFromSuperview()
             isFavOn = true
             favButton.tintColor = Colors().pink
-           
         }
         else{
             self.tableData.addSubview(refreshControl)
             isFavOn = false
             favButton.tintColor = Colors().grey
         }
+        if displayFav {
+            self.tableData.reloadData()
+        }
     }
     
-    func getFavPlacesRequest() {
+    func getFavPlacesRequest() -> Bool {
+        var displayFav = true
         let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
         var places = [Place]()
-        //self.searchArray.removeAll()
+        self.searchArray.removeAll()
         let request = NSFetchRequest(entityName: "Place")
         do {
             
@@ -233,7 +235,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         }
         
         if idArray.count != 0 {
-            
+            displayFav = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
             let friends = userDefaults.objectForKey("friends")
             var statsSince = 0
@@ -266,11 +268,13 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
             })
             
         } else {
-            let notification = UILocalNotification()
+            
+            /*let notification = UILocalNotification()
             notification.alertBody = "Pas d'ids de place"
             notification.soundName = "Default";
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)*/
         }
+        return displayFav
     }
     
     //-- Give route place
@@ -323,8 +327,8 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
                     
                     indexPath = tableData.indexPathForCell(cell)!
                     
-                    var namePlace = placeItems[indexPath.row].placeName
-                    var nbUsers = placeItems[indexPath.row].counter
+                    let namePlace = placeItems[indexPath.row].placeName
+                    let nbUsers = placeItems[indexPath.row].counter
 
                     let textToShare = "\(nbUsers) Hadder sont allés au \(namePlace!). Voir plus d'info sur l'application Had"
         

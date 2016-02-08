@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if PFUser.currentUser() != nil {
             locationTracker.startLocationTracking()
+            
+            self.locationTracker.updateLocationToServer()
             let time:NSTimeInterval = 15 * 60;
             //var locationUpdateTimer :NSTimer?
             //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
@@ -188,13 +190,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLCircularRegion {
+            locationTracker.isOut = false
             handleRegionEvent(region)
         }
     }
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
         if region is CLCircularRegion {
+            locationTracker.isOut = true
             handleRegionEvent(region)
+            
         }
     }
     

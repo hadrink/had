@@ -124,8 +124,8 @@ extension MainViewController: UITableViewDataSource
         func filterAge() {
             var ageMin : Double
             var ageMax : Double
-            var place = placeItems[indexPath.row]
-            var placeAverageAge: Int? = place.averageAge
+            let place = placeItems[indexPath.row]
+            let placeAverageAge: Int? = place.averageAge
             
             //-- If userDefault value exist use it, else take the default value
             if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -146,7 +146,7 @@ extension MainViewController: UITableViewDataSource
         }
         
         
-        if (/*self.searchController.active ||*/ isFavOn) {
+        if (/*self.searchController.active ||*/ isFavOn && searchArray.count > indexPath.row) {
             let type = searchArray[indexPath.row].typeofPlace as String!
             
             cellDataFav()
@@ -709,7 +709,7 @@ func IsPlaceInCoreData(placeId : String) -> Bool {
 func setHeartButtonImage(cell:PlaceCell,isFavOn:Bool)
 {
     PFAnalytics.trackEventInBackground("ClickOnHeart", block: nil)
-    if (IsPlaceInCoreData(cell.placeId!) || isFavOn) {
+    if (IsPlaceInCoreData(cell.placeId!)/* || isFavOn*/) {
         cell.heartButton.setImage(UIImage(named: "heart-hover"), forState: .Normal)
     }
     else {
