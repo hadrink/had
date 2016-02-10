@@ -55,6 +55,8 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 
                 indexPathTableView = tableData.indexPathForCell(tableViewCell)!
                 
+                print("nbfriend")
+                print(placeItems[indexPathTableView.row].friends)
                 var friends = isFavOn ? searchArray[indexPathTableView.row].friends : placeItems[indexPathTableView.row].friends
                 let userId = indexPath.row
                 let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "\(friends![userId])?fields=picture,first_name,last_name,birthday,gender", parameters: nil)

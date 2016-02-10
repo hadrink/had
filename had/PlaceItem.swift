@@ -37,7 +37,7 @@ class PlaceItem : CLLocationManager{
      init (json : NSDictionary, userLocation : NSDictionary) {
         
         // Init for place name and counter
-        print(json)
+        //print(json)
         
         placeId = json["_id"] as? String
         
@@ -103,20 +103,29 @@ class PlaceItem : CLLocationManager{
             showDetails = true
             print("visitorsss")
             print(usersvisited)
-            
+            //Uncomment following to ensure the robustness of friends if there is a bug, just in case
+            //var ids :[String] = []
             for uservisited in usersvisited {
-                let age:String = uservisited["age"] as! String
-                let sex:String = uservisited["sex"] as! String
-                print("age")
-                print(sex)
-                print(age)
-                let ageInt = Int(age)
-                
-                sexArray.append(sex)
-                
-                count = usersvisited.count
-                cumul += ageInt!
-                
+                /*let id:String = uservisited["id_facebook"] as! String
+                if(ids.indexOf(id) == nil)
+                {
+                    ids.append(id)*/
+                    var ageInt = 0
+                    if let age:String = uservisited["age"] as? String
+                    {
+                        print(age)
+                        ageInt = Int(age)!
+                    }
+                    if let sex:String = uservisited["sex"] as? String
+                    {
+                        print(sex)
+                        sexArray.append(sex)
+                    }
+                    
+                    count = usersvisited.count
+                  //  count++
+                    cumul += ageInt
+                //}
             }
             
             let sexCount = sexArray.count

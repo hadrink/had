@@ -420,7 +420,7 @@ extension MainViewController: CLLocationManagerDelegate
                 let userDataFb = UserDataFb()
                 //userDataFb.getFriends()
                 let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                print("MyFriends\(friends)" )
+                //print("MyFriends\(friends)" )
                 
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince, "friends" : friends!], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")

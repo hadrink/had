@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
             self.backgroundTaskManager?.beginNewBackgroundTask()
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "requestUpdateFav")
+            NSUserDefaults.standardUserDefaults().synchronize()
 
         } else if NSUserDefaults.standardUserDefaults().boolForKey("HasLaunchedOnce") {
             initialViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")

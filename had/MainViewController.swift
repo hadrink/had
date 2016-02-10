@@ -107,7 +107,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         isFavOn = false
-        getFavPlacesRequest()
+        //getFavPlacesRequest()
         //- Get Picture Facebook
         //UserDataFb().getPicture()
     }
@@ -230,28 +230,60 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         print(places.count)
         var idArray:Array<String> = Array()
         
-        for  p in places {
-            idArray.append(p.place_id!)
-        }
-        
-        if idArray.count != 0 {
+        if places.count != 0 {
             displayFav = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            let friends = userDefaults.objectForKey("friends")
-            var statsSince = 0
-            
-            if (userDefaults.objectForKey("stats_since") != nil) {
-                statsSince = userDefaults.integerForKey("stats_since")
+            let dorequest = userDefaults.boolForKey("requestUpdateFav")
+            print("dorequest")
+            print(dorequest)
+            if !dorequest {
+                //chercher dans core data
+                for  p in places {
+                    idArray.append(p.place_id!)
+                    
+                    let place:PlaceItem = PlaceItem()
+                    place.placeId = p.place_id
+                    place.placeName = p.place_name
+                    print("placename")
+                    print(p.place_name)
+                    place.city = p.place_city
+                    place.averageAge = p.place_average_age?.integerValue
+                    place.pourcentSex = p.place_pourcent_sex != nil ? p.place_pourcent_sex?.floatValue : 0.0
+                    
+                    place.typeofPlace = p.place_type
+                    place.counter = p.place_counter?.integerValue
+                    place.distance = p.place_distance?.doubleValue
+                    place.placeLatitudeDegrees = p.place_latitude?.doubleValue
+                    place.placeLongitudeDegrees = p.place_longitude?.doubleValue
+                    self.searchArray.append(place)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableData.reloadData()
+                    
+                })
             } else {
-                statsSince = settingDefault.statsSince
-            }
-            
-            QServices.post("POST", params: ["ids":idArray, "friends":friends!], url: "https://hadrink.herokuapp.com/likeplaces/\(statsSince)", postCompleted:{
-                (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                //sinon update avec la requete
+                userDefaults.setBool(false, forKey: "requestUpdateFav")
+                userDefaults.synchronize()
+                for  p in places {
+                    idArray.append(p.place_id!)
+                }
+                let friends = userDefaults.objectForKey("friends")
+                var statsSince = 0
+                
+                if (userDefaults.objectForKey("stats_since") != nil) {
+                    statsSince = userDefaults.integerForKey("stats_since")
+                } else {
+                    statsSince = settingDefault.statsSince
+                }
+                
+                QServices.post("POST", params: ["ids":idArray, "friends":friends!], url: "https://hadrink.herokuapp.com/likeplaces/\(statsSince)", postCompleted:{
+                    (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     if let reposArray = obj["likeplaces"] as? [NSDictionary]  {
                         self.searchArray.removeAll()
                         let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: self.locServices.latitude), "longitude" : String(stringInterpolationSegment: self.locServices.longitude)]
-                    
+                        
                         for item in reposArray {
                             if var placeProperties = item["properties"] as? [String:AnyObject] {
                                 if (placeProperties["name"] != nil) {
@@ -260,15 +292,16 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
                             }
                         }
                     }
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableData.reloadData()
                     
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableData.reloadData()
+                        
+                    })
                 })
-            })
-            
+            }
         } else {
             
+            //self.tableData.reloadData()
             /*let notification = UILocalNotification()
             notification.alertBody = "Pas d'ids de place"
             notification.soundName = "Default";
