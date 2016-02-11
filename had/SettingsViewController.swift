@@ -79,6 +79,11 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
         pageController.goToNextVC()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        print("appeared")
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "reloadData")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         PFAnalytics.trackEventInBackground("SettingViewLoaded", block: nil)

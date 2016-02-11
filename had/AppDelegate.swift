@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if PFUser.currentUser() != nil {
             locationTracker.startLocationTracking()
             
-            self.locationTracker.updateLocationToServer()
+            //self.locationTracker.updateLocationToServer()
             let time:NSTimeInterval = 15 * 60;
             //var locationUpdateTimer :NSTimer?
             //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)

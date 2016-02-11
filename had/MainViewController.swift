@@ -75,7 +75,10 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if (!isFavOn){
+        let reloadData = NSUserDefaults.standardUserDefaults().boolForKey("reloadData")
+        if (!isFavOn && reloadData == true){
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "reloadData")
+            NSUserDefaults.standardUserDefaults().synchronize()
             tableData.reloadData()
         }
         setLogoNavBar()
@@ -233,7 +236,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         if places.count != 0 {
             displayFav = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            let dorequest = userDefaults.boolForKey("requestUpdateFav")
+            /*let dorequest = userDefaults.boolForKey("requestUpdateFav")
             print("dorequest")
             print(dorequest)
             if !dorequest {
@@ -252,7 +255,9 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
                     
                     place.typeofPlace = p.place_type
                     place.counter = p.place_counter?.integerValue
-                    place.distance = p.place_distance?.doubleValue
+                    place.distance = p.place_distance!.doubleValue
+                    
+                    
                     place.placeLatitudeDegrees = p.place_latitude?.doubleValue
                     place.placeLongitudeDegrees = p.place_longitude?.doubleValue
                     self.searchArray.append(place)
@@ -265,7 +270,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
             } else {
                 //sinon update avec la requete
                 userDefaults.setBool(false, forKey: "requestUpdateFav")
-                userDefaults.synchronize()
+                userDefaults.synchronize()*/
                 for  p in places {
                     idArray.append(p.place_id!)
                 }
@@ -298,7 +303,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
                         
                     })
                 })
-            }
+            //}
         } else {
             
             //self.tableData.reloadData()
