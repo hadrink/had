@@ -91,6 +91,9 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         
         activity.StartActivityIndicator(self)
         
+        //-- No display cell empty
+        tableData.tableFooterView = UIView()
+        
         let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
             locationManager.requestAlwaysAuthorization()
