@@ -106,7 +106,7 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let fbImageView:UIImageView = UIImageView()
             
             fbImageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            fbImageView.layer.cornerRadius = fbImageView.frame.size.width / 2
+            fbImageView.layer.cornerRadius = fbImageView.layer.frame.size.width / 2
             fbImageView.layer.masksToBounds = true
             
             

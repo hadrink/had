@@ -885,11 +885,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "476982697.900294"
+            timestampString = "477089211.400936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "642"
-            endingLineNumber = "642"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "animateRefreshView()"
             landmarkType = "5">
             <Locations>
@@ -933,11 +933,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "476982697.900294"
+            timestampString = "477089211.400936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "615"
-            endingLineNumber = "615"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "animateRefreshView()"
             landmarkType = "5">
          </BreakpointContent>

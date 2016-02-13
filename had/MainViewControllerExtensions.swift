@@ -450,14 +450,17 @@ extension MainViewController: CLLocationManagerDelegate
                 }
                 
             } else {
-                NSLog("App is backgrounded. New location is %@", manager.location!)
+                
+                //-- This snippet make an app crash when it pass in background
+                
+                /*NSLog("App is backgrounded. New location is %@", manager.location!)
                 let email: String! = userDefaults.stringForKey("email")
                 QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(userLatitude)/\(userLongitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                 }
                 
                 let distance:CLLocationDistance = 200
                 let time:NSTimeInterval = 10
-                manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)
+                manager.allowDeferredLocationUpdatesUntilTraveled(distance, timeout: time)*/
                 
             }
             locationManager = nil
