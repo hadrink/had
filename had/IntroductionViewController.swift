@@ -231,6 +231,8 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var buttleHad: UIImageView!
     @IBOutlet weak var backgroundIntro: UIImageView!
     
+    let QServices = QueryServices()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -275,6 +277,7 @@ class LoginViewController: UIViewController{
             user["gender"] = r["gender"]
             user["friends"] = r["friends"]
             print("Friends intror\(r["friends"])")
+            print(r["gender"])
             
             settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
             settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
@@ -285,6 +288,21 @@ class LoginViewController: UIViewController{
             dateFormatter.dateFormat = "MM/dd/yyyy"
             user["birthDay"] = dateFormatter.dateFromString(r["birthday"] as! String)
             
+            
+            //-- Send user in data base
+            
+            var gender = r["gender"] as! String
+            if( gender == "male") {
+                gender = "M"
+            }
+            
+            self.QServices.post("POST", params:["firstname":r["first_name"]!, "lastname": r["last_name"]!, "gender": gender, "birthday" : r["birthday"]!, "id_facebook" : r["id"]!], url: Urls.createUser) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                
+                
+                //print("Mon object \(obj)")
+                
+            }
             
         })
         

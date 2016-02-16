@@ -12,6 +12,7 @@ import Foundation
 struct Urls {
     
     static let urlListPlace = "https://hadrink.herokuapp.com/list/had/"
+    static let createUser = "https://hadrink.herokuapp.com/users/create/"
     
 }
 struct user {
