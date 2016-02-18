@@ -39,14 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if PFUser.currentUser() != nil {
-            locationTracker.startLocationTracking()
+            //locationTracker.startLocationTracking()
             
-            //self.locationTracker.updateLocationToServer()
-            let time:NSTimeInterval = 15 * 60;
+            self.locationTracker.updateLocationToServer()
+            //let time:NSTimeInterval = 15 * 60;
             //var locationUpdateTimer :NSTimer?
             //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
             initialViewController = pageController
-            self.backgroundTaskManager?.beginNewBackgroundTask()
+//            self.backgroundTaskManager?.beginNewBackgroundTask()
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "requestUpdateFav")
             NSUserDefaults.standardUserDefaults().synchronize()
 
@@ -83,8 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
-            let types = UIRemoteNotificationType([.Badge, .Sound, .Alert])
-            application.registerForRemoteNotificationTypes(types)
+            let types = UIUserNotificationType([.Badge, .Sound, .Alert])
+            application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: types, categories: nil))
+            application.registerForRemoteNotifications()
         }
         
         
@@ -166,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("terminate")
-        locationTracker.startLocationWhenAppIsKilled()
+        //locationTracker.startLocationForSignificantChanges()
     }
     
     func handleRegionEvent(region: CLRegion) {
@@ -187,13 +188,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             notification.soundName = "Default";
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
-        locationTracker.startLocationTracking()
+        //locationTracker.startLocationTracking()
     }
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if region is CLCircularRegion {
             locationTracker.isOut = false
             handleRegionEvent(region)
+            locationTracker.restartLocationUpdates()
         }
     }
     

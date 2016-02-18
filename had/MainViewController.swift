@@ -98,7 +98,7 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
             locationManager.requestAlwaysAuthorization()
         }
-        startLocationManager()
+        //startLocationManager()
         
         //-- Start Updating Location
         locationManager.startUpdatingLocation()
@@ -166,8 +166,8 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
             print("pause")
             self.locationManager.pausesLocationUpdatesAutomatically = false
             print(self.locationManager.pausesLocationUpdatesAutomatically)
-            self.locationManager.startMonitoringSignificantLocationChanges()
-            //self.locationManager.startUpdatingLocation()
+            //self.locationManager.startMonitoringSignificantLocationChanges()
+            self.locationManager.startUpdatingLocation()
             self.isLocating = true
         }
         return isLocating

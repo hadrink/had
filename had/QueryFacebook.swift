@@ -20,7 +20,7 @@ class UserDataFb {
         
         print("Func get profil picture")
         
-        let pictureRequest = FBSDKGraphRequest(graphPath: "/v2.2/me/picture?type=large&redirect=false", parameters: nil)
+        let pictureRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture.type(large)", parameters: nil)
         
         print("picture request")
         
@@ -35,10 +35,6 @@ class UserDataFb {
                 
                 
                     //print(self.cache.objectForKey("profile_picture")?.description)
-                
-                
-                
-                
                 
                     let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
                 

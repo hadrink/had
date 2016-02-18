@@ -417,11 +417,14 @@ extension MainViewController: CLLocationManagerDelegate
                 let formatter: NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "dd-MM-yyyy"
                 
-                let userDataFb = UserDataFb()
+                //let userDataFb = UserDataFb()
                 //userDataFb.getFriends()
-                let friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                print("MyFriends\(friends)" )
-                
+                var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
+                //print("MyFriends\(friends)" )
+                /*if friends == nil
+                {
+                    friends = []
+                }*/
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince, "friends" : friends!], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     

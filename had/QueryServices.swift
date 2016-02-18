@@ -97,6 +97,21 @@ class QueryServices{
         
     }
     
+    func send(url: String, f: (NSDictionary) -> ()) {
+        do {
+            let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(["object":"object"], options: .PrettyPrinted)
+            var response: NSURLResponse?
+            let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves) as? NSDictionary
+            f(json!)
+        }
+        catch let err as NSError {
+            print(err)
+        }
+    }
+    
     //-- Func delete for delete account
     func delete(params : Dictionary<String, String>,url : String) {
         let request = NSMutableURLRequest(URL: NSURL(string: url)!)
@@ -116,32 +131,14 @@ class QueryServices{
             })
             
             task.resume()
-
+            
         }
-        
+            
         catch let err as NSError? {
             print(err)
         }
         
     }
-    
-        func send(url: String, f: (NSDictionary) -> ()) {
-           
-            do {
-                let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-                request.HTTPMethod = "POST"
-                var response: NSURLResponse?
-                let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-                let reply = NSDictionary(object: data, forKey: NSUTF8StringEncoding)
-                f(reply)
-            
-            }
-            
-            catch let err as NSError {
-                print(err)
-            }
-            
-        }
     
     func saveImage(image: UIImage, path: String ) -> Bool{
         
@@ -156,54 +153,54 @@ class QueryServices{
     
     /*var userName:AnyObject = 101
     func loadUserDataFromPList() {
-        // getting path to GameData.plist
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-        let documentsDirectory = paths[0] as! String
-        let path = documentsDirectory.stringByAppendingPathComponent("user.plist")
-        let fileManager = NSFileManager.defaultManager()
-        //check if file exists
-        if(!fileManager.fileExistsAtPath(path)) {
-            // If it doesn't, copy it from the default file in the Bundle
-            if let bundlePath = NSBundle.mainBundle().pathForResource("user", ofType: "plist") {
-                let resultDictionary = NSMutableDictionary(contentsOfFile: bundlePath)
-                println("Bundle GameData.plist file is --> \(resultDictionary?.description)")
-                fileManager.copyItemAtPath(bundlePath, toPath: path, error: nil)
-                println("copy")
-            } else {
-                println("GameData.plist not found. Please, make sure it is part of the bundle.")
-            }
-        } else {
-            println("GameData.plist already exits at path.")
-            // use this to delete file from documents directory
-            //fileManager.removeItemAtPath(path, error: nil)
-        }
-        let resultDictionary = NSMutableDictionary(contentsOfFile: path)
-        println("Loaded GameData.plist file is --> \(resultDictionary?.description)")
-        var myDict = NSDictionary(contentsOfFile: path)
-        if let dict = myDict {
-            //loading values
-            userName = dict.objectForKey("Firstname")!
-//            bedroomWallID = dict.objectForKey(BedroomWallKey)!
-            //...
-        } else {
-            println("WARNING: Couldn't create dictionary from GameData.plist! Default values will be used!")
-        }
+    // getting path to GameData.plist
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+    let documentsDirectory = paths[0] as! String
+    let path = documentsDirectory.stringByAppendingPathComponent("user.plist")
+    let fileManager = NSFileManager.defaultManager()
+    //check if file exists
+    if(!fileManager.fileExistsAtPath(path)) {
+    // If it doesn't, copy it from the default file in the Bundle
+    if let bundlePath = NSBundle.mainBundle().pathForResource("user", ofType: "plist") {
+    let resultDictionary = NSMutableDictionary(contentsOfFile: bundlePath)
+    println("Bundle GameData.plist file is --> \(resultDictionary?.description)")
+    fileManager.copyItemAtPath(bundlePath, toPath: path, error: nil)
+    println("copy")
+    } else {
+    println("GameData.plist not found. Please, make sure it is part of the bundle.")
+    }
+    } else {
+    println("GameData.plist already exits at path.")
+    // use this to delete file from documents directory
+    //fileManager.removeItemAtPath(path, error: nil)
+    }
+    let resultDictionary = NSMutableDictionary(contentsOfFile: path)
+    println("Loaded GameData.plist file is --> \(resultDictionary?.description)")
+    var myDict = NSDictionary(contentsOfFile: path)
+    if let dict = myDict {
+    //loading values
+    userName = dict.objectForKey("Firstname")!
+    //            bedroomWallID = dict.objectForKey(BedroomWallKey)!
+    //...
+    } else {
+    println("WARNING: Couldn't create dictionary from GameData.plist! Default values will be used!")
+    }
     }*/
     
     /*func SaveUserDataToPList(userData: AnyObject)
     {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-        let documentsDirectory = paths.objectAtIndex(0) as! NSString
-        let path = documentsDirectory.stringByAppendingPathComponent("user.plist")
-        var dict: NSMutableDictionary = ["XInitializerItem": "DoNotEverChangeMe"]
-        //saving values
-        let userName :NSString = userData.valueForKey("name") as! NSString
-        dict.setObject(userName, forKey: "Firstname")
-//        dict.setObject(bedroomWallID, forKey: BedroomWallKey)
-        //...
-        //writing to GameData.plist
-        dict.writeToFile(path, atomically: false)
-        let resultDictionary = NSMutableDictionary(contentsOfFile: path)
-        print("Saved GameData.plist file is --> \(resultDictionary?.description)")
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+    let documentsDirectory = paths.objectAtIndex(0) as! NSString
+    let path = documentsDirectory.stringByAppendingPathComponent("user.plist")
+    var dict: NSMutableDictionary = ["XInitializerItem": "DoNotEverChangeMe"]
+    //saving values
+    let userName :NSString = userData.valueForKey("name") as! NSString
+    dict.setObject(userName, forKey: "Firstname")
+    //        dict.setObject(bedroomWallID, forKey: BedroomWallKey)
+    //...
+    //writing to GameData.plist
+    dict.writeToFile(path, atomically: false)
+    let resultDictionary = NSMutableDictionary(contentsOfFile: path)
+    print("Saved GameData.plist file is --> \(resultDictionary?.description)")
     }*/
 }

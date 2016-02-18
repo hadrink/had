@@ -249,11 +249,11 @@ class LoginViewController: UIViewController{
             }
             else if user!.authenticated{
                 self.getParseUserInfo(user!)
-                UserDataFb().getPicture()
+                //UserDataFb().getPicture()
             } else if user!.isNew {
                 print("User just signed up and logged in for the first time.")
                 self.getParseUserInfo(user!)
-                UserDataFb().getPicture()
+                //UserDataFb().getPicture()
             } else {
                 print("User logged in through Facebook.")
             }
@@ -268,42 +268,52 @@ class LoginViewController: UIViewController{
         
         let FBRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "/me?fields=picture,first_name,last_name,birthday,gender,friends", parameters: nil)
         FBRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            let r = result as! NSDictionary
-            let settingViewController = SettingsViewController()
-            
-            user["firstName"] = r["first_name"]
-            user["lastName"] = r["last_name"]
-            user["gender"] = r["gender"]
-            user["friends"] = r["friends"]
-            print("Friends intror\(r["friends"])")
-            print(r["gender"])
-            
-            settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
-            settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
-            settingViewController.userDefaults.setObject(r["friends"], forKey: "friends")
-            settingViewController.userDefaults.synchronize()
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            user["birthDay"] = dateFormatter.dateFromString(r["birthday"] as! String)
-            
-            
-            //-- Send user in data base
-            
-            var gender = r["gender"] as! String
-            if( gender == "male") {
-                gender = "M"
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
             }
-            
-            self.QServices.post("POST", params:["firstname":r["first_name"]!, "lastname": r["last_name"]!, "gender": gender, "birthday" : r["birthday"]!, "id_facebook" : r["id"]!], url: Urls.createUser) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+            else
+            {
+                let r = result as! NSDictionary
+                let settingViewController = SettingsViewController()
+                
+                user["profile_picture"] = r["picture"]
+                user["firstName"] = r["first_name"]
+                user["lastName"] = r["last_name"]
+                user["gender"] = r["gender"]
+                user["friends"] = r["friends"]
+                print("Friends intror\(r["friends"])")
+                print(r["gender"])
+                
+                settingViewController.userDefaults.setValue(r["id"], forKey: "id_Fb")
+                settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
+                settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
+                settingViewController.userDefaults.setObject(r["friends"], forKey: "friends")
+                settingViewController.userDefaults.synchronize()
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy"
+                user["birthDay"] = dateFormatter.dateFromString(r["birthday"] as! String)
                 
                 
-                //print("Mon object \(obj)")
+                //-- Send user in data base
                 
+                var gender = r["gender"] as! String
+                if( gender == "male") {
+                    gender = "M"
+                }
+                
+                self.QServices.post("POST", params:["firstname":r["first_name"]!, "lastname": r["last_name"]!, "gender": gender, "birthday" : r["birthday"]!, "id_facebook" : r["id"]!], url: Urls.createUser) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
+                    //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
+                    
+                    
+                    //print("Mon object \(obj)")
+                    
+                }
+                
+                LocationTracker().startLocationForSignificantChanges()
             }
-            
         })
         
     }
