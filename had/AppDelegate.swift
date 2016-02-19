@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if PFUser.currentUser() != nil {
             //locationTracker.startLocationTracking()
             
-            self.locationTracker.updateLocationToServer()
+            //self.locationTracker.updateLocationToServer()
             //let time:NSTimeInterval = 15 * 60;
             //var locationUpdateTimer :NSTimer?
             //locationUpdateTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
@@ -58,6 +58,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             initialViewController = storyboard.instantiateViewControllerWithIdentifier("LaunchViewController")
         }
         
+        
+        if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
+            print("It's a location event")
+            let notification = UILocalNotification()
+            notification.alertBody = "Location Event"
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            
+            locationTracker.startLocationForSignificantChanges()
+
+        }
         
         //-- Notification parse
         
@@ -156,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        self.locationTracker.createRegionsForSignificantChanges()
+        self.locationTracker.startLocationForSignificantChanges()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -167,7 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("terminate")
-        //locationTracker.startLocationForSignificantChanges()
+        locationTracker.startLocationForSignificantChanges()
     }
     
     func handleRegionEvent(region: CLRegion) {

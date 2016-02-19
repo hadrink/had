@@ -312,7 +312,7 @@ class LoginViewController: UIViewController{
                     
                 }
                 
-                LocationTracker().startLocationForSignificantChanges()
+                //LocationTracker().startLocationForSignificantChanges()
             }
         })
         

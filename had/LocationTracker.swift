@@ -43,7 +43,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         self.shareModel = LocationShareModel()
         self.shareModel!.myLocationArray = NSMutableArray()
         
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationEnterBackground", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         
     }
     
@@ -64,7 +64,13 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     // MARK: Application in background
-    /*func applicationEnterBackground() {
+    func applicationEnterBackground() {
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Dans le background"
+        notification.soundName = "Default"
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
         let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
         locationManager.pausesLocationUpdatesAutomatically = false
         if #available(iOS 9.0, *) {
@@ -75,13 +81,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
         
         self.shareModel!.bgTask = BackgroundTaskManager.sharedBackgroundTaskManager()
         self.shareModel?.bgTask?.beginNewBackgroundTask()
         
-    }*/
-    
+    }
     
     func restartLocationUpdates() {
         //print("restartLocationUpdates\n")
@@ -175,6 +180,12 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Dans le locationManager"
+        notification.soundName = "Default"
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
         //print("locationManager didUpdateLocations\n")
         for (var i : Int = 0; i < locations.count; i++) {
             let newLocation : CLLocation? = locations[i] as CLLocation
@@ -233,6 +244,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         {
             updateLocationToServer()
         }
+        
     }
     
     func createRegionsForSignificantChanges() {
