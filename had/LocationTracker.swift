@@ -254,23 +254,28 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         notification.alertBody = String(locationManager.monitoredRegions.count)
         notification.soundName = "Default";
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+
         if(locationManager.monitoredRegions.count != 0){
             
             for geotification in geotifications{
                 stopMonitoringGeotification(geotification)
                 removeGeotification(geotification)
             }
+            
+            for monitored in locationManager.monitoredRegions {
+                locationManager.stopMonitoringForRegion(monitored)
+            }
         }
         /*let bestLoc: NSDictionary = getBestLocation()!
         let lat = bestLoc.valueForKey("lat")
         let lon = bestLoc.valueForKey("lon")*/
         let request = QueryServices()
+        
         request.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(locationManager.location!.coordinate.latitude)/\(locationManager.location!.coordinate.longitude)/10000/", f: {(result: NSDictionary) -> () in
             let locationDictionary:NSDictionary = ["latitude" : String(stringInterpolationSegment: locationManager.location!.coordinate.latitude), "longitude" : String(stringInterpolationSegment: locationManager.location!.coordinate.longitude)]
             
             if let reposArray = result["listbar"] as? [NSDictionary]  {
                 self.placeItems.removeAll()
-                
                 
                 for item in reposArray {
                     if var placeProperties = item["properties"] as? [String:AnyObject] {
@@ -289,13 +294,19 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         
         for place in placeItems
         {
-            if(locationManager.monitoredRegions.count < 20){
+            //if(locationManager.monitoredRegions.count <= 20){
+                
+                let notification = UILocalNotification()
+                notification.alertBody = place.placeName
+                notification.soundName = "Default"
+                UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+                
                 let identifier = NSUUID().UUIDString
                 let coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: place.placeLatitudeDegrees!, longitude: place.placeLongitudeDegrees!)
                 let geotification = Geotification(coordinate: coordinate, radius: 50, identifier: identifier)
                 self.geotifications.append(geotification)
                 self.startMonitoringGeotification(geotification)
-            }
+            //}
         }
     }
     
@@ -304,7 +315,7 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
         // 2
         region.notifyOnEntry = true
-        //region.notifyOnExit = true
+        region.notifyOnExit = true
         //region.notifyOnEntry = (geotification.eventType == .OnEntry)
         //region.notifyOnExit = !region.notifyOnEntry
         return region
@@ -322,10 +333,52 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         //showSimpleAlertWithTitle("Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
         }*/
         // 3
+        
         let region = regionWithGeotification(geotification)
         // 4
         locationManager.startMonitoringForRegion(region)
         //locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
+        let notification = UILocalNotification()
+        notification.alertBody = "DidStartMonitoringForRegion"
+        notification.soundName = "Default"
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
+        let locationManager : CLLocationManager = LocationTracker.sharedLocationManager()!
+        locationManager.requestStateForRegion(region)
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
+        print("BM didDetermineState \(state)");
+        
+        switch state {
+        case .Inside:
+            let notification = UILocalNotification()
+            notification.alertBody = "Inside"
+            notification.soundName = "Default"
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            print("BeaconManager:didDetermineState CLRegionState.Inside \(region.identifier)");
+        case .Outside:
+            let notification = UILocalNotification()
+            notification.alertBody = "Outside"
+            notification.soundName = "Default"
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        case .Unknown:
+            let notification = UILocalNotification()
+            notification.alertBody = "Unknown"
+            notification.soundName = "Default"
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            print("BeaconManager:didDetermineState CLRegionState.Unknown");
+        default:
+            let notification = UILocalNotification()
+            notification.alertBody = "Default"
+            notification.soundName = "Default"
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            print("BeaconManager:didDetermineState default");
+        }
     }
     
     func stopMonitoringGeotification(geotification: Geotification) {
@@ -345,6 +398,56 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
         }
     }
     
+    func handleRegionEvent(region: CLRegion) {
+        // Show an alert if application is active
+        /*if UIApplication.sharedApplication().applicationState == .Active {
+            //if //notefromRegionIdentifier(region.identifier) {
+            /*let message = "Dans la région"
+            if let viewController = window?.rootViewController {
+                showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
+            }
+            print("handleRegionevent")*/
+            //print(self.locationManager.monitoredRegions.count)
+            //}
+        } else {*/
+            // Otherwise present a local notification
+            let notification = UILocalNotification()
+            notification.alertBody = "Dans la région (pas active)"
+            notification.soundName = "Default";
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        //}
+        //locationTracker.startLocationTracking()
+    }
+    
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Did Enter Region"
+        notification.soundName = "Default";
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
+        
+        if region is CLCircularRegion {
+            isOut = false
+            handleRegionEvent(region)
+            restartLocationUpdates()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Did Exit Region"
+        notification.soundName = "Default";
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
+        if region is CLCircularRegion {
+            isOut = true
+            handleRegionEvent(region)
+            
+        }
+    }
+    
     func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
@@ -353,8 +456,15 @@ class LocationTracker : NSObject, CLLocationManagerDelegate, UIAlertViewDelegate
     }
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Monitoring failed"
+        notification.soundName = "Default";
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        
         print(manager.monitoredRegions.count)
         print("Monitoring failed for region with identifier: \(region!.identifier)")
+        print(region?.description)
     }
     
     //MARK: Stop the locationManager

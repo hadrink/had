@@ -121,6 +121,7 @@ extension MainViewController: UITableViewDataSource
             
         }
         
+        //-- Filter by age func
         func filterAge() {
             var ageMin : Double
             var ageMax : Double
@@ -146,7 +147,7 @@ extension MainViewController: UITableViewDataSource
         }
         
         
-        if (/*self.searchController.active ||*/ isFavOn && searchArray.count > indexPath.row) {
+        if isFavOn && searchArray.count > indexPath.row {
             let type = searchArray[indexPath.row].typeofPlace as String!
             
             cellDataFav()
@@ -168,21 +169,16 @@ extension MainViewController: UITableViewDataSource
                 
             }
             
-            
             //-- Define bar or Nightclub
-            
             displayBarOrNightClub(type)
             return cell
             
         } else {
-            
             let type = placeItems[indexPath.row].typeofPlace as String!
             
             //-- Cell Data MainView
             cellDataMainView()
-            
             setHeartButtonImage(cell,isFavOn: isFavOn)
-
             
             //-- Check if users in place (If true elements display else none)
             if placeItems[indexPath.row].counter == nil {
@@ -207,15 +203,12 @@ extension MainViewController: UITableViewDataSource
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if (placeItems.count != 0 && !isFavOn) || (searchArray.count != 0 && isFavOn)
-        {
+        if (placeItems.count != 0 && !isFavOn) || (searchArray.count != 0 && isFavOn) {
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             messageLabel.text?.removeAll()
-            //return 1;
-        }
-        else if Reachability.isConnectedToNetwork() == false {
+        } else if Reachability.isConnectedToNetwork() == false {
             messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            var mess = "Petit problème d'internet ? ;)"
+            let mess = "Petit problème d'internet ? ;)"
             
             messageLabel.text = mess
             messageLabel.textColor = Colors().darkGrey
@@ -226,16 +219,15 @@ extension MainViewController: UITableViewDataSource
             self.tableData.backgroundView = messageLabel
             self.tableData.separatorStyle = UITableViewCellSeparatorStyle.None
 
-        }
-        else
-        {
-            // Display a message when the table is empty
+        } else {
+            //-- Display a message when the table is empty
             messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             var mess = "Aucune données disponible actuellement. Tire pour rafraîchir"
-            if(searchArray.count == 0 && isFavOn)
-            {
+            
+            if(searchArray.count == 0 && isFavOn) {
                 mess = "Vous n'avez pas encore de favoris !!"
             }
+            
             messageLabel.text = mess
             messageLabel.textColor = Colors().darkGrey
             messageLabel.numberOfLines = 0
@@ -249,23 +241,17 @@ extension MainViewController: UITableViewDataSource
         }
         return 1
     }
-    
-    
-    
 }
 
-extension MainViewController: UITableViewDelegate
-{
+extension MainViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.clearColor()
         
         guard let tableViewCell = cell as? PlaceCell else { return }
-        
       
         tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
             
     }
-    
 }
 
 /*
@@ -339,27 +325,17 @@ extension MainViewController: CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if((locationManager.location) != nil)
-        {
+        if((locationManager.location) != nil) {
             locServices.latitude = locationManager.location!.coordinate.latitude
             locServices.longitude = locationManager.location!.coordinate.longitude
             let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
             let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
             let userDefaults = NSUserDefaults.standardUserDefaults()
             if UIApplication.sharedApplication().applicationState == .Active {
-                //print("app is activated")
-                
                 userDefaults.setValue("UIApplicationStateActive", forKey: "applicationState")
                 locationManager.stopUpdatingLocation()
                 
-                
-                //let userLatitude = String(stringInterpolationSegment: manager.location!.coordinate.latitude)
-                //let userLongitude = String(stringInterpolationSegment: manager.location!.coordinate.longitude)
-                //print("Latitude \(userLatitude)")
-                //print("Longitude \(userLongitude)")
-                
                 //-- Variable send to the method post
-                
                 var distanceMax: Float
                 var ageMin : Double
                 var ageMax : Double
@@ -368,7 +344,6 @@ extension MainViewController: CLLocationManagerDelegate
                 var statsSince : Int
                 
                 //-- Check if value exist in the userDefault Setting else we get the default values
-                
                 let settingViewController = SettingsViewController()
                 
                 if (settingViewController.userDefaults.floatForKey("AgeMinValue").isZero && settingViewController.userDefaults.floatForKey("AgeMaxValue").isZero ) {
@@ -387,10 +362,8 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateBar") != nil) {
                     displayBar = settingViewController.userDefault.boolForKey("SwitchStateBar")
-                    //print("SwitchStateBar")
                 } else {
                     displayBar = settingDefault.displayBar
-                    //print("default setting")
                 }
                 
                 if (settingViewController.userDefaults.objectForKey("SwitchStateNightclub") != nil) {
@@ -401,14 +374,11 @@ extension MainViewController: CLLocationManagerDelegate
                 
                 if (settingViewController.userDefaults.objectForKey("stats_since") != nil) {
                     statsSince = settingViewController.userDefaults.integerForKey("stats_since")
-                    //print("Value \(statsSince)")
                 } else {
                     statsSince = settingDefault.statsSince
-                    //print("stats \(statsSince)")
                 }
                 
                 //-- Transform to String
-                
                 let distanceMaxString = String(stringInterpolationSegment: distanceMax)
                 //print("Distance max \(distanceMax)")
                 let ageMinString = String(stringInterpolationSegment: ageMin)
@@ -417,14 +387,8 @@ extension MainViewController: CLLocationManagerDelegate
                 let formatter: NSDateFormatter = NSDateFormatter()
                 formatter.dateFormat = "dd-MM-yyyy"
                 
-                //let userDataFb = UserDataFb()
-                //userDataFb.getFriends()
                 var friends: AnyObject? = settingViewController.userDefaults.objectForKey("friends")
-                //print("MyFriends\(friends)" )
-                /*if friends == nil
-                {
-                    friends = []
-                }*/
+                
                 self.QServices.post("POST", params:["latitude":userLatitude, "longitude": userLongitude, "collection": "places", "age_min" : ageMinString, "age_max" : ageMaxString, "distance_max" : distanceMaxString, "bar" : displayBar, "nightclub" : displayNightclub, "date" : statsSince, "friends" : friends!], url: Urls.urlListPlace) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
                     
@@ -441,7 +405,6 @@ extension MainViewController: CLLocationManagerDelegate
                             }
                         }
                     }
-                    //print("Mon object \(obj)")
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         
@@ -483,202 +446,10 @@ extension MainViewController: UISearchBarDelegate
     }
 }*/
 
-extension MainViewController
-{
-    
-    func setupRefreshControl() {
-        //print("")
-        // Setup the loading view, which will hold the moving graphics
-        self.refreshLoadingView = UIView(frame: self.refreshControl.bounds)
-        self.refreshLoadingView.backgroundColor = UIColor.clearColor()
-        
-        // Setup the color view, which will display the rainbowed background
-        self.refreshColorView = UIView(frame: self.refreshControl.bounds)
-        self.refreshColorView.backgroundColor = UIColor.clearColor()
-        self.refreshColorView.alpha = 0.30
-        
-        // Create the graphic image views
-        town_background = UIImageView(image: UIImage(named: "pull-to-refresh-bg"))
-        //compass_background.frame.size.width = 375
-        //compass_background.frame.size.height = 10
-        
-        self.bottle_spinner = UIImageView(image: UIImage(named: "bottle-spin"))
-        self.bottle_spinner.frame.size = CGSize(width: 42, height: 42)
-        
-        
-        // Add the graphics to the loading view
-        self.refreshLoadingView.addSubview(self.town_background)
-        self.refreshLoadingView.addSubview(self.bottle_spinner)
-        
-        // Clip so the graphics don't stick out
-        self.refreshLoadingView.clipsToBounds = true;
-        
-        // Hide the original spinner icon
-        self.refreshControl.tintColor = UIColor.clearColor()
-        
-        // Add the loading and colors views to our refresh control
-        self.refreshControl.addSubview(self.refreshColorView)
-        self.refreshControl.addSubview(self.refreshLoadingView)
-        
-        // Initalize flags
-        self.isRefreshIconsOverlap = false;
-        self.isRefreshAnimating = false;
-        
-        // When activated, invoke our refresh function
-        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-        
-    }
-    
-    func refresh(){
-        //print("")
-        PFAnalytics.trackEventInBackground("RefrechMainView", block: nil)
-        
-        // -- DO SOMETHING AWESOME (... or just wait 3 seconds) --
-        // This is where you'll make requests to an API, reload data, or process information
-        let delayInSeconds = 3.0;
-        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)));
-        dispatch_after(popTime, dispatch_get_main_queue()) { () -> Void in
-            // When done requesting/reloading/processing invoke endRefreshing, to close the control
-            self.nbAlertDuringRefresh = 0
-            self.refreshControl.endRefreshing()
-        }
-        // -- FINISHED SOMETHING AWESOME, WOO! --
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        // Get the current size of the refresh controller
-        var refreshBounds = self.refreshControl.bounds;
-        
-        // Distance the table has been pulled >= 0
-        let pullDistance = max(0.0, -self.refreshControl.frame.origin.y);
-        
-        // Half the width of the table
-        let midX = self.tableData.frame.size.width / 2.0;
-        
-        // Calculate the width and height of our graphics
-        let compassHeight = self.town_background.bounds.size.height + 120;
-        let compassHeightHalf = compassHeight / 2.0;
-        
-        let compassWidth = self.town_background.bounds.size.width;
-        let compassWidthHalf = compassWidth / 2.0;
-        
-        let spinnerHeight = self.bottle_spinner.bounds.size.height;
-        let spinnerHeightHalf = spinnerHeight / 2.0;
-        
-        let spinnerWidth = self.bottle_spinner.bounds.size.width;
-        let spinnerWidthHalf = spinnerWidth / 2.0;
-        
-        // Calculate the pull ratio, between 0.0-1.0
-        //_ = min( max(pullDistance, 0.0), 100.0) / 100.0;
-        
-        // Set the Y coord of the graphics, based on pull distance
-        let compassY = pullDistance / 2.0 - compassHeightHalf;
-        let spinnerY = pullDistance / 2.0 - spinnerHeightHalf;
-        
-        // Calculate the X coord of the graphics, adjust based on pull ratio
-        var compassX = midX + compassWidthHalf - compassWidth;
-        var spinnerX = midX - spinnerWidthHalf;
-        
-        // When the compass and spinner overlap, keep them together
-        if (fabsf(Float(compassX - spinnerX)) < 1.0) {
-            self.isRefreshIconsOverlap = true;
-        }
-        
-        // If the graphics have overlapped or we are refreshing, keep them together
-        if (self.isRefreshIconsOverlap || self.refreshControl.refreshing) {
-            compassX = midX - compassWidthHalf;
-            spinnerX = midX - spinnerWidthHalf;
-        }
-        
-        // Set the graphic's frames
-        var compassFrame = self.town_background.frame;
-        compassFrame.origin.x = compassX;
-        compassFrame.origin.y = compassY;
-        
-        var spinnerFrame = self.bottle_spinner.frame;
-        spinnerFrame.origin.x = spinnerX;
-        spinnerFrame.origin.y = spinnerY;
-        
-        self.town_background.frame = compassFrame;
-        self.bottle_spinner.frame = spinnerFrame;
-        
-        // Set the encompassing view's frames
-        refreshBounds.size.height = pullDistance;
-        
-        self.refreshColorView.frame = refreshBounds;
-        self.refreshLoadingView.frame = refreshBounds;
-        
-        // If we're refreshing and the animation is not playing, then play the animation
-        if (self.refreshControl.refreshing && !self.isRefreshAnimating) {
-            self.animateRefreshView()
-        }
-    }
-    
-    func animateRefreshView() {
-        //print("")
-        
-        // Background color to loop through for our color view
-        
-        var colorArray = [UIColor.redColor(), UIColor.blueColor(), UIColor.purpleColor(), UIColor.cyanColor(), UIColor.orangeColor(), UIColor.magentaColor()]
-        
-        // In Swift, static variables must be members of a struct or class
-        struct ColorIndex {
-            static var colorIndex = 0
-        }
-        
-        
-        // Flag that we are animating
-        self.isRefreshAnimating = true;
-        
-        UIView.animateWithDuration(
-            Double(0.3),
-            delay: Double(0.0),
-            options: UIViewAnimationOptions.CurveLinear,
-            animations: {
-                if(self.nbAlertDuringRefresh == 0){
-                    self.isAnimating = self.startLocationManager()
-                    self.nbAlertDuringRefresh++
-                }
-                // Rotate the spinner by M_PI_2 = PI/2 = 90 degrees
-                self.bottle_spinner.transform = CGAffineTransformRotate(self.bottle_spinner.transform, CGFloat(M_PI_2))
-                
-                // Change the background color
-                self.refreshColorView!.backgroundColor = colorArray[ColorIndex.colorIndex]
-                ColorIndex.colorIndex = (ColorIndex.colorIndex + 1) % colorArray.count
-            },
-            completion: { finished in
-                // If still refreshing, keep spinning, else reset
-                if (self.refreshControl.refreshing) {
-                    self.animateRefreshView()
-                    if(self.isAnimating && self.nbAlertDuringRefresh == 0){
-                        self.locationManager.stopUpdatingLocation()
-                    }
-                    
-                }else {
-                    self.resetAnimation()
-                }
-            }
-        )
-    }
-    
-    func resetAnimation() {
-        //print("")
-        
-        // Reset our flags and }background color
-        self.isRefreshAnimating = false;
-        self.isRefreshIconsOverlap = false;
-        self.refreshColorView.backgroundColor = UIColor.clearColor()
-    }
-    
-}
 
 func IsPlaceInCoreData(placeId : String) -> Bool {
-    
     let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     var isChecked:Bool = false
-    
-    
     let request = NSFetchRequest(entityName: "Place")
     request.includesSubentities = false
     request.returnsObjectsAsFaults = false
@@ -687,9 +458,7 @@ func IsPlaceInCoreData(placeId : String) -> Bool {
     let predicate = NSPredicate(format: "place_id == '\(placeId)'")
     request.predicate = predicate
     
-    //request.predicate = NSPredicate(format: "place_id == %@", placeId)
     do {
-        
         let places = try moContext?.executeFetchRequest(request) as! [Place]
         
         for p in places {
@@ -700,14 +469,9 @@ func IsPlaceInCoreData(placeId : String) -> Bool {
             if placeId == p.place_id {
                 isChecked = p.is_checked as! Bool
             }
-            
         }
-    }
-        
-    catch let err as NSError {
-        
+    } catch let err as NSError {
         print(err)
-        
     }
     return isChecked
 }

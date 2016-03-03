@@ -11,23 +11,18 @@ import UIKit
 import CoreData
 
 class CellSetting:UITableViewCell{
-    
     @IBOutlet weak var titleSetting: UILabel!
-    
 }
-
-
 
 class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate{
     
-    //let userDataFb = UserDataFb.sharedInstance
-
+    //-- Global const
     let QServices = QueryServices()
     let rangeSlider = RangeSlider(frame: CGRectZero)
     let settingDefault = SettingDefault()
+    let queryServices = QueryServices()
     
-    // Outlets setting
-
+    //--Outlets setting
     @IBOutlet weak var ageMin: UILabel!
     @IBOutlet weak var ageMax: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -41,7 +36,6 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     @IBOutlet weak var twoweeksCheckmarkCell: UITableViewCell!
     @IBOutlet weak var monthCheckmarkCell: UITableViewCell!
     @IBOutlet weak var deleteAccountButton: UIButton!
-    
     @IBOutlet var Name: UILabel!
     @IBOutlet var Mail: UILabel!
     @IBOutlet var Age: UILabel!
@@ -51,16 +45,11 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     @IBOutlet var Places: UILabel!
     @IBOutlet var Musics: UILabel!
     @IBOutlet var SeekingAge: UILabel!
-    
     @IBOutlet weak var ageLabel: UILabel!
-    
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var backgroundPicture: UIImageView!
-    
     @IBOutlet weak var contentViewTest: UIView!
-    
     @IBOutlet var contentViewTest2: UIView!
-    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,10 +62,6 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
         navigationItem.setRightBarButtonItem(rightBarButtonItem, animated: true)
         rightBarButtonItem.tintColor = Colors().grey
         
-    }
-    
-    func goToMainView(button: UIBarButtonItem) {
-        pageController.goToNextVC()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -132,37 +117,12 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
             rangeSlider.upperValue = userDefaults.doubleForKey("AgeMaxValue")
         }
         
-                
-        /*if ageMax.text == "0"{
-            ageMax.text == String(stringInterpolationSegment: Int(rangeSlider.upperValue))
-        }
-        else {
-            ageMax.text = String(stringInterpolationSegment: Int(userDefaults.floatForKey("AgeMaxValue"))) + " ans"
-        }*/
-        
-        //UserData()
         contentViewTest2.addSubview(rangeSlider)
         contentViewTest2.addSubview(ageLabel)
-
         initCheckmarksCells()
-        
         rangeSlider.translatesAutoresizingMaskIntoConstraints = false
         
         print("Bob\(rangeSlider.accessibilityElementCount())")
-        
-        
-        /*let rangeSliderConstraint = NSLayoutConstraint(item: rangeSlider, attribute:
-            .TopMargin, relatedBy: .Equal, toItem: ageLabel,
-            attribute: .TopMargin, multiplier: 1.0, constant: 20)*/
-        
-        
-        print("get image picture")
-       
-        
-        
-        print("profile picture setting")
-        //print(UserDataFb().pictureCache.description)
-
         
     }
     
@@ -175,12 +135,14 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     }
     
     
-    // Save user config
+    func goToMainView(button: UIBarButtonItem) {
+        pageController.goToNextVC()
+    }
     
+    //-- Save user config
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     @IBAction func saveSwitchState(sender: AnyObject) {
-        
         if barSwitch.on {
             PFAnalytics.trackEventInBackground("BarSwitchOn", block: nil)
             userDefaults.setBool(true, forKey: "SwitchStateBar")
@@ -198,13 +160,9 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
         }
         
         userDefaults.setFloat(distanceSlider.value, forKey: "DistanceValue")
-        
         distanceLabel.text = String(stringInterpolationSegment: Int(distanceSlider.value)) + " km"
-    
-        
     }
     
-    let queryServices = QueryServices()
     let userDefault = NSUserDefaults.standardUserDefaults()
     //let FBLogOut = FBSDKLoginManager()
     
@@ -286,9 +244,7 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
         }
     }
     
-    
     func initCheckmarksCells(){
-        //nomatterCheckmarkCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         let stats_since = userDefaults.integerForKey("stats_since")
         switch(stats_since){
         case 30:

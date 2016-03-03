@@ -12,7 +12,6 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //-- Return number of cells in CollectionView
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-        
             collectionView.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
             var indexPath: NSIndexPath?
             if let superview = collectionView.superview {
@@ -20,18 +19,10 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                     indexPath = tableData.indexPathForCell(cell)
                     print("Index Path Row \(indexPath?.row)")
                     if indexPath != nil {
-                        /*if isFavOn {
-                            print(searchArray[indexPath!.row].friends)
-                        }*/
                         var friendsCount:Int? = 0
-                        if ((isFavOn && searchArray.count > indexPath!.row ) || (!isFavOn && placeItems.count > indexPath!.row))
-                        {
+                        if ((isFavOn && searchArray.count > indexPath!.row ) || (!isFavOn && placeItems.count > indexPath!.row)) {
                              friendsCount = isFavOn ? searchArray[indexPath!.row].friends?.count : placeItems[indexPath!.row].friends?.count
                         }
-                        /*if isFavOn {
-                            print(searchArray[indexPath!.row])
-                        }
-                        print(isFavOn)*/
                         return friendsCount != nil ? friendsCount! : 0
                     }
                     
@@ -73,13 +64,13 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                     self.view.addSubview(tooltip)
                     
                     UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-                        tooltip.alpha = 0.9
+                            tooltip.alpha = 0.9
                         }, completion: {
                             (finished: Bool) -> Void in
                             
-                            // Fade in
+                            //-- Fade in
                             UIView.animateWithDuration(0.5, delay: 2.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                                tooltip.alpha = 0.0
+                                    tooltip.alpha = 0.0
                                 }, completion: {
                                     (finished: Bool) -> Void in
                                     if finished {
@@ -87,7 +78,7 @@ extension MainViewController : UICollectionViewDelegate, UICollectionViewDataSou
                                     }
                                 })
                             
-                    })
+                        })
                     
                 })
                 

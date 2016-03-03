@@ -178,45 +178,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("terminate")
-        locationTracker.startLocationForSignificantChanges()
+        //locationTracker.startLocationForSignificantChanges()
     }
     
-    func handleRegionEvent(region: CLRegion) {
-        // Show an alert if application is active
-        if UIApplication.sharedApplication().applicationState == .Active {
-            //if //notefromRegionIdentifier(region.identifier) {
-            let message = "Dans la région"
-            if let viewController = window?.rootViewController {
-                locationTracker.showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
-            }
-            print("handleRegionevent")
-            //print(self.locationManager.monitoredRegions.count)
-            //}
-        } else {
-            // Otherwise present a local notification
-            let notification = UILocalNotification()
-            notification.alertBody = "Dans la région (pas active)"
-            notification.soundName = "Default";
-            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-        }
-        //locationTracker.startLocationTracking()
-    }
     
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            locationTracker.isOut = false
-            handleRegionEvent(region)
-            locationTracker.restartLocationUpdates()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            locationTracker.isOut = true
-            handleRegionEvent(region)
-            
-        }
-    }
     
     // MARK: - Core Data stack
     

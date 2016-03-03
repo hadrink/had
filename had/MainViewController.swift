@@ -23,15 +23,9 @@ import CoreData
 
 class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
     
-    let model: [[UIColor]] = Design().generateRandomData()
-    
-    
-    
     //-- Global const and var
-    
     var hamburger = UIBarButtonItem()
     var favButton = UIBarButtonItem()
-    //var searchButton = UIBarButtonItem()
     var messageLabel:UILabel!
     var data: NSMutableData = NSMutableData()
     var jsonData: NSArray = NSArray()
@@ -49,29 +43,60 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     var isLocating:Bool = false
     var isFavOn = false
     var nbAlertDuringRefresh = 0
-    //var searchController = UISearchController()
+    var placeItems = [PlaceItem]()
     var searchArray:[PlaceItem] = [PlaceItem](){
         didSet  {}
     }
-    
     lazy var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
-        //manager.requestAlwaysAuthorization()
         return manager
     }()
-    
-    
     let locServices = LocationServices()
     let QServices = QueryServices()
     let settingDefault = SettingDefault()
+    let activity = ActivityIndicator()
     
     //-- Outlets
-    
     @IBOutlet var tableData: UITableView!
     @IBOutlet var navbar: UINavigationItem!
     @IBOutlet weak var myMap: MKMapView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        
+        if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
+            locationManager.requestAlwaysAuthorization()
+        }
+        
+        //-- Check internet connexion
+        activity.StartActivityIndicator(self)
+        
+        //-- No display cell empty
+        tableData.tableFooterView = UIView()
+        
+        //-- Start Updating Location
+        locationManager.startUpdatingLocation()
+        
+        //-- Set pull to refresh
+        self.setupRefreshControl()
+        
+        //-- Change navbar color
+        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
+        self.navigationController?.navigationBar.translucent = false
+        
+        //-- Observer for background state
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        isFavOn = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableData.layoutMargins = UIEdgeInsetsZero
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -83,84 +108,42 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         }
         setLogoNavBar()
     }
-    
-    let activity = ActivityIndicator()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        activity.StartActivityIndicator(self)
-        
-        //-- No display cell empty
-        tableData.tableFooterView = UIView()
-        
-        let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
-        if(status == CLAuthorizationStatus.NotDetermined || status == CLAuthorizationStatus.Denied){
-            locationManager.requestAlwaysAuthorization()
-        }
-        //startLocationManager()
-        
-        //-- Start Updating Location
-        locationManager.startUpdatingLocation()
 
-        self.setupRefreshControl()
-        //tableData.reloadData()
-        
-        self.navigationController?.navigationBar.barTintColor = Design().UIColorFromRGB(0x5a74ae)
-        self.navigationController?.navigationBar.translucent = false
-        
-        //-- Observer for background state
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("myObserverMethod:"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        isFavOn = false
-        //getFavPlacesRequest()
-        //- Get Picture Facebook
-        //UserDataFb().getPicture()
-    }
     
+    //-- Go to setting button action
     func goToSettings(button: UIBarButtonItem) {
         pageController.goToPreviousVC()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableData.layoutMargins = UIEdgeInsetsZero
-    }
-    
-    //-- Table view configuration
-    
-    var placeItems = [PlaceItem]()
-    
-    
-    //-- Refresh places
-       
+    //-- Change title in mainview
     func setLogoNavBar() {
+        
+        //-- Change heart color if isFavOn == true
+        if isFavOn {
+            favButton.tintColor = Colors().pink
+            refreshControl.removeFromSuperview()
+        } else {
+            favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
+            self.tableData.addSubview(refreshControl)
+        }
+        
+        //-- load button in navbar and set the title
         let SettingsBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: self, action: "goToSettings:")
         navbar.titleView = UIImageView(image: UIImage(named: "had-title"))
         favButton.image = UIImage(named: "heart-hover")
-        
-        if(isFavOn)
-        {
-            favButton.tintColor = Colors().pink
-            refreshControl.removeFromSuperview()
-        }
-        else
-        {
-            favButton.tintColor = Design().UIColorFromRGB(0xF0F0EF)
-            self.tableData.addSubview(refreshControl)//active le refresh à la sortie du search
-        }
-        
         SettingsBarButtonItem.tintColor = Colors().grey
+        
+        //-- Define the favButton target
         favButton.target = self
         favButton.action = "GetFavPlaces:"
         
+        //-- Set left and right buttons
         navbar.setLeftBarButtonItems([SettingsBarButtonItem], animated: true)
         navbar.setRightBarButtonItems([favButton], animated: true)
     }
     
-    /*
-    * StartUpdatingLocation if the location is deactivate an ui alert is shown
-    */
+    
+    //-- StartUpdatingLocation if the location is deactivate an ui alert is shown
     func startLocationManager(/*isInViewWillAppear:Bool = false*/) -> Bool{
         if(self.locationManager.location != nil){
             print("pause")
@@ -193,21 +176,25 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func GetFavPlaces(sender:UIButton)
-    {
+    //-- Action to get Fav places
+    func GetFavPlaces(sender:UIButton) {
+        
+        //-- Get Fav places
         let displayFav = getFavPlacesRequest()
-        if !isFavOn
-        {
+        
+        //-- If button isFavOn is clicked
+        if !isFavOn {
             PFAnalytics.trackEventInBackground("ClickOnFav", block: nil)
             refreshControl.removeFromSuperview()
             isFavOn = true
             favButton.tintColor = Colors().pink
-        }
-        else{
+        } else {
             self.tableData.addSubview(refreshControl)
             isFavOn = false
             favButton.tintColor = Colors().grey
         }
+        
+        //-- Reload data in tableview if displayFav
         if displayFav {
             self.tableData.reloadData()
         }
@@ -215,65 +202,24 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
     
     func getFavPlacesRequest() -> Bool {
         var displayFav = true
-        let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
         var places = [Place]()
-        self.searchArray.removeAll()
+        var idArray:Array<String> = Array()
+        let moContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
         let request = NSFetchRequest(entityName: "Place")
+
+        self.searchArray.removeAll()
+        
         do {
-            
             places = try moContext?.executeFetchRequest(request) as! [Place]
             print("nb fav dans getfavplaces")
             print(places.count)
-            
-        }
-            
-        catch let err as NSError {
-            
+        } catch let err as NSError {
             print(err)
-            
         }
-        print("nbplace places")
-        print(places.count)
-        var idArray:Array<String> = Array()
         
         if places.count != 0 {
             displayFav = false
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            /*let dorequest = userDefaults.boolForKey("requestUpdateFav")
-            print("dorequest")
-            print(dorequest)
-            if !dorequest {
-                //chercher dans core data
-                for  p in places {
-                    idArray.append(p.place_id!)
-                    
-                    let place:PlaceItem = PlaceItem()
-                    place.placeId = p.place_id
-                    place.placeName = p.place_name
-                    print("placename")
-                    print(p.place_name)
-                    place.city = p.place_city
-                    place.averageAge = p.place_average_age?.integerValue
-                    place.pourcentSex = p.place_pourcent_sex != nil ? p.place_pourcent_sex?.floatValue : 0.0
-                    
-                    place.typeofPlace = p.place_type
-                    place.counter = p.place_counter?.integerValue
-                    place.distance = p.place_distance!.doubleValue
-                    
-                    
-                    place.placeLatitudeDegrees = p.place_latitude?.doubleValue
-                    place.placeLongitudeDegrees = p.place_longitude?.doubleValue
-                    self.searchArray.append(place)
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableData.reloadData()
-                    
-                })
-            } else {
-                //sinon update avec la requete
-                userDefaults.setBool(false, forKey: "requestUpdateFav")
-                userDefaults.synchronize()*/
                 for  p in places {
                     idArray.append(p.place_id!)
                 }
@@ -355,47 +301,46 @@ class MainViewController: UIViewController, MKMapViewDelegate, UIGestureRecogniz
         }
     }
     
+    //-- Action on share button in cell
     @IBAction func shareClicked(sender: AnyObject) {
         
+        //-- Track Event on Parse
         PFAnalytics.trackEventInBackground("ClickOnShare", block: nil)
         
+        //-- Need index for cell
         var indexPath: NSIndexPath
         
         if let button = sender as? UIButton {
             if let superview = button.superview {
                 if let cell = superview.superview as? PlaceCell {
-                    // text to share
                     
                     indexPath = tableData.indexPathForCell(cell)!
                     
+                    //-- Get some infos to display
                     let namePlace = placeItems[indexPath.row].placeName
                     let nbUsers = placeItems[indexPath.row].counter
-
                     let textToShare = "\(nbUsers) Hadder sont allés au \(namePlace!). Voir plus d'info sur l'application Had"
         
-                    // url to share, if any
-                    let urlToShare = NSURL(string: "www.islandtechph.com")
+                    //-- place the items to share in an array of type AnyObject
+                    let objectsToShare: [AnyObject] = [textToShare]
         
-                    // place the items to share in an array of type AnyObject
-                    let objectsToShare: [AnyObject] = [textToShare, urlToShare!]
-        
-                    // initialize the controller that will show the share options
+                    //-- initialize the controller that will show the share options
                     let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         
-                    // exclude some activities that are irrelevant to your app,
-                    // leaving only CopyToPasteboard, Mail, Message
+                    //-- exclude some activities that are irrelevant
                     if #available(iOS 9.0, *) {
                         activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypeOpenInIBooks, UIActivityTypePostToFlickr, UIActivityTypePostToTencentWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll, UIActivityTypePrint]
                     } else {
-                        // Fallback on earlier versions
+                        //--Fallback on earlier versions
                     }
         
-                    // show the share options view
+                    //--show the share options view
                     self.presentViewController(activityVC, animated: true, completion: nil)
                 }
             }
         }
     }
+    
     //-- Avoid Bounce effect
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         

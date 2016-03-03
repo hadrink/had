@@ -840,70 +840,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "477089211.400936"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "645"
-            endingLineNumber = "645"
-            landmarkName = "animateRefreshView()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "had.MainViewController.locationManager (had.MainViewController)(ObjectiveC.CLLocationManager, didUpdateLocations : Swift.Array&lt;ObjectiveC.CLLocation&gt;) -&gt; ()"
-                  moduleName = "had"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Romain/Documents/application/had/had/MainViewControllerExtensions.swift"
-                  timestampString = "465573861.90059"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "278"
-                  endingLineNumber = "278"
-                  offsetFromSymbolStart = "4508">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "had.MainViewController.(locationManager (had.MainViewController) -&gt; (ObjectiveC.CLLocationManager, didUpdateLocations : Swift.Array&lt;ObjectiveC.CLLocation&gt;) -&gt; ()).(closure #1)"
-                  moduleName = "had"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Romain/Documents/application/had/had/MainViewControllerExtensions.swift"
-                  timestampString = "465573861.900862"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "282"
-                  endingLineNumber = "282"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "had/MainViewControllerExtensions.swift"
-            timestampString = "477089211.400936"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
-            landmarkName = "animateRefreshView()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "had/MainViewControllerExtensions.swift"
             timestampString = "476982697.900294"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -1183,13 +1119,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/LocationTracker.swift"
-            timestampString = "477584335.68552"
+            timestampString = "477774534.21412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "updateLocationToServer()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.LocationTracker.updateLocationToServer (had.LocationTracker)() -&gt; ()"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/LocationTracker.swift"
+                  timestampString = "477745065.81853"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "459"
+                  endingLineNumber = "459"
+                  offsetFromSymbolStart = "4108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.LocationTracker.(updateLocationToServer (had.LocationTracker) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/LocationTracker.swift"
+                  timestampString = "477745065.818814"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "459"
+                  endingLineNumber = "459"
+                  offsetFromSymbolStart = "832">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
