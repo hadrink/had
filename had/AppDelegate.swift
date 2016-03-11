@@ -14,14 +14,14 @@ import ParseFacebookUtilsV4
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var locationTracker: LocationTracker = LocationTracker.init()
-    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
-    var backgroundTaskManager:BackgroundTaskManager?
+    let placeManager = PlaceManager()
+    let backgroundTask = BackgroundTask()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let locationManager = placeManager.locationManager
         var initialViewController: UIViewController
         
         
@@ -63,11 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("It's a location event")
             let notification = UILocalNotification()
             notification.alertBody = "Location Event"
-            notification.soundName = "Default";
+            notification.soundName = "Default"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
             
-            locationTracker.startLocationForSignificantChanges()
-
+            locationManager?.startMonitoringSignificantLocationChanges()
         }
         
         //-- Notification parse
@@ -112,10 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func updateLocation(){
-        self.locationTracker.updateLocationToServer()
-        self.locationTracker.createRegionsForSignificantChanges()
-    }
     
     /*func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
@@ -167,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        self.locationTracker.startLocationForSignificantChanges()
+        self.placeManager.locationManager?.startMonitoringSignificantLocationChanges()
     }
     
     func applicationWillEnterForeground(application: UIApplication) {
@@ -178,7 +173,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("terminate")
-        //locationTracker.startLocationForSignificantChanges()
     }
     
     

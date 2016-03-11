@@ -263,16 +263,10 @@ class SettingsViewController: UITableViewController, UIGestureRecognizerDelegate
     
     func designProfileViews() {
         //-- Fill profilePicture & backgroundPicture with the facebook profile picture
-        do {
-            let currentUserPhoto:PFFile = PFUser.currentUser()?.objectForKey("profile_picture") as! PFFile
-            let profilePicture = try UIImage(data: currentUserPhoto.getData())
+        
+            self.profilePicture.image = UIImage(data: userDefaults.objectForKey("profile_picture") as! NSData)
+            self.backgroundPicture.image = UIImage(data: userDefaults.objectForKey("profile_picture") as! NSData)
             
-            self.profilePicture.image = profilePicture
-            self.backgroundPicture.image = profilePicture
-            
-        } catch {
-            print("Cannot get profile picture")
-        }
         
         //-- Add blur on the profile picture views
         if !UIAccessibilityIsReduceTransparencyEnabled() {

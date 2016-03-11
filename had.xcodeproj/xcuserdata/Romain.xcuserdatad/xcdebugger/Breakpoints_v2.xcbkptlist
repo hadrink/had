@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
             endingLineNumber = "243"
-            landmarkName = "rangeSliderValueChanged(_:)"
+            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -193,16 +193,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "had.LoginViewController.init (had.LoginViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; had.LoginViewController"
+                  symbolName = "had.LoginViewController.__deallocating_deinit"
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.036588"
+                  timestampString = "479398411.37885"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.LoginViewController.init (had.LoginViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; had.LoginViewController"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
+                  timestampString = "479398411.379075"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -212,12 +227,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.036808"
+                  timestampString = "479398411.379294"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -243,12 +258,27 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.038772"
+                  timestampString = "479398411.398483"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.LoginViewController.init (had.LoginViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; had.LoginViewController"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
+                  timestampString = "479398411.398825"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -258,12 +288,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.039258"
+                  timestampString = "479398411.399063"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -289,12 +319,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.041407"
+                  timestampString = "479398411.400158"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -304,12 +334,27 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.041733"
+                  timestampString = "479398411.400366"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "had.LoginViewController.init (had.LoginViewController.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;had.LoginViewController&gt;"
+                  moduleName = "had"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
+                  timestampString = "479398411.40064"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -335,12 +380,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.04362"
+                  timestampString = "479398411.401857"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -350,12 +395,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.043805"
+                  timestampString = "479398411.402049"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -365,12 +410,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.043981"
+                  timestampString = "479398411.40221"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -396,12 +441,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.04561"
+                  timestampString = "479398411.403658"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -411,12 +456,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.045815"
+                  timestampString = "479398411.403845"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -426,12 +471,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.046"
+                  timestampString = "479398411.404008"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -457,12 +502,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.047664"
+                  timestampString = "479398411.405157"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -472,12 +517,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.04785"
+                  timestampString = "479398411.405323"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "58">
+                  offsetFromSymbolStart = "68">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -487,12 +532,12 @@
                   moduleName = "had"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Romain/Documents/application/had/had/IntroductionViewController.swift"
-                  timestampString = "477580938.048025"
+                  timestampString = "479398411.405487"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -844,7 +889,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "296"
-            endingLineNumber = "296">
+            endingLineNumber = "296"
+            landmarkName = "myObserverMethod(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -858,7 +905,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "297"
-            endingLineNumber = "297">
+            endingLineNumber = "297"
+            landmarkName = "myObserverMethod(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -873,8 +922,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "305"
             endingLineNumber = "305"
-            landmarkName = "MainViewController"
-            landmarkType = "3">
+            landmarkName = "myObserverMethod(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -889,7 +938,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "317"
             endingLineNumber = "317"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "WillAppTerminate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -905,7 +954,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "324"
             endingLineNumber = "324"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "locationManager(_:didFinishDeferredUpdatesWithError:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -953,7 +1002,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "319"
             endingLineNumber = "319"
-            landmarkName = "myObserverMethod(_:)"
+            landmarkName = "WillAppTerminate(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1001,7 +1050,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
-            landmarkName = "viewWillAppear(_:)"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1126,38 +1175,6 @@
             endingLineNumber = "525"
             landmarkName = "updateLocationToServer()"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "had.LocationTracker.updateLocationToServer (had.LocationTracker)() -&gt; ()"
-                  moduleName = "had"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Romain/Documents/application/had/had/LocationTracker.swift"
-                  timestampString = "477745065.81853"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "459"
-                  endingLineNumber = "459"
-                  offsetFromSymbolStart = "4108">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "had.LocationTracker.(updateLocationToServer (had.LocationTracker) -&gt; () -&gt; ()).(closure #1)"
-                  moduleName = "had"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Romain/Documents/application/had/had/LocationTracker.swift"
-                  timestampString = "477745065.818814"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "459"
-                  endingLineNumber = "459"
-                  offsetFromSymbolStart = "832">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1167,11 +1184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "had/QueryServices.swift"
-            timestampString = "471024357.87184"
+            timestampString = "479393550.752759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "delete(_:url:)"
             landmarkType = "5">
          </BreakpointContent>

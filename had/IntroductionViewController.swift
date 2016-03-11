@@ -277,19 +277,36 @@ class LoginViewController: UIViewController{
             {
                 let r = result as! NSDictionary
                 let settingViewController = SettingsViewController()
+                let friends = r["friends"] == nil ? "" : r["friends"]
+                var gender = r["gender"] == nil ? "" : r["gender"]
                 
-                user["profile_picture"] = r["picture"]
+                let data = r["picture"]!.objectForKey("data") as! NSDictionary
+                let dataURL = data.objectForKey("url") as! String
+                let pictureURL = NSURL(string: dataURL)
+                let imageD = NSData(contentsOfURL: pictureURL!)
+                let img = UIImage(data: imageD!)
+                let imageFile:PFFile = PFFile(data: UIImageJPEGRepresentation(img!, 1.0)!)!
+                
+                imageFile.saveInBackgroundWithBlock({ (succeeded, error) -> Void in
+                    if (error != nil) {
+                        user.setObject(imageFile, forKey: "profile_picture")
+                        user.saveInBackground()
+                    }
+                })
+                
                 user["firstName"] = r["first_name"]
                 user["lastName"] = r["last_name"]
-                user["gender"] = r["gender"]
-                user["friends"] = r["friends"]
+                user["gender"] = gender
+                user["friends"] = friends
+                
                 print("Friends intror\(r["friends"])")
                 print(r["gender"])
                 
                 settingViewController.userDefaults.setValue(r["id"], forKey: "id_Fb")
                 settingViewController.userDefaults.setValue(r["first_name"], forKey: "first_name")
                 settingViewController.userDefaults.setValue(r["last_name"], forKey: "last_name")
-                settingViewController.userDefaults.setObject(r["friends"], forKey: "friends")
+                settingViewController.userDefaults.setObject(friends, forKey: "friends")
+                settingViewController.userDefaults.setObject(imageD, forKey: "profile_picture")
                 settingViewController.userDefaults.synchronize()
                 
                 let dateFormatter = NSDateFormatter()
@@ -298,21 +315,16 @@ class LoginViewController: UIViewController{
                 
                 
                 //-- Send user in data base
-                
-                var gender = r["gender"] as! String
-                if( gender == "male") {
+                if( gender as! String == "male" || gender as! String == "homme") {
                     gender = "M"
+                } else {
+                    gender = "F"
                 }
                 
-                self.QServices.post("POST", params:["firstname":r["first_name"]!, "lastname": r["last_name"]!, "gender": gender, "birthday" : r["birthday"]!, "id_facebook" : r["id"]!], url: Urls.createUser) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-                    //var alert = UIAlertView(title: "Success!", message: msg, delegate: nil, cancelButtonTitle: "Okay.")
-                    
-                    
-                    //print("Mon object \(obj)")
+                self.QServices.post("POST", params:["firstname":r["first_name"]!, "lastname": r["last_name"]!, "gender": gender!, "birthday" : r["birthday"]!, "id_facebook" : r["id"]!], url: Urls.createUser) { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
                     
                 }
                 
-                //LocationTracker().startLocationForSignificantChanges()
             }
         })
         
