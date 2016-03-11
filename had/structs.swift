@@ -50,7 +50,7 @@ struct Design {
 
 class SettingDefault {
         
-    var distanceMax:Float = 300;
+    var distanceMax:Float = 50;
     var ageMin:Double = 18
     var ageMax:Double = 30
     var displayBar:Bool = true

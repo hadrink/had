@@ -153,14 +153,23 @@ extension MainViewController: UITableViewDataSource
             cellDataFav()
             setHeartButtonImage(cell,isFavOn: isFavOn)
             
+            let nbHadder = searchArray[indexPath.row].counter
+            let nbFriends = searchArray[indexPath.row].friends?.count
+            
             //-- Check if users in place (If true elements display else none)
-            if searchArray[indexPath.row].counter == nil {
+            if nbHadder == nil {
                 print("index")
                 print(indexPath.row)
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
                 tableData.rowHeight = 82
+            } else if nbHadder != nil && nbFriends == 0 {
+                    tableData.rowHeight = 120
+                    cell.backgroundNbUser.layer.opacity = 1
+                    cell.backgroundAge.layer.opacity = 1
+                    cell.backgroundSex.layer.opacity = 1
+                
             } else {
                 tableData.rowHeight = 153
                 cell.backgroundNbUser.layer.opacity = 1
@@ -180,20 +189,31 @@ extension MainViewController: UITableViewDataSource
             cellDataMainView()
             setHeartButtonImage(cell,isFavOn: isFavOn)
             
+            let nbHadder : Int? = placeItems[indexPath.row].counter
+            let nbFriends : Int? = placeItems[indexPath.row].friends?.count
+            
             //-- Check if users in place (If true elements display else none)
-            if placeItems[indexPath.row].counter == nil {
+            if nbHadder == nil {
                 print("index")
                 print(indexPath.row)
+                tableData.rowHeight = 82
                 cell.backgroundNbUser.layer.opacity = 0
                 cell.backgroundAge.layer.opacity = 0
                 cell.backgroundSex.layer.opacity = 0
-                tableData.rowHeight = 82
+            } else if nbHadder != nil && nbFriends == 0 {
+                tableData.rowHeight = 118
+                cell.backgroundNbUser.layer.opacity = 1
+                cell.backgroundAge.layer.opacity = 1
+                cell.backgroundSex.layer.opacity = 1
+                
             } else {
                 tableData.rowHeight = 153
                 cell.backgroundNbUser.layer.opacity = 1
                 cell.backgroundAge.layer.opacity = 1
                 cell.backgroundSex.layer.opacity = 1
+                
             }
+
             
             displayBarOrNightClub(type)
             filterAge()
@@ -225,7 +245,7 @@ extension MainViewController: UITableViewDataSource
             var mess = "Aucune données disponible actuellement. Tire pour rafraîchir"
             
             if(searchArray.count == 0 && isFavOn) {
-                mess = "Vous n'avez pas encore de favoris !!"
+                mess = "Vous n'avez pas encore de favoris."
             }
             
             messageLabel.text = mess
@@ -311,13 +331,6 @@ extension MainViewController: CLLocationManagerDelegate
         //self.locationManager.startMonitoringSignificantLocationChanges()
     }
     
-    func WillAppTerminate(notification: NSNotification){
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let email: String! = userDefaults.stringForKey("email")
-        QServices.post("POST", params:["object":"object"], url: "https://hadrink.herokuapp.com/usercoordinate/users/\(email)/\(self.locationManager.location!.coordinate.latitude)/\(self.locationManager.location!.coordinate.longitude)") { (succeeded: Bool, msg: String, obj : NSDictionary) -> () in
-            //print("dans le post du backgroundeuuuux")
-        }
-    }
     
     func locationManager(manager: CLLocationManager, didFinishDeferredUpdatesWithError error: NSError?) {
         print("deferredUpdates")

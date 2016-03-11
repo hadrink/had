@@ -99,7 +99,7 @@ class PlaceManager : NSObject, CLLocationManagerDelegate {
         }
         
         //-- Call region and append regionToMonitorItems
-        queryServices.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(self.latitude)/\(self.longitude)/10000/", f: {(result: NSDictionary) -> () in
+        queryServices.sendForRegion("https://hadrink.herokuapp.com/closeplaces/places/\(self.latitude)/\(self.longitude)/500/", f: {(result: NSDictionary) -> () in
             
             //-- We check if listbar object exists
             if let regionItems = result["listbar"] as? [NSDictionary]  {
@@ -367,9 +367,12 @@ class PlaceManager : NSObject, CLLocationManagerDelegate {
     
     //-- Method for check if user is within place
     func checkUserIsWithinPlace() {
+
+        //--Get user id
+        let userId = userDefault.stringForKey("id_Fb")
         
         //-- We send the specific request for set the "userWithinPlace" variable
-        queryServices.userWithinPlace("https://hadrink.herokuapp.com/usercoordinate/users/976915349020345/\(self.latitude)/\(self.longitude)", f: {(result: NSDictionary) -> () in
+        queryServices.userWithinPlace("https://hadrink.herokuapp.com/usercoordinate/users/\(userId)/\(self.latitude)/\(self.longitude)", f: {(result: NSDictionary) -> () in
             print(result["result"])
             if let resultRequest = result["result"] as? NSDictionary  {
                 let success:Bool = resultRequest["success"] as! Bool

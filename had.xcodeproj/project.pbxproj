@@ -49,8 +49,6 @@
 		7AB6C99A1BADAAC10025477A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB6C9981BADAAC10025477A /* libsqlite3.tbd */; };
 		7ABC6AA119D489DB00B18DC8 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */; };
 		7ABC6AA219D489DB00B18DC8 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */; };
-		7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */; };
-		7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFAE0719CEDCEC00476A99 /* UserManager.swift */; };
 		7ACC176A1C64FD2400082E42 /* CheckConnexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC17691C64FD2400082E42 /* CheckConnexion.swift */; };
 		7ACC176C1C64FE6900082E42 /* Tooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC176B1C64FE6900082E42 /* Tooltip.swift */; };
 		7AE1D28E1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */; };
@@ -69,8 +67,6 @@
 		EB4EF7661BF656CD00461020 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4EF7641BF656CD00461020 /* Place.swift */; };
 		EB797E721B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */; };
 		EBFD30211AB77BB600727E3F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFD30201AB77BB600727E3F /* Security.framework */; };
-		EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */; };
-		F3C67E071B601B6600191138 /* QueryFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C67E061B601B6600191138 /* QueryFacebook.swift */; };
 		F61331F71A1E6FF40007FAA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F61331F61A1E6FF40007FAA1 /* Main.storyboard */; };
 		F6A5521E1A279D6A001C371E /* PlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5521D1A279D6A001C371E /* PlaceItem.swift */; };
 		F6A552211A27A317001C371E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A552201A27A317001C371E /* Item.swift */; };
@@ -136,8 +132,6 @@
 		7AB6C9981BADAAC10025477A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7ABC6A9F19D489DB00B18DC8 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		7ABC6AA019D489DB00B18DC8 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
-		7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		7ABFAE0719CEDCEC00476A99 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		7ACC17691C64FD2400082E42 /* CheckConnexion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckConnexion.swift; sourceTree = "<group>"; };
 		7ACC176B1C64FE6900082E42 /* Tooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		7AE1D28D1A8D2E0000386387 /* ResponsiveTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveTextFieldViewController.swift; sourceTree = "<group>"; };
@@ -155,9 +149,6 @@
 		EB4EF7641BF656CD00461020 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		EB797E711B56F1EF00F5B2C0 /* MainViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerExtensions.swift; sourceTree = "<group>"; };
 		EBFD30201AB77BB600727E3F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
-		EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainWrapper.m; sourceTree = "<group>"; };
-		F3C67E061B601B6600191138 /* QueryFacebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryFacebook.swift; sourceTree = "<group>"; };
 		F463444393859306F6482E9F /* Pods_had.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_had.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61331F61A1E6FF40007FAA1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F6A5521D1A279D6A001C371E /* PlaceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceItem.swift; sourceTree = "<group>"; };
@@ -320,7 +311,6 @@
 		7A7CC77C1C626EDF00FAD7C7 /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
-				7ABFAE0519CEDB8F00476A99 /* CreateAccountViewController.swift */,
 				7AA2251D19CDBE96002003ED /* IntroductionViewController.swift */,
 			);
 			name = Introduction;
@@ -371,9 +361,7 @@
 				7A081BC91BB6D50D0061D775 /* CoreData */,
 				7A081BCA1BB6D8A50061D775 /* StaticInfo */,
 				EB1BBE141B45CAA300F46E99 /* Services */,
-				7AF659631A49F111002C6745 /* library */,
 				F6E2B65A1A2F9F8C00B085DC /* Controller */,
-				7ABFAE0719CEDCEC00476A99 /* UserManager.swift */,
 				7AA2250419CDA9D1002003ED /* Images.xcassets */,
 				7AA2250619CDA9D1002003ED /* LaunchScreen.xib */,
 				7A081BCC1BB6DDAE0061D775 /* Assets */,
@@ -408,21 +396,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7AF659631A49F111002C6745 /* library */ = {
-			isa = PBXGroup;
-			children = (
-				EBFD30221AB8CC3000727E3F /* KeychainWrapper.h */,
-				EBFD30231AB8CC3000727E3F /* KeychainWrapper.m */,
-			);
-			name = library;
-			sourceTree = "<group>";
-		};
 		EB1BBE141B45CAA300F46E99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				7AA2251F19CDBED4002003ED /* QueryServices.swift */,
 				EB1BBE151B45CABE00F46E99 /* locationServices.swift */,
-				F3C67E061B601B6600191138 /* QueryFacebook.swift */,
 				7ACC17691C64FD2400082E42 /* CheckConnexion.swift */,
 			);
 			name = Services;
@@ -664,10 +642,7 @@
 				7A3B0CE21C92F546009025F9 /* BackgroundTaskManager.swift in Sources */,
 				7A3B0CE11C92F546009025F9 /* PlaceManager.swift in Sources */,
 				EB444F901A9527D600E533B2 /* structs.swift in Sources */,
-				7ABFAE0619CEDB8F00476A99 /* CreateAccountViewController.swift in Sources */,
 				7A70C49B1BB146C300299781 /* Store.swift in Sources */,
-				EBFD30241AB8CC3000727E3F /* KeychainWrapper.m in Sources */,
-				F3C67E071B601B6600191138 /* QueryFacebook.swift in Sources */,
 				7AA2252019CDBED4002003ED /* QueryServices.swift in Sources */,
 				7AA2251E19CDBE96002003ED /* IntroductionViewController.swift in Sources */,
 				7AF6596B1A49F74E002C6745 /* MainViewController.swift in Sources */,
@@ -689,7 +664,6 @@
 				7A70C49A1BB146C300299781 /* Store+CoreDataProperties.swift in Sources */,
 				EB4EF7651BF656CD00461020 /* Place+CoreDataProperties.swift in Sources */,
 				F6A552211A27A317001C371E /* Item.swift in Sources */,
-				7ABFAE0819CEDCEC00476A99 /* UserManager.swift in Sources */,
 				EB1BBE1C1B4D825700F46E99 /* SettingsViewController.swift in Sources */,
 				7A7DA73C1C50248D0047C64D /* OnboardingViewController.swift in Sources */,
 				7AA224FA19CDA9D1002003ED /* AppDelegate.swift in Sources */,
